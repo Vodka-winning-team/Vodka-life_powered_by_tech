@@ -28,7 +28,7 @@ test('demo 1 with job answers: listed but not proof, register phone, fee counted
   expect(r.level).toBe('STOP');
   expect(r.findings.find((f) => f.kind === 'agency_listed')!.detail).toContain('does not prove');
   expect(r.findings.filter((f) => f.kind === 'job_fee')).toHaveLength(1);
-  expect(r.contacts.some((c) => c.phone === '+230 5256 8074')).toBe(true);
+  expect(r.contacts.some((c) => c.phone.replace(/\D/g, '') === '23052568074')).toBe(true);
   expect(r.contacts.some((c) => c.name.includes('Mauritius Commercial'))).toBe(false); // "Juice" alone doesn't add MCB
 });
 
@@ -42,7 +42,7 @@ test('demo 4: MCB lookalike link is STOP with the official number', () => {
   const r = engine.check('MCB: Unusual activity on your account. Verify your account at mcb-login-secure.net or it will be blocked.');
   expect(r.level).toBe('STOP');
   expect(kinds(r).has('bank_link')).toBe(true);
-  expect(r.contacts.some((c) => c.phone === '+230 202 6060')).toBe(true);
+  expect(r.contacts.some((c) => c.phone.replace(/\D/g, '') === '2302026060')).toBe(true);
 });
 
 test('demo 5: genuine OTP SMS has no findings', () => {
