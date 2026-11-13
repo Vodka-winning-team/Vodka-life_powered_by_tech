@@ -32,7 +32,8 @@ export default function ResultScreen() {
   const highlights = result.findings.flatMap((f) => f.highlights);
 
   return (
-    <Screen>
+    // A new case (shared message, follow-up) starts a fresh page at the top, so the level banner is always seen.
+    <Screen key={`${current.id}-${text}`}>
       <LevelBanner level={result.level} />
 
       {/* Granny mode: one plain sentence, then the official number to call, first. Details stay below. */}

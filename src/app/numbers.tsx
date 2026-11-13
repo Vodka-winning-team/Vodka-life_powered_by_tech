@@ -52,16 +52,21 @@ export default function NumbersScreen() {
         style={[styles.input, { color: theme.text, backgroundColor: theme.backgroundElement, borderColor: theme.border }]}
       />
 
-      <Label variant="label">
-        {t('srcBanksTitle')} ({banks.length})
-      </Label>
+      {/* Empty sections are hidden (e.g. a search that only matches agencies). */}
+      {banks.length > 0 && (
+        <Label variant="label">
+          {t('srcBanksTitle')} ({banks.length})
+        </Label>
+      )}
       {banks.map((entry) => (
         <EntryCard key={entry.id} entry={entry} />
       ))}
 
-      <Label variant="label">
-        {t('srcAgenciesTitle')} ({agencies.length})
-      </Label>
+      {agencies.length > 0 && (
+        <Label variant="label">
+          {t('srcAgenciesTitle')} ({agencies.length})
+        </Label>
+      )}
       {agencies.map((entry) => (
         <EntryCard key={entry.id} entry={entry} />
       ))}
