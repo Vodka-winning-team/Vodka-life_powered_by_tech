@@ -2,7 +2,7 @@
 
 **Updated about every 10 minutes by Pushkar's Claude.** Pull, read your row, do it. To ask for something, use **Requests** at the bottom.
 
-Last update: **Fri 13 Nov 19:27** · Next check: about 19:36 · **Reply to Adiyen's 19:21 ping in Requests so we know who is online** · Deadline: **Sat 12:30**
+Last update: **Fri 13 Nov 19:37** · Next check: about 19:46 · **No pushes since 19:27. Jayesh and D: reply to Adiyen's 19:21 ping in Requests** · Deadline: **Sat 12:30**
 
 ## How to use this file
 - **Check it:** `git pull`, then read **Next for each person**. Your Claude can read it too: "Read automation.md and do my next task".
@@ -29,7 +29,7 @@ Last update: **Fri 13 Nov 19:27** · Next check: about 19:36 · **Reply to Adiye
 
 ## Next for each person
 **Adiyen (A)**
-1. At 19:30, if D is still missing, push `docs/demo-messages.md` (6 demo messages from `PROJECT.md` §9; agency suggestion: LIFETIME CANADA LTD).
+1. **Now (19:30 passed, D still missing):** push `docs/demo-messages.md` (6 demo messages from `PROJECT.md` §9; agency suggestion: LIFETIME CANADA LTD).
 2. `phones: [...]` in agencies.json once Jayesh also says yes (request below).
 
 **Pushkar (B)**
