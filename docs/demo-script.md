@@ -34,7 +34,7 @@ The messages are in [`demo-messages.md`](demo-messages.md) and the slides in [`s
 
 ### 1:15–5:15 · Slide 3, live demo · Jayesh drives, Paveesh narrates
 
-**Step 1: job offer (about 1 min 15 s)**
+**Step 1: job offer (about 1 min)**
 - Paste demo message 1 → tap **Check message**.
 > "Kevin pastes the message. Nothing leaves the phone."
 - Result: **Stop – high risk**. Point to the highlights: "processing fee", "Urgent".
@@ -43,7 +43,7 @@ The messages are in [`demo-messages.md`](demo-messages.md) and the slides in [`s
 > "THINK RECRUITMENT LTD is a real agency in the Ministry's register of 4 November, licensed for jobs abroad. But look at the wording: *listed, but this does not prove the message is from them*. Anyone can use a real agency's name.
 > And the processing fee is paid by the employer, regulation 7(2)(e). So: Stop."
 
-**Step 2: what to do now (about 45 s)**
+**Step 2: what to do now (about 35 s)**
 - Tap **What to do now** → **Call the official number**. The dialler opens with +230 5256 8074. **Don't press call.**
 > "The number comes from the Ministry register, never from the message, so Kevin calls the real agency."
 - Go back → **Share a summary**, pick Mum in the share sheet. **Don't send.**
@@ -51,24 +51,30 @@ The messages are in [`demo-messages.md`](demo-messages.md) and the slides in [`s
 - Go back to the result → **Save to history**.
 > "It's saved only because we tapped Save."
 
-**Step 3: follow-up (about 40 s)**
+**Step 3: follow-up (about 35 s)**
 - Open **History**, then the saved case. Under **They asked for something new?**, paste demo message 3 ("They now want Rs 15,000 for the air ticket.") → tap **Add to this case and check again**.
 - *Fallback (rehearse both):* **Job offer? Check the agency** → pick **Round trip air tickets** → **Check again**.
 > "A week later they ask for Rs 15,000 for the air ticket. Same case, checked again: air tickets are the employer's cost too, regulation 7(2)(a). Stop."
 
-**Step 4: fake bank link (about 40 s)**
+**Step 4: fake bank link (about 30 s)**
 - Back to Scan, paste demo message 4 → **Check message** → **Stop – high risk**.
 > "Not only jobs. This says MCB, but the link is mcb-login-secure.net. MCB's official website on the Bank of Mauritius list is mcb.mu. Stop. And here is MCB's official number, from mcb.mu."
 
-**Step 5: no false alarm (about 30 s)**
+**Step 5: no false alarm (about 20 s)**
 - Paste demo message 5 (the real-style MCB code SMS) → **Check message** → **No warning signs found – still verify**.
 > "A real bank code SMS. It says *never share this code*, so the app doesn't cry wolf. And it never says 'safe'. It says: still verify."
 
-**Step 6: Our sources (about 10 s)**
-- Back to Scan → **Our sources**.
-> "Every check runs on these official records, bundled in the app, each with its date."
+**Step 6: surprise card, "try to break it" (about 60 s)**
+> "Our surprise card: the app must survive a user doing the wrong thing. Kevin is stressed and in a hurry. Let's try to break it."
+- Tap **Check message** with nothing pasted → *"Paste a message first."*
+- Paste `🙂🙂🙂` → **Check message** → *"Paste the whole message to check it"*, never "No warning signs found".
+- Paste demo message 1 with a line break inside "processing fee" (from `quick-test.md`, section B2) → tap **Check message** 5 times fast → one result: **Stop**.
+- Open **Job offer? Check the agency** → tap **Back** without picking anything → the result still shows every warning sign. No green light.
+> "Whatever Kevin does wrong, the app never gives him a false green light. It fails safe. We tested it with 500 random messages."
+- *Before rehearsal: check each of these on the APK. The tap guard and the skipped-Job-check message are Jayesh's part (in progress at 20:48).*
 
 ### 5:15–5:45 · Slide 4, our data · Adiyen
+*(If time allows, Jayesh opens **Our sources** on the phone during this slide.)*
 > "79 agency licences from the Ministry of Labour, 8 fee rules from the Act and the Regulations, 18 banks and 3 payment apps from the Bank of Mauritius, 21 FSC investment warnings, and 5 CERT-MU alerts. Every row has its source link and date. We checked every agency row by eye against the PDF, and we store no personal names. No AI model: clear rules anyone can check, and tests run every demo message you just saw."
 
 ### 5:45–6:30 · Slide 5, impact · Paveesh
@@ -77,7 +83,7 @@ The messages are in [`demo-messages.md`](demo-messages.md) and the slides in [`s
 > In a pilot we'd measure one thing: how many users call the official number before they pay."
 
 ### 6:30–7:00 · Slide 6, surprise card + next · Paveesh
-> "Our surprise card was *[card]*. We changed *[what changed on screen]*. You saw it in step *[n]*."
+> "Our surprise card asked us to survive a user doing the wrong thing. We chose Kevin's key flow and made it fail safe: wrong input, skipped steps or panic-tapping never give a false green light. You saw it in the last minute of the demo."
 > "Next: *Arnak? Live*, a warning that appears during a phone call when a bank app is opened.
 > *Verifye avan ou peye.* Check before you pay. Thank you."
 
@@ -149,7 +155,7 @@ Answer in **two sentences**, then stop. The person in brackets answers first; an
 23. **"What did you change after testing with users?"** (Paveesh)
     *(Fill in after the user tests: the top 3 fixes, before and after.)*
 24. **"How did you handle the surprise card?"** (Paveesh)
-    *(Fill in when announced: the card, what we decided at what time, and where it shows on screen.)*
+    The card was "survive a user doing the wrong thing" (20:46). We chose Kevin's key flow and one principle, fail safe: the engine never crashes, and garbage, empty or broken input never shows "No warning signs found" (decision 14). It's the "try to break it" minute in the demo, with 24 engine tests behind it, including 500 random messages.
 
 ---
 
@@ -157,4 +163,4 @@ Answer in **two sentences**, then stop. The person in brackets answers first; an
 - [ ] Run 1: full run with a timer. Cut words if it goes over 7 minutes.
 - [ ] Run 2: with the backup video switch, as if the phone failed at step 3.
 - [ ] Run 3: swap roles. Each person explains a part they didn't build (Q&A 5, 11, 14, 19).
-- [ ] On the day: update Q&A 9 (test count), 23 (user tests) and 24 (surprise card).
+- [ ] On the day: update Q&A 9 (test count) and 23 (user tests); check Q24 matches what the app shows.

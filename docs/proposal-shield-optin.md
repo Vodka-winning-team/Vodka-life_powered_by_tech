@@ -1,7 +1,7 @@
 # Proposal: opt-in automatic checking on Android ("Shield", switch off by default)
 
 **From:** Paveesh (D) · **Date:** Fri 13 Nov 2026, 20:40 · **Status:** PROPOSAL, needs A, B and C to agree. **Vote by 23:00.**
-Shield was cut at 16:05 (decision 5). This brings it back **only as an opt-in switch**, and only if the gates below pass. Features 1–8 and share-in come first.
+Shield was cut at 16:05 (decision 5). This brings it back **only as an opt-in switch**, and only if the gates below pass. Features 1–8, share-in and **the surprise card work (decision 14)** come first.
 
 ---
 
@@ -27,6 +27,7 @@ Shield was cut at 16:05 (decision 5). This brings it back **only as an opt-in sw
 | Gate | When | If not |
 |---|---|---|
 | A, B and C vote yes | by 23:00 | Not built; slide 6 line only |
+| The surprise card app work (tap guard, "paste the whole message", skipped Job check) is done | before work starts | Surprise card first |
 | The APK builds on the demo phone (it can't run in Expo Go) | by 23:00 | Not built; slide 6 line only |
 | Share-in from WhatsApp is done first (part of feature 1, never cut) | before work starts | Share-in first |
 | Shield works on the APK | **03:00, hard stop** | Removed; slide 6 line only |

@@ -58,10 +58,15 @@ Every warning in the app shows its source and date. No personal names stored. No
 ---
 
 ## 6. Surprise card + what's next
-- **Surprise card:** *(fill in when announced: the constraint, and what it changed on screen)*.
+- **Surprise card:** *"Survive a user doing the wrong thing: wrong input, skipped steps, panic-tapping."*
+  - Our key flow: **Scan → Result → Job check → What to do now**.
+  - **Fail safe:** empty, garbage or broken input never shows "No warning signs found". One action per tap. Skipped steps never give a green light.
+  - Tested with 500 random messages, a 200,000-character paste and 20 repeated taps.
+  - *(You just saw it live: the "try to break it" minute.)*
 - **What's next:**
   - **Arnak? Live:** a warning that appears *during* a call when a bank app is opened.
   - Updating the data automatically from the official sources.
   - A full Kreol voice mode.
+  - **Shield (opt-in, Android):** check new WhatsApp and SMS messages automatically, if the user turns it on. Nothing saved.
 
 Speaker note: finish with "Verifye avan ou peye."

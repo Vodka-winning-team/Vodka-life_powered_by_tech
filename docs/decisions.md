@@ -30,9 +30,11 @@ Started by A (Adiyen) at 20:15 because D was missing (Jayesh's request on `autom
 11. **20:04 · Agencies keep every register phone number.** `phone` stays the main number and `phones` lists all of them (175 numbers; 55 agencies have 2–6). A matching number is never treated as proof that a message is real, because scammers can copy numbers. This is a contract change, agreed by A, by B (18:58) and by C (20:04). *Record: commit 1483850; TASKS.md §2.*
 12. **20:07 · Test in Expo Go and the browser; don't wait for the APK.** The Windows native build ran out of memory, and the app already works in Expo Go and on the web. *Record: board, Jayesh 20:07.*
 13. **20:10 · The stage demo uses THINK RECRUITMENT LTD** (a real licensed abroad agency, register page 7). The demo texts are the same ones B's engine tests check, so what we show is what is tested. LIFETIME CANADA LTD was also suggested. *Record: commits 5b7ca41, 4b7541c.*
+14. **20:46 · Surprise card: "survive a user doing the wrong thing".** The card: *"Your app must survive a user doing the 'wrong' thing: wrong input, skipped steps, panic-tapping. Make one key flow hard to break."* Our key flow is Kevin's case, **Scan → Result → Job check → What to do now**, and our principle is **fail safe**: wrong, empty or broken input never shows "No warning signs found". Engine side done at 20:48 (never crashes; 4 new finding kinds: `empty_message`, `message_truncated`, `cost_unknown`, `check_failed`; 24 robustness tests). App side (tap guard, "paste the whole message", skipped Job check) by Jayesh. D adds a 60-second "try to break it" demo segment, a slide and the README section. *Record: board 20:46 and 20:48 (Pushkar); commit 0996621. Team 10-minute meeting to confirm: see Open.*
 
 ## Open (not decided yet)
 
 - **The AI pattern score, on-phone learning and data updates** (C's proposal, 17:42, `docs/proposal-ai-and-updates.md`). It's marked "PROPOSAL, needs A, B, C and D to agree", and it would change decision 2.
 - **Reusing FraudLens's old look and fonts:** the question to the organisers (TASKS.md, D at 16:30). No answer is logged yet.
-- **Surprise card:** not announced yet. When it is, all 4 meet for 10 minutes, and the decision goes here with the time.
+- **Surprise card meeting:** Pushkar's plan (decision 14) was posted at 20:46 and the engine part is done. All 4 still confirm it in a 10-minute meeting; D adds the time here.
+- **Shield as an opt-in switch** (D's proposal, 20:48, `docs/proposal-shield-optin.md`): vote by 23:00, and only after the surprise card work is done.

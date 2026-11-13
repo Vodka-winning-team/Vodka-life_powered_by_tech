@@ -62,6 +62,20 @@ Mauritius Telecom Lucky Draw: you have won a prize! Send your details to mauriti
 - [ ] Language switch: **Français**, then **Kreol**, then back to **English**. The titles change, and nothing is cut off.
 - [ ] No screen shows the words "safe", "genuine", "scam" or "illegal".
 
+## B2. Try to break it (surprise card, 1 minute)
+
+- [ ] Tap **Check message** with nothing pasted → *"Paste a message first."*
+- [ ] Paste `🙂🙂🙂` → *"Paste the whole message to check it"*, **never** "No warning signs found".
+- [ ] Paste this (the line break inside "processing fee" is on purpose) → **Stop**:
+  ```
+  Bonjour Kevin! THINK RECRUITMENT LTD here. To secure your place, pay the processing
+  fee of Rs 50,000 today by Juice. Urgent, only 2 places left.
+  ```
+- [ ] Tap **Check message** 5 times fast → **one** result screen, the same Stop.
+- [ ] **Job offer? Check the agency** → **Back** without picking anything → the warnings are still there; no green light.
+- [ ] **Save to history** twice → **one** entry in History.
+- [ ] Close the app completely and reopen it → it doesn't crash; History is still there.
+
 ## C. Shield, only if it was built ([proposal](proposal-shield-optin.md))
 
 - [ ] Switch off → the fake notification below gives **no** alert.

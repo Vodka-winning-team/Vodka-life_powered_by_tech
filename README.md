@@ -67,7 +67,22 @@ AI tools were allowed by the organisers. We list them all here. Every AI-assiste
 Every teammate can explain and change their own part.
 
 ## Surprise card
-*(To be filled in when the card is announced: what it was, and how it changed the app.)*
+**Our card (announced Fri 13 Nov, 20:46):** "Your app must survive a user doing the 'wrong' thing: wrong input, skipped steps, panic-tapping. Make one key flow hard to break." Rule: "Show the key flow recovers safely from mistakes."
+
+**Our key flow:** Kevin's case: **Scan → Result → Job check → What to do now**.
+**Our principle: fail safe.** Whatever the user does wrong, the app never shows a false "No warning signs found".
+
+| Mistake | What the app does | Status |
+|---|---|---|
+| Empty paste, 2 letters, emojis only | "Paste the whole message to check it", never a result | Engine ✅ (20:48) · screen: in progress |
+| Very long paste | Checks the first 20,000 characters and says so | Engine ✅ |
+| Line breaks, tabs or extra spaces inside words ("processing / fee") | Still found, same result | Engine ✅ |
+| Panic-tapping Check | Same input always gives the same result; one action per tap | Engine ✅ · tap guard: in progress |
+| Unknown agency or cost (e.g. an old saved case) | "Be careful", with the reason; never a green light | Engine ✅ |
+| Skipping the Job check, or going Back | Result still shows every warning sign found; never "no warning" | In progress |
+| Internal error | "We couldn't check this message" (Be careful), never a crash | Engine ✅ |
+
+**Tested:** 24 "try to break it" tests in the engine, including 500 random messages, a 200,000-character paste, 20 repeated taps and wrong input types (88 engine tests in total at 20:48). See decision 14 in [`docs/decisions.md`](docs/decisions.md) and the demo segment in [`docs/demo-script.md`](docs/demo-script.md).
 
 ## How to run
 ```
