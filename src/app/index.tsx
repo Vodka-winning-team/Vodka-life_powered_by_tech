@@ -74,6 +74,7 @@ export default function ScanScreen() {
           <Button kind="secondary" title={t('openSources')} onPress={() => router.push('/sources')} />
         </View>
       </View>
+      <Button kind="secondary" title={t('numbersTitle')} onPress={() => router.push('/numbers')} />
 
       {/* Shield: Android APK only (the native part doesn't exist in Expo Go or on the web). Off unless turned on. */}
       {Shield && (

@@ -56,6 +56,10 @@ const en = {
   historyClear: 'Clear history',
 
   sourcesTitle: 'Our sources',
+  // Official numbers (Adiyen, 22:47)
+  numbersTitle: 'Official numbers',
+  numbersSearch: 'Search an agency or bank',
+  numbersHint: "Numbers from the official lists. Being listed doesn't prove a message is from them.",
   // Shield (decision 15), texts from D's docs/strings-shield.md
   shieldSwitch: 'Check new messages automatically',
   shieldSwitchHint: 'WhatsApp and SMS, on this phone only. Off unless you turn it on.',
@@ -101,6 +105,9 @@ export type StringKey = keyof typeof en;
 export type Language = 'en' | 'fr' | 'mfe';
 
 const fr: Partial<Record<StringKey, string>> = {
+  numbersTitle: "Numéros officiels",
+  numbersSearch: "Chercher une agence ou une banque",
+  numbersHint: "Numéros des listes officielles. Être sur la liste ne prouve pas que le message vient d'eux.",
   shieldSwitch: "Vérifier les nouveaux messages automatiquement",
   shieldSwitchHint: "WhatsApp et SMS, sur ce téléphone seulement. Désactivé tant que vous ne l'activez pas.",
   shieldSetupTitle: "Vérification automatique",
@@ -173,6 +180,9 @@ const fr: Partial<Record<StringKey, string>> = {
   sourcesChecked: "vérifié",
 };
 const mfe: Partial<Record<StringKey, string>> = {
+  numbersTitle: "Nimero ofisiel",
+  numbersSearch: "Rod enn lazans ouswa enn labank",
+  numbersHint: "Nimero depi bann lis ofisiel. Lor lis pa pe dir ki mesaz la sorti kot zot.",
   findingInfo: "Bon pou kone",
   followUpLabel: "Zot pe dimann enn lot zafer?",
   followUpPlaceholder: "Kol zot nouvo mesaz isi",
