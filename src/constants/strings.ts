@@ -60,15 +60,15 @@ const en = {
   sourcesRecords: 'records',
   sourcesChecked: 'checked',
   srcAgenciesTitle: 'Recruitment agencies',
-  srcAgenciesText: 'Recruitment agencies: 79 licences, Ministry of Labour list of 4 Nov 2026.',
+  srcAgenciesText: '79 licences, Ministry of Labour list of 4 Nov 2026.',
   srcFeesTitle: 'Who pays recruitment costs',
-  srcFeesText: 'Who pays recruitment costs: Private Recruitment Agencies Act 2023 s.5 and Regulations 2025 reg 7(2).',
+  srcFeesText: 'Private Recruitment Agencies Act 2023 s.5 and Regulations 2025 reg 7(2).',
   srcBanksTitle: 'Banks and payment apps',
-  srcBanksText: "Banks and payment apps: 18 banks and 3 payment providers, Bank of Mauritius list (13 Nov 2026). Phone numbers come from each bank's own website.",
+  srcBanksText: "18 banks and 3 payment providers, Bank of Mauritius list (13 Nov 2026). Phone numbers come from each bank's own website.",
   srcFscTitle: 'Investment warnings',
-  srcFscText: 'Investment warnings: 21 organisations named in Financial Services Commission alerts (2017–2026).',
+  srcFscText: '21 organisations named in Financial Services Commission alerts (2017–2026).',
   srcCertTitle: 'Security alert campaigns',
-  srcCertText: 'Security alert campaigns: 5 CERT-MU security alerts (Feb–Oct 2026).',
+  srcCertText: '5 CERT-MU security alerts (Feb–Oct 2026).',
 
 };
 
@@ -192,6 +192,11 @@ export function getLanguage(): Language {
 
 // Finding titles by kind, from A's docs/strings-fr-mfe.md section 2.
 const findingTitles: Record<string, Record<Language, string>> = {
+  // Surprise card kinds (engine 20:48). Kreol: waiting for Adiyen ("" = show English).
+  empty_message: { en: "Paste the whole message to check it", fr: "Collez le message en entier pour le vérifier", mfe: "" },
+  message_truncated: { en: "Only the first part was checked", fr: "Seul le début du message a été vérifié", mfe: "" },
+  cost_unknown: { en: "We couldn't match that cost", fr: "Nous n'avons pas reconnu ce coût", mfe: "" },
+  check_failed: { en: "We couldn't check this message", fr: "Nous n'avons pas pu vérifier ce message", mfe: "" },
   code_request: { en: "Asks for a code, PIN or password", fr: "Demande un code, un PIN ou un mot de passe", mfe: "Pe dimann enn kod, PIN ouswa mo de pas" },
   bank_link: { en: "Link is not {name}'s official website", fr: "Ce lien n'est pas le site officiel de {name}", mfe: "Sa lien la pa sit ofisiel {name}" },
   bank_phone: { en: "Number is not {name}'s official number", fr: "Ce numéro n'est pas le numéro officiel de {name}", mfe: "Sa nimero la pa nimero ofisiel {name}" },
@@ -240,6 +245,7 @@ export function findingTitle(finding: { kind: string; title: string }): string {
   if (!match) return finding.title;
 
   let text = titles[current];
+  if (!text) return finding.title; // not translated yet
   names.forEach((name, i) => {
     text = text.replace('{' + name + '}', match[i + 1]);
   });

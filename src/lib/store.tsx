@@ -19,7 +19,7 @@ export type Check = {
 type Store = {
   current: Check | null;
   history: Check[];
-  runCheck: (text: string, job?: JobAnswers | null) => void;
+  runCheck: (text: string, job?: JobAnswers | null) => Check;
   updateCase: (text: string, job: JobAnswers | null) => void;
   addToCase: (newText: string) => void;
   openCheck: (check: Check) => void;
@@ -65,9 +65,10 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   }
 
   /** A new check from the Scan screen: always a new case. */
-  function runCheck(text: string, job: JobAnswers | null = null) {
-    const result = engine.check(text, job);
-    setCurrent({ id: String(Date.now()), text, job, result, savedAt: null });
+  function runCheck(text: string, job: JobAnswers | null = null): Check {
+    const check: Check = { id: String(Date.now()), text, job, result: engine.check(text, job), savedAt: null };
+    setCurrent(check);
+    return check;
   }
 
   /**

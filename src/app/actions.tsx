@@ -41,7 +41,7 @@ export default function ActionsScreen() {
           <Label variant="label">{c.name}</Label>
           <Button title={formatPhone(c.phone)} onPress={() => call(c.phone)} />
           <Label variant="small">
-            {t('sourceLabel')}: {c.source.url} ({c.source.date})
+            {t('sourceLabel')}: {c.source.name} ({c.source.date})
           </Label>
         </Card>
       ))}

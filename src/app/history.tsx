@@ -6,6 +6,7 @@ import { Pressable } from 'react-native';
 import { Button, Card, Label, LevelTag, Screen } from '@/components/ui';
 import { t } from '@/constants/strings';
 import { useStore, type Check } from '@/lib/store';
+import { localDateTime } from '@/lib/time';
 
 export default function HistoryScreen() {
   const { history, openCheck, clearHistory } = useStore();
@@ -23,7 +24,7 @@ export default function HistoryScreen() {
           <Card>
             <LevelTag level={check.result.level} />
             <Label numberOfLines={2}>{check.text}</Label>
-            <Label variant="small">{check.savedAt?.slice(0, 16).replace('T', ' ')}</Label>
+            <Label variant="small">{localDateTime(check.savedAt)}</Label>
           </Card>
         </Pressable>
       ))}

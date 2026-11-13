@@ -29,7 +29,8 @@ export default function JobScreen() {
   const picked = engine.data.agencies.find((a) => a.id === agencyId);
 
   function checkAgain() {
-    updateCase(text, { agencyId, costId });
+    // Nothing picked = the Job check was skipped: check the message on its own (never an empty answer).
+    updateCase(text, agencyId || costId ? { agencyId, costId } : null);
     router.back();
   }
 

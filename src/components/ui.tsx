@@ -1,6 +1,6 @@
 // Small building blocks used by every screen. Colours and sizes come from constants/theme.ts.
 
-import type { ReactNode } from 'react';
+import { useRef, type ReactNode } from 'react';
 import { Pressable, ScrollView, StyleSheet, Text, View, type TextStyle } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -55,6 +55,20 @@ export function Card({ children }: { children: ReactNode }) {
   );
 }
 
+/**
+ * Surprise card ("panic-tapping"): a second tap within `wait` ms is ignored,
+ * so one tap = one action (one check, one save, one call, one share, one screen).
+ */
+function useOneTap(onPress: () => void, wait: number) {
+  const last = useRef(0);
+  return () => {
+    const now = Date.now();
+    if (now - last.current < wait) return;
+    last.current = now;
+    onPress();
+  };
+}
+
 export function Button({
   title,
   onPress,
@@ -66,10 +80,11 @@ export function Button({
 }) {
   const theme = useTheme();
   const primary = kind === 'primary';
+  const press = useOneTap(onPress, 1000);
   return (
     <Pressable
       accessibilityRole="button"
-      onPress={onPress}
+      onPress={press}
       style={({ pressed }) => [
         styles.button,
         {
@@ -100,7 +115,9 @@ export function LevelTag({ level, label }: { level: Level; label?: string }) {
   const colors = LevelColors[level];
   return (
     <View style={[styles.tag, { backgroundColor: colors.background }]}>
-      <Text style={[textStyles.small, { color: colors.text, fontWeight: '700' }]}>{label ?? t(`level${level}`)}</Text>
+      <Text numberOfLines={1} style={[textStyles.tag, { color: colors.text }]}>
+        {label ?? t(`level${level}`)}
+      </Text>
     </View>
   );
 }
@@ -137,11 +154,12 @@ export function HighlightedText({ text, highlights }: { text: string; highlights
 /** Pill button for picking one option (costs, agencies). */
 export function Chip({ title, selected, onPress }: { title: string; selected: boolean; onPress: () => void }) {
   const theme = useTheme();
+  const press = useOneTap(onPress, 400);
   return (
     <Pressable
       accessibilityRole="button"
       accessibilityState={{ selected }}
-      onPress={onPress}
+      onPress={press}
       style={[
         styles.chip,
         {
@@ -160,6 +178,7 @@ const textStyles = StyleSheet.create({
   title: { fontSize: FontSize.title, fontWeight: '700', lineHeight: FontSize.title * 1.25 },
   body: { fontSize: FontSize.body, lineHeight: FontSize.body * 1.45 },
   small: { fontSize: FontSize.small, lineHeight: FontSize.small * 1.4 },
+  tag: { fontSize: FontSize.small, lineHeight: FontSize.small * 1.4, fontWeight: '700' },
   label: { fontSize: FontSize.body, fontWeight: '700' },
   banner: { fontSize: FontSize.banner, fontWeight: '800', textAlign: 'center' },
 });

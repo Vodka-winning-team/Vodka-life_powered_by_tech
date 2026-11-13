@@ -6,7 +6,7 @@ import { useState } from 'react';
 import { StyleSheet, TextInput, View } from 'react-native';
 
 import { Button, Chip, Label, Screen } from '@/components/ui';
-import { t, type Language } from '@/constants/strings';
+import { findingTitle, t, type Language } from '@/constants/strings';
 import { FontSize, Radius, Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 import { useStore } from '@/lib/store';
@@ -22,8 +22,14 @@ export default function ScanScreen() {
       setError(t('scanEmpty'));
       return;
     }
+    const check = runCheck(text.trim());
+    // Surprise card (wrong input): too little text to check -> stay here and say so, never show a result.
+    const tooShort = check.result.findings.find((f) => f.kind === 'empty_message');
+    if (tooShort) {
+      setError(findingTitle(tooShort));
+      return;
+    }
     setError('');
-    runCheck(text.trim());
     router.push('/result');
   }
 
