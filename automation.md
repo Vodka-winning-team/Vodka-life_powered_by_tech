@@ -2,7 +2,7 @@
 
 **Updated about every 10 minutes by Pushkar's Claude.** Pull, read your row, do it. To ask for something, use **Requests** at the bottom.
 
-Last update: **Fri 13 Nov 20:18** · Next check: about 20:26 · Deadline: **Sat 12:30**
+Last update: **Fri 13 Nov 20:28** · Next check: about 20:36 · Deadline: **Sat 12:30**
 
 ## How to use this file
 - **Check it:** `git pull`, then read **Next for each person**. Your Claude can read it too: "Read automation.md and do my next task".
@@ -16,32 +16,35 @@ Last update: **Fri 13 Nov 20:18** · Next check: about 20:26 · Deadline: **Sat 
 ## Status
 | Checkpoint | State |
 |---|---|
-| 18:00: APK on a real phone; data | Data ✅ · Engine ✅ · **APK ⏳ delayed (out of memory); demo backup: Expo Go** |
-| 23:00: full flow with real data | App ✅ builds with the real engine, FR/Kreol switch in · **to do: click-through on a real phone (Expo Go)** |
-| 03:00: FSC/CERT in, job follow-up works | FSC/CERT ✅ · job follow-up: engine ✅, app side (reopen case + new cost) → Jayesh |
+| 18:00: APK on a real phone; data | Data ✅ · Engine ✅ · **APK ⏳ delayed (out of memory)** |
+| 23:00: full flow with real data | App ✅ builds (web build checked 20:27), FR/Kreol in · **to do: click-through on a real phone** |
+| 03:00: FSC/CERT in, job follow-up works | FSC/CERT ✅ · job follow-up ✅ (Jayesh 20:19) |
 | 07:00: feature freeze | — |
 
+⚠️ **Demo plan:** Expo Go needs the laptop on the same network (use a phone hotspot) and **does not work in airplane mode**. Offline on stage needs the APK; otherwise show offline only in the backup video.
+
 **Done so far**
-- **Adiyen (A):** 5 data files with all register phones, `validate.py`, sources, 15 test cases, FR/Kreol strings, demo messages, `docs/decisions.md` (13 decisions), slide-2 fact check.
-- **Pushkar (B):** engine, **64 tests pass** (incl. demo texts read from `docs/demo-messages.md`); README draft; `docs/slides.md` draft; this board.
-- **Jayesh (C):** 6 screens on the real engine; French + Kreol + language switch; finding titles by kind; dev sample removed.
-- **D:** nothing pushed yet (decisions, demo messages and slides drafts were done by others).
+- **Adiyen (A):** data with all register phones, validate, sources, 15 test cases, FR/Kreol strings, demo messages, decisions (13), user-test script.
+- **Pushkar (B):** engine, **all 71 tests pass** (engine + app); README and slides drafts; this board.
+- **Jayesh (C):** 6 screens, FR/Kreol + switch, finding titles, job follow-up (reopen case + new cost).
+- **Paveesh (D):** online 20:21; README finished (team, AI tools); taking over user tests.
 
 ## Next for each person
 **Adiyen (A)**
-1. Find 1 native Kreol reader and 1–2 testers (jobseeker or parent): 10 minutes each in the browser/Expo Go; notes in `docs/user-tests.md` *(user tests were due 19:00–21:00)*.
+1. Help Paveesh find 1 native Kreol reader; check Kreol texts on screen.
 
 **Pushkar (B)**
-1. Click through the demo (`docs/demo-messages.md`) in the browser and on the phone with Expo Go; post screen problems here.
-2. Give your vote on Jayesh's AI proposal (open item in `docs/decisions.md`).
+1. Click through the demo on a phone (Expo Go over a hotspot) and in the browser; post screen problems here.
+2. Vote on Jayesh's AI proposal (open item in `docs/decisions.md`).
 
 **Jayesh (C)**
-1. Job follow-up in the app: reopen a saved case, add a new cost, re-check (due 03:00; engine already supports it).
-2. APK again when memory allows; otherwise Expo Go is the demo plan.
-3. Please run `git config core.autocrlf true` (automation.md keeps getting Windows line endings).
+1. APK (needed for the airplane-mode part of the demo). If the laptop keeps running out of memory, say so here so we decide by 23:00.
+2. `git config core.autocrlf true` on your laptop.
 
-**D (pitch and testing): still missing**
-1. Review `docs/slides.md` and `docs/decisions.md`, finish `README.md` (AI tools, team names), record the backup video later.
+**Paveesh (D)**
+1. User tests (browser or Expo Go), notes in `docs/user-tests.md`.
+2. Organisers: FraudLens look/fonts answer → `docs/decisions.md`.
+3. Review `docs/slides.md`, write `docs/demo-script.md` (4 min + judge Q&A).
 
 ## Requests
 <!-- Add new lines at the END of this list. Format: - [ ] HH:MM · Name: request -->
@@ -66,4 +69,4 @@ Last update: **Fri 13 Nov 20:18** · Next check: about 20:26 · Deadline: **Sat 
 - [ ] 20:14 · Adiyen: `docs/decisions.md` started (commit ba8b14b): 13 decisions with real times, each with its record (commit, file or board line), plus 3 open items: C's AI proposal (not agreed by all 4, so not logged as a decision), the organisers' answer on FraudLens fonts, and the surprise card. D (or whoever does the README): please review it and add new decisions with the time. → B 20:18: read it; matches the git log. On the open AI proposal, Pushkar will give his own vote (not decided by his Claude).
 - [x] 20:19 · Jayesh: **job follow-up done (commit fd0f572)**. Reopen a saved case from History → Job check → pick a new cost (e.g. Round trip air tickets) → Check again: same case, saved copy in History updated. New: on the Result screen, "They asked for something new?" adds their next message to the case and checks it all again. Also ran `git config core.autocrlf true`. **Adiyen:** 3 new texts need Kreol (French done): `followUpLabel` "They asked for something new?", `followUpPlaceholder` "Paste their new message", `followUpButton` "Add to this case and check again". Post them here and I'll paste them in.
 - [x] 20:20 · Adiyen: Jayesh, Kreol for your 3 follow-up texts (also in docs/strings-fr-mfe.md, commit 041faca): `followUpLabel`: "Zot pe dimann enn lot zafer?" · `followUpPlaceholder`: "Kol zot nouvo mesaz isi" · `followUpButton`: "Azout dan sa dosie la ek verifye ankor" → done 20:24 (commit bf91dd7), in the app.
-- [ ] 20:21 · Paveesh (D): **online.** README finished (commit 04ed64a): team names, AI tools table from the AI log, links to decisions and user tests, "Security alert campaigns". Doing now: user tests with A's script in `docs/user-tests.md` (Adiyen, I'll take them over so you can stay on data), and asking the organisers about the FraudLens look/fonts. Next: review `docs/slides.md` and `docs/decisions.md`, write `docs/demo-script.md` (4 min + judge Q&A). Need: the Expo Go QR code from whoever runs `npx expo start`.
+- [ ] 20:21 · Paveesh (D): **online.** README finished (commit 04ed64a): team names, AI tools table from the AI log, links to decisions and user tests, "Security alert campaigns". Doing now: user tests with A's script in `docs/user-tests.md` (Adiyen, I'll take them over so you can stay on data), and asking the organisers about the FraudLens look/fonts. Next: review `docs/slides.md` and `docs/decisions.md`, write `docs/demo-script.md` (4 min + judge Q&A). Need: the Expo Go QR code from whoever runs `npx expo start`. → B 20:28: welcome! The QR code only works on the **same network** as the laptop running `npx expo start` (venue Wi-Fi often blocks it; use a phone hotspot that the laptop joins). Install Expo Go (SDK 58). Until then, testers can use the browser version. ⚠️ For the demo: Expo Go loads the app from the laptop, so **airplane mode breaks it**; show offline only with the APK or in the backup video.
