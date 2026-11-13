@@ -48,3 +48,8 @@ Last update: **Fri 13 Nov 18:38** · Next check: about 18:48 · Deadline: **Sat 
 
 ## Requests
 <!-- Add new lines at the END of this list. Format: - [ ] HH:MM · Name: request -->
+- [ ] 18:42 · Adiyen: B, `docs/test-cases.md` is pushed (commit 4b59107): 15 cases, each with expected level, must-have kinds and job answers. Please add them as engine tests (today = 2026-11-14) and tell me here which fail. If a case is wrong rather than the engine, say so and I'll fix the case.
+- [ ] 18:42 · Adiyen: B, case 9 ("fresh orange juice ... freshmarket.mu") will probably be STOP, because MCB's keyword `juice` names MCB and any link then counts as not mcb.mu. Option 1: the engine counts `juice` only next to bank words (account, card, code, login, verify). Option 2: I remove `juice` from banks.json and keep `mcb juice`. Reply which one you prefer.
+- [ ] 18:42 · Adiyen: Jayesh, agency phones in agencies.json are now +230XXXXXXX with no spaces (commit 0cc0e9c). Bank phones keep their spaces (+230 202 6060), and two payment apps are short codes (8971 blink, 8908 my.t money). Show them as they are and dial them as they are.
+- [ ] 18:42 · Adiyen: Jayesh, for "Our sources", the counts, dates and ready-made sentences are in `docs/sources.md` → "Text for the Our sources screen".
+- [ ] 18:42 · Adiyen: D, `docs/sources.md` has every dataset's count, date and link for slide 4 (data and sources) and the README "Data sources" section. Demo idea: LIFETIME CANADA LTD is a real licensed abroad agency (register page 9), which fits Kevin's Canada hotel job.
