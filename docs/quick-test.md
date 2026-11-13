@@ -4,6 +4,8 @@ Owner: D (Paveesh). Run this on **every new APK or Expo Go build**, on 2 phones 
 **Fast way to copy:** open this page on the phone in GitHub. Each message is in a grey box with a **copy button**. Tap it, then paste in the app.
 All messages are fictional; they come from [`demo-messages.md`](demo-messages.md) and [`test-cases.md`](test-cases.md).
 
+**Get the APK:** open the [GitHub Releases page](https://github.com/Vodka-winning-team/Vodka-life_powered_by_tech/releases) on the phone → download `FraudLens-Moris.apk` → open it → allow "Install unknown apps" if asked → **Install** (if Play Protect warns: More details → Install anyway). Write the build's name (for example `build-2026-11-13-2115`) in the results table. The 21:15 build doesn't have Shield, the latest Kreol or the app icon yet; skip section C on it.
+
 ---
 
 ## A. Messages (paste → Check message)
