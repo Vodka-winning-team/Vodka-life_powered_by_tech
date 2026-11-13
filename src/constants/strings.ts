@@ -197,6 +197,9 @@ const fr: Partial<Record<StringKey, string>> = {
   sourcesChecked: "vérifié",
 };
 const mfe: Partial<Record<StringKey, string>> = {
+  readAloud: "Lir for",
+  stopReading: "Aret lir",
+  checkedAgainst: "Nou finn verifye avek sa bann lis ofisiel la:",
   grannySTOP: "Pa peye ni avoy nanye. Avan tou, apel nimero ofisiel anba la.",
   grannyCAREFUL: "Fer atansion. Avan ou peye, apel nimero ofisiel la ou mem.",
   grannyNONE: "Nou pa finn trouv okenn sinn danze. Kan mem, apel nimero ofisiel la avan ou peye.",
