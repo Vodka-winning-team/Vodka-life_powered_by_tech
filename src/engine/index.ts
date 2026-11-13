@@ -84,6 +84,13 @@ type Message = {
 
 const LEVEL_ORDER: Record<Level, number> = { STOP: 0, CAREFUL: 1, NONE: 2 };
 
+/** Messaging apps Shield may read (WhatsApp, WhatsApp Business, Google Messages, Samsung Messages). */
+export const SHIELD_PACKAGES = ['com.whatsapp', 'com.whatsapp.w4b', 'com.google.android.apps.messaging', 'com.samsung.android.messaging'];
+/** Debug builds only: adb test notifications (docs/quick-test.md, section C). */
+export const SHIELD_DEBUG_PACKAGES = ['com.android.shell'];
+/** Finding kinds that are about the input, not a warning sign in the message. */
+const NOT_A_WARNING = ['empty_message', 'check_failed', 'message_truncated'];
+
 /** Longest message we check in full (a pasted chat log can be huge; the phone must stay fast). */
 const MAX_CHARS = 20000;
 
@@ -180,6 +187,21 @@ export class Engine {
     return { level, findings: sorted, contacts: uniqueContacts };
   }
 
+  /**
+   * Shield (opt-in, Android only, decision 15): should a new WhatsApp/SMS notification raise an alert?
+   * Only for an allowed messaging app AND a STOP or CAREFUL result with a real warning sign.
+   * Never alerts for an empty or unreadable notification (`empty_message`, `check_failed`) or for length alone
+   * (`message_truncated`), so the phone isn't flooded. `debug` also allows `com.android.shell` (adb test notifications).
+   */
+  shouldAlert(appPackage: string, text: string, debug = false): { alert: boolean; level: Level } {
+    const allowed = SHIELD_PACKAGES.includes(appPackage) || (debug && SHIELD_DEBUG_PACKAGES.includes(appPackage));
+    if (!allowed) return { alert: false, level: 'NONE' };
+    const r = this.check(text);
+    const real = r.findings.filter((f) => f.level !== 'NONE' && !NOT_A_WARNING.includes(f.kind));
+    if (r.level === 'NONE' || real.length === 0) return { alert: false, level: 'NONE' };
+    return { alert: true, level: r.level };
+  }
+
   /** Register agencies whose names appear in the message, best match first (for the Job check screen). */
   suggestAgencies(text: string): Agency[] {
     const words = Agencies.words(text);
@@ -270,7 +292,8 @@ export class Engine {
           vars: { name: bank.name, phone: Text.formatPhone(bank.phone) },
         });
       }
-      if (claimsBank || codeRequest) contacts.push({ name: bank.name, phone: bank.phone, source });
+      // The phone number comes from the bank's own website, so the contact cites that page.
+      if (claimsBank || codeRequest) contacts.push({ name: bank.name, phone: bank.phone, source: bankPhoneSource(bank) });
     }
     if (m.banksNamed.length > 0) out.push(...this.phraseCheck(m, Rules.BANK_ALARM));
     return out;
@@ -290,7 +313,7 @@ export class Engine {
         kind: 'fsc_alert', level: 'STOP',
         title: `The FSC warned about ${alert.name}`,
         detail:
-          `The Financial Services Commission published a warning about ${alert.name} on ${alert.alertDate}: ` +
+          `The Financial Services Commission published a warning about ${alert.name} on ${prettyDate(alert.alertDate)}: ` +
           "it is not licensed by the FSC. Don't send money.",
         highlights: hits,
         source: { name: 'FSC investor alert', url: alert.alertUrl, date: alert.alertDate },
@@ -465,6 +488,8 @@ export class Engine {
 
 const allWords = (rule: FeeRule) => [...rule.wordsEn, ...rule.wordsFr, ...rule.wordsMfe];
 const bankSource = (bank: Bank): Source => ({ name: 'Bank of Mauritius list of licensees', url: bank.sourceUrl, date: bank.snapshot });
+const bankPhoneSource = (bank: Bank): Source =>
+  bank.phoneSource ? { name: `${bank.name} website`, url: bank.phoneSource, date: bank.snapshot } : bankSource(bank);
 const agencySource = (a: Agency): Source => ({ name: 'Ministry of Labour list of recruitment agencies', url: a.sourceUrl, date: a.snapshot });
 
 /** Agency name matching, tolerant of case, accents, "Ltd" and one-letter typos. */

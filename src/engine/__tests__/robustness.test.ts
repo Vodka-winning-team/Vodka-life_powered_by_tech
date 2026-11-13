@@ -147,3 +147,11 @@ describe('wording rule (CLAUDE.md): no "safe", "genuine", "scam" or "illegal" in
     expect(r.findings.find((f) => f.kind === 'agency_listed')!.detail).toContain('+230 5256 8074');
   });
 });
+
+test('dates in texts are readable and the bank contact cites the bank website', () => {
+  const fsc = engine.check('Earn 5% per day with AI trading on mornefundvex.net');
+  expect(fsc.findings.find((f) => f.kind === 'fsc_alert')!.detail).toContain('30 Jun 2026');
+  const bank = engine.check('MCB: Unusual activity on your account. Verify at mcb-login-secure.net');
+  const mcb = bank.contacts.find((c) => c.name.includes('Mauritius Commercial'))!;
+  expect(mcb.source.url).toContain('mcb.mu');
+});
