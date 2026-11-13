@@ -123,6 +123,9 @@ const fr: Partial<Record<StringKey, string>> = {
   sourcesChecked: "vérifié",
 };
 const mfe: Partial<Record<StringKey, string>> = {
+  followUpLabel: "Zot pe dimann enn lot zafer?",
+  followUpPlaceholder: "Kol zot nouvo mesaz isi",
+  followUpButton: "Azout dan sa dosie la ek verifye ankor",
   languageLabel: "Lang",
   scanTitle: "Verifye enn mesaz",
   scanHint: "Kol enn SMS, WhatsApp ou email ki ou dout la anba. Nanye pa sorti depi ou telefonn.",
