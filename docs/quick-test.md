@@ -103,6 +103,7 @@ Mauritius Telecom Lucky Draw: you have won a prize! Send your details to mauriti
 | 20:57 | APK (airplane mode) | Jayesh's phone, Android 16 | Jayesh | All 6 demo steps + 3 backup messages | — | board 20:57 |
 | 22:33 | Release APK with Shield | Jayesh's phone, Android 16 | Jayesh + Pushkar | Shield: real WhatsApp → alert; normal message → no alert | — | board 22:33 |
 | 22:44 | Release APK build-2026-11-13-2115 | Samsung Galaxy A72, Android 14 | Pushkar | Demo 1 via share-in, Job check, Call, demos 4 and 5, all of B2 (empty, "ok", 6 rapid taps, skipped Job check, Save twice, force stop), Kreol screens | 1) keyboard hides "Check message" while typing; 2) FR/Kreol finding details and "Result" header still English; 3) dates show 2026-11-13; 4) Truecaller makes Call show an "Open with" chooser | board 22:45 (for Jayesh) |
+| 22:54 | Release APK with Shield | Jayesh's phone, Android 16 | Jayesh + Pushkar | Shield end to end: real WhatsApp → alert → tap → Result "Stop – high risk" (a mistyped link, mcb-logon-secure.net, was still caught); normal message → no alert | — (findings 1 and 3 from 22:44 fixed in commit e27f04a, in the next APK) | board 22:54 |
 | | | | | | | |
 
 **A failure?** Open a GitHub Issue: the message number, the phone, what you expected and what you saw (a screenshot helps). Post the issue link on the board for the owner: engine → Pushkar, screens → Jayesh, data → Adiyen.
