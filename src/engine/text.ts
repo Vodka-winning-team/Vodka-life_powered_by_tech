@@ -16,6 +16,12 @@ export function normalise(text: string): string {
       out += "'";
       continue;
     }
+    // Line breaks, tabs, non-breaking and zero-width spaces all become one plain space (same length),
+    // so "processing<newline>fee" or "processing<nbsp>fee" is still found.
+    if (/[\s\u00a0\u2007\u202f\u200b-\u200d\ufeff]/.test(c)) {
+      out += ' ';
+      continue;
+    }
     const base = [...c.normalize('NFD')].find((ch) => !COMBINING.test(ch)) ?? c;
     out += base.toLowerCase()[0] ?? c; // one character in, one character out
   }
@@ -28,20 +34,21 @@ export function escapeRe(s: string): string {
   return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
-/** Every whole-word occurrence of `phrase` in already-normalised `norm`. */
+/**
+ * Every whole-word occurrence of `phrase` in already-normalised `norm`.
+ * Spaces in the phrase match one or more spaces in the message ("processing   fee" still counts).
+ */
 export function findPhrase(norm: string, phrase: string): Highlight[] {
   const p = normalise(phrase).trim();
   if (p.length === 0) return [];
+  const re = new RegExp(p.split(/ +/).map(escapeRe).join(' +'), 'g');
   const hits: Highlight[] = [];
-  let from = 0;
-  while (true) {
-    const i = norm.indexOf(p, from);
-    if (i < 0) break;
-    const end = i + p.length; // not included
+  for (const m of allMatches(re, norm)) {
+    const i = m.index;
+    const end = i + m[0].length; // not included
     const okStart = i === 0 || !isWordChar(norm[i - 1]) || !isWordChar(p[0]);
     const okEnd = end === norm.length || !isWordChar(norm[end]) || !isWordChar(p[p.length - 1]);
     if (okStart && okEnd) hits.push({ start: i, end });
-    from = i + 1;
   }
   return hits;
 }
@@ -125,4 +132,14 @@ export function phones(original: string): Phone[] {
 /** Official phone in the data file → digits only, without the country code. */
 export function phoneDigits(phone: string): string {
   return phone.replace(/\D/g, '').replace(/^230/, '');
+}
+
+/** "+23052568074" → "+230 5256 8074", "+2302026060" → "+230 202 6060"; short codes ("8971") unchanged. Same rule as the app's formatPhone. */
+export function formatPhone(phone: string): string {
+  const digits = phone.replace(/[^\d]/g, '');
+  if (!phone.trim().startsWith('+230') || !digits.startsWith('230')) return phone;
+  const local = digits.slice(3);
+  if (local.length === 8) return `+230 ${local.slice(0, 4)} ${local.slice(4)}`;
+  if (local.length === 7) return `+230 ${local.slice(0, 3)} ${local.slice(3)}`;
+  return phone;
 }

@@ -26,6 +26,8 @@ export type Finding = {
   detail: string;
   highlights: Highlight[];
   source: Source | null;
+  /** Values used in title/detail (name, phone, date, ref...), so the app can build French/Kreol texts by `kind`. Optional. */
+  vars?: Record<string, string>;
 };
 
 /** An official number to call. Never a number taken from the message. */

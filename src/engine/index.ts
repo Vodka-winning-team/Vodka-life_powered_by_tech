@@ -84,6 +84,9 @@ type Message = {
 
 const LEVEL_ORDER: Record<Level, number> = { STOP: 0, CAREFUL: 1, NONE: 2 };
 
+/** Longest message we check in full (a pasted chat log can be huge; the phone must stay fast). */
+const MAX_CHARS = 20000;
+
 /** Today as YYYY-MM-DD in local time (dates in the data are ISO strings, so they compare as text). */
 function todayIso(): string {
   const d = new Date();
@@ -99,10 +102,60 @@ export class Engine {
     private today: string = todayIso(),
   ) {}
 
+  /**
+   * Never throws, and fails SAFE (surprise card: wrong input, skipped steps, panic-tapping):
+   * - empty or nearly empty text → "Paste the whole message" (CAREFUL, never "No warning signs found");
+   * - a very long paste → only the first part is checked, and the result says so (CAREFUL);
+   * - an unknown agency or cost id (stale saved case, wrong tap) → reported, never silently ignored;
+   * - any internal error → "We couldn't check this message" (CAREFUL) instead of a crash.
+   * Same input → same result every time, so tapping Check five times changes nothing.
+   */
   check(text: string, job: JobAnswers | null = null): CheckResult {
-    const m = this.read(text);
+    try {
+      return this.checkUnsafe(typeof text === 'string' ? text : '', job && typeof job === 'object' ? job : null);
+    } catch {
+      return {
+        level: 'CAREFUL',
+        findings: [{
+          kind: 'check_failed', level: 'CAREFUL',
+          title: "We couldn't check this message",
+          detail: 'Something went wrong while checking. Do not pay yet: call the organisation on a number you find yourself.',
+          highlights: [], source: null, vars: {},
+        }],
+        contacts: [],
+      };
+    }
+  }
+
+  private checkUnsafe(fullText: string, job: JobAnswers | null): CheckResult {
     const findings: Finding[] = [];
     const contacts: Contact[] = [];
+
+    // Nothing (or almost nothing) to check: never answer "No warning signs found" for an empty paste.
+    const letters = (fullText.match(/[\p{L}\p{N}]/gu) ?? []).length;
+    if (letters < 3 && !job) {
+      return {
+        level: 'CAREFUL',
+        findings: [{
+          kind: 'empty_message', level: 'CAREFUL',
+          title: 'Paste the whole message to check it',
+          detail: 'There is not enough text to check. Copy the full message (or share it to the app) and try again.',
+          highlights: [], source: null, vars: {},
+        }],
+        contacts: [],
+      };
+    }
+    // A huge paste: check the first part quickly and say the rest was not checked.
+    const text = fullText.length > MAX_CHARS ? fullText.slice(0, MAX_CHARS) : fullText;
+    if (text.length < fullText.length) {
+      findings.push({
+        kind: 'message_truncated', level: 'CAREFUL',
+        title: 'Only the first part was checked',
+        detail: `The message is very long, so only the first ${MAX_CHARS.toLocaleString('en')} characters were checked. Check the rest yourself before paying.`,
+        highlights: [], source: null, vars: { chars: String(MAX_CHARS) },
+      });
+    }
+    const m = this.read(text);
 
     findings.push(...this.codeRequestCheck(m));
     findings.push(...this.bankLinkCheck(m, contacts));
@@ -201,6 +254,7 @@ export class Engine {
             `The official website of ${bank.name} is ${bank.domains.join(' or ')} ` +
             "(Bank of Mauritius list of licensees). Don't open this link. Call the bank on its official number.",
           highlights: bad.map((l) => l.range), source,
+          vars: { name: bank.name, domains: bank.domains.join(' / ') },
         });
       }
       // The message claims to come from the bank (account alarm or a link) and gives another phone number.
@@ -211,8 +265,9 @@ export class Engine {
         out.push({
           kind: 'bank_phone', level: 'CAREFUL',
           title: `Number is not ${bank.name}'s official number`,
-          detail: `Call ${bank.name} only on its official number ${bank.phone}, never on a number given in a message.`,
+          detail: `Call ${bank.name} only on its official number ${Text.formatPhone(bank.phone)}, never on a number given in a message.`,
           highlights: otherPhones.map((p) => p.range), source,
+          vars: { name: bank.name, phone: Text.formatPhone(bank.phone) },
         });
       }
       if (claimsBank || codeRequest) contacts.push({ name: bank.name, phone: bank.phone, source });
@@ -239,6 +294,7 @@ export class Engine {
           "it is not licensed by the FSC. Don't send money.",
         highlights: hits,
         source: { name: 'FSC investor alert', url: alert.alertUrl, date: alert.alertDate },
+        vars: { name: alert.name, date: prettyDate(alert.alertDate) },
       });
     }
     return out;
@@ -274,6 +330,7 @@ export class Engine {
           'Every recruitment agency must hold a licence from the Ministry of Labour. ' +
           "Ask the Ministry's Recruitment Licence Unit (pra@govmu.org) before paying anything.",
         highlights: [], source: first ? agencySource(first) : null,
+        vars: { date: prettyDate(first?.snapshot ?? '') },
       });
     } else {
       const source = agencySource(agency);
@@ -288,6 +345,7 @@ export class Engine {
             `The Ministry list records this licence as valid from ${prettyDate(agency.validFrom)} to ` +
             `${prettyDate(agency.expiry)}. Ask the Ministry before paying anything.`,
           highlights: [], source,
+          vars: { name: agency.name, validFrom: prettyDate(agency.validFrom), expiry: prettyDate(agency.expiry) },
         });
       } else if (agency.category !== 'abroad') {
         out.push({
@@ -297,6 +355,7 @@ export class Engine {
             `Its licence is for ${Agencies.categoryText(agency.category)}. ` +
             'Only agencies licensed for jobs abroad may recruit you for work overseas.',
           highlights: [], source,
+          vars: { name: agency.name, category: agency.category },
         });
       } else {
         out.push({
@@ -304,14 +363,27 @@ export class Engine {
           title: `${agency.name} is listed for jobs abroad`,
           detail:
             `Recorded as valid until ${prettyDate(agency.expiry)}. Listed, but this does not prove ` +
-            `the message is from them. Call them on the number from the Ministry list: ${agency.phone}.`,
+            `the message is from them. Call them on the number from the Ministry list: ${Text.formatPhone(agency.phone)}.`,
           highlights: [], source,
+          vars: { name: agency.name, expiry: prettyDate(agency.expiry), phone: Text.formatPhone(agency.phone) },
         });
       }
     }
     const rule = job.costId ? this.data.feeRules.find((r) => r.id === job.costId) : undefined;
     // Highlight the cost words if the message has them.
     if (rule) out.push(this.feeFinding(rule, Text.findAny(m.norm, allWords(rule))));
+    else if (job.costId) {
+      // A cost id we don't know (old saved case, wrong tap): say so; never drop it silently.
+      const general = this.data.feeRules.find((r) => r.id === 'any_recruitment_fee');
+      out.push({
+        kind: 'cost_unknown', level: 'CAREFUL',
+        title: "We couldn't match that cost",
+        detail: 'Pick the cost again on the Job check screen.' +
+          (general ? ` Remember: no agency or employer may charge a worker a fee for recruiting them (${general.ref}).` : ''),
+        highlights: [], source: general ? { name: general.ref, url: general.sourceUrl, date: general.snapshot } : null,
+        vars: { ref: general?.ref ?? '' },
+      });
+    }
     return out;
   }
 
@@ -327,6 +399,7 @@ export class Engine {
       title: 'A job cost the employer must pay',
       detail, highlights: hits,
       source: { name: rule.ref, url: rule.sourceUrl, date: rule.snapshot },
+      vars: { cost: rule.cost, ref: rule.ref, generalRef: general?.ref ?? '' },
     };
   }
 
@@ -377,6 +450,7 @@ export class Engine {
         detail: `CERT-MU (the national cybersecurity team) warned about this on ${prettyDate(alert.alertDate)}.`,
         highlights: hitsByPhrase.flatMap((x) => x.hits),
         source: { name: 'CERT-MU security alert', url: alert.alertUrl, date: alert.alertDate },
+        vars: { campaign: alert.campaign, date: prettyDate(alert.alertDate) },
       });
     }
     return out;

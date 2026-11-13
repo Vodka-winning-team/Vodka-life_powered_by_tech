@@ -11,7 +11,7 @@ export const URGENCY: PhraseRule = {
   kind: 'urgency',
   level: 'CAREFUL',
   title: 'Pressure to act fast',
-  detail: "Scammers rush you so you don't stop to check. A real organisation gives you time.",
+  detail: "People who want your money rush you so you don't stop to check. A real organisation gives you time.",
   phrases: [
     'urgent', 'urgently', 'immediately', 'right now', 'act now', 'today only', 'pay today', 'within 24 hours',
     'within 24h', 'within 48 hours', 'last chance', 'last day', 'expires today', "before it's too late", 'asap',
