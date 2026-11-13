@@ -117,6 +117,7 @@ Mauritius Telecom Lucky Draw: you have won a prize! Send your details to mauriti
 | 23:24–23:28 | Verifye.apk (verifye-2026-11-13-2330) | Jayesh's phone, Android 16 | Jayesh | Verifye name, keyboard fix, titles switch language, dates, Official numbers, Granny mode, Shield still on | — | board 23:28 |
 | 23:40 | Verifye.apk (verifye-2026-11-13-2330) | Samsung Galaxy A72, Android 14 | Pushkar | Retest: name, keyboard fix and the rest of the quick test | 2 small issues (Result not starting at the top for a new case; empty sections in Official numbers), fixed 23:42 | board 23:40 |
 | 00:53–00:56 | Final Verifye.apk (verifye-final-2026-11-14-0055) | Jayesh's phone, Android 16 | Jayesh | Phone-tested before release (icon, UI polish, Read aloud, records card, FR/Kreol, agency fixes) | — | board 00:56 |
+| 01:28 | Final Verifye.apk (verifye-final-2026-11-14-0055) | Samsung Galaxy A72, Android 14 | Pushkar | Full quick test on the final APK: new Scan layout, demo 1 via share-in, Read aloud and records card on the Result, Job check, one card per organisation, demos 4 and 5, wrong-input checks | 1 small note: Result did not open at the top after Job check → Check again (fixed in git 01:30, commit 46513e3; not in this APK) | board 01:28 |
 | | | | | | | |
 
 **A failure?** Open a GitHub Issue: the message number, the phone, what you expected and what you saw (a screenshot helps). Post the issue link on the board for the owner: engine → Pushkar, screens → Jayesh, data → Adiyen.
