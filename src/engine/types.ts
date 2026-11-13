@@ -1,0 +1,96 @@
+// The contract between Engine (B) and App (C): docs/TASKS.md §2.
+// TypeScript port of engine/src/main/kotlin/.../Model.kt. Same names, camelCase fields.
+// Pure TypeScript: no React Native imports anywhere in src/engine/, so `npm test` runs it without a phone.
+
+/** STOP = "Stop – high risk", CAREFUL = "Be careful – verify", NONE = "No warning signs found – still verify". */
+export type Level = 'STOP' | 'CAREFUL' | 'NONE';
+
+/** Where a finding comes from: an official record, with its date. */
+export type Source = { name: string; url: string; date: string };
+
+/**
+ * A span of the original message to mark in the X-Ray.
+ * start is included, end is NOT included (like text.slice(start, end)).
+ * Kotlin used IntRange (end included); here end = Kotlin's last + 1.
+ */
+export type Highlight = { start: number; end: number };
+
+/**
+ * One reason shown on the Result screen.
+ * kind: fixed key ("job_fee", "code_request", "bank_link"...) so the app can translate the title.
+ */
+export type Finding = {
+  kind: string;
+  level: Level;
+  title: string;
+  detail: string;
+  highlights: Highlight[];
+  source: Source | null;
+};
+
+/** An official number to call. Never a number taken from the message. */
+export type Contact = { name: string; phone: string; source: Source };
+
+export type CheckResult = { level: Level; findings: Finding[]; contacts: Contact[] };
+
+/** The user's answers on the Job check screen: which register agency, which cost they are asked to pay. */
+export type JobAnswers = { agencyId: string | null; costId: string | null };
+
+// ---- Records loaded from A's data files (app/src/main/assets/data/) ----
+
+export type Agency = {
+  id: string;
+  name: string;
+  category: string; // "abroad" | "local" | "non_citizen"
+  phone: string;
+  address: string;
+  validFrom: string; // YYYY-MM-DD
+  expiry: string; // YYYY-MM-DD
+  page: number;
+  sourceUrl: string;
+  snapshot: string;
+};
+
+export type FeeRule = {
+  id: string;
+  cost: string;
+  wordsEn: string[];
+  wordsFr: string[];
+  wordsMfe: string[];
+  payer: string;
+  ref: string;
+  sourceUrl: string;
+  snapshot: string;
+};
+
+export type Bank = {
+  id: string;
+  name: string;
+  type: string; // "bank" | "psp"
+  keywords: string[];
+  domains: string[];
+  phone: string;
+  phoneSource: string;
+  sourceUrl: string;
+  snapshot: string;
+};
+
+export type FscAlert = {
+  id: string;
+  name: string;
+  domains: string[];
+  alertDate: string;
+  alertUrl: string;
+  sourceUrl: string;
+  snapshot: string;
+};
+
+export type CertAlert = {
+  id: string;
+  campaign: string;
+  phrases: string[];
+  alertDate: string;
+  alertUrl: string;
+  sourceUrl: string;
+  snapshot: string;
+};

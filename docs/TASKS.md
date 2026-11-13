@@ -3,6 +3,24 @@
 Read `PROJECT.md` first. This file adds the exact tasks per person, which files each person owns, and how we use Claude.
 Changes since PROJECT.md (team review, 16:05): **Shield is cut**, the Arnak? Live plan is the "what's next" slide only, and the **job check is the lead story**.
 
+> ## ⚠️ STACK CHANGE (team decision, Fri 13 Nov ~18:15): the app is now **Expo (React Native + TypeScript)**
+> **Why:** it must work on any device: Android APK, iPhone through Expo Go, and a web link, from one codebase.
+> **What changes:** the app is TypeScript in `src/`. The engine moves from Kotlin to **TypeScript in `src/engine/`** (same names, same behaviour). The data files do **not** move: `app/src/main/assets/data/` stays as it is.
+> **What stays:** the data contract, the level rule, the wording rules, offline, no server, all features and the demo.
+>
+> ### Pushkar (B): port the engine to TypeScript, now
+> Your Kotlin engine (`engine/`, ~1,000 lines, 21 tests) works, so **port it, don't redesign it**. Stop adding Kotlin.
+> 1. `git pull`, then `npm install` (once). Read `src/engine/types.ts`: the contract already ported from your `Model.kt` (same names, camelCase fields).
+> 2. Replace the stub in `src/engine/index.ts` with a port of `DataSet.kt`, `Engine.kt`, `Rules.kt`, `Text.kt`. Same class and method names: `DataSet.fromJson(agencies, feeRules, banks, fscAlerts, certAlerts)` (5 JSON strings), `new Engine(data)`, `engine.check(text, job?)`, `engine.suggestAgencies(text)`. The app already calls these, so screens work the moment you push.
+> 3. **Highlights:** Kotlin `IntRange` (end included) becomes `{ start, end }` with **end NOT included** (`end = last + 1`, like `text.slice(start, end)`). Keep `Text.kt`'s trick that keeps character positions after removing accents.
+> 4. Port `EngineTest.kt` + `DataSetTest.kt` to Jest in `src/engine/__tests__/` (read the data files with `fs.readFileSync` from `app/src/main/assets/data/`). Run with `npm test`. All 21 must pass.
+> 5. `TryIt.kt` becomes `src/engine/try-it.ts` if you still want it (optional).
+> 6. **Pure TypeScript only:** no `react-native` or `expo` imports in `src/engine/`.
+> 7. When all tests pass: delete the Kotlin `engine/` folder in the same commit (`B: engine ported to TypeScript, 21 tests`).
+>
+> **Adiyen (A):** nothing changes. `validate.py` and the JSON stay where they are.
+> **D:** README "Stack" = Expo SDK 58, React Native, TypeScript, Expo Router. "How to run" = `npm install`, then `npx expo start` (scan the QR code with Expo Go), or install the APK.
+
 ---
 
 ## 0. How we work with Claude (everyone)
@@ -24,8 +42,8 @@ Changes since PROJECT.md (team review, 16:05): **Shield is cut**, the Arnak? Liv
 | Person | Owns | Never touches |
 |---|---|---|
 | **A: Data (Adiyen)** | `data/`, `app/src/main/assets/data/` | `engine/`, app code |
-| **B: Engine (Pushkar)** | `engine/` (Kotlin module + its tests) | `app/`, `data/` |
-| **C: App + main laptop (Jayesh)** | `app/` (except `assets/data/`), `settings.gradle.kts`, root `build.gradle.kts`, `gradle/` | `engine/src/`, `data/` |
+| **B: Engine (Pushkar)** | `src/engine/` (TypeScript + its tests); the old Kotlin `engine/` until it is deleted | `src/app/`, `data/` |
+| **C: App + main laptop (Jayesh)** | `src/` (except `src/engine/`), `assets/` (except data), `package.json`, `app.json`, `tsconfig.json`, `eslint.config.js` | `src/engine/`, `data/` |
 | **D: Pitch + testing** | `README.md`, `docs/` | code |
 
 ---
@@ -44,27 +62,30 @@ JSON arrays in `app/src/main/assets/data/`. **Every record has `source_url` and 
 | `cert_alerts.json` | `id, campaign, phrases [ ], alert_date, alert_url` |
 
 ### Engine: B writes it, C calls it
-Module `:engine`, package `mu.fraudlens.moris.engine`. **Pure Kotlin, no Android imports**, so it can be tested without a phone.
+Folder `src/engine/`, imported as `@/engine`. **Pure TypeScript, no `react-native` or `expo` imports**, so it can be tested without a phone (`npm test`). Full types: `src/engine/types.ts`.
 
-```kotlin
-enum class Level { STOP, CAREFUL, NONE }
-data class Source(val name: String, val url: String, val date: String)
-data class Finding(val kind: String, val level: Level, val title: String,
-                   val detail: String, val highlights: List<IntRange>, val source: Source?)
-data class Contact(val name: String, val phone: String, val source: Source)
-data class CheckResult(val level: Level, val findings: List<Finding>, val contacts: List<Contact>)
-data class JobAnswers(val agencyId: String?, val costId: String?)
+```ts
+type Level = 'STOP' | 'CAREFUL' | 'NONE';
+type Source = { name: string; url: string; date: string };
+type Highlight = { start: number; end: number };          // end NOT included
+type Finding = { kind: string; level: Level; title: string; detail: string;
+                 highlights: Highlight[]; source: Source | null };
+type Contact = { name: string; phone: string; source: Source };
+type CheckResult = { level: Level; findings: Finding[]; contacts: Contact[] };
+type JobAnswers = { agencyId: string | null; costId: string | null };
 
-class DataSet { companion object {
-    fun fromJson(agencies: String, feeRules: String, banks: String,
-                 fscAlerts: String, certAlerts: String): DataSet } }
-
-class Engine(val data: DataSet) {
-    fun check(text: String, job: JobAnswers? = null): CheckResult
-    fun suggestAgencies(text: String): List<Agency>   // agency names found in the message
+class DataSet {
+  agencies: Agency[]; feeRules: FeeRule[]; banks: Bank[]; fscAlerts: FscAlert[]; certAlerts: CertAlert[];
+  static fromJson(agencies: string, feeRules: string, banks: string,
+                  fscAlerts: string, certAlerts: string): DataSet;
+}
+class Engine {
+  constructor(data: DataSet);
+  check(text: string, job?: JobAnswers | null): CheckResult;
+  suggestAgencies(text: string): Agency[];               // agency names found in the message
 }
 ```
-C reads the 5 files from assets and passes their text to `DataSet.fromJson`.
+C loads the 5 files (`src/lib/data.ts`) and passes their text to `DataSet.fromJson`.
 `Finding.kind` is a fixed key (`job_fee`, `code_request`, `bank_link`…), so C can translate titles later.
 
 **Level rule:** STOP if any of: a request for a code or PIN; a link that isn't the official site of the bank named; a job fee the employer should pay; a match with an FSC alert. CAREFUL if there are other warning signs. NONE otherwise.
