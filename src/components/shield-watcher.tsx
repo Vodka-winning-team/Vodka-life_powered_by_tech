@@ -1,6 +1,6 @@
 // Shield: while it is on, each new WhatsApp/SMS notification is checked with Pushkar's engine.shouldAlert().
 // If it has warning signs, the phone shows "Stop – warning signs found / Tap to see why".
-// Tapping the alert opens FraudLens with the message (same path as share-in), so the Result shows why.
+// Tapping the alert opens Verifye with the message (same path as share-in), so the Result shows why.
 // Nothing is saved or sent anywhere.
 
 import { useEffect } from 'react';

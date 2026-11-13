@@ -1,4 +1,4 @@
-// Share-in: in WhatsApp/SMS, long-press a message → Share → FraudLens.
+// Share-in: in WhatsApp/SMS, long-press a message → Share → Verifye.
 // The app opens, checks the shared text and shows the Result screen. (APK only: not in Expo Go or on the web.)
 
 import { router, usePathname } from 'expo-router';
