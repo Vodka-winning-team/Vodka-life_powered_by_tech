@@ -4,7 +4,7 @@ Owner: D (Paveesh). Run this on **every new APK or Expo Go build**, on 2 phones 
 **Fast way to copy:** open this page on the phone in GitHub. Each message is in a grey box with a **copy button**. Tap it, then paste in the app.
 All messages are fictional; they come from [`demo-messages.md`](demo-messages.md) and [`test-cases.md`](test-cases.md).
 
-**Get the APK:** open the [GitHub Releases page](https://github.com/Vodka-winning-team/Vodka-life_powered_by_tech/releases) on the phone → download the `.apk` file → open it → allow "Install unknown apps" if asked → **Install** (if Play Protect warns: More details → Install anyway). Write the build's name (for example `build-2026-11-13-2115`) in the results table. The 21:15 build doesn't have Shield, the latest Kreol or the app icon yet; skip section C on it.
+**Get the APK:** open the [final release](https://github.com/Vodka-winning-team/Vodka-life_powered_by_tech/releases/tag/verifye-final-2026-11-14-0055) on the phone (Sat 14 Nov, 00:55) → download the `.apk` file → open it → allow "Install unknown apps" if asked → **Install** (if Play Protect warns: More details → Install anyway). Install it over the old build and write the build's name (`verifye-final-2026-11-14-0055`) in the results table. Remove the old September FraudLens app, and set Phone as the default dialler.
 
 ---
 
@@ -65,6 +65,16 @@ Mauritius Telecom Lucky Draw: you have won a prize! Send your details to mauriti
 - [ ] Language switch: **Français**, then **Kreol**, then back to **English**. The titles change, and nothing is cut off.
 - [ ] No screen shows the words "safe", "genuine", "scam" or "illegal".
 
+## B1. New screens (final APK, 1 minute)
+
+- [ ] The app's name and icon are **Verifye** (home screen, Share menu, Notification access list).
+- [ ] While typing on Scan, the keyboard doesn't hide **Check message**.
+- [ ] **Search an agency or bank** → type "think" → THINK RECRUITMENT LTD with both register numbers and "page 7" → a number opens the dialler only. Type "mcb" → MCB's official number.
+- [ ] **Granny mode** (Settings card on Scan) → bigger text and buttons, no grey text; the Result shows one plain sentence, then the Call button. Switch it off again.
+- [ ] **Read aloud** on the Result reads the result (English and French voices); **Stop reading** stops it.
+- [ ] The Result shows **"Checked against these official records"** with dates (agencies 4 Nov 2026; banks, FSC and CERT-MU 13 Nov 2026) → tap → Our sources.
+- [ ] In French and Kreol, the finding details, cost names and dates are translated.
+
 ## B2. Try to break it (surprise card, 1 minute)
 
 - [ ] Tap **Check message** with nothing pasted → *"Paste a message first."*
@@ -104,6 +114,9 @@ Mauritius Telecom Lucky Draw: you have won a prize! Send your details to mauriti
 | 22:33 | Release APK with Shield | Jayesh's phone, Android 16 | Jayesh + Pushkar | Shield: real WhatsApp → alert; normal message → no alert | — | board 22:33 |
 | 22:44 | Release APK build-2026-11-13-2115 | Samsung Galaxy A72, Android 14 | Pushkar | Demo 1 via share-in, Job check, Call, demos 4 and 5, all of B2 (empty, "ok", 6 rapid taps, skipped Job check, Save twice, force stop), Kreol screens | 1) keyboard hides "Check message" while typing; 2) FR/Kreol finding details and "Result" header still English; 3) dates show 2026-11-13; 4) Truecaller makes Call show an "Open with" chooser | board 22:45 (for Jayesh) |
 | 22:54 | Release APK with Shield | Jayesh's phone, Android 16 | Jayesh + Pushkar | Shield end to end: real WhatsApp → alert → tap → Result "Stop – high risk" (a mistyped link, mcb-logon-secure.net, was still caught); normal message → no alert | — (findings 1 and 3 from 22:44 fixed in commit e27f04a, in the next APK) | board 22:54 |
+| 23:24–23:28 | Verifye.apk (verifye-2026-11-13-2330) | Jayesh's phone, Android 16 | Jayesh | Verifye name, keyboard fix, titles switch language, dates, Official numbers, Granny mode, Shield still on | — | board 23:28 |
+| 23:40 | Verifye.apk (verifye-2026-11-13-2330) | Samsung Galaxy A72, Android 14 | Pushkar | Retest: name, keyboard fix and the rest of the quick test | 2 small issues (Result not starting at the top for a new case; empty sections in Official numbers), fixed 23:42 | board 23:40 |
+| 00:53–00:56 | Final Verifye.apk (verifye-final-2026-11-14-0055) | Jayesh's phone, Android 16 | Jayesh | Phone-tested before release (icon, UI polish, Read aloud, records card, FR/Kreol, agency fixes) | — | board 00:56 |
 | | | | | | | |
 
 **A failure?** Open a GitHub Issue: the message number, the phone, what you expected and what you saw (a screenshot helps). Post the issue link on the board for the owner: engine → Pushkar, screens → Jayesh, data → Adiyen.

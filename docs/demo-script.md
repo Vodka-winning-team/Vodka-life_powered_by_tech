@@ -74,6 +74,8 @@ The messages are in [`demo-messages.md`](demo-messages.md) and the slides in [`s
 > "Whatever Kevin does wrong, the app never gives him a false green light. It fails safe. We tested it with 500 random messages."
 - *Before rehearsal: check each of these on the APK (Jayesh's app side was done at 21:00; `quick-test.md` section B2).*
 
+**Optional extras, only if there's time (10 s each; pick one, rehearsed):** **Granny mode** (Settings card on Scan → big text, one plain sentence, Call button first) · **Search an agency or bank** (type "think" → THINK RECRUITMENT LTD with both register numbers) · **Read aloud** on the Result · the **"Checked against these official records"** card: *"Every result shows the date of each official list it used."*
+
 **Step 7 (optional): automatic checking, Shield (about 20 s)**. Passed on the release APK at 22:33 (real WhatsApp test). Rehearse it once on the demo phone first.
 - **Before this step: turn airplane mode off** (Wi-Fi or data on), so the WhatsApp message can arrive. Shield must already be switched on, with Notification access granted.
 - Jayesh's phone sends demo message 1 by WhatsApp to the demo phone → **"Stop – warning signs found. Tap to see why, before you pay."** → tap → Result: **Stop**.
@@ -82,7 +84,7 @@ The messages are in [`demo-messages.md`](demo-messages.md) and the slides in [`s
 
 ### 5:15–5:45 · Slide 4, our data · Adiyen
 *(If time allows, Jayesh opens **Our sources** on the phone during this slide.)*
-> "79 agency licences from the Ministry of Labour, 8 fee rules from the Act and the Regulations, 18 banks and 3 payment apps from the Bank of Mauritius, 21 FSC investment warnings, and 5 CERT-MU alerts. Every row has its source link and date. We checked every agency row by eye against the PDF, and we store no personal names. No AI model: clear rules anyone can check, and tests run every demo message you just saw."
+> "79 agency licences from the Ministry of Labour, 8 fee rules from the Act and the Regulations, 18 banks and 3 payment apps from the Bank of Mauritius, 21 FSC investment warnings, and 5 CERT-MU alerts. Every row has its source link and date. Every agency row was checked against the official PDF, page by page, and a script checks every phone number against its row. We store no personal names. No AI model: clear rules anyone can check, and tests run every demo message you just saw."
 
 ### 5:45–6:30 · Slide 5, impact · Paveesh
 > "Who could run it? The Ministry of Labour's Recruitment Licence Unit and CERT-MU already publish this data. We'd propose a handover; we have no partnership today. Running cost: Rs 0. No server, it works offline, and keeping the data fresh is a few hours a month.
@@ -130,7 +132,7 @@ Answer in **two sentences**, then stop. The person in brackets answers first; an
 
 ### The data
 11. **"Where does the data come from, and how do you know it's right?"** (Adiyen)
-    Official sources only: the Ministry register PDF, the Act and Regulations, the Bank of Mauritius list, FSC alerts and CERT-MU alerts. Every agency row was compared by eye with the PDF, every clause found word for word, and every bank phone read on the bank's own website. `validate.py` checks every row.
+    Official sources only: the Ministry register PDF, the Act and Regulations, the Bank of Mauritius list, FSC alerts and CERT-MU alerts. Every agency row was checked against the official PDF, page by page, and a script checks every phone number against its row; every clause was found word for word, and every bank phone was read on the bank's own website. `validate.py` checks every row.
 12. **"What if the register changes tomorrow?"** (Adiyen)
     The app shows the date of every dataset, for example "Ministry list of 4 Nov 2026". Our script rebuilds the file from a new PDF in minutes. Automatic updates are on the "what's next" list.
 13. **"How did you handle the data cleaning?"** (Adiyen)

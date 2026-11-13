@@ -2,7 +2,7 @@
 
 For `src/constants/strings.ts`, in the `en`, `fr` and `mfe` objects. The design is in [`proposal-shield-optin.md`](proposal-shield-optin.md).
 Wording rule in all three languages: no "safe", "genuine", "scam" or "illegal" (*sûr, authentique, arnaque, illégal*; *sekirite, vre, arnak, ilegal*).
-**Kreol: Paveesh checks it as a native speaker before it goes in.** Fix it here first, then in `strings.ts`.
+**Kreol: approved by Paveesh (native speaker) on Sat 14 Nov. Ready to paste.** Later fixes go here first, then in `strings.ts`.
 Android's own permission screens (Notification access, battery) are in the phone's language, so we don't translate them.
 
 ## 1. Where each text appears
@@ -37,7 +37,7 @@ The debug-only button **"Send test alert"** stays in English (it's for us, not f
 
 ## 2. French and Kreol
 
-| key | French | Kreol (draft, Paveesh to check) |
+| key | French | Kreol (approved by Paveesh) |
 |---|---|---|
 | shieldSwitch | Vérifier les nouveaux messages automatiquement | Verifye nouvo mesaz otomatikman |
 | shieldSwitchHint | WhatsApp et SMS, sur ce téléphone seulement. Désactivé tant que vous ne l'activez pas. | WhatsApp ek SMS, lor sa telefonn la selman. Li pa marse tanki ou pa met li. |
@@ -63,7 +63,7 @@ The debug-only button **"Send test alert"** stays in English (it's for us, not f
 | shieldChannelName | Vérification des messages | Verifikasion mesaz |
 | shieldChannelDescription | Alertes quand un nouveau message présente des signes d'alerte. | Alert kan enn nouvo mesaz ena sinn danze. |
 
-Kreol notes for Paveesh: *marse* = running/on, *tengn* = turned off, *sinn danze* = warning signs (the same words as `levelNONE`), *aperçu* left in French because Mauritian WhatsApp screens are in English or French. In step 4 the menu names stay in English, as WhatsApp shows them on most phones here.
+Kreol notes: *marse* = running/on, *tengn* = turned off, *sinn danze* = warning signs (the same words as `levelNONE`), *aperçu* left in French because Mauritian WhatsApp screens are in English or French. In step 4 the menu names stay in English, as WhatsApp shows them on most phones here.
 
 ## 3. Paste-ready blocks for `strings.ts`
 
@@ -122,7 +122,7 @@ shieldChannelDescription: "Alertes quand un nouveau message présente des signes
 ```
 
 ```ts
-// mfe (Kreol: Paveesh to check before pasting)
+// mfe (Kreol: approved by Paveesh)
 shieldSwitch: "Verifye nouvo mesaz otomatikman",
 shieldSwitchHint: "WhatsApp ek SMS, lor sa telefonn la selman. Li pa marse tanki ou pa met li.",
 shieldSetupTitle: "Verifikasion otomatik",

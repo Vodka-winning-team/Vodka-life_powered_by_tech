@@ -28,6 +28,10 @@ The law is clear: no agency or employer may charge a worker a recruitment fee (P
 5. **What to do now:** call the **official** number (from the register or the bank list, never from the message), share a summary with someone you trust, report (MAUCORS, the bank, the Ministry's Recruitment Licence Unit).
 6. **History** (saved only when you tap Save) and **Our sources** (every dataset with its date).
 7. **Automatic checking (opt-in, Android only):** if you switch it on, new WhatsApp and SMS notifications are checked on the phone with the same rules, and a warning appears: *"Stop – warning signs found. Tap to see why."* Off by default, nothing saved or sent, no other apps read. It can't read photos, voice notes or muted chats, so sharing or pasting stays the main way in.
+8. **Official numbers ("Search an agency or bank"):** look up any of the 79 agencies or 21 banks and payment apps without a message, and see every official number with its source. The Call button only opens the dialler.
+9. **Granny mode:** one switch for bigger text and buttons, strong contrast, and a simpler result: one plain sentence, then the Call button.
+10. **Read aloud:** the result is read out with the phone's own voices, offline (English and French; Kreol is read with the French voice for now).
+11. **"Checked against these official records":** every result shows the date of each official list it used.
 
 No AI model: clear rules plus official records, so every warning can be explained and checked.
 
@@ -63,7 +67,7 @@ AI tools were allowed by the organisers. We list them all here. Every AI-assiste
 
 **What we added ourselves, and checked:**
 - **Choices:** the user (Kevin), the job-fee check as our lead story, no AI model, no server, and every cut. See [`docs/decisions.md`](docs/decisions.md).
-- **The data:** every agency row compared by eye with the Ministry PDF; every law clause found word for word in the Act and the Regulations; every bank phone read on the bank's own website.
+- **The data:** every agency row checked against the Ministry PDF, page by page (all 79, with 2 errors found and fixed), and a script checks every phone number against its row; every law clause found word for word in the Act and the Regulations; every bank phone read on the bank's own website.
 - **The rules:** tested on the 6 demo messages and 15 test cases, including a real bank code SMS that must give no warning.
 - **Real phones:** the team tested the release APK on two Android phones (Android 14 and 16): every demo message, wrong input, panic taps, share-in, and automatic checking with a real WhatsApp ([`docs/quick-test.md`](docs/quick-test.md)). **No tests with outside users yet:** that is the first step of a pilot (decision 18).
 
