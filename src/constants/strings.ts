@@ -3,7 +3,7 @@
 // Wording rule: never "safe", "genuine", "scam" or "illegal" in any language.
 
 const en = {
-  appName: 'FraudLens Moris',
+  appName: 'Verifye',
   tagline: 'Verifye avan ou peye: check before you pay',
 
   languageLabel: 'Language',
@@ -60,11 +60,11 @@ const en = {
   shieldSwitch: 'Check new messages automatically',
   shieldSwitchHint: 'WhatsApp and SMS, on this phone only. Off unless you turn it on.',
   shieldSetupTitle: 'Automatic checking',
-  shieldSetupWhat: 'When this is on, FraudLens reads new WhatsApp and SMS notifications on this phone and checks them with the same rules. Nothing is saved or sent.',
+  shieldSetupWhat: 'When this is on, Verifye reads new WhatsApp and SMS notifications on this phone and checks them with the same rules. Nothing is saved or sent.',
   shieldSetupNot: "It doesn't read other apps, your photos or your contacts. You can turn it off at any time.",
   shieldStepAccess: '1. Allow notification access',
-  shieldStepAccessHint: 'Android will open a list. Turn on FraudLens Moris.',
-  shieldStepAlerts: '2. Allow FraudLens to show alerts',
+  shieldStepAccessHint: 'Android will open a list. Turn on Verifye.',
+  shieldStepAlerts: '2. Allow Verifye to show alerts',
   shieldStepBattery: '3. Set battery use to "Unrestricted"',
   shieldStepBatteryHint: 'Some phones stop apps in the background. This keeps the check running.',
   shieldStepPreview: '4. Keep message previews on in WhatsApp',
@@ -104,11 +104,11 @@ const fr: Partial<Record<StringKey, string>> = {
   shieldSwitch: "Vérifier les nouveaux messages automatiquement",
   shieldSwitchHint: "WhatsApp et SMS, sur ce téléphone seulement. Désactivé tant que vous ne l'activez pas.",
   shieldSetupTitle: "Vérification automatique",
-  shieldSetupWhat: "Quand c'est activé, FraudLens lit les nouvelles notifications WhatsApp et SMS de ce téléphone et les vérifie avec les mêmes règles. Rien n'est enregistré ni envoyé.",
+  shieldSetupWhat: "Quand c'est activé, Verifye lit les nouvelles notifications WhatsApp et SMS de ce téléphone et les vérifie avec les mêmes règles. Rien n'est enregistré ni envoyé.",
   shieldSetupNot: "Il ne lit pas les autres applications, vos photos ni vos contacts. Vous pouvez le désactiver à tout moment.",
   shieldStepAccess: "1. Autoriser l'accès aux notifications",
-  shieldStepAccessHint: "Android va ouvrir une liste. Activez FraudLens Moris.",
-  shieldStepAlerts: "2. Autoriser FraudLens à afficher des alertes",
+  shieldStepAccessHint: "Android va ouvrir une liste. Activez Verifye.",
+  shieldStepAlerts: "2. Autoriser Verifye à afficher des alertes",
   shieldStepBattery: "3. Régler la batterie sur « Non restreinte »",
   shieldStepBatteryHint: "Certains téléphones arrêtent les applications en arrière-plan. Cela permet à la vérification de continuer.",
   shieldStepPreview: "4. Garder l'aperçu des messages dans WhatsApp",
@@ -231,8 +231,8 @@ export function setLanguage(language: Language) {
   current = language;
 }
 
-export function t(key: StringKey): string {
-  return all[current][key] ?? en[key];
+export function t(key: StringKey, language: Language = current): string {
+  return all[language][key] ?? en[key];
 }
 
 export function getLanguage(): Language {

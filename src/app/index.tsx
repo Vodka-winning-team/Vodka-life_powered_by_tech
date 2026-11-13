@@ -2,8 +2,8 @@
 // TODO(C): share-in from WhatsApp/SMS needs a development build (not Expo Go); add after the 18:00 sync.
 
 import { router } from 'expo-router';
-import { useState } from 'react';
-import { StyleSheet, Switch, TextInput, View } from 'react-native';
+import { useRef, useState, type ComponentRef } from 'react';
+import { ScrollView, StyleSheet, Switch, TextInput, View } from 'react-native';
 
 import Shield from '../../modules/fraudlens-shield';
 
@@ -18,6 +18,7 @@ export default function ScanScreen() {
   const { runCheck, language, setLanguage, shieldOn, setShieldOn } = useStore();
   const [text, setText] = useState('');
   const [error, setError] = useState('');
+  const scrollRef = useRef<ComponentRef<typeof ScrollView>>(null);
 
   function check() {
     if (text.trim() === '') {
@@ -36,7 +37,7 @@ export default function ScanScreen() {
   }
 
   return (
-    <Screen>
+    <Screen scrollRef={scrollRef}>
       <View style={styles.languages} accessibilityLabel={t('languageLabel')}>
         {LANGUAGES.map((l) => (
           <Chip key={l.id} title={l.name} selected={l.id === language} onPress={() => setLanguage(l.id)} />
@@ -54,6 +55,8 @@ export default function ScanScreen() {
         multiline
         textAlignVertical="top"
         accessibilityLabel={t('scanPlaceholder')}
+        // Keep the "Check message" button in view above the keyboard while typing.
+        onFocus={() => setTimeout(() => scrollRef.current?.scrollToEnd({ animated: true }), 300)}
         style={[
           styles.input,
           { color: theme.text, backgroundColor: theme.backgroundElement, borderColor: theme.border },

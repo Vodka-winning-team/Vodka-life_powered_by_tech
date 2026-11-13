@@ -9,6 +9,7 @@ import { findingTitle, t } from '@/constants/strings';
 import { FontSize, Radius, Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 import { useStore } from '@/lib/store';
+import { prettyDay } from '@/lib/time';
 
 export default function ResultScreen() {
   const theme = useTheme();
@@ -46,7 +47,7 @@ export default function ResultScreen() {
           <Label>{finding.detail}</Label>
           {finding.source && (
             <Label variant="small">
-              {t('sourceLabel')}: {finding.source.name} ({finding.source.date})
+              {t('sourceLabel')}: {finding.source.name} ({prettyDay(finding.source.date)})
             </Label>
           )}
         </Card>

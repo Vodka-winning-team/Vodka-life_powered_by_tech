@@ -36,7 +36,7 @@ export default function RootLayout() {
 
 /** Reads the language from the store, so the screen titles re-render when it changes. */
 function AppStack({ colors }: { colors: ThemeColors }) {
-  useStore(); // subscribe to language changes
+  const { language } = useStore(); // titles are re-read when the language changes
   return (
     <Stack
       screenOptions={{
@@ -45,13 +45,13 @@ function AppStack({ colors }: { colors: ThemeColors }) {
         headerShadowVisible: false,
         contentStyle: { backgroundColor: colors.background },
       }}>
-      <Stack.Screen name="index" options={{ title: t('appName') }} />
-      <Stack.Screen name="result" options={{ title: t('resultTitle') }} />
-      <Stack.Screen name="job" options={{ title: t('jobTitle') }} />
-      <Stack.Screen name="actions" options={{ title: t('actionsTitle') }} />
-      <Stack.Screen name="history" options={{ title: t('historyTitle') }} />
-      <Stack.Screen name="sources" options={{ title: t('sourcesTitle') }} />
-      <Stack.Screen name="shield" options={{ title: t('shieldSetupTitle') }} />
+      <Stack.Screen name="index" options={{ title: t('appName', language) }} />
+      <Stack.Screen name="result" options={{ title: t('resultTitle', language) }} />
+      <Stack.Screen name="job" options={{ title: t('jobTitle', language) }} />
+      <Stack.Screen name="actions" options={{ title: t('actionsTitle', language) }} />
+      <Stack.Screen name="history" options={{ title: t('historyTitle', language) }} />
+      <Stack.Screen name="sources" options={{ title: t('sourcesTitle', language) }} />
+      <Stack.Screen name="shield" options={{ title: t('shieldSetupTitle', language) }} />
     </Stack>
   );
 }

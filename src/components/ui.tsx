@@ -1,7 +1,7 @@
 // Small building blocks used by every screen. Colours and sizes come from constants/theme.ts.
 
-import { useRef, type ReactNode } from 'react';
-import { Pressable, ScrollView, StyleSheet, Text, View, type TextStyle } from 'react-native';
+import { useRef, type ComponentRef, type ReactNode, type RefObject } from 'react';
+import { KeyboardAvoidingView, Pressable, ScrollView, StyleSheet, Text, View, type TextStyle } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { t } from '@/constants/strings';
@@ -10,16 +10,16 @@ import type { Highlight, Level } from '@/engine';
 import { useTheme } from '@/hooks/use-theme';
 
 /** Scrolling page with safe margins and a max width (looks right on phones, tablets and the web). */
-export function Screen({ children }: { children: ReactNode }) {
+export function Screen({ children, scrollRef }: { children: ReactNode; scrollRef?: RefObject<ComponentRef<typeof ScrollView> | null> }) {
   const theme = useTheme();
   return (
     <SafeAreaView edges={['bottom', 'left', 'right']} style={{ flex: 1, backgroundColor: theme.background }}>
-      <ScrollView
-        contentContainerStyle={styles.scroll}
-        keyboardShouldPersistTaps="handled"
-        automaticallyAdjustKeyboardInsets>
-        <View style={styles.column}>{children}</View>
-      </ScrollView>
+      {/* While typing, the keyboard pushes the page up instead of covering the buttons. */}
+      <KeyboardAvoidingView behavior="padding" style={{ flex: 1 }}>
+        <ScrollView ref={scrollRef} contentContainerStyle={styles.scroll} keyboardShouldPersistTaps="handled">
+          <View style={styles.column}>{children}</View>
+        </ScrollView>
+      </KeyboardAvoidingView>
     </SafeAreaView>
   );
 }

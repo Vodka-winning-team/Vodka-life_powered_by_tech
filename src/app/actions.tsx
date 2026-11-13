@@ -6,6 +6,7 @@ import { Button, Card, Label, Screen } from '@/components/ui';
 import { findingTitle, t } from '@/constants/strings';
 import { dialNumber, formatPhone } from '@/lib/phone';
 import { useStore } from '@/lib/store';
+import { prettyDay } from '@/lib/time';
 
 // TODO(D): confirm both links before the demo.
 const MAUCORS_URL = 'https://maucors.govmu.org';
@@ -41,7 +42,7 @@ export default function ActionsScreen() {
           <Label variant="label">{c.name}</Label>
           <Button title={formatPhone(c.phone)} onPress={() => call(c.phone)} />
           <Label variant="small">
-            {t('sourceLabel')}: {c.source.name} ({c.source.date})
+            {t('sourceLabel')}: {c.source.name} ({prettyDay(c.source.date)})
           </Label>
         </Card>
       ))}

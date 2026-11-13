@@ -26,7 +26,7 @@ test('English stays English; missing French text falls back to English', () => {
   expect(t('scanTitle')).toBe('Check a message');
   setLanguage('fr');
   expect(t('scanTitle')).toBe('Vérifier un message');
-  expect(t('appName')).toBe('FraudLens Moris');
+  expect(t('appName')).toBe('Verifye');
 });
 
 test('wording rule: no "safe", "genuine", "scam" or "illegal" in any language', () => {
