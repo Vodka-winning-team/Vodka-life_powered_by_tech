@@ -88,7 +88,7 @@ export default function ScanScreen() {
       {/* Look things up without a message. */}
       <Section>
         {/* Look up an agency or bank (e.g. a name heard from a friend). */}
-        <Button kind="secondary" title={t('numbersSearch')} onPress={() => router.push('/numbers')} />
+        <Button kind="secondary" title={t('scanNumbersButton')} onPress={() => router.push('/numbers')} />
         <View style={granny ? styles.column : styles.row}>
           <View style={granny ? undefined : styles.half}>
             <Button kind="secondary" title={t('openHistory')} onPress={() => router.push('/history')} />

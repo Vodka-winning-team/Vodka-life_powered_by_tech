@@ -12,12 +12,14 @@ import type { OfficialEntry } from '@/engine';
 import { useLook } from '@/hooks/use-look';
 import { useTheme } from '@/hooks/use-theme';
 import { engine } from '@/lib/data';
-import { dialNumber, formatPhone } from '@/lib/phone';
+import { dialNumber, formatPhone, isPhoneQuery } from '@/lib/phone';
 import { prettyDay } from '@/lib/time';
 
-function EntryCard({ entry }: { entry: OfficialEntry }) {
+function EntryCard({ entry, byNumber }: { entry: OfficialEntry; byNumber: boolean }) {
   return (
     <Card>
+      {/* Found by a phone number: say whose number it is, and that a caller can fake it. */}
+      {byNumber && <Label>{t('numberListed').replace('{name}', entry.name).replace('{source}', entry.source.name)}</Label>}
       <Label variant="label">{entry.name}</Label>
       <Label variant="small">{entry.detail}</Label>
       {entry.phones.map((phone) => (
@@ -32,6 +34,7 @@ function EntryCard({ entry }: { entry: OfficialEntry }) {
       <Label variant="small">
         {t('sourceLabel')}: {entry.source.name} ({prettyDay(entry.source.date)})
       </Label>
+      {byNumber && <Label variant="small">{t('numberSpoofWarning')}</Label>}
     </Card>
   );
 }
@@ -41,6 +44,9 @@ export default function NumbersScreen() {
   const { scale } = useLook();
   const [query, setQuery] = useState('');
   const { agencies, banks } = engine.officialNumbers(query);
+  const byNumber = isPhoneQuery(query);
+  // For the "not in our lists" card: how many records we searched.
+  const all = engine.officialNumbers('');
 
   return (
     <Screen>
@@ -61,7 +67,7 @@ export default function NumbersScreen() {
         </Label>
       )}
       {banks.map((entry) => (
-        <EntryCard key={entry.id} entry={entry} />
+        <EntryCard key={entry.id} entry={entry} byNumber={byNumber} />
       ))}
 
       {agencies.length > 0 && (
@@ -70,8 +76,16 @@ export default function NumbersScreen() {
         </Label>
       )}
       {agencies.map((entry) => (
-        <EntryCard key={entry.id} entry={entry} />
+        <EntryCard key={entry.id} entry={entry} byNumber={byNumber} />
       ))}
+
+      {byNumber && agencies.length === 0 && banks.length === 0 && (
+        <Card>
+          <Label>
+            {t('numberNotListed').replace('{agencies}', String(all.agencies.length)).replace('{banks}', String(all.banks.length))}
+          </Label>
+        </Card>
+      )}
     </Screen>
   );
 }
