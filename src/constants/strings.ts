@@ -125,6 +125,7 @@ const fr: Partial<Record<StringKey, string>> = {
   sourcesChecked: "vérifié",
 };
 const mfe: Partial<Record<StringKey, string>> = {
+  findingInfo: "Bon pou kone",
   followUpLabel: "Zot pe dimann enn lot zafer?",
   followUpPlaceholder: "Kol zot nouvo mesaz isi",
   followUpButton: "Azout dan sa dosie la ek verifye ankor",
@@ -192,11 +193,11 @@ export function getLanguage(): Language {
 
 // Finding titles by kind, from A's docs/strings-fr-mfe.md section 2.
 const findingTitles: Record<string, Record<Language, string>> = {
-  // Surprise card kinds (engine 20:48). Kreol: waiting for Adiyen ("" = show English).
-  empty_message: { en: "Paste the whole message to check it", fr: "Collez le message en entier pour le vérifier", mfe: "" },
-  message_truncated: { en: "Only the first part was checked", fr: "Seul le début du message a été vérifié", mfe: "" },
-  cost_unknown: { en: "We couldn't match that cost", fr: "Nous n'avons pas reconnu ce coût", mfe: "" },
-  check_failed: { en: "We couldn't check this message", fr: "Nous n'avons pas pu vérifier ce message", mfe: "" },
+  // Surprise card kinds (engine 20:48), Kreol from Adiyen (21:01).
+  empty_message: { en: "Paste the whole message to check it", fr: "Collez le message en entier pour le vérifier", mfe: "Kol mesaz la an antie pou nou kapav verifye li" },
+  message_truncated: { en: "Only the first part was checked", fr: "Seul le début du message a été vérifié", mfe: "Nou finn verifye zis koumansman mesaz la" },
+  cost_unknown: { en: "We couldn't match that cost", fr: "Nous n'avons pas reconnu ce coût", mfe: "Nou pa finn rekonet sa fre la" },
+  check_failed: { en: "We couldn't check this message", fr: "Nous n'avons pas pu vérifier ce message", mfe: "Nou pa finn kapav verifye sa mesaz la" },
   code_request: { en: "Asks for a code, PIN or password", fr: "Demande un code, un PIN ou un mot de passe", mfe: "Pe dimann enn kod, PIN ouswa mo de pas" },
   bank_link: { en: "Link is not {name}'s official website", fr: "Ce lien n'est pas le site officiel de {name}", mfe: "Sa lien la pa sit ofisiel {name}" },
   bank_phone: { en: "Number is not {name}'s official number", fr: "Ce numéro n'est pas le numéro officiel de {name}", mfe: "Sa nimero la pa nimero ofisiel {name}" },
