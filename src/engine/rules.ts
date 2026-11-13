@@ -74,7 +74,18 @@ export const NEW_NUMBER: PhraseRule = {
   ],
 };
 
-export const SHORTENERS = ['bit.ly', 'tinyurl.com', 't.co', 'goo.gl', 'is.gd', 'cutt.ly', 'shorturl.at', 'rb.gy', 'ow.ly', 'tiny.cc'];
+/** Bank keywords that are also everyday words: they only name the bank when a banking word is within 40 characters. */
+export const EVERYDAY_BANK_KEYWORDS = ['juice'];
+
+/** Banking words that make an everyday keyword ("juice") mean the bank's app. */
+export const BANK_CONTEXT = [
+  'account', 'card', 'code', 'otp', 'pin', 'login', 'log in', 'verify', 'verification', 'wallet', 'payment', 'transfer',
+  'app', 'bank', 'blocked', 'suspended', 'mcb', 'password',
+  'compte', 'carte', 'virement', 'paiement', 'banque', 'bloque',
+  'kont', 'kart', 'transfer larzan', 'bloke', 'labank',
+];
+
+export const SHORTENERS =['bit.ly', 'tinyurl.com', 't.co', 'goo.gl', 'is.gd', 'cutt.ly', 'shorturl.at', 'rb.gy', 'ow.ly', 'tiny.cc'];
 export const RISKY_TLDS = ['xyz', 'top', 'cam', 'click', 'tk', 'ml', 'ga', 'cf', 'gq', 'vip', 'win', 'bid', 'loan', 'work', 'live'];
 
 /** Words showing the message is about a job, used to decide when fee words mean a recruitment fee. */

@@ -142,11 +142,24 @@ export class Engine {
     const norm = Text.normalise(original);
     const links = Text.links(original);
     // Banks named in the text, or hidden in a link (mcb-login-secure.net names MCB).
+    // Everyday words used as bank keywords ("juice" for MCB Juice) only count next to banking words,
+    // so "fresh orange juice" is not MCB, but "your Juice account" is.
+    const hasBankContext = (near: Highlight) =>
+      Text.findAny(norm, Rules.BANK_CONTEXT).some((c) => c.start - 40 < near.end && near.start < c.end + 40);
+    const keywordHits = (k: string) => {
+      const hits = Text.findPhrase(norm, k);
+      return Rules.EVERYDAY_BANK_KEYWORDS.includes(k) ? hits.filter(hasBankContext) : hits;
+    };
     const banksNamed = this.data.banks.filter(
       (bank) =>
-        Text.findAny(norm, bank.keywords).length > 0 ||
+        bank.keywords.some((k) => keywordHits(k).length > 0) ||
         links.some((link) =>
-          bank.keywords.some((k) => k.length >= 3 && link.host.replace(/-/g, '').includes(k.replace(/ /g, ''))),
+          bank.keywords.some(
+            (k) =>
+              k.length >= 3 &&
+              !Rules.EVERYDAY_BANK_KEYWORDS.includes(k) &&
+              link.host.replace(/-/g, '').includes(k.replace(/ /g, '')),
+          ),
         ),
     );
     return {
