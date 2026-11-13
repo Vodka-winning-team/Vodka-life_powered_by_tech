@@ -44,7 +44,7 @@ The scripts read `data/raw/`, which is not committed. To rebuild, download the f
 ## Things to know (for B and C)
 
 - **Same company, several licences.** An agency can hold licences in more than one category (e.g. HRPRO LTD: local, abroad and non_citizen). Each licence is its own row, and the id is `<category>-<name-slug>`, e.g. `abroad-hrpro-ltd`.
-- **Agency phone** is the first number the register prints for that licence.
+- **Agency phones:** `phone` is the first number the register prints for that licence (the main number, for the dial button). `phones` lists every number the register prints, in PDF order without repeats (175 numbers; 55 agencies have 2 to 6). A matching number in a message does not prove the message is from the agency, because scammers can copy numbers.
 - **One name is kept exactly as printed:** `DEEVALEN MAREEMOOTO O LIMITED` (the PDF wraps the word). Probably "MAREEMOOTOO", but no official source confirms it.
 - **Short codes.** Two PSP phones are Mauritian short codes, not +230 numbers: blink by Emtel `8971` (24/7), my.t money `8908`. They dial as is from a Mauritian phone. `validate.py` allows 3–4 digit short codes.
 - **Domain rule.** A link is official if its host equals a domain in `domains` or ends with `.` + that domain (so `blink.emtel.com` matches `emtel.com`). SBI uses `mu.statebank` and `onlinesbiglobal.statebank` (`.statebank` is SBI's own top-level domain).

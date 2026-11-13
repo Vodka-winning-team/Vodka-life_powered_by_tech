@@ -55,7 +55,7 @@ JSON arrays in `app/src/main/assets/data/`. **Every record has `source_url` and 
 
 | File | Fields |
 |---|---|
-| `agencies.json` | `id, name, category ("abroad" \| "local" \| "non_citizen"), phone, address, valid_from, expiry, page` |
+| `agencies.json` | `id, name, category ("abroad" \| "local" \| "non_citizen"), phone, phones [ ], address, valid_from, expiry, page` (`phone` = main number = `phones[0]`; `phones` = every number the register prints) |
 | `fee_rules.json` | `id, cost, words_en [ ], words_fr [ ], words_mfe [ ], payer ("employer"), ref` |
 | `banks.json` | `id, name, type ("bank" \| "psp"), keywords [ ], domains [ ], phone, phone_source` |
 | `fsc_alerts.json` | `id, name, domains [ ], alert_date, alert_url` (organisations only, never people) |

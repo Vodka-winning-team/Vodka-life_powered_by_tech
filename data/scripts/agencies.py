@@ -41,7 +41,7 @@ def split_address(cell):
     address = clean(" ".join(x for x in lines if not is_phone_line(x)))
     address = re.sub(r"\s+,", ",", address)
     phones = phones_in(" ".join(x for x in lines if is_phone_line(x)))
-    return address, phones
+    return address, list(dict.fromkeys(phones))  # some rows print a number twice; keep PDF order
 
 
 def category_of(page_text):
@@ -76,6 +76,7 @@ def main():
                         "name": name,
                         "category": cat,
                         "phone": phones[0] if phones else None,
+                        "phones": phones,  # every number the register prints, first = phone
                         "address": address,
                         "valid_from": parse_date(r[VALID_FROM]),
                         "expiry": parse_date(r[EXPIRY]),

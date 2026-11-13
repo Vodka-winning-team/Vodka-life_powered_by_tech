@@ -68,8 +68,10 @@ def main(fix):
             problems.append((*where, "row not found in the register PDF"))
         elif normalize_phone(phone) not in printed:
             problems.append((*where, f"{phone} is not in this row of the PDF (PDF has {printed})"))
+        elif "phones" in a and a["phones"] != printed:
+            problems.append((*where, f"phones {a['phones']} differ from the PDF row {printed}"))
         elif len(printed) > 1:
-            notes.append((*where, f"PDF lists {len(printed)} numbers {printed}; the file keeps the first"))
+            notes.append((*where, f"PDF lists {len(printed)} numbers, all kept in phones: {printed}"))
 
     by_phone = defaultdict(set)
     for a in agencies:
@@ -88,7 +90,7 @@ def main(fix):
     print(f"Problems: {len(problems)}")
     for id_, name, page, what in problems:
         print(f"  PROBLEM  {id_} | {name} | page {page} | {what}")
-    print(f"Notes (several numbers in the register, first one kept): {len(notes)}")
+    print(f"Agencies with several register numbers: {len(notes)}")
     for id_, name, page, what in notes:
         print(f"  note     {id_} | page {page} | {what}")
 

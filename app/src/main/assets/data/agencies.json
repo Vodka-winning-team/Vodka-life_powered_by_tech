@@ -4,6 +4,9 @@
     "name": "My Web Ltd",
     "category": "local",
     "phone": "+23054975200",
+    "phones": [
+      "+23054975200"
+    ],
     "address": "No. 5, Socota Phoenicia Business Park, Sayed Hossen Road, Solferino, Phoenix",
     "valid_from": "2026-04-01",
     "expiry": "2029-03-31",
@@ -16,6 +19,10 @@
     "name": "TALENT LAB LTD",
     "category": "local",
     "phone": "+2304681541",
+    "phones": [
+      "+2304681541",
+      "+23054971978"
+    ],
     "address": "Ground Floor, The Dot, Avenue de Telfair, Moka",
     "valid_from": "2026-04-01",
     "expiry": "2029-03-31",
@@ -28,6 +35,9 @@
     "name": "Career Moves Ltd",
     "category": "local",
     "phone": "+23059079061",
+    "phones": [
+      "+23059079061"
+    ],
     "address": "Banyan House & UHY Building, Vivea Business Park, Moka",
     "valid_from": "2026-04-01",
     "expiry": "2029-03-31",
@@ -40,6 +50,10 @@
     "name": "ADEQUATE CONSULTING LTD",
     "category": "local",
     "phone": "+23059410202",
+    "phones": [
+      "+23059410202",
+      "+23059172952"
+    ],
     "address": "Anse Courtoie, Conidae House, Pailles, Port Louis",
     "valid_from": "2026-04-01",
     "expiry": "2029-03-31",
@@ -52,6 +66,9 @@
     "name": "Proactive HR Services Ltd",
     "category": "local",
     "phone": "+2304069604",
+    "phones": [
+      "+2304069604"
+    ],
     "address": "Ground Floor, Iconebene, Rue De L'institut, Ebene",
     "valid_from": "2026-04-10",
     "expiry": "2029-04-09",
@@ -64,6 +81,10 @@
     "name": "HRPRO LTD",
     "category": "local",
     "phone": "+23059417418",
+    "phones": [
+      "+23059417418",
+      "+23052588324"
+    ],
     "address": "E43, Rue de la Canelle, Ebene Links, Ebene",
     "valid_from": "2026-05-06",
     "expiry": "2029-05-05",
@@ -76,6 +97,10 @@
     "name": "Prime Recruitment Ltd",
     "category": "local",
     "phone": "+23054507500",
+    "phones": [
+      "+23054507500",
+      "+23052507556"
+    ],
     "address": "Level 1, Workshop 17 Telfair, La Promenade, Telfair, 80829",
     "valid_from": "2026-05-12",
     "expiry": "2029-05-11",
@@ -88,6 +113,10 @@
     "name": "MSK GLOBAL SERVICES CO LTD",
     "category": "local",
     "phone": "+2302657387",
+    "phones": [
+      "+2302657387",
+      "+23057520754"
+    ],
     "address": "Jhuboo Avenue, Trou aux Biches",
     "valid_from": "2026-05-12",
     "expiry": "2029-05-11",
@@ -100,6 +129,9 @@
     "name": "BluAve Ltd",
     "category": "local",
     "phone": "+23058214787",
+    "phones": [
+      "+23058214787"
+    ],
     "address": "The Hive, Nouvelle Usine, Magalkhan, Floreal",
     "valid_from": "2026-05-27",
     "expiry": "2029-05-26",
@@ -112,6 +144,9 @@
     "name": "Sunrise Labour Services Ltd",
     "category": "local",
     "phone": "+23057795753",
+    "phones": [
+      "+23057795753"
+    ],
     "address": "Eastern Vehicle Examination Centre Royal Road Laventure",
     "valid_from": "2026-06-17",
     "expiry": "2029-06-16",
@@ -124,6 +159,10 @@
     "name": "CREATIVE MANPOWER SERVICES LTD",
     "category": "local",
     "phone": "+2302454754",
+    "phones": [
+      "+2302454754",
+      "+23058112632"
+    ],
     "address": "No. 14 Poudriere Street, Sterling Tower, Port Louis",
     "valid_from": "2026-07-01",
     "expiry": "2029-06-30",
@@ -136,6 +175,14 @@
     "name": "RECRUITMENT LEADERS LTD",
     "category": "local",
     "phone": "+2304285464",
+    "phones": [
+      "+2304285464",
+      "+2302343127",
+      "+2306264501",
+      "+2306323885",
+      "+23052521310",
+      "+23057448010"
+    ],
     "address": "Coulisses Road, 1st Floor, Goundan Building, Rivere des Anguilles",
     "valid_from": "2026-07-22",
     "expiry": "2029-07-21",
@@ -148,6 +195,9 @@
     "name": "Grayson (Mauritius) Limited",
     "category": "local",
     "phone": "+23057100475",
+    "phones": [
+      "+23057100475"
+    ],
     "address": "Devi Court Block B (DH NO 1), Dr Perreau Street, Port Louis",
     "valid_from": "2026-08-07",
     "expiry": "2029-08-06",
@@ -160,6 +210,9 @@
     "name": "The Bridge (Moris) Collective Ltd",
     "category": "local",
     "phone": "+23057050245",
+    "phones": [
+      "+23057050245"
+    ],
     "address": "The Hive Workplace, Nouvelle Usine, Mangalkhan, Floreal",
     "valid_from": "2026-08-07",
     "expiry": "2029-08-06",
@@ -172,6 +225,12 @@
     "name": "EMPLOYMENT PRO LIMITED",
     "category": "local",
     "phone": "+23052560682",
+    "phones": [
+      "+23052560682",
+      "+23052513599",
+      "+23052597113",
+      "+23057222299"
+    ],
     "address": "159, Sir Guy Forget Avenue, Quatre Bornes",
     "valid_from": "2026-08-13",
     "expiry": "2029-08-12",
@@ -184,6 +243,14 @@
     "name": "BHOYROO'S TRAVEL & TOURS LTD",
     "category": "local",
     "phone": "+23052525595",
+    "phones": [
+      "+23052525595",
+      "+2304137423",
+      "+23052585595",
+      "+2304130160",
+      "+23052545595",
+      "+2304132892"
+    ],
     "address": "Arcade Sibartie, Central Flacq",
     "valid_from": "2026-09-23",
     "expiry": "2029-09-22",
@@ -196,6 +263,9 @@
     "name": "SOFT SKILLS CONSULTANTS (MAURITIUS) LTD",
     "category": "local",
     "phone": "+2304246110",
+    "phones": [
+      "+2304246110"
+    ],
     "address": "4 Avenue Manguiers, Quatre Bornes",
     "valid_from": "2026-10-01",
     "expiry": "2029-09-30",
@@ -208,6 +278,9 @@
     "name": "Archnest Concept Ltd",
     "category": "local",
     "phone": "+23057682000",
+    "phones": [
+      "+23057682000"
+    ],
     "address": "Dr Eugene Laurent Street, Port Louis",
     "valid_from": "2026-10-16",
     "expiry": "2029-10-15",
@@ -220,6 +293,9 @@
     "name": "DIRECT RECRUITMENT SOLUTIONS LTD",
     "category": "local",
     "phone": "+2302088090",
+    "phones": [
+      "+2302088090"
+    ],
     "address": "Second Floor (Level 3), Somerset House, 23 Eugene Laurent Street, Port Louis",
     "valid_from": "2026-10-22",
     "expiry": "2029-10-21",
@@ -232,6 +308,9 @@
     "name": "Bolt Talent Solutions Ltd",
     "category": "local",
     "phone": "+2304341128",
+    "phones": [
+      "+2304341128"
+    ],
     "address": "The Trademark 1st Floor, La Promenade Telfair, Moka",
     "valid_from": "2026-10-30",
     "expiry": "2029-10-29",
@@ -244,6 +323,10 @@
     "name": "THINK RECRUITMENT LTD",
     "category": "abroad",
     "phone": "+23052568074",
+    "phones": [
+      "+23052568074",
+      "+2304877890"
+    ],
     "address": "85, Newry Complex Quatre Bornes",
     "valid_from": "2026-04-22",
     "expiry": "2029-04-21",
@@ -256,6 +339,10 @@
     "name": "VIVALDI INTERNATIONAL CRUISE SERVICES LTD",
     "category": "abroad",
     "phone": "+2304126046",
+    "phones": [
+      "+2304126046",
+      "+23057413142"
+    ],
     "address": "1st Floor, AIS Court, Royal Road, Riviere De Rempart",
     "valid_from": "2026-04-23",
     "expiry": "2029-04-22",
@@ -268,6 +355,10 @@
     "name": "HRPRO LTD",
     "category": "abroad",
     "phone": "+23059417418",
+    "phones": [
+      "+23059417418",
+      "+23052588324"
+    ],
     "address": "E43, Rue de la Canelle, Ebene Links, Ebene",
     "valid_from": "2026-05-06",
     "expiry": "2029-05-05",
@@ -280,6 +371,9 @@
     "name": "BluAve Ltd",
     "category": "abroad",
     "phone": "+23058214787",
+    "phones": [
+      "+23058214787"
+    ],
     "address": "The Hive, Nouvelle Usine, Magalkhan, Floreal",
     "valid_from": "2026-05-27",
     "expiry": "2029-05-26",
@@ -292,6 +386,10 @@
     "name": "CREATIVE MANPOWER SERVICES LTD",
     "category": "abroad",
     "phone": "+2302454754",
+    "phones": [
+      "+2302454754",
+      "+23058112632"
+    ],
     "address": "No. 14 Poudriere Street, Sterling Tower, Port Louis",
     "valid_from": "2026-07-01",
     "expiry": "2029-06-30",
@@ -304,6 +402,9 @@
     "name": "CSCS International Manning Ltd",
     "category": "abroad",
     "phone": "+23052557071",
+    "phones": [
+      "+23052557071"
+    ],
     "address": "Royal Road, Quartre Cocos",
     "valid_from": "2026-07-03",
     "expiry": "2029-07-02",
@@ -316,6 +417,10 @@
     "name": "INTERNATIONAL SHIPPING SERVICES (MAURITIUS) LTD",
     "category": "abroad",
     "phone": "+2302142687",
+    "phones": [
+      "+2302142687",
+      "+23057672687"
+    ],
     "address": "4th Floor, Fonsing Building, Edith Cavell Street, Port Louis",
     "valid_from": "2026-07-09",
     "expiry": "2029-07-08",
@@ -328,6 +433,10 @@
     "name": "INTERNATIONAL CRUISE RECRUITMENT SERVICES LTD",
     "category": "abroad",
     "phone": "+2302882174",
+    "phones": [
+      "+2302882174",
+      "+23057586476"
+    ],
     "address": "Royal Road, Roche Terre, Grand Gaube",
     "valid_from": "2026-07-09",
     "expiry": "2029-07-08",
@@ -340,6 +449,13 @@
     "name": "LIFETIME CANADA LTD",
     "category": "abroad",
     "phone": "+2302138028",
+    "phones": [
+      "+2302138028",
+      "+2302122072",
+      "+23052582151",
+      "+23055001184",
+      "+23052519739"
+    ],
     "address": "12, Leoville L'Homme St, Port Louis",
     "valid_from": "2026-07-28",
     "expiry": "2029-07-27",
@@ -352,6 +468,12 @@
     "name": "EMPLOYMENT PRO LIMITED",
     "category": "abroad",
     "phone": "+23052560682",
+    "phones": [
+      "+23052560682",
+      "+23052513599",
+      "+23052597113",
+      "+23057222299"
+    ],
     "address": "159, Sir Guy Forget Avenue, Quatre Bornes",
     "valid_from": "2026-08-13",
     "expiry": "2029-08-12",
@@ -364,6 +486,10 @@
     "name": "AMETIS MANAGEMENT SERVICES LTD",
     "category": "abroad",
     "phone": "+23052545300",
+    "phones": [
+      "+23052545300",
+      "+23057628600"
+    ],
     "address": "River Court, St Denis Street, Port Louis",
     "valid_from": "2026-09-10",
     "expiry": "2029-09-09",
@@ -376,6 +502,14 @@
     "name": "BHOYROO'S TRAVEL & TOURS LTD",
     "category": "abroad",
     "phone": "+23052525595",
+    "phones": [
+      "+23052525595",
+      "+2304137423",
+      "+23052585595",
+      "+2304130160",
+      "+23052545595",
+      "+2304132892"
+    ],
     "address": "Arcade Sibartie, Central Flacq",
     "valid_from": "2026-09-23",
     "expiry": "2029-09-22",
@@ -388,6 +522,10 @@
     "name": "ADEQUATE CONSULTING LTD",
     "category": "non_citizen",
     "phone": "+23059410202",
+    "phones": [
+      "+23059410202",
+      "+23059172952"
+    ],
     "address": "Anse Courtoie, Conidae House, Pailles, Port Louis",
     "valid_from": "2026-04-01",
     "expiry": "2029-03-31",
@@ -400,6 +538,10 @@
     "name": "ZENITH CONSULTANCY LTD",
     "category": "non_citizen",
     "phone": "+2304287373",
+    "phones": [
+      "+2304287373",
+      "+23059650243"
+    ],
     "address": "1st Floor, 165, SSR Avenue Morcellement St Jean, Quatre Bornes",
     "valid_from": "2026-05-11",
     "expiry": "2029-05-10",
@@ -412,6 +554,10 @@
     "name": "MSK GLOBAL SERVICES CO LTD",
     "category": "non_citizen",
     "phone": "+2302657387",
+    "phones": [
+      "+2302657387",
+      "+23057520754"
+    ],
     "address": "Jhuboo Avenue, Trou aux Biches",
     "valid_from": "2026-05-12",
     "expiry": "2029-05-11",
@@ -424,6 +570,10 @@
     "name": "SM OVERSEAS LTD",
     "category": "non_citizen",
     "phone": "+23054992424",
+    "phones": [
+      "+23054992424",
+      "+23052525717"
+    ],
     "address": "8, Shaan E Islam, Rue Labourdonnais, Port Louis",
     "valid_from": "2026-05-20",
     "expiry": "2029-05-19",
@@ -436,6 +586,9 @@
     "name": "BluAve Ltd",
     "category": "non_citizen",
     "phone": "+23058214787",
+    "phones": [
+      "+23058214787"
+    ],
     "address": "The Hive, Nouvelle Usine, Magalkhan, Floreal",
     "valid_from": "2026-05-27",
     "expiry": "2029-05-26",
@@ -448,6 +601,10 @@
     "name": "REVA ENTERPRISE CO LTD",
     "category": "non_citizen",
     "phone": "+23054991474",
+    "phones": [
+      "+23054991474",
+      "+23054221474"
+    ],
     "address": "Royal Road Elizabethville, Baie du Tombeau",
     "valid_from": "2026-06-12",
     "expiry": "2029-06-11",
@@ -460,6 +617,9 @@
     "name": "Billion Human Resource Ltd",
     "category": "non_citizen",
     "phone": "+23057360651",
+    "phones": [
+      "+23057360651"
+    ],
     "address": "Suite No 7013, 7th Floor, Hennessy Court, Pope Hennessy Street, Port Louis",
     "valid_from": "2026-07-01",
     "expiry": "2029-06-30",
@@ -472,6 +632,10 @@
     "name": "CREATIVE MANPOWER SERVICES LTD",
     "category": "non_citizen",
     "phone": "+2302454754",
+    "phones": [
+      "+2302454754",
+      "+23058112632"
+    ],
     "address": "No. 14 Poudriere Street, Sterling Tower, Port Louis",
     "valid_from": "2026-07-01",
     "expiry": "2029-06-30",
@@ -484,6 +648,10 @@
     "name": "PORT-LOUIS RECRUITMENT AGENCY LTD",
     "category": "non_citizen",
     "phone": "+23057790111",
+    "phones": [
+      "+23057790111",
+      "+2302172489"
+    ],
     "address": "No. 24, Dr. Hassen Sakir Street, Port Louis",
     "valid_from": "2026-07-08",
     "expiry": "2029-07-07",
@@ -496,6 +664,10 @@
     "name": "HRPRO LTD",
     "category": "non_citizen",
     "phone": "+23059417418",
+    "phones": [
+      "+23059417418",
+      "+23052588324"
+    ],
     "address": "E43, Rue de la Canelle, Ebene Links, Ebene",
     "valid_from": "2026-07-09",
     "expiry": "2029-07-08",
@@ -508,6 +680,9 @@
     "name": "Sunrise Labour Services Ltd",
     "category": "non_citizen",
     "phone": "+23057795753",
+    "phones": [
+      "+23057795753"
+    ],
     "address": "Eastern Vehicle Examination Centre Royal Road Laventure",
     "valid_from": "2026-07-09",
     "expiry": "2029-07-08",
@@ -520,6 +695,10 @@
     "name": "HIREABROAD RECRUITMENT LTD",
     "category": "non_citizen",
     "phone": "+2302498173",
+    "phones": [
+      "+2302498173",
+      "+23058169985"
+    ],
     "address": "25, Reserves Street, Les salines, Port Louis",
     "valid_from": "2026-07-09",
     "expiry": "2029-07-08",
@@ -532,6 +711,10 @@
     "name": "A.S.K RECRUITING AGENCY LTD",
     "category": "non_citizen",
     "phone": "+2304661667",
+    "phones": [
+      "+2304661667",
+      "+23052576029"
+    ],
     "address": "10, Dr Henri Lorans Street, Rose Hill",
     "valid_from": "2026-07-10",
     "expiry": "2029-07-09",
@@ -544,6 +727,10 @@
     "name": "GREENACO LTD",
     "category": "non_citizen",
     "phone": "+23057509443",
+    "phones": [
+      "+23057509443",
+      "+23058408569"
+    ],
     "address": "La Louise, Candos Road, Quatre Bornes",
     "valid_from": "2026-07-17",
     "expiry": "2029-07-16",
@@ -556,6 +743,9 @@
     "name": "AHANA LTD",
     "category": "non_citizen",
     "phone": "+23052531103",
+    "phones": [
+      "+23052531103"
+    ],
     "address": "Ground Floor 14A, Celicourt Antelme Street, Rose Hill",
     "valid_from": "2026-07-17",
     "expiry": "2029-07-16",
@@ -568,6 +758,14 @@
     "name": "RECRUITMENT LEADERS LTD",
     "category": "non_citizen",
     "phone": "+2304285464",
+    "phones": [
+      "+2304285464",
+      "+2302343127",
+      "+2306264501",
+      "+2306323885",
+      "+23052521310",
+      "+23057448010"
+    ],
     "address": "Coulisses Road, 1st Floor, Goundan Building, Rivere des Anguilles",
     "valid_from": "2026-07-22",
     "expiry": "2029-07-21",
@@ -580,6 +778,10 @@
     "name": "BEST RECRUIT CO LTD",
     "category": "non_citizen",
     "phone": "+23052563276",
+    "phones": [
+      "+23052563276",
+      "+23052525045"
+    ],
     "address": "4th Floor Delightio Supermarket Building, La Croisee Diolle, Vacoas",
     "valid_from": "2026-07-30",
     "expiry": "2029-07-29",
@@ -592,6 +794,10 @@
     "name": "NIVALRAJ CO LTD",
     "category": "non_citizen",
     "phone": "+23052542816",
+    "phones": [
+      "+23052542816",
+      "+2304549201"
+    ],
     "address": "Suite No 7001, 7th Floor, Hennessy Court, Pope Hennessy Street, Port Louis",
     "valid_from": "2026-08-06",
     "expiry": "2029-08-05",
@@ -604,6 +810,12 @@
     "name": "EMPLOYMENT PRO LIMITED",
     "category": "non_citizen",
     "phone": "+23052560682",
+    "phones": [
+      "+23052560682",
+      "+23052513599",
+      "+23052597113",
+      "+23057222299"
+    ],
     "address": "159, Sir Guy Forget Avenue, Quatre Bornes",
     "valid_from": "2026-08-13",
     "expiry": "2029-08-12",
@@ -616,6 +828,9 @@
     "name": "Career Moves Ltd",
     "category": "non_citizen",
     "phone": "+23059079061",
+    "phones": [
+      "+23059079061"
+    ],
     "address": "Banyan House & UHY Building, Vivea Business Park, Moka",
     "valid_from": "2026-08-24",
     "expiry": "2029-08-23",
@@ -628,6 +843,9 @@
     "name": "PRAVESH POTTERY COMPANY LIMITED",
     "category": "non_citizen",
     "phone": "+23058042227",
+    "phones": [
+      "+23058042227"
+    ],
     "address": "School Lane, Royal Road, Belvedere, Brisee Verdiere",
     "valid_from": "2026-08-25",
     "expiry": "2029-08-24",
@@ -640,6 +858,10 @@
     "name": "EVEREST CONSULTANCY SERVICES LTD",
     "category": "non_citizen",
     "phone": "+23058225556",
+    "phones": [
+      "+23058225556",
+      "+23054957089"
+    ],
     "address": "Block B Office 125, The Junction Business Hub, Arsenal Branch Road,Calebasses",
     "valid_from": "2026-09-01",
     "expiry": "2029-08-31",
@@ -652,6 +874,11 @@
     "name": "My Recruit Ltd",
     "category": "non_citizen",
     "phone": "+23059457255",
+    "phones": [
+      "+23059457255",
+      "+23059417807",
+      "+23059432324"
+    ],
     "address": "1st Floor, Mastan building, 8th Mile, Triolet",
     "valid_from": "2026-09-01",
     "expiry": "2029-08-31",
@@ -664,6 +891,10 @@
     "name": "Lexus Recruitment Agency Co Ltd",
     "category": "non_citizen",
     "phone": "+23059135970",
+    "phones": [
+      "+23059135970",
+      "+23052539590"
+    ],
     "address": "9th Floor, Suite 905, Sterling Tower, 14 Poudriere street, Port Louis",
     "valid_from": "2026-09-04",
     "expiry": "2029-09-03",
@@ -676,6 +907,12 @@
     "name": "Kendi Fleet Enterprise Ltd",
     "category": "non_citizen",
     "phone": "+23052549814",
+    "phones": [
+      "+23052549814",
+      "+2302433907",
+      "+23054283716",
+      "+23052572758"
+    ],
     "address": "Along Rails, Independence Road, Vacoas",
     "valid_from": "2026-09-07",
     "expiry": "2029-09-06",
@@ -688,6 +925,10 @@
     "name": "AMETIS MANAGEMENT SERVICES LTD",
     "category": "non_citizen",
     "phone": "+23052545300",
+    "phones": [
+      "+23052545300",
+      "+23057628600"
+    ],
     "address": "River Court, St Denis Street, Port Louis",
     "valid_from": "2026-09-10",
     "expiry": "2029-09-09",
@@ -700,6 +941,11 @@
     "name": "EliteSeek LTD",
     "category": "non_citizen",
     "phone": "+23052592977",
+    "phones": [
+      "+23052592977",
+      "+23059462977",
+      "+2306852977"
+    ],
     "address": "La Marie Road, Glen Park, Vacoas",
     "valid_from": "2026-09-14",
     "expiry": "2029-09-13",
@@ -712,6 +958,9 @@
     "name": "VKB CONSULTANT LTD",
     "category": "non_citizen",
     "phone": "+23057604439",
+    "phones": [
+      "+23057604439"
+    ],
     "address": "Corner of Dispensary Road and Cite Mere Theresa Street, Triolet",
     "valid_from": "2026-09-17",
     "expiry": "2029-09-16",
@@ -724,6 +973,11 @@
     "name": "IQRA & MAIRA CONSULTANCY CO LTD",
     "category": "non_citizen",
     "phone": "+2306068993",
+    "phones": [
+      "+2306068993",
+      "+23059454050",
+      "+23057827991"
+    ],
     "address": "37B, Royal Road, Phoenix",
     "valid_from": "2026-09-17",
     "expiry": "2029-09-16",
@@ -736,6 +990,10 @@
     "name": "SPLENDINO SERVICES LTD",
     "category": "non_citizen",
     "phone": "+23058591038",
+    "phones": [
+      "+23058591038",
+      "+23059203041"
+    ],
     "address": "N. Pursooramen Building, Impasse Pot-de-Terre, Curepipe",
     "valid_from": "2026-09-23",
     "expiry": "2029-09-22",
@@ -748,6 +1006,14 @@
     "name": "BHOYROO'S TRAVEL & TOURS LTD",
     "category": "non_citizen",
     "phone": "+23052525595",
+    "phones": [
+      "+23052525595",
+      "+2304137423",
+      "+23052585595",
+      "+2304130160",
+      "+23052545595",
+      "+2304132892"
+    ],
     "address": "Arcade Sibartie, Central Flacq",
     "valid_from": "2026-09-23",
     "expiry": "2029-09-22",
@@ -760,6 +1026,10 @@
     "name": "THE LIGHT AGENCY LTD",
     "category": "non_citizen",
     "phone": "+23052539786",
+    "phones": [
+      "+23052539786",
+      "+23054535055"
+    ],
     "address": "84, Rue Volcy Pougnet, Port Louis",
     "valid_from": "2026-09-25",
     "expiry": "2029-09-24",
@@ -772,6 +1042,10 @@
     "name": "OPTI POINT STRATEGY LTD",
     "category": "non_citizen",
     "phone": "+23057844400",
+    "phones": [
+      "+23057844400",
+      "+23059374440"
+    ],
     "address": "Purpass Avenue, Palma, Quatre Bornes",
     "valid_from": "2026-09-25",
     "expiry": "2029-09-24",
@@ -784,6 +1058,10 @@
     "name": "TRAVEL LODGE EXPRESS CO LTD",
     "category": "non_citizen",
     "phone": "+23052552488",
+    "phones": [
+      "+23052552488",
+      "+2302111499"
+    ],
     "address": "AWL Building, Corner Reserves St and Felix Noel Jouanis, Cassis",
     "valid_from": "2026-10-01",
     "expiry": "2029-09-30",
@@ -796,6 +1074,9 @@
     "name": "Disponib Local Ltd",
     "category": "non_citizen",
     "phone": "+23052591725",
+    "phones": [
+      "+23052591725"
+    ],
     "address": "11th Floor, Bramer House, Ebene",
     "valid_from": "2026-10-01",
     "expiry": "2029-09-30",
@@ -808,6 +1089,10 @@
     "name": "MH Sayf Consultants Ltd",
     "category": "non_citizen",
     "phone": "+23059501218",
+    "phones": [
+      "+23059501218",
+      "+23052570130"
+    ],
     "address": "Office 516, St James Court, St Denis Street, Port Louis",
     "valid_from": "2026-10-08",
     "expiry": "2029-10-07",
@@ -820,6 +1105,10 @@
     "name": "DEEVALEN MAREEMOOTO O LIMITED",
     "category": "non_citizen",
     "phone": "+23059401169",
+    "phones": [
+      "+23059401169",
+      "+23058006999"
+    ],
     "address": "1st Floor, The Insight Hub Ltd, Royal Road, Pamplemousses",
     "valid_from": "2026-10-08",
     "expiry": "2029-10-07",
@@ -832,6 +1121,9 @@
     "name": "THAI FOOD GANG CO LTD",
     "category": "non_citizen",
     "phone": "+23057675988",
+    "phones": [
+      "+23057675988"
+    ],
     "address": "24, Issackhan Street, Coromondel",
     "valid_from": "2026-10-09",
     "expiry": "2029-10-08",
@@ -844,6 +1136,9 @@
     "name": "Archnest Concept Ltd",
     "category": "non_citizen",
     "phone": "+23057682000",
+    "phones": [
+      "+23057682000"
+    ],
     "address": "Dr Eugene Laurent Street, Port Louis",
     "valid_from": "2026-10-16",
     "expiry": "2029-10-15",
@@ -856,6 +1151,10 @@
     "name": "ELITE HIRE LTD",
     "category": "non_citizen",
     "phone": "+23052511411",
+    "phones": [
+      "+23052511411",
+      "+23057582844"
+    ],
     "address": "433, Royal Road, Castel",
     "valid_from": "2026-10-23",
     "expiry": "2029-10-22",
@@ -868,6 +1167,13 @@
     "name": "WISDOM MANAGEMENT CONSULTANCY (MAURITIUS) Ltd",
     "category": "non_citizen",
     "phone": "+23057129799",
+    "phones": [
+      "+23057129799",
+      "+2306982121",
+      "+2306988181",
+      "+2306983131",
+      "+2306987171"
+    ],
     "address": "Matikola Complex, 1st Floor, Independence Avenue, Vacoas",
     "valid_from": "2026-10-27",
     "expiry": "2029-10-26",
@@ -880,6 +1186,10 @@
     "name": "SKYJOBDATING CO LTD",
     "category": "non_citizen",
     "phone": "+23055057501",
+    "phones": [
+      "+23055057501",
+      "+23059783866"
+    ],
     "address": "Morcellement Traffic Centre, St Pierre",
     "valid_from": "2026-10-27",
     "expiry": "2029-10-26",
@@ -892,6 +1202,10 @@
     "name": "TALENT LAB LTD",
     "category": "non_citizen",
     "phone": "+2304681541",
+    "phones": [
+      "+2304681541",
+      "+23054971978"
+    ],
     "address": "Ground Floor, The Dot, Avenue de Telfair, Moka",
     "valid_from": "2026-10-27",
     "expiry": "2029-10-26",
@@ -904,6 +1218,12 @@
     "name": "PeoplePartner Ltd",
     "category": "non_citizen",
     "phone": "+23057507869",
+    "phones": [
+      "+23057507869",
+      "+2302613446",
+      "+23052521877",
+      "+2304132222"
+    ],
     "address": "2nd Floor, Ramnath Jeetah Building, 51B Rue du Savoir, Ebene",
     "valid_from": "2026-10-27",
     "expiry": "2029-10-26",
@@ -916,6 +1236,11 @@
     "name": "MASTECH INTERNATIONAL CONSULTANCY LTD",
     "category": "non_citizen",
     "phone": "+2302145858",
+    "phones": [
+      "+2302145858",
+      "+23055005959",
+      "+2302145959"
+    ],
     "address": "L'Esplanade Du Pouce Buidling, 6A, Poudriere Street, Port Louis",
     "valid_from": "2026-10-27",
     "expiry": "2029-10-26",
@@ -928,6 +1253,11 @@
     "name": "Talentius Connect Ltd",
     "category": "non_citizen",
     "phone": "+23058048444",
+    "phones": [
+      "+23058048444",
+      "+2302114444",
+      "+2302148484"
+    ],
     "address": "Le Workspace, Level 3, Tower 4, The Docks, Port Louis",
     "valid_from": "2026-10-29",
     "expiry": "2029-10-28",
@@ -940,6 +1270,9 @@
     "name": "Bolt Talent Solutions Ltd",
     "category": "non_citizen",
     "phone": "+2304341128",
+    "phones": [
+      "+2304341128"
+    ],
     "address": "The Trademark 1st Floor, La Promenade Telfair, Moka",
     "valid_from": "2026-10-30",
     "expiry": "2029-10-29",

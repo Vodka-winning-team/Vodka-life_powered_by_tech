@@ -19,7 +19,7 @@ from _common import OUT, PHONE_OK  # noqa: E402
 
 COMMON = {"source_url", "snapshot"}
 FIELDS = {
-    "agencies.json": {"id", "name", "category", "phone", "address", "valid_from", "expiry", "page"},
+    "agencies.json": {"id", "name", "category", "phone", "phones", "address", "valid_from", "expiry", "page"},
     "fee_rules.json": {"id", "cost", "words_en", "words_fr", "words_mfe", "payer", "ref"},
     "banks.json": {"id", "name", "type", "keywords", "domains", "phone", "phone_source"},
     "fsc_alerts.json": {"id", "name", "domains", "alert_date", "alert_url"},
@@ -31,7 +31,7 @@ ALLOWED = {
     ("banks.json", "type"): {"bank", "psp"},
 }
 DATE_FIELDS = {"snapshot", "valid_from", "expiry", "alert_date"}
-LIST_FIELDS = {"words_en", "words_fr", "words_mfe", "keywords", "domains", "phrases"}
+LIST_FIELDS = {"words_en", "words_fr", "words_mfe", "keywords", "domains", "phrases", "phones"}
 PHONE = re.compile(r"^(\+230 \d{3,4} \d{4}|\d{3,4})$")
 DOMAIN = re.compile(r"^[a-z0-9-]+(\.[a-z0-9-]+)+$")
 PERSON = re.compile(r"\b(Mr|Mrs|Ms|Miss)\b\.?\s+[A-Z]")
@@ -81,6 +81,14 @@ def check_file(name, fields):
         if name == "agencies.json":
             if not PHONE_OK.match(str(row.get("phone"))):
                 errors.append(f"{where}: phone {row.get('phone')!r} must be +230 then 7 digits, or 8 starting with 5")
+            phones = row.get("phones") or []
+            if not phones or phones[0] != row.get("phone"):
+                errors.append(f"{where}: phones must start with phone")
+            if len(set(phones)) != len(phones):
+                errors.append(f"{where}: phones has the same number twice")
+            for p in phones:
+                if not PHONE_OK.match(str(p)):
+                    errors.append(f"{where}: phones item {p!r} must be +230 then 7 digits, or 8 starting with 5")
         elif "phone" in row and not PHONE.match(str(row["phone"])):
             errors.append(f"{where}: phone {row['phone']!r} must be '+230 ...' or a short code")
         for d in row.get("domains", []):
