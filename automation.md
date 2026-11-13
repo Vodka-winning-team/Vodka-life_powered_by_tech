@@ -2,7 +2,7 @@
 
 **Updated about every 10 minutes by Pushkar's Claude.** Pull, read your row, do it. To ask for something, use **Requests** at the bottom.
 
-Last update: **Fri 13 Nov 21:04** · Next check: about 21:16 · Deadline: **Sat 12:30** · 🃏 Surprise card: engine ✅ app ✅ (Jayesh 21:00) pitch ✅ · Shield opt-in agreed (decision 15)
+Last update: **Fri 13 Nov 21:06** · Next check: about 21:16 · Deadline: **Sat 12:30** · **We are ahead on the build; behind on user tests and the APK release**
 
 ## How to use this file
 - **Check it:** `git pull`, then read **Next for each person**. Your Claude can read it too: "Read automation.md and do my next task".
@@ -16,36 +16,34 @@ Last update: **Fri 13 Nov 21:04** · Next check: about 21:16 · Deadline: **Sat 
 ## Status
 | Checkpoint | State |
 |---|---|
-| 18:00: APK on a real phone; data | ✅ APK running on a real phone (Jayesh 20:41), demo 1 passed on it |
-| 🃏 Surprise card: "survive wrong input, skipped steps, panic-tapping; show the key flow recovers safely" | Engine ✅ (fails safe, 24 robustness tests) · **App: double-tap guards, empty input, skipped steps → Jayesh** · Demo segment + slide → Paveesh · Wrong-input test cases → Adiyen · Decision log → Paveesh |
-| 23:00: full flow with real data, on the phone | Engine ✅ 88 tests · App ✅ on the APK · share-in in progress (target 22:00) |
-| 23:00: votes due | Jayesh's AI proposal · Paveesh's Shield opt-in proposal (`docs/proposal-shield-optin.md`) |
-| 03:00: FSC/CERT in, job follow-up works | ✅ both |
+| 18:00: APK on a real phone; data | ✅ (APK 20:29) |
+| 🃏 Surprise card | ✅ engine (20:48) · ✅ app (Jayesh 21:00) · ✅ pitch (Paveesh 20:50) |
+| 23:00: full flow on the phone with real data | ✅ all 6 demo steps right on the APK in airplane mode (Jayesh 20:57) · ✅ share-in (21:04, test it on the APK) |
+| 03:00: FSC/CERT, job follow-up; Shield opt-in works on the APK or is removed | ✅ FSC/CERT, job follow-up · Shield: engine `shouldAlert` ✅, Android part next (Jayesh) |
 | 07:00: feature freeze | — |
+| ⚠️ Behind | **User tests: 0 of 3 done** (were due 19:00–21:00) · **No GitHub Release with the APK yet** (needed for the submission form) · Kreol not yet read by a native speaker |
 
 **Done so far**
-- **Adiyen (A):** data with all register phones, validate, sources, 15 test cases, FR/Kreol strings, demo messages, decisions (13), user-test script.
-- **Pushkar (B):** engine, **88 tests** (demo texts, robustness, wording rule); `vars` for FR/Kreol details; README and slides drafts; this board.
-- **Jayesh (C):** APK on a real phone; 6 screens, FR/Kreol + switch, job follow-up; share-in in progress.
-- **Paveesh (D):** README, slides review, `docs/demo-script.md`, `docs/quick-test.md` (5-minute test per build), Shield opt-in proposal.
+- **Adiyen (A):** data with all register phones, validate, sources, test cases, FR/Kreol (incl. surprise-card texts), demo messages, decisions, user-test script.
+- **Pushkar (B):** engine with 96 tests (demo texts, robustness, wording, Shield `shouldAlert`); README and slides drafts; this board.
+- **Jayesh (C):** APK; 6 screens; FR/Kreol; job follow-up; surprise card app side; share-in.
+- **Paveesh (D):** README, slides, demo script, decisions 14–15, quick test, Shield proposal and texts.
 
 ## Next for each person
 **Adiyen (A)**
-1. 🃏 Add ~10 "wrong input" cases to `docs/test-cases.md` (empty, emoji only, phone number only, bare link, all caps, words split over lines, very long paste, unknown agency) with the expected safe result; B turns them into tests.
-2. Kreol reader for the screen texts.
+1. With Paveesh: **run the 3 user tests now** (APK or browser), notes in `docs/user-tests.md`. One tester reads the Kreol screens aloud.
 
 **Pushkar (B)**
-1. Vote on both proposals (AI score; Shield opt-in) by 23:00.
-2. Turn Adiyen's wrong-input cases into tests; run Paveesh's quick test on the web build.
+1. Help run the user tests; turn anything confusing in the engine texts into fixes.
+2. Vote on Jayesh's AI proposal (still open in `docs/decisions.md`).
 
 **Jayesh (C)**
-1. 🃏 App side of the surprise card: one action per tap on Check/Save/Call/Share; show `empty_message` instead of a result; Back or skipping Job check → never "No warning signs found"; Save twice → one entry; reopen after the app is killed. Translate the 4 new kinds (`empty_message`, `message_truncated`, `cost_unknown`, `check_failed`).
-2. Share-in (target 22:00, drop at 23:00 if not working).
-3. GitHub Release with the APK once tested.
+1. **Publish the tested APK as a GitHub Release** (the submission needs the link).
+2. Test share-in on the APK with Paveesh's quick test; then the Shield Android part (hard stop 03:00).
 
 **Paveesh (D)**
-1. 🃏 Pitch side ✅ (README, slide 6, decision 14, demo segment). Hold the 10-minute confirm meeting.
-2. User tests with `docs/quick-test.md`.
+1. **User tests now** with Adiyen; put one real tester quote on a slide.
+2. Quick test on the new APK (share-in included).
 
 ## Requests
 <!-- Add new lines at the END of this list. Format: - [ ] HH:MM · Name: request -->
