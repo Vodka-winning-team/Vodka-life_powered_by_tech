@@ -1,6 +1,6 @@
 # Proposal: opt-in automatic checking on Android ("Shield", switch off by default)
 
-**From:** Paveesh (D) · **Date:** Fri 13 Nov 2026, 20:40 · **Status:** PROPOSAL, needs A, B and C to agree. **Vote by 23:00.**
+**From:** Paveesh (D) · **Date:** Fri 13 Nov 2026, 20:40 · **Status:** **AGREED at 21:01** by A, B, C and D (decision 15 in `decisions.md`). Texts: [`strings-shield.md`](strings-shield.md).
 Shield was cut at 16:05 (decision 5). This brings it back **only as an opt-in switch**, and only if the gates below pass. Features 1–8, share-in and **the surprise card work (decision 14)** come first.
 
 ---
@@ -94,8 +94,8 @@ It is **never in the main demo path**. It's the last 20 seconds of the demo, and
 ## 8. Decision
 
 - [x] Paveesh (D) agrees
-- [ ] Adiyen (A) agrees
-- [ ] Pushkar (B) agrees
-- [ ] Jayesh (C) agrees
+- [x] Adiyen (A) agrees (in person, 21:01, reported by Paveesh)
+- [x] Pushkar (B) agrees (in person, 21:01, reported by Paveesh)
+- [x] Jayesh (C) agrees (in person, 21:01, reported by Paveesh)
 
 **Decision log line (D adds it with the real time once all agree):** *"Shield comes back as an opt-in switch, off by default, Android APK only, WhatsApp and SMS notifications only, nothing saved; gated on the APK by 23:00 and a hard stop at 03:00."*
