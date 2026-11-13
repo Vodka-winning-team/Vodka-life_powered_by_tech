@@ -9,6 +9,7 @@ const en = {
   tagline: 'Verifye avan ou peye: check before you pay',
 
   languageLabel: 'Language',
+  settingsTitle: 'Settings',
   // Granny mode (Adiyen, 22:45). The one plain sentence on the Result screen, per level.
   grannyMode: 'Granny mode: bigger text and buttons',
   grannySTOP: "Don't pay or send anything. First call the official number below.",
@@ -115,6 +116,7 @@ export type StringKey = keyof typeof en;
 export type Language = 'en' | 'fr' | 'mfe';
 
 const fr: Partial<Record<StringKey, string>> = {
+  settingsTitle: "Réglages",
   readAloud: "Lire à voix haute",
   stopReading: "Arrêter la lecture",
   checkedAgainst: "Vérifié avec ces listes officielles :",

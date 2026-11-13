@@ -42,6 +42,9 @@ export default function ResultScreen() {
     <Screen key={`${current.id}-${text}`}>
       <LevelBanner level={result.level} />
 
+      {/* The next step comes first. (Granny mode shows the Call buttons themselves, just below.) */}
+      {!granny && <Button title={t('resultActionsButton')} onPress={() => router.push('/actions')} />}
+
       {/* Read aloud: level, plain sentence, each finding, official numbers (EN/FR voices; Kreol uses French). */}
       <Button
         kind="secondary"
@@ -107,7 +110,6 @@ export default function ResultScreen() {
         </Card>
       </Pressable>
 
-      <Button title={t('resultActionsButton')} onPress={() => router.push('/actions')} />
       <Button kind="secondary" title={t('resultJobButton')} onPress={() => router.push('/job')} />
       <Button
         kind="secondary"

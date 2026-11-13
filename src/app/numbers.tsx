@@ -9,6 +9,7 @@ import { Button, Card, Label, Screen } from '@/components/ui';
 import { t } from '@/constants/strings';
 import { FontSize, Radius, Spacing } from '@/constants/theme';
 import type { OfficialEntry } from '@/engine';
+import { useLook } from '@/hooks/use-look';
 import { useTheme } from '@/hooks/use-theme';
 import { engine } from '@/lib/data';
 import { dialNumber, formatPhone } from '@/lib/phone';
@@ -37,6 +38,7 @@ function EntryCard({ entry }: { entry: OfficialEntry }) {
 
 export default function NumbersScreen() {
   const theme = useTheme();
+  const { scale } = useLook();
   const [query, setQuery] = useState('');
   const { agencies, banks } = engine.officialNumbers(query);
 
@@ -49,7 +51,7 @@ export default function NumbersScreen() {
         placeholder={t('numbersSearch')}
         placeholderTextColor={theme.textSecondary}
         accessibilityLabel={t('numbersSearch')}
-        style={[styles.input, { color: theme.text, backgroundColor: theme.backgroundElement, borderColor: theme.border }]}
+        style={[styles.input, { color: theme.text, backgroundColor: theme.backgroundElement, borderColor: theme.border, fontSize: FontSize.body * scale }]}
       />
 
       {/* Empty sections are hidden (e.g. a search that only matches agencies). */}
@@ -75,5 +77,5 @@ export default function NumbersScreen() {
 }
 
 const styles = StyleSheet.create({
-  input: { borderWidth: 1, borderRadius: Radius, padding: Spacing.three, fontSize: FontSize.body },
+  input: { borderWidth: 1, borderRadius: Radius, padding: Spacing.three, fontSize: FontSize.body, minHeight: 52 },
 });

@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import { AppState, PermissionsAndroid, Platform } from 'react-native';
 
 import Shield from '../../modules/fraudlens-shield';
-import { Button, Card, Label, Screen } from '@/components/ui';
+import { Button, Card, Label, Screen, Status } from '@/components/ui';
 import { t } from '@/constants/strings';
 import { useStore } from '@/lib/store';
 
@@ -65,7 +65,7 @@ export default function ShieldSetupScreen() {
         <Label variant="label">{t('shieldStepAccess')}</Label>
         <Label variant="small">{t('shieldStepAccessHint')}</Label>
         {status.access ? (
-          <Label>✓ {t('shieldStepDone')}</Label>
+          <Status>{t('shieldStepDone')}</Status>
         ) : (
           <Button kind="secondary" title={t('shieldOpenSettings')} onPress={() => Shield?.openAccessSettings()} />
         )}
@@ -74,7 +74,7 @@ export default function ShieldSetupScreen() {
       <Card>
         <Label variant="label">{t('shieldStepAlerts')}</Label>
         {status.alerts ? (
-          <Label>✓ {t('shieldStepDone')}</Label>
+          <Status>{t('shieldStepDone')}</Status>
         ) : (
           <Button kind="secondary" title={t('shieldOpenSettings')} onPress={allowAlerts} />
         )}

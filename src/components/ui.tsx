@@ -58,6 +58,30 @@ export function Label({
   );
 }
 
+/**
+ * A group of related items (a heading and its controls): tight spacing inside,
+ * while the page puts more space between groups. Granny mode spreads it a little more.
+ */
+export function Section({ title, children }: { title?: string; children: ReactNode }) {
+  const { granny } = useLook();
+  return (
+    <View style={{ gap: granny ? Spacing.three : Spacing.two }}>
+      {title ? <Label variant="label">{title}</Label> : null}
+      {children}
+    </View>
+  );
+}
+
+/** A short state line (e.g. "Automatic checking is on", "Done"), in the accent colour, bold. */
+export function Status({ children }: { children: ReactNode }) {
+  const theme = useTheme();
+  return (
+    <Label variant="label" style={{ color: theme.primary }}>
+      {children}
+    </Label>
+  );
+}
+
 export function Card({ children }: { children: ReactNode }) {
   const theme = useTheme();
   return (
@@ -198,7 +222,7 @@ const textStyles = StyleSheet.create({
   body: { fontSize: FontSize.body, lineHeight: FontSize.body * 1.45 },
   small: { fontSize: FontSize.small, lineHeight: FontSize.small * 1.4 },
   tag: { fontSize: FontSize.small, lineHeight: FontSize.small * 1.4, fontWeight: '700' },
-  label: { fontSize: FontSize.body, fontWeight: '700' },
+  label: { fontSize: FontSize.body, lineHeight: FontSize.body * 1.3, fontWeight: '700' },
   banner: { fontSize: FontSize.banner, fontWeight: '800', textAlign: 'center' },
 });
 

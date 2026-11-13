@@ -7,9 +7,9 @@ import { ScrollView, StyleSheet, Switch, TextInput, View } from 'react-native';
 
 import Shield from '../../modules/fraudlens-shield';
 
-import { Button, Card, Chip, Label, Screen } from '@/components/ui';
+import { Button, Card, Chip, Label, Screen, Section, Status } from '@/components/ui';
 import { findingTitle, t, type Language } from '@/constants/strings';
-import { FontSize, Radius, Spacing } from '@/constants/theme';
+import { FontSize, LevelColors, Radius, Spacing } from '@/constants/theme';
 import { useLook } from '@/hooks/use-look';
 import { useTheme } from '@/hooks/use-theme';
 import { useStore } from '@/lib/store';
@@ -21,6 +21,7 @@ export default function ScanScreen() {
   const [text, setText] = useState('');
   const [error, setError] = useState('');
   const scrollRef = useRef<ComponentRef<typeof ScrollView>>(null);
+  const [inputY, setInputY] = useState(0);
 
   function check() {
     if (text.trim() === '') {
@@ -45,66 +46,88 @@ export default function ScanScreen() {
           <Chip key={l.id} title={l.name} selected={l.id === language} onPress={() => setLanguage(l.id)} />
         ))}
       </View>
-      <View style={styles.switchRow}>
-        <View style={styles.half}>
-          <Label variant="label">{t('grannyMode')}</Label>
-        </View>
-        <Switch value={granny} accessibilityLabel={t('grannyMode')} onValueChange={setGranny} />
-      </View>
-      <Label variant="small">{t('tagline')}</Label>
-      <Label variant="title">{t('scanTitle')}</Label>
-      <Label>{t('scanHint')}</Label>
 
-      <TextInput
-        value={text}
-        onChangeText={setText}
-        placeholder={t('scanPlaceholder')}
-        placeholderTextColor={theme.textSecondary}
-        multiline
-        textAlignVertical="top"
-        accessibilityLabel={t('scanPlaceholder')}
-        // Keep the "Check message" button in view above the keyboard while typing.
-        onFocus={() => setTimeout(() => scrollRef.current?.scrollToEnd({ animated: true }), 300)}
-        style={[
-          styles.input,
-          { color: theme.text, backgroundColor: theme.backgroundElement, borderColor: theme.border, fontSize: FontSize.body * scale },
-        ]}
-      />
-      {error !== '' && <Label variant="small">{error}</Label>}
+      {/* The main task first: paste (or share) a message and check it. */}
+      <Section>
+        <Label variant="small">{t('tagline')}</Label>
+        <Label variant="title">{t('scanTitle')}</Label>
+        <Label>{t('scanHint')}</Label>
+      </Section>
 
-      <Button title={t('scanButton')} onPress={check} />
-
-      <View style={styles.row}>
-        <View style={styles.half}>
-          <Button kind="secondary" title={t('openHistory')} onPress={() => router.push('/history')} />
-        </View>
-        <View style={styles.half}>
-          <Button kind="secondary" title={t('openSources')} onPress={() => router.push('/sources')} />
-        </View>
-      </View>
-      {/* Look up an agency or bank without a message (e.g. a name heard from a friend). */}
-      <Button kind="secondary" title={t('numbersSearch')} onPress={() => router.push('/numbers')} />
-
-      {/* Shield: Android APK only (the native part doesn't exist in Expo Go or on the web). Off unless turned on. */}
-      {Shield && (
-        <Card>
-          <View style={styles.switchRow}>
-            <View style={styles.half}>
-              <Label variant="label">{t('shieldSwitch')}</Label>
-            </View>
-            <Switch
-              value={shieldOn}
-              accessibilityLabel={t('shieldSwitch')}
-              onValueChange={(on) => (on ? router.push('/shield') : setShieldOn(false))}
-            />
+      <View style={styles.field} onLayout={(e) => setInputY(e.nativeEvent.layout.y)}>
+        <TextInput
+          value={text}
+          onChangeText={setText}
+          placeholder={t('scanPlaceholder')}
+          placeholderTextColor={theme.textSecondary}
+          multiline
+          textAlignVertical="top"
+          accessibilityLabel={t('scanPlaceholder')}
+          // Keep the box and the "Check message" button in view above the keyboard while typing.
+          onFocus={() => setTimeout(() => scrollRef.current?.scrollTo({ y: Math.max(0, inputY - Spacing.three), animated: true }), 300)}
+          style={[
+            styles.input,
+            {
+              color: theme.text,
+              backgroundColor: theme.backgroundElement,
+              borderColor: error !== '' ? LevelColors.CAREFUL.background : theme.border,
+              fontSize: FontSize.body * scale,
+              lineHeight: FontSize.body * scale * 1.45,
+            },
+          ]}
+        />
+        {/* The error sits under its box and is read out by screen readers. */}
+        {error !== '' && (
+          <View accessibilityLiveRegion="polite">
+            <Label variant="label">{error}</Label>
           </View>
-          <Label variant="small">{t('shieldSwitchHint')}</Label>
-          {shieldOn && Shield.isAccessEnabled() && <Label>✓ {t('shieldOnStatus')}</Label>}
-          {shieldOn && !Shield.isAccessEnabled() && (
-            <Button kind="secondary" title={t('shieldNeedsAccess')} onPress={() => router.push('/shield')} />
-          )}
-        </Card>
-      )}
+        )}
+        <Button title={t('scanButton')} onPress={check} />
+      </View>
+
+      {/* Look things up without a message. */}
+      <Section>
+        {/* Look up an agency or bank (e.g. a name heard from a friend). */}
+        <Button kind="secondary" title={t('numbersSearch')} onPress={() => router.push('/numbers')} />
+        <View style={granny ? styles.column : styles.row}>
+          <View style={granny ? undefined : styles.half}>
+            <Button kind="secondary" title={t('openHistory')} onPress={() => router.push('/history')} />
+          </View>
+          <View style={granny ? undefined : styles.half}>
+            <Button kind="secondary" title={t('openSources')} onPress={() => router.push('/sources')} />
+          </View>
+        </View>
+      </Section>
+
+      {/* Settings: Granny mode for everyone; Shield in the Android APK only (no native part in Expo Go or on the web). */}
+      <Card>
+        <Label variant="label">{t('settingsTitle')}</Label>
+        <View style={styles.switchRow}>
+          <View style={styles.half}>
+            <Label>{t('grannyMode')}</Label>
+          </View>
+          <Switch value={granny} accessibilityLabel={t('grannyMode')} onValueChange={setGranny} />
+        </View>
+        {Shield && (
+          <>
+            <View style={styles.switchRow}>
+              <View style={styles.half}>
+                <Label>{t('shieldSwitch')}</Label>
+              </View>
+              <Switch
+                value={shieldOn}
+                accessibilityLabel={t('shieldSwitch')}
+                onValueChange={(on) => (on ? router.push('/shield') : setShieldOn(false))}
+              />
+            </View>
+            <Label variant="small">{t('shieldSwitchHint')}</Label>
+            {shieldOn && Shield.isAccessEnabled() && <Status>{t('shieldOnStatus')}</Status>}
+            {shieldOn && !Shield.isAccessEnabled() && (
+              <Button kind="secondary" title={t('shieldNeedsAccess')} onPress={() => router.push('/shield')} />
+            )}
+          </>
+        )}
+      </Card>
     </Screen>
   );
 }
@@ -127,5 +150,7 @@ const styles = StyleSheet.create({
   },
   row: { flexDirection: 'row', gap: Spacing.two },
   half: { flex: 1 },
+  column: { gap: Spacing.two },
+  field: { gap: Spacing.two },
   switchRow: { flexDirection: 'row', alignItems: 'center', gap: Spacing.two },
 });
