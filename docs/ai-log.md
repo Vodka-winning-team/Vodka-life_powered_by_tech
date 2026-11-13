@@ -51,3 +51,4 @@
 - 13 Nov 22:57 · D (Paveesh) · Claude added the 22:54 Shield tap test (alert → tap → Result Stop) to the quick-test results table, with the note that the keyboard and date findings are fixed in e27f04a · Checked: Jayesh's 22:54 board lines and AI-log line
 - 13 Nov 23:05 · C (Jayesh) · Claude added the Official numbers screen (A's request; engine.officialNumbers) and Granny mode (useLook hook: 1.4x text, bigger buttons/chips, no grey text, simple Result with Call buttons first; remembered setting) · Checked: typecheck, eslint, 115 tests, web export
 - 13 Nov 23:28 · C (Jayesh) · Built and installed the Verifye APK (17 min), tested on the phone with adb: Verifye name, keyboard fix, FR titles, dates, Official numbers, Granny mode · Checked: screenshots of each screen
+- 13 Nov 23:31 · C (Jayesh) · Published Verifye.apk as GitHub pre-release verifye-2026-11-13-2330 with Jayesh's OK and posted the link on the board · Checked: release page lists Verifye.apk
