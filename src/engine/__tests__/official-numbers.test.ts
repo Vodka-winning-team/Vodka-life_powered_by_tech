@@ -44,7 +44,7 @@ test('no match, nonsense or wrong input → empty lists, never a crash', () => {
     const r = engine.officialNumbers(q);
     expect(Array.isArray(r.agencies) && Array.isArray(r.banks)).toBe(true);
   }
-  expect(engine.officialNumbers('zzzzqqq')).toEqual({ agencies: [], banks: [] });
+  expect(engine.officialNumbers('zzzzqqq')).toEqual({ agencies: [], banks: [], matchedBy: 'name', number: null });
 });
 
 test('an expired licence says so instead of "valid until"', () => {
@@ -55,4 +55,48 @@ test('an expired licence says so instead of "valid until"', () => {
 test('wording rule: no safe / genuine / scam / illegal in any entry', () => {
   const all = engine.officialNumbers('');
   for (const e of [...all.agencies, ...all.banks]) expect(`${e.name} ${e.detail}`).not.toMatch(/\b(safe|genuine|scams?|illegal)\b/i);
+});
+
+describe('"Is this number official?" (Adiyen 02:26): a number in the search box is matched by number', () => {
+  const ids = (q: string) => {
+    const r = engine.officialNumbers(q);
+    return { matchedBy: r.matchedBy, agencies: r.agencies.map((a) => a.name), banks: r.banks.map((b) => b.id) };
+  };
+
+  test('"5256 8074" → THINK RECRUITMENT LTD (abroad)', () => {
+    const r = engine.officialNumbers('5256 8074');
+    expect(r.matchedBy).toBe('number');
+    expect(r.number).toBe('+230 5256 8074');
+    expect(r.agencies.map((a) => [a.name, a.category])).toEqual([['THINK RECRUITMENT LTD', 'abroad']]);
+    expect(r.banks).toHaveLength(0);
+  });
+
+  test('"+230 202 6060" and "00230-202-6060" → MCB', () => {
+    expect(ids('+230 202 6060')).toEqual({ matchedBy: 'number', agencies: [], banks: ['mcb'] });
+    expect(ids('00230-202-6060').banks).toEqual(['mcb']);
+    expect(ids('(230) 2026060').banks).toEqual(['mcb']);
+  });
+
+  test('short code "8971" → Emtel MFS (blink)', () => {
+    expect(ids('8971')).toEqual({ matchedBy: 'number', agencies: [], banks: ['emtel_mfs'] });
+  });
+
+  test('"4637800" → EMPLOYMENT PRO LIMITED, every licence that lists it', () => {
+    const r = ids('4637800');
+    expect(r.agencies.length).toBeGreaterThanOrEqual(1);
+    expect(new Set(r.agencies)).toEqual(new Set(['EMPLOYMENT PRO LIMITED']));
+    expect(r.agencies.length).toBe(engine.officialNumbers('').agencies
+      .filter((a) => a.name === 'EMPLOYMENT PRO LIMITED' && a.phones.some((p) => p.replace(/\D/g, '').endsWith('4637800'))).length);
+  });
+
+  test('a number not in our lists → nothing, but still a number search (app shows "not in our official lists")', () => {
+    expect(engine.officialNumbers('5999 9999')).toEqual({ agencies: [], banks: [], matchedBy: 'number', number: '+230 5999 9999' });
+  });
+
+  test('names still search by name; text with letters is never a number search', () => {
+    expect(engine.officialNumbers('think').matchedBy).toBe('name');
+    expect(engine.officialNumbers('').matchedBy).toBe('all');
+    expect(engine.officialNumbers('MCB 202').matchedBy).toBe('name');
+    expect(engine.officialNumbers('12').matchedBy).toBe('name'); // too short to be a number
+  });
 });

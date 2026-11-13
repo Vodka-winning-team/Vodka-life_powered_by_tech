@@ -211,7 +211,19 @@ export class Engine {
    */
   officialNumbers(query = ''): OfficialNumbers {
     try {
-      const q = Agencies.words(typeof query === 'string' ? query : '');
+      const raw = typeof query === 'string' ? query : '';
+      // "Is this number official?": a query that looks like a phone number is matched by number, not by name.
+      const digits = phoneQuery(raw);
+      if (digits) {
+        const agencies = this.data.agencies
+          .filter((a) => (a.phones.length > 0 ? a.phones : [a.phone]).some((p) => localDigits(p) === digits))
+          .map((a) => this.agencyEntry(a))
+          .sort((x, y) => x.name.localeCompare(y.name) || x.category.localeCompare(y.category));
+        const banks = this.data.banks.filter((b) => localDigits(b.phone) === digits).map((b) => this.bankEntry(b));
+        const shown = digits.length >= 7 ? Text.formatPhone(`+230${digits}`) : digits;
+        return { agencies, banks, matchedBy: 'number', number: shown };
+      }
+      const q = Agencies.words(raw);
       const agencies = this.data.agencies
         .map((a) => ({ e: this.agencyEntry(a), score: q.length ? nameScore(q, a.name, []) : 1 }))
         .filter((x) => x.score > 0)
@@ -222,9 +234,9 @@ export class Engine {
         .filter((x) => x.score > 0)
         .sort((x, y) => y.score - x.score || x.e.name.localeCompare(y.e.name))
         .map((x) => x.e);
-      return { agencies, banks };
+      return { agencies, banks, matchedBy: q.length ? 'name' : 'all', number: null };
     } catch {
-      return { agencies: [], banks: [] };
+      return { agencies: [], banks: [], matchedBy: 'all', number: null };
     }
   }
 
@@ -617,4 +629,25 @@ function nameScore(queryWords: string[], name: string, keywords: string[]): numb
     else return 0;
   }
   return score;
+}
+
+/**
+ * If the search text is a phone number, its local digits ("+230 5256 8074" → "52568074", "8971" → "8971");
+ * otherwise null. A query counts as a number when it holds only digits, spaces, + - . ( ) and 3 to 13 digits.
+ */
+function phoneQuery(query: string): string | null {
+  const q = query.trim();
+  if (!/^[\d\s+\-.()]+$/.test(q)) return null;
+  const d = q.replace(/\D/g, '');
+  if (d.length < 3 || d.length > 13) return null;
+  return localDigits(q);
+}
+
+/** Digits without the Mauritius prefix (+230, 230 or 00230) when what's left is a 7- or 8-digit local number. */
+function localDigits(phone: string): string {
+  const d = phone.replace(/\D/g, '');
+  for (const prefix of ['00230', '230']) {
+    if (d.startsWith(prefix) && [7, 8].includes(d.length - prefix.length)) return d.slice(prefix.length);
+  }
+  return d;
 }

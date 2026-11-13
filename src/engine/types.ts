@@ -118,4 +118,16 @@ export type OfficialEntry = {
   source: Source;
 };
 
-export type OfficialNumbers = { agencies: OfficialEntry[]; banks: OfficialEntry[] };
+/**
+ * Result of officialNumbers(query). `matchedBy` tells the app which card to show:
+ * 'number' → the query was a phone number: show the "listed as … official number" card + the caller-ID warning,
+ *            or, with no results, the "not in our official lists" card;
+ * 'name'   → name search; 'all' → empty query (everything, A to Z).
+ */
+export type OfficialNumbers = {
+  agencies: OfficialEntry[];
+  banks: OfficialEntry[];
+  matchedBy: 'all' | 'name' | 'number';
+  /** For a number search: the number as the app should show it back ("+230 5256 8074", "8971"). */
+  number: string | null;
+};
