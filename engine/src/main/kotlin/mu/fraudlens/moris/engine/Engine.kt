@@ -22,7 +22,7 @@ class Engine(val data: DataSet, private val today: LocalDate = LocalDate.now()) 
         findings += bankLinkCheck(m, contacts)
         findings += fscCheck(m)
         findings += jobFeeFromText(m, job)
-        if (job != null) findings += jobAnswersCheck(job, contacts)
+        if (job != null) findings += jobAnswersCheck(m, job, contacts)
         findings += phraseCheck(m, Rules.URGENCY)
         findings += paymentRequestCheck(m)
         findings += phraseCheck(m, Rules.PRIZE)
@@ -143,7 +143,7 @@ class Engine(val data: DataSet, private val today: LocalDate = LocalDate.now()) 
     }
 
     /** The user's answers on the Job check screen: the chosen register agency and the cost they are asked to pay. */
-    private fun jobAnswersCheck(job: JobAnswers, contacts: MutableList<Contact>): List<Finding> {
+    private fun jobAnswersCheck(m: Message, job: JobAnswers, contacts: MutableList<Contact>): List<Finding> {
         val out = mutableListOf<Finding>()
         val agency = job.agencyId?.let { id -> data.agencies.firstOrNull { it.id == id } }
         if (agency == null) {
@@ -184,7 +184,8 @@ class Engine(val data: DataSet, private val today: LocalDate = LocalDate.now()) 
                 )
             }
         }
-        job.costId?.let { id -> data.feeRules.firstOrNull { it.id == id } }?.let { out += feeFinding(it, emptyList()) }
+        job.costId?.let { id -> data.feeRules.firstOrNull { it.id == id } }
+            ?.let { rule -> out += feeFinding(rule, Text.findAny(m.norm, rule.allWords)) } // highlight the cost words if the message has them
         return out
     }
 

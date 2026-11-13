@@ -17,6 +17,16 @@ kotlin {
     compilerOptions { jvmTarget.set(JvmTarget.JVM_11) }
 }
 
+// Try the engine by hand without a phone: ./gradlew -q --console=plain :engine:tryIt
+tasks.register<JavaExec>("tryIt") {
+    group = "verification"
+    description = "Type messages and see what the engine finds (uses the real data files)."
+    classpath = sourceSets["test"].runtimeClasspath
+    mainClass.set("mu.fraudlens.moris.engine.TryItKt")
+    standardInput = System.`in`
+    workingDir = projectDir
+}
+
 dependencies {
     // Only the JSON parser is used (no @Serializable classes), so no serialization compiler plugin is needed.
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.3")
