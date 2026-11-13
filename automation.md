@@ -2,7 +2,7 @@
 
 **Updated about every 10 minutes by Pushkar's Claude.** Pull, read your row, do it. To ask for something, use **Requests** at the bottom.
 
-Last update: **Fri 13 Nov 19:16** · Next check: about 19:26 · **No pushes from anyone since 18:58: please push your work at least hourly** · Deadline: **Sat 12:30**
+Last update: **Fri 13 Nov 19:27** · Next check: about 19:36 · **Reply to Adiyen's 19:21 ping in Requests so we know who is online** · Deadline: **Sat 12:30**
 
 ## How to use this file
 - **Check it:** `git pull`, then read **Next for each person**. Your Claude can read it too: "Read automation.md and do my next task".
@@ -16,7 +16,7 @@ Last update: **Fri 13 Nov 19:16** · Next check: about 19:26 · **No pushes from
 ## Status
 | Checkpoint | State |
 |---|---|
-| 18:00: APK on a real phone; agencies, fee rules, banks data | Data ✅ · Engine ✅ · **APK ⏳ not reported yet (Jayesh), 1 h 15 overdue** |
+| 18:00: APK on a real phone; agencies, fee rules, banks data | Data ✅ · Engine ✅ · **APK ⏳ not reported yet (Jayesh), no push since 18:45** |
 | 23:00: full flow with real data | Screens ✅ wired to the real engine · needs a run on a real phone |
 | 03:00: FSC/CERT in, job follow-up works | FSC/CERT ✅ in the engine |
 | 07:00: feature freeze | — |
@@ -29,7 +29,7 @@ Last update: **Fri 13 Nov 19:16** · Next check: about 19:26 · **No pushes from
 
 ## Next for each person
 **Adiyen (A)**
-1. If D is still missing at 19:30, write `docs/demo-messages.md` (6 demo messages from `PROJECT.md` §9; agency suggestion: LIFETIME CANADA LTD).
+1. At 19:30, if D is still missing, push `docs/demo-messages.md` (6 demo messages from `PROJECT.md` §9; agency suggestion: LIFETIME CANADA LTD).
 2. `phones: [...]` in agencies.json once Jayesh also says yes (request below).
 
 **Pushkar (B)**
@@ -60,4 +60,4 @@ Last update: **Fri 13 Nov 19:16** · Next check: about 19:26 · **No pushes from
 - [ ] 18:49 · Adiyen: Jayesh, `docs/strings-fr-mfe.md` is pushed (commit 67907bf): French and Kreol for all 43 keys in strings.ts, ready to paste into the `fr` and `mfe` objects (section 3), plus the 17 finding titles by `kind` with {name}/{date}/{campaign} placeholders (section 2). Kreol needs a native speaker's read before the demo; send corrections here and I'll update the file.
 - [ ] 18:51 · Adiyen: D, slide-2 fact check of PROJECT.md §2. ✅ "MAUCORS logged 913 scam reports in 2025" is confirmed: 913 "arnaques et fraudes" out of 6,073 incidents reported to MAUCORS in 2025 (Defimedia, 24 Aug 2026: https://defimedia.info/risques-dusurpation-didentite-whatsapp-username-le-gm-veut-des-garanties-avant-tout-deploiement). ❌ "Radio One 2026: 20+ alleged victims, Rs 296,000 from 4 complainants": no source found, so don't put it on a slide unless you have the link. ❌ "Ministry warnings in 2022 and 2023": no communiqué found online. A sourced alternative: Defimedia, 30 Jul 2021, about ten Mauritians cheated by fake recruiters for Canada, 6 complaints to the Ministry of Labour in 2 months, one person paid about Rs 350,000 (https://defimedia.info/immigration-letranger-les-faux-recruteurs-traques-intensivement-depuis-deux-mois). → B note 18:58 (sources opened and read today): ✅ Radio One, 25 Aug 2026: "une vingtaine de Mauriciens" (about twenty), one official complaint so far: https://radio1.mu/faux-recruteur-le-reve-de-travailler-a-letranger-vire-au-cauchemar-pour-une-vingtaine-de-mauriciens/ · ✅ Radio One, 7 Sep 2026: four complainants say they paid Rs 296,000 in total, one paid Rs 50,000 for a job in Dubai: https://radio1.mu/promesses-demplois-letranger-un-habitant-de-quatre-bornes-aurait-soutire-pres-de-rs-300-000-a-quatre-victimes/ · ✅ Ministry of Labour communiqué, 28 Apr 2022, "Attention aux fausses agences de recrutement offrant du travail à l'étranger": https://www.govmu.org/EN/Communique1/year%202022/May/Communiqu%C3%A9-%20Fausses%20agences%20de%20recrutement%2028.04.22.pdf · ❌ the 2023 warning link is dead (404), so say "warned in 2022" only. Slide wording: "about twenty", not "20+"; these are allegations, not convictions. README updated with these links.
 - [~] 18:51 · Adiyen: B and Jayesh, a question (no change made). 55 of the 79 agencies list 2 or 3 phone numbers in the register, but agencies.json keeps only the first (the contract has one `phone`). A message using an agency's real second number can't be matched. Option: add `phones: [...]` (all register numbers) next to `phone`. That's a contract change: reply "yes" both, and I'll add it, update TASKS.md §2 and validate.py in one commit. → B 18:58: **yes from B**, as an extra field: keep `phone` (main number, unchanged) and add `phones: [...]` with all register numbers. The engine will show the extra numbers only as official numbers to call. It will never treat a number in a message that matches the register as proof the message is real (scammers can copy numbers). Waiting for Jayesh's yes.
-- [ ] 19:21 · Adiyen: **PING, everyone.** Reply on this line with your name and the time (or push anything), so we know who's online. Jayesh: no push since 18:45, and the APK is overdue. Are you building? Also waiting for your yes/no on `phones` (B already said yes). D: nothing pushed yet. If there's no `docs/demo-messages.md` by 19:30, I'll push mine (same texts as B's tests).
+- [ ] 19:21 · Adiyen: **PING, everyone.** Reply on this line with your name and the time (or push anything), so we know who's online. Jayesh: no push since 18:45, and the APK is overdue. Are you building? Also waiting for your yes/no on `phones` (B already said yes). D: nothing pushed yet. If there's no `docs/demo-messages.md` by 19:30, I'll push mine (same texts as B's tests). → **Pushkar (B) online 19:27** (board checks every 10 min; engine 59 tests green). Adiyen: yes, push your demo-messages.md at 19:30 if D hasn't; I'll add it as engine tests on the next check.
