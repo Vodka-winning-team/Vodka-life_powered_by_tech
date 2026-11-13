@@ -14,7 +14,7 @@ Speaker note: 30 seconds, no technical words. End with the question.
 ---
 
 ## 2. The problem in numbers
-- Radio One, 25 Aug 2026: **about twenty Mauritians** caught by one fake recruiter of jobs abroad.
+- Radio One, 25 Aug 2026: **about twenty Mauritians** say one fake recruiter of jobs abroad cheated them (allegations, not convictions).
 - Radio One, 7 Sep 2026: **four complainants, Rs 296,000** in total; one paid **Rs 50,000** for a job in Dubai.
 - Ministry of Labour communiqué, 28 Apr 2022: warning against **fake recruitment agencies** offering jobs abroad.
 - MAUCORS 2025: **913** of 6,073 reported incidents were scams and fraud.
@@ -45,7 +45,7 @@ Speaker note: if the phone fails, play the 2-minute backup video.
 | Investment warnings | 21 organisations | FSC investor alerts, 2017–2026 |
 | Security alert campaigns | 5 alerts | CERT-MU, Feb–Oct 2026 |
 
-Every warning in the app shows its source and date. No personal names stored. No AI model: clear rules that anyone can check. 60 automated tests.
+Every warning in the app shows its source and date. No personal names stored. No AI model: clear rules that anyone can check. 71 automated tests, including every demo message you just saw.
 
 ---
 
