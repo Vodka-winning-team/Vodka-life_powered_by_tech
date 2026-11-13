@@ -1,6 +1,9 @@
+// The sound player is a native module; the tests only check the words, so a stand-in is enough.
 import { setLanguage } from '@/constants/strings';
 import { engine } from '@/lib/data';
 import { speechFor } from '@/lib/speak';
+
+jest.mock('expo-audio', () => ({ createAudioPlayer: jest.fn() }));
 
 afterEach(() => setLanguage('en'));
 

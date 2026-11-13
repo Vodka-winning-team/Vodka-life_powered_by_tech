@@ -14,7 +14,7 @@ import logging
 
 from .api.deps import get_analyzer, get_intel, get_ml
 from .api.security import RateLimitMiddleware, SecurityHeadersMiddleware
-from .api.routes import analyze, content, intel, learning, payments
+from .api.routes import analyze, content, intel, learning, payments, speech
 from .core.config import get_settings
 from .web_ui import mount_web_ui
 
@@ -52,7 +52,7 @@ def create_app() -> FastAPI:
         return {"status": "ok", "version": settings.version, "ai_provider": analyzer.ai.name,
                 "ml": ml.status() if ml else None, "intel": intel_svc.status() if intel_svc else None}
 
-    for router in (analyze.router, payments.router, content.router, learning.router, intel.router):
+    for router in (analyze.router, payments.router, content.router, learning.router, intel.router, speech.router):
         app.include_router(router, prefix=settings.api_prefix)
     mount_web_ui(app)  # last, so the API routes always win
     return app

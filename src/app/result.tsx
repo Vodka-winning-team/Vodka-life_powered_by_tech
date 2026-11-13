@@ -19,7 +19,7 @@ import { prettyDay } from '@/lib/time';
 
 export default function ResultScreen() {
   const theme = useTheme();
-  const { current, saveCurrent, addToCase } = useStore();
+  const { current, saveCurrent, addToCase, serverUrl } = useStore();
   const { granny, scale } = useLook();
   const [newText, setNewText] = useState('');
   const [reading, setReading] = useState(false);
@@ -61,7 +61,7 @@ export default function ResultScreen() {
             setReading(false);
           } else {
             setReading(true);
-            speak(speechFor(result), () => setReading(false));
+            speak(speechFor(result), () => setReading(false), serverUrl);
           }
         }}
       />

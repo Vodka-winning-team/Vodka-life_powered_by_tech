@@ -23,6 +23,11 @@ class Settings(BaseSettings):
     ipqs_key: str | None = None            # IPQualityScore (phone reputation)
     ipqs_daily_limit: int = 30             # free plan allows 35/day; keep a margin
     ipqs_country: str = "MU"
+    # myt AI Cloud text-to-speech (key, API root and voice id come from the myt console; set them in .env)
+    myt_api_key: str | None = None
+    myt_base_url: str | None = None
+    myt_voice: str | None = None
+    myt_model: str = "myt/myt_tts"
     telesign_customer_id: str | None = None  # Telesign Intelligence (phone risk score 0-1000)
     telesign_api_key: str | None = None
     telesign_daily_limit: int = 30         # trial credits are limited; keep a margin
