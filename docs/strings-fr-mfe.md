@@ -29,6 +29,9 @@ Kreol uses the standard Kreol Morisien spelling (*Grafi Larmoni*: mesaz, nimero,
 | resultSave | Save to history | Enregistrer dans l'historique | Gard dan istorik |
 | resultSaved | Saved | Enregistré | Finn gard |
 | sourceLabel | Source | Source | Sours |
+| followUpLabel | They asked for something new? | Ils demandent autre chose ? | Zot pe dimann enn lot zafer? |
+| followUpPlaceholder | Paste their new message | Collez leur nouveau message | Kol zot nouvo mesaz isi |
+| followUpButton | Add to this case and check again | Ajouter à ce dossier et vérifier à nouveau | Azout dan sa dosie la ek verifye ankor |
 | jobTitle | Job check | Vérifier l'offre d'emploi | Verifye lofer travay |
 | jobAgencyLabel | 1. Which agency is it? | 1. De quelle agence s'agit-il ? | 1. Ki lazans sa? |
 | jobSuggested | Found in the message | Trouvée dans le message | Trouv dan mesaz la |
@@ -101,6 +104,9 @@ const fr: Partial<Record<StringKey, string>> = {
   resultSave: "Enregistrer dans l'historique",
   resultSaved: "Enregistré",
   sourceLabel: "Source",
+  followUpLabel: "Ils demandent autre chose ?",
+  followUpPlaceholder: "Collez leur nouveau message",
+  followUpButton: "Ajouter à ce dossier et vérifier à nouveau",
   jobTitle: "Vérifier l'offre d'emploi",
   jobAgencyLabel: "1. De quelle agence s'agit-il ?",
   jobSuggested: "Trouvée dans le message",
@@ -147,6 +153,9 @@ const mfe: Partial<Record<StringKey, string>> = {
   resultSave: "Gard dan istorik",
   resultSaved: "Finn gard",
   sourceLabel: "Sours",
+  followUpLabel: "Zot pe dimann enn lot zafer?",
+  followUpPlaceholder: "Kol zot nouvo mesaz isi",
+  followUpButton: "Azout dan sa dosie la ek verifye ankor",
   jobTitle: "Verifye lofer travay",
   jobAgencyLabel: "1. Ki lazans sa?",
   jobSuggested: "Trouv dan mesaz la",
