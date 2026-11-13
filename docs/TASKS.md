@@ -23,9 +23,9 @@ Changes since PROJECT.md (team review, 16:05): **Shield is cut**, the Arnak? Liv
 
 | Person | Owns | Never touches |
 |---|---|---|
-| **A: Data** | `data/`, `app/src/main/assets/data/` | `engine/`, app code |
-| **B: Engine** | `engine/` (Kotlin module + its tests) | `app/`, `data/` |
-| **C: App + main laptop** | `app/` (except `assets/data/`), `settings.gradle.kts`, root `build.gradle.kts`, `gradle/` | `engine/src/`, `data/` |
+| **A: Data (Adiyen)** | `data/`, `app/src/main/assets/data/` | `engine/`, app code |
+| **B: Engine (Pushkar)** | `engine/` (Kotlin module + its tests) | `app/`, `data/` |
+| **C: App + main laptop (Jayesh)** | `app/` (except `assets/data/`), `settings.gradle.kts`, root `build.gradle.kts`, `gradle/` | `engine/src/`, `data/` |
 | **D: Pitch + testing** | `README.md`, `docs/` | code |
 
 ---
@@ -72,7 +72,7 @@ C reads the 5 files from assets and passes their text to `DataSet.fromJson`.
 
 ---
 
-## 3. Person A: Data (name: ________)
+## 3. Person A: Data (name: Adiyen)
 
 **Goal:** 5 JSON files of real, checked records, with a source on every row.
 
@@ -92,7 +92,7 @@ C reads the 5 files from assets and passes their text to `DataSet.fromJson`.
 
 ---
 
-## 4. Person B: Engine (name: ________)
+## 4. Person B: Engine (name: Pushkar)
 
 **Goal:** `check()` gives the right level and reasons for every test message, without a phone.
 
@@ -110,7 +110,7 @@ C reads the 5 files from assets and passes their text to `DataSet.fromJson`.
 
 ---
 
-## 5. Person C: App + main laptop (name: ________)
+## 5. Person C: App + main laptop (name: Jayesh)
 
 **Goal:** the APK on a real phone, every screen working with B's engine and A's data. **You are the main laptop:** you pull everyone's work at each sync, build, and install.
 
