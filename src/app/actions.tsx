@@ -4,6 +4,7 @@ import { Linking, Share } from 'react-native';
 
 import { Button, Card, Label, Screen } from '@/components/ui';
 import { t } from '@/constants/strings';
+import { dialNumber, formatPhone } from '@/lib/phone';
 import { useStore } from '@/lib/store';
 
 // TODO(D): confirm both links before the demo.
@@ -16,7 +17,7 @@ export default function ActionsScreen() {
 
   function call(phone: string) {
     // Always an official number from our data, never one taken from the message.
-    Linking.openURL(`tel:${phone.replace(/\s/g, '')}`).catch(() => {});
+    Linking.openURL(`tel:${dialNumber(phone)}`).catch(() => {});
   }
 
   function share() {
@@ -38,7 +39,7 @@ export default function ActionsScreen() {
       {contacts.map((c) => (
         <Card key={c.name + c.phone}>
           <Label variant="label">{c.name}</Label>
-          <Button title={c.phone} onPress={() => call(c.phone)} />
+          <Button title={formatPhone(c.phone)} onPress={() => call(c.phone)} />
           <Label variant="small">
             {t('sourceLabel')}: {c.source.url} ({c.source.date})
           </Label>

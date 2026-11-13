@@ -8,7 +8,6 @@
     "scheme": "fraudlens",
     "userInterfaceStyle": "automatic",
     "ios": {
-      "icon": "./assets/expo.icon",
       "bundleIdentifier": "mu.fraudlens.moris",
       "supportsTablet": true
     },
