@@ -21,7 +21,7 @@ Each case tests one data file and one rule. The **expected level** follows the l
 | 5 | EN | STOP | bank_link, bank_alarm | banks `absa`: link not on absabank.mu |
 | 6 | Kreol | STOP | bank_link | banks `emtel_mfs` (payment provider): link not on emtel.com; contact 8971 |
 | 7 | EN | NONE | none | banks `sbm`: the official link sbmgroup.mu is not flagged |
-| 8 | EN | NONE | none | genuine MCB code SMS ("never share it") |
+| 8 | EN | NONE | none | real MCB code SMS ("never share it") |
 | 9 | EN | NONE | none | banks `mcb` keyword `juice`: "orange juice" is not MCB |
 | 10 | EN | STOP | fsc_alert | fsc_alerts `krakeif_global`: match by name |
 | 11 | FR | STOP | fsc_alert | fsc_alerts `star_net`: match by domain starnetfx.com |
@@ -67,7 +67,7 @@ Each case tests one data file and one rule. The **expected level** follows the l
 
 - No findings. www.sbmgroup.mu is SBM's official domain.
 
-**8. Genuine MCB code SMS → NONE**
+**8. Real MCB code SMS → NONE**
 > MCB: 482913 is your Juice verification code. MCB will never ask you for this code. Do not share it.
 
 - No findings. A code sent *to* you with "do not share" is not a request for a code.

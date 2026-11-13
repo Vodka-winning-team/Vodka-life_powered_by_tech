@@ -18,7 +18,7 @@ Every row in every data file has a `source_url` and a `snapshot` date. Nothing i
 - Who pays recruitment costs: Private Recruitment Agencies Act 2023 s.5 and Regulations 2025 reg 7(2).
 - Banks and payment apps: 18 banks and 3 payment providers, Bank of Mauritius list (13 Nov 2026). Phone numbers come from each bank's own website.
 - Investment warnings: 21 organisations named in Financial Services Commission alerts (2017–2026).
-- Scam campaigns: 5 CERT-MU security alerts (Feb–Oct 2026).
+- Security alert campaigns: 5 CERT-MU security alerts (Feb–Oct 2026).
 
 ## How to rebuild
 
