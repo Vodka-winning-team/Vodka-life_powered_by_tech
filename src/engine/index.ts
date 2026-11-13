@@ -8,6 +8,8 @@
 import * as Rules from './rules';
 import * as Text from './text';
 import type {
+  OfficialEntry,
+  OfficialNumbers,
   Agency,
   Bank,
   CertAlert,
@@ -200,6 +202,54 @@ export class Engine {
     const real = r.findings.filter((f) => f.level !== 'NONE' && !NOT_A_WARNING.includes(f.kind));
     if (r.level === 'NONE' || real.length === 0) return { alert: false, level: 'NONE' };
     return { alert: true, level: r.level };
+  }
+
+  /**
+   * "Official numbers" screen: search every agency licence and bank / payment app by part of its name
+   * (case, accents, "Ltd" and one-letter typos ignored; bank keywords like "juice" or "blink" work too).
+   * Empty query → everything, A to Z. Never throws.
+   */
+  officialNumbers(query = ''): OfficialNumbers {
+    try {
+      const q = Agencies.words(typeof query === 'string' ? query : '');
+      const agencies = this.data.agencies
+        .map((a) => ({ e: this.agencyEntry(a), score: q.length ? nameScore(q, a.name, []) : 1 }))
+        .filter((x) => x.score > 0)
+        .sort((x, y) => y.score - x.score || x.e.name.localeCompare(y.e.name) || x.e.category.localeCompare(y.e.category))
+        .map((x) => x.e);
+      const banks = this.data.banks
+        .map((b) => ({ e: this.bankEntry(b), score: q.length ? nameScore(q, b.name, b.keywords) : 1 }))
+        .filter((x) => x.score > 0)
+        .sort((x, y) => y.score - x.score || x.e.name.localeCompare(y.e.name))
+        .map((x) => x.e);
+      return { agencies, banks };
+    } catch {
+      return { agencies: [], banks: [] };
+    }
+  }
+
+  private agencyEntry(a: Agency): OfficialEntry {
+    const validNow = a.validFrom <= this.today && this.today <= a.expiry;
+    const licence = a.category === 'abroad' ? 'Licensed for jobs abroad'
+      : a.category === 'local' ? 'Licensed for jobs in Mauritius'
+        : a.category === 'non_citizen' ? 'Licensed to bring foreign workers into Mauritius' : `Licence: ${a.category}`;
+    return {
+      type: 'agency', id: a.id, name: a.name, category: a.category,
+      detail: validNow ? `${licence} · valid until ${prettyDate(a.expiry)}` : `${licence} · recorded validity ${prettyDate(a.validFrom)} to ${prettyDate(a.expiry)} (not today)`,
+      validNow,
+      phones: a.phones.length > 0 ? a.phones : [a.phone].filter(Boolean),
+      source: { name: `Ministry of Labour list of recruitment agencies, page ${a.page}`, url: a.sourceUrl, date: a.snapshot },
+    };
+  }
+
+  private bankEntry(b: Bank): OfficialEntry {
+    return {
+      type: b.type === 'psp' ? 'psp' : 'bank', id: b.id, name: b.name, category: b.type,
+      detail: b.type === 'psp' ? 'Payment service provider (Bank of Mauritius list)' : 'Bank (Bank of Mauritius list)',
+      validNow: null,
+      phones: [b.phone].filter(Boolean),
+      source: bankPhoneSource(b),
+    };
   }
 
   /** Register agencies whose names appear in the message, best match first (for the Job check screen). */
@@ -522,8 +572,13 @@ export const Agencies = {
   },
 };
 
+/** One typo apart: one letter added, removed or changed, or two neighbouring letters swapped ("recruitmnet"). */
 function oneEditApart(a: string, b: string): boolean {
   if (Math.abs(a.length - b.length) > 1) return false;
+  if (a.length === b.length) {
+    const diff = [...a].map((c, i) => (c === b[i] ? -1 : i)).filter((i) => i >= 0);
+    if (diff.length === 2 && diff[1] === diff[0] + 1 && a[diff[0]] === b[diff[1]] && a[diff[1]] === b[diff[0]]) return true;
+  }
   let i = 0;
   let j = 0;
   let edits = 0;
@@ -544,4 +599,22 @@ export function prettyDate(iso: string): string {
   const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso);
   if (!m) return iso;
   return `${Number(m[3])} ${MONTHS[Number(m[2]) - 1]} ${m[1]}`;
+}
+
+/**
+ * How well search words match a name (or a bank keyword): 0 = no match.
+ * Every search word must match a name word (same word, start of a word, or one typo for 5+ letters), or a keyword.
+ */
+function nameScore(queryWords: string[], name: string, keywords: string[]): number {
+  const nameWords = Agencies.words(name);
+  const kw = keywords.map((k) => Text.normalise(k));
+  let score = 0;
+  for (const q of queryWords) {
+    if (nameWords.includes(q)) score += 3;
+    else if (nameWords.some((w) => w.startsWith(q))) score += 2;
+    else if (kw.some((k) => k === q || k.split(/[^a-z0-9]+/).includes(q))) score += 3;
+    else if (q.length >= 5 && nameWords.some((w) => oneEditApart(w, q))) score += 1;
+    else return 0;
+  }
+  return score;
 }

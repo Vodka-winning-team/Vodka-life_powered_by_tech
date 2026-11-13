@@ -98,3 +98,24 @@ export type CertAlert = {
   sourceUrl: string;
   snapshot: string;
 };
+
+/**
+ * One entry on the "Official numbers" screen (Adiyen's 22:47 request): an agency licence or a bank / payment app,
+ * with every official number we have and where it comes from. Being listed never proves a message is from them.
+ */
+export type OfficialEntry = {
+  type: 'agency' | 'bank' | 'psp';
+  id: string;
+  name: string;
+  /** Agencies: "abroad" | "local" | "non_citizen". Banks: "bank" | "psp". */
+  category: string;
+  /** One readable line, e.g. "Licensed for jobs abroad · valid until 21 Apr 2029" or "Bank". */
+  detail: string;
+  /** Agencies only: does the recorded validity cover today? */
+  validNow: boolean | null;
+  /** Raw numbers as stored (the app formats them for reading; dial them as they are). */
+  phones: string[];
+  source: Source;
+};
+
+export type OfficialNumbers = { agencies: OfficialEntry[]; banks: OfficialEntry[] };
