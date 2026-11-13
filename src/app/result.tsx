@@ -4,10 +4,12 @@ import { router } from 'expo-router';
 import { useEffect, useState } from 'react';
 import { Linking, Pressable, StyleSheet, TextInput } from 'react-native';
 
+import { OnlineCheck } from '@/components/online-check';
 import { Button, Card, HighlightedText, Label, LevelBanner, LevelTag, Screen } from '@/components/ui';
 import { findingDetail, findingTitle, t } from '@/constants/strings';
 import { FontSize, Radius, Spacing } from '@/constants/theme';
 import { useLook } from '@/hooks/use-look';
+import { useOnlineCheck } from '@/hooks/use-online-check';
 import { useTheme } from '@/hooks/use-theme';
 import { dialNumber, formatPhone } from '@/lib/phone';
 import { sources } from '@/lib/data';
@@ -21,6 +23,7 @@ export default function ResultScreen() {
   const { granny, scale } = useLook();
   const [newText, setNewText] = useState('');
   const [reading, setReading] = useState(false);
+  const online = useOnlineCheck(current?.text ?? '');
 
   // Stop reading aloud when leaving the screen.
   useEffect(() => stopSpeaking, []);
@@ -36,11 +39,14 @@ export default function ResultScreen() {
 
   const { result, text } = current;
   const highlights = result.findings.flatMap((f) => f.highlights);
+  // The banner shows the stronger of the two answers: the checks on the phone, or the server's score.
+  const onlineLevel = typeof online === 'object' ? (online.risk_level === 'high' ? 'STOP' : online.risk_level === 'medium' ? 'CAREFUL' : 'NONE') : 'NONE';
+  const level = result.level === 'STOP' || onlineLevel === 'STOP' ? 'STOP' : result.level === 'CAREFUL' || onlineLevel === 'CAREFUL' ? 'CAREFUL' : 'NONE';
 
   return (
     // A new case, follow-up or Job check answer starts a fresh page at the top, so the level banner is always seen.
     <Screen key={`${current.id}-${text}-${current.job?.agencyId ?? ''}-${current.job?.costId ?? ''}`}>
-      <LevelBanner level={result.level} />
+      <LevelBanner level={level} />
 
       {/* The next step comes first. (Granny mode shows the Call buttons themselves, just below.) */}
       {!granny && <Button title={t('resultActionsButton')} onPress={() => router.push('/actions')} />}
@@ -97,6 +103,9 @@ export default function ResultScreen() {
           )}
         </Card>
       ))}
+
+      {/* What our server adds: score, live link and number checks, reports from other users. */}
+      <OnlineCheck state={online} text={text} />
 
       {/* How old is the data: every check uses these official records, with their dates. */}
       <Pressable accessibilityRole="link" onPress={() => router.push('/sources')}>

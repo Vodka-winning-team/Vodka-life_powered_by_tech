@@ -10,6 +10,15 @@ const en = {
 
   languageLabel: 'Language',
   settingsTitle: 'Settings',
+  onlineTitle: 'Online check',
+  onlineLoading: 'Checking online…',
+  onlineOffline: "Can't reach the server. The checks on your phone still work.",
+  onlineScore: 'Risk score',
+  onlineIntelTitle: 'Live link and number checks',
+  onlineReports: 'Reports from other users',
+  onlineReportButton: 'Report this message',
+  onlineReportHint: 'A report helps warn the next person who gets this message.',
+  serverLabel: 'Server address (online checks)',
   // Granny mode (Adiyen, 22:45). The one plain sentence on the Result screen, per level.
   grannyMode: 'Granny mode: bigger text and buttons',
   grannySTOP: "Don't pay or send anything. First call the official number below.",
@@ -121,6 +130,15 @@ export type Language = 'en' | 'fr' | 'mfe';
 
 const fr: Partial<Record<StringKey, string>> = {
   settingsTitle: "Réglages",
+  onlineTitle: "Vérification en ligne",
+  onlineLoading: "Vérification en ligne…",
+  onlineOffline: "Serveur injoignable. Les vérifications sur votre téléphone fonctionnent toujours.",
+  onlineScore: "Score de risque",
+  onlineIntelTitle: "Vérification en direct des liens et numéros",
+  onlineReports: "Signalements d'autres utilisateurs",
+  onlineReportButton: "Signaler ce message",
+  onlineReportHint: "Un signalement aide à prévenir la prochaine personne qui reçoit ce message.",
+  serverLabel: "Adresse du serveur (vérifications en ligne)",
   readAloud: "Lire à voix haute",
   stopReading: "Arrêter la lecture",
   checkedAgainst: "Vérifié avec ces listes officielles :",

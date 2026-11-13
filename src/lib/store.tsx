@@ -7,6 +7,7 @@ import { createContext, useContext, useEffect, useState, type ReactNode } from '
 import { setLanguage as setStringsLanguage, type Language } from '@/constants/strings';
 import type { CheckResult, JobAnswers } from '@/engine';
 import { engine } from '@/lib/data';
+import { DEFAULT_SERVER } from '@/lib/online';
 
 export type Check = {
   id: string;
@@ -33,12 +34,16 @@ type Store = {
   /** Granny mode: bigger text and buttons, strong contrast, simpler Result (display only). */
   granny: boolean;
   setGranny: (on: boolean) => void;
+  /** Address of our server for the online checks. */
+  serverUrl: string;
+  setServerUrl: (url: string) => void;
 };
 
 const HISTORY_KEY = 'history-v1';
 const LANGUAGE_KEY = 'language-v1';
 const SHIELD_KEY = 'shield-v1';
 const GRANNY_KEY = 'granny-v1';
+const SERVER_KEY = 'server-v1';
 const StoreContext = createContext<Store | null>(null);
 
 export function StoreProvider({ children }: { children: ReactNode }) {
@@ -47,6 +52,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   const [language, setLanguageState] = useState<Language>('en');
   const [shieldOn, setShieldOnState] = useState(false);
   const [granny, setGrannyState] = useState(false);
+  const [serverUrl, setServerUrlState] = useState(DEFAULT_SERVER);
 
   // Load saved history once, when the app starts.
   useEffect(() => {
@@ -66,7 +72,16 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     AsyncStorage.getItem(GRANNY_KEY)
       .then((saved) => setGrannyState(saved === 'on'))
       .catch(() => {});
+    AsyncStorage.getItem(SERVER_KEY)
+      .then((saved) => { if (saved) setServerUrlState(saved); })
+      .catch(() => {});
   }, []);
+
+  function setServerUrl(url: string) {
+    const clean = url.trim() || DEFAULT_SERVER;
+    setServerUrlState(clean);
+    AsyncStorage.setItem(SERVER_KEY, clean).catch(() => {});
+  }
 
   function setGranny(on: boolean) {
     setGrannyState(on);
@@ -142,6 +157,8 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     setShieldOn,
     granny,
     setGranny,
+    serverUrl,
+    setServerUrl,
   };
 
   return <StoreContext.Provider value={store}>{children}</StoreContext.Provider>;

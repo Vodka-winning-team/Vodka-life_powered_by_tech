@@ -16,7 +16,7 @@ import { useStore } from '@/lib/store';
 
 export default function ScanScreen() {
   const theme = useTheme();
-  const { runCheck, language, setLanguage, shieldOn, setShieldOn, granny, setGranny } = useStore();
+  const { runCheck, language, setLanguage, shieldOn, setShieldOn, granny, setGranny, serverUrl, setServerUrl } = useStore();
   const { scale } = useLook();
   const [text, setText] = useState('');
   const [error, setError] = useState('');
@@ -127,6 +127,18 @@ export default function ScanScreen() {
             )}
           </>
         )}
+        {/* Where the online checks go (our server). Saved when the keyboard closes. */}
+        <Label variant="small">{t('serverLabel')}</Label>
+        <TextInput
+          defaultValue={serverUrl}
+          key={serverUrl}
+          onEndEditing={(e) => setServerUrl(e.nativeEvent.text)}
+          autoCapitalize="none"
+          autoCorrect={false}
+          keyboardType="url"
+          accessibilityLabel={t('serverLabel')}
+          style={[styles.server, { color: theme.text, backgroundColor: theme.background, borderColor: theme.border }]}
+        />
       </Card>
     </Screen>
   );
@@ -150,6 +162,7 @@ const styles = StyleSheet.create({
   },
   row: { flexDirection: 'row', gap: Spacing.two },
   half: { flex: 1 },
+  server: { borderWidth: 1, borderRadius: Radius, padding: Spacing.two, fontSize: FontSize.small, minHeight: 48 },
   column: { gap: Spacing.two },
   field: { gap: Spacing.two },
   switchRow: { flexDirection: 'row', alignItems: 'center', gap: Spacing.two },
