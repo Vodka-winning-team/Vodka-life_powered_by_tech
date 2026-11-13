@@ -71,7 +71,7 @@ The messages are in [`demo-messages.md`](demo-messages.md) and the slides in [`s
 - Paste demo message 1 with a line break inside "processing fee" (from `quick-test.md`, section B2) → tap **Check message** 5 times fast → one result: **Stop**.
 - Open **Job offer? Check the agency** → tap **Back** without picking anything → the result still shows every warning sign. No green light.
 > "Whatever Kevin does wrong, the app never gives him a false green light. It fails safe. We tested it with 500 random messages."
-- *Before rehearsal: check each of these on the APK. The tap guard and the skipped-Job-check message are Jayesh's part (in progress at 20:48).*
+- *Before rehearsal: check each of these on the APK (Jayesh's app side was done at 21:00; `quick-test.md` section B2).*
 
 ### 5:15–5:45 · Slide 4, our data · Adiyen
 *(If time allows, Jayesh opens **Our sources** on the phone during this slide.)*
@@ -103,7 +103,7 @@ Answer in **two sentences**, then stop. The person in brackets answers first; an
 2. **"Is Kevin real?"** (Paveesh)
    Kevin is a persona built from the reported cases: Radio One's Rs 50,000 case and the Ministry's warnings. Our testers *(fill in after the user tests)* are real people.
 3. **"Why would Kevin open an app at that moment?"** (Jayesh)
-   It takes two taps: copy the message in WhatsApp, paste it in the app. The moment that matters is before he pays, and his mother can check it too. *(If Jayesh adds share-in to the APK, say "he shares it straight from WhatsApp" instead.)*
+   He doesn't copy anything: in WhatsApp he long-presses the message, taps Share, then FraudLens Moris, and the result opens. On iPhone or the web he pastes it. And if he turns on automatic checking (Android), the warning comes to him.
 
 ### How it works
 4. **"Why no AI or machine learning?"** (Pushkar)

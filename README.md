@@ -15,7 +15,7 @@ The law is clear: no agency or employer may charge a worker a recruitment fee (P
 **Kevin, 24, from Triolet**, gets a WhatsApp offer for a hotel job in Canada. The "agency" wants Rs 50,000 today, and his mother is asked to lend it. The app gives both of them the same evidence before any money moves.
 
 ## What the app does
-1. **Scan:** paste a message (share-in from WhatsApp comes with the APK).
+1. **Scan:** paste a message, or share it straight from WhatsApp or SMS (Share → FraudLens Moris, Android APK).
 2. **X-Ray:** highlights the tricks in English, French and Kreol: pressure to act fast, asking for a code or PIN, asking for money, prizes and gifts, account-blocked alarms, guaranteed profit, "I have a new number", odd links.
 3. **Official checks:**
    - **Job offer:** is the agency in the Ministry of Labour register, licensed for jobs **abroad**, and valid today? Is the fee one the employer must pay (with the exact clause)?
@@ -74,12 +74,13 @@ Every teammate can explain and change their own part.
 
 | Mistake | What the app does | Status |
 |---|---|---|
-| Empty paste, 2 letters, emojis only | "Paste the whole message to check it", never a result | Engine ✅ (20:48) · screen: in progress |
+| Empty paste, 2 letters, emojis only | "Paste the whole message to check it", never a result | ✅ engine 20:48 · app 21:00 |
 | Very long paste | Checks the first 20,000 characters and says so | Engine ✅ |
 | Line breaks, tabs or extra spaces inside words ("processing / fee") | Still found, same result | Engine ✅ |
-| Panic-tapping Check | Same input always gives the same result; one action per tap | Engine ✅ · tap guard: in progress |
+| Panic-tapping any button | Same input always gives the same result; a second tap within 1 second is ignored (Check, Save, Call, Share) | ✅ engine 20:48 · app 21:00 |
 | Unknown agency or cost (e.g. an old saved case) | "Be careful", with the reason; never a green light | Engine ✅ |
-| Skipping the Job check, or going Back | Result still shows every warning sign found; never "no warning" | In progress |
+| Skipping the Job check, or going Back | Result still shows every warning sign found; never "no warning" | ✅ app 21:00 |
+| Saving twice, or closing the app mid-flow | One history entry; history and language are kept when the app reopens | ✅ app 21:00 |
 | Internal error | "We couldn't check this message" (Be careful), never a crash | Engine ✅ |
 
 **Tested:** 24 "try to break it" tests in the engine, including 500 random messages, a 200,000-character paste, 20 repeated taps and wrong input types (88 engine tests in total at 20:48). See decision 14 in [`docs/decisions.md`](docs/decisions.md) and the demo segment in [`docs/demo-script.md`](docs/demo-script.md).

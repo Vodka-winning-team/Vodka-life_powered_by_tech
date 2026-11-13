@@ -43,7 +43,7 @@ It is **never in the main demo path**. It's the last 20 seconds of the demo, and
 
 | Time | Who | Step | Done when |
 |---|---|---|---|
-| 23:00–23:30 | **Pushkar (B)** | Pure function in the engine, so it's testable without a phone: `shouldAlert(appPackage: string, text: string): { alert: boolean; level: Level }`. It returns `alert: true` only for an allowed package (list below) **and** a STOP or CAREFUL result from `check()`. Jest tests: demo 1 → alert STOP; demo 5 → no alert; any other package → no alert; empty text → no alert. | `npm test` green |
+| ✅ done 21:04 (commit 5aec588) | **Pushkar (B)** | Pure function in the engine, so it's testable without a phone: `shouldAlert(appPackage: string, text: string): { alert: boolean; level: Level }`. It returns `alert: true` only for an allowed package (list below) **and** a STOP or CAREFUL result from `check()`. Jest tests: demo 1 → alert STOP; demo 5 → no alert; any other package → no alert; empty text → no alert. | `npm test` green |
 | 23:30–02:30 | **Pushkar (B)**, in C's `src/` and `app.json` **only with Jayesh's yes on the board** | The Android part (section 5). | The alert works on the APK |
 | 23:00–00:00 | **Paveesh (D)** | Wording for the switch, the explanation screen and the alert in English, French and Kreol, sent to Jayesh; a decision-log line; a slide line; a demo step | Texts on the board |
 | 02:30–03:00 | **Paveesh (D)** | The quick test (section 6) on 2 phones | Pass or fail logged |

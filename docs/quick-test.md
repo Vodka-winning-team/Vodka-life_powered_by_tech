@@ -55,6 +55,7 @@ Mauritius Telecom Lucky Draw: you have won a prize! Send your details to mauriti
 
 ## B. Screens (1 minute)
 
+- [ ] **Share-in (APK only):** in WhatsApp, long-press message 1 → **Share** → **FraudLens Moris** → the Result opens with Stop.
 - [ ] **What to do now** → **Call the official number** opens the dialler with the register or bank number (don't call).
 - [ ] **Share a summary** opens the share sheet (don't send).
 - [ ] **Save to history** → **History** shows the case → **Clear history** empties it.
