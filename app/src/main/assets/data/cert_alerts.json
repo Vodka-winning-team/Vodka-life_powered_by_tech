@@ -1,0 +1,73 @@
+[
+  {
+    "id": "divali_cash_gift",
+    "campaign": "Fake Divali cash gift on WhatsApp",
+    "phrases": [
+      "Divali Cash Gift",
+      "cash gift",
+      "Rs. 2,000",
+      "View Now"
+    ],
+    "alert_date": "2026-10-30",
+    "alert_url": "https://cert-mu.govmu.org/cert-mu/wp-content/uploads/2026/11/Security-Alert-Divali-Bonus-Scam-on-WhatsApp.pdf",
+    "source_url": "https://cert-mu.govmu.org/cert-mu/wp-content/uploads/2026/11/Security-Alert-Divali-Bonus-Scam-on-WhatsApp.pdf",
+    "snapshot": "2026-11-13"
+  },
+  {
+    "id": "property_deposit_tiktok",
+    "campaign": "Fake property adverts on TikTok asking for a deposit before a visit",
+    "phrases": [
+      "property visit",
+      "secure a property viewing",
+      "advance payment or deposit",
+      "Rs. 700,000"
+    ],
+    "alert_date": "2026-10-01",
+    "alert_url": "https://cert-mu.govmu.org/cert-mu/wp-content/uploads/2026/10/Security-Alert-Property-Scam.pdf",
+    "source_url": "https://cert-mu.govmu.org/cert-mu/wp-content/uploads/2026/10/Security-Alert-Property-Scam.pdf",
+    "snapshot": "2026-11-13"
+  },
+  {
+    "id": "fake_speeding_fine",
+    "campaign": "Fake speeding fine by SMS",
+    "phrases": [
+      "Traffic Enforcement Alert",
+      "Speeding Case",
+      "govmu-avip.cam",
+      "exceeded the speed limit",
+      "driving license will be suspended"
+    ],
+    "alert_date": "2026-07-01",
+    "alert_url": "https://cert-mu.govmu.org/cert-mu/wp-content/uploads/2026/07/Security-Alert-Scam-in-Circulation-Fake-Speeding-Fines-in-Mauritius.pdf",
+    "source_url": "https://cert-mu.govmu.org/cert-mu/wp-content/uploads/2026/07/Security-Alert-Scam-in-Circulation-Fake-Speeding-Fines-in-Mauritius.pdf",
+    "snapshot": "2026-11-13"
+  },
+  {
+    "id": "mt_lucky_draw",
+    "campaign": "Fake Mauritius Telecom lucky draw",
+    "phrases": [
+      "Lucky Draw",
+      "mauritiustelecomeluckydraw@gmail.com",
+      "won a prize",
+      "promotional offer"
+    ],
+    "alert_date": "2026-04-17",
+    "alert_url": "https://cert-mu.govmu.org/cert-mu/wp-content/uploads/2026/04/Security-Alert-MT-Phishing-Scam.pdf",
+    "source_url": "https://cert-mu.govmu.org/cert-mu/wp-content/uploads/2026/04/Security-Alert-MT-Phishing-Scam.pdf",
+    "snapshot": "2026-11-13"
+  },
+  {
+    "id": "whatsapp_impersonation",
+    "campaign": "WhatsApp messages posing as family, a bank or an employer",
+    "phrases": [
+      "new phone number",
+      "urgent money transfers",
+      "one-time passwords",
+      "verification codes"
+    ],
+    "alert_date": "2026-02-06",
+    "alert_url": "https://cert-mu.govmu.org/cert-mu/wp-content/uploads/2026/02/Security-Alert-WhatsApp-Scam.pdf",
+    "source_url": "https://cert-mu.govmu.org/cert-mu/wp-content/uploads/2026/02/Security-Alert-WhatsApp-Scam.pdf",
+    "snapshot": "2026-11-13"
+  }
+]

@@ -1,0 +1,209 @@
+[
+  {
+    "id": "mornefundvex",
+    "name": "Mornefundvex.net",
+    "domains": [
+      "mornefundvex.net"
+    ],
+    "alert_date": "2026-06-30",
+    "alert_url": "https://www.fscmauritius.org/media/j4hpzi4b/v10-investor-alert-mornefundvex-ed-30062026.pdf",
+    "source_url": "https://www.fscmauritius.org/media/j4hpzi4b/v10-investor-alert-mornefundvex-ed-30062026.pdf",
+    "snapshot": "2026-11-13"
+  },
+  {
+    "id": "star_net",
+    "name": "STAR NET LIMITED (Starnet Limited)",
+    "domains": [
+      "starnetfx.com"
+    ],
+    "alert_date": "2026-06-29",
+    "alert_url": "https://www.fscmauritius.org/media/wivpfmih/annex-6-investor-alert-290626-1.pdf",
+    "source_url": "https://www.fscmauritius.org/media/wivpfmih/annex-6-investor-alert-290626-1.pdf",
+    "snapshot": "2026-11-13"
+  },
+  {
+    "id": "distributex",
+    "name": "DistributeX",
+    "domains": [
+      "dx9001.com"
+    ],
+    "alert_date": "2026-04-30",
+    "alert_url": "https://www.fscmauritius.org/media/g5imvcdp/v10-investor-alert-distributex-ed-30042026.pdf",
+    "source_url": "https://www.fscmauritius.org/media/g5imvcdp/v10-investor-alert-distributex-ed-30042026.pdf",
+    "snapshot": "2026-11-13"
+  },
+  {
+    "id": "loan_agency_of_mauritius",
+    "name": "Loan Agency of Mauritius",
+    "domains": [],
+    "alert_date": "2026-04-30",
+    "alert_url": "https://www.fscmauritius.org/media/s2lddtmx/v10-investor-alert-maaf-assurance-ed-30042026.pdf",
+    "source_url": "https://www.fscmauritius.org/media/s2lddtmx/v10-investor-alert-maaf-assurance-ed-30042026.pdf",
+    "snapshot": "2026-11-13"
+  },
+  {
+    "id": "maaf_assurance",
+    "name": "MAAF Assurance",
+    "domains": [],
+    "alert_date": "2026-04-30",
+    "alert_url": "https://www.fscmauritius.org/media/s2lddtmx/v10-investor-alert-maaf-assurance-ed-30042026.pdf",
+    "source_url": "https://www.fscmauritius.org/media/s2lddtmx/v10-investor-alert-maaf-assurance-ed-30042026.pdf",
+    "snapshot": "2026-11-13"
+  },
+  {
+    "id": "qnet",
+    "name": "Qnet Ltd",
+    "domains": [],
+    "alert_date": "2025-03-27",
+    "alert_url": "https://www.fscmauritius.org/media/198707/communique_qnet-27032025-1.pdf",
+    "source_url": "https://www.fscmauritius.org/media/198707/communique_qnet-27032025-1.pdf",
+    "snapshot": "2026-11-13"
+  },
+  {
+    "id": "krakeif_global",
+    "name": "KRAKEIF Global",
+    "domains": [],
+    "alert_date": "2024-12-04",
+    "alert_url": "https://www.fscmauritius.org/media/194592/investor-alert-krakeif-to-publish-on-website.pdf",
+    "source_url": "https://www.fscmauritius.org/media/194592/investor-alert-krakeif-to-publish-on-website.pdf",
+    "snapshot": "2026-11-13"
+  },
+  {
+    "id": "seal_exchange",
+    "name": "SEAL Exchange",
+    "domains": [],
+    "alert_date": "2024-09-18",
+    "alert_url": "https://www.fscmauritius.org/media/193031/investor-alert-seal-exchange.pdf",
+    "source_url": "https://www.fscmauritius.org/media/193031/investor-alert-seal-exchange.pdf",
+    "snapshot": "2026-11-13"
+  },
+  {
+    "id": "crypto_coin_investment",
+    "name": "Crypto Coin Investment",
+    "domains": [],
+    "alert_date": "2023-10-31",
+    "alert_url": "https://www.fscmauritius.org/media/167543/investor-alert-crypto-coin-investment-311023.pdf",
+    "source_url": "https://www.fscmauritius.org/media/167543/investor-alert-crypto-coin-investment-311023.pdf",
+    "snapshot": "2026-11-13"
+  },
+  {
+    "id": "trading_asset_solution",
+    "name": "Trading Asset Solution",
+    "domains": [
+      "tradingassetsolution.com"
+    ],
+    "alert_date": "2023-10-24",
+    "alert_url": "https://www.fscmauritius.org/media/166510/investor-alert-trading-asset-solution.pdf",
+    "source_url": "https://www.fscmauritius.org/media/166510/investor-alert-trading-asset-solution.pdf",
+    "snapshot": "2026-11-13"
+  },
+  {
+    "id": "al_veyux",
+    "name": "AL VEYUX",
+    "domains": [],
+    "alert_date": "2023-09-27",
+    "alert_url": "https://www.fscmauritius.org/media/159711/investor-alert-final-al-veyux.pdf",
+    "source_url": "https://www.fscmauritius.org/media/159711/investor-alert-final-al-veyux.pdf",
+    "snapshot": "2026-11-13"
+  },
+  {
+    "id": "match_cfd",
+    "name": "Match CFD",
+    "domains": [],
+    "alert_date": "2023-04-24",
+    "alert_url": "https://www.fscmauritius.org/media/143875/investor-alert-cfd-rev-krag.pdf",
+    "source_url": "https://www.fscmauritius.org/media/143875/investor-alert-cfd-rev-krag.pdf",
+    "snapshot": "2026-11-13"
+  },
+  {
+    "id": "localcoinswap",
+    "name": "Localcoinswap",
+    "domains": [
+      "localcoinswap.com"
+    ],
+    "alert_date": "2023-03-09",
+    "alert_url": "https://www.fscmauritius.org/media/ydbdwe54/v11-annex-25-investor-alert-localcoinswap.pdf",
+    "source_url": "https://www.fscmauritius.org/media/ydbdwe54/v11-annex-25-investor-alert-localcoinswap.pdf",
+    "snapshot": "2026-11-13"
+  },
+  {
+    "id": "saqs_investment",
+    "name": "Saqs Investment",
+    "domains": [],
+    "alert_date": "2023-02-06",
+    "alert_url": "https://www.fscmauritius.org/media/137587/saqs-investment.pdf",
+    "source_url": "https://www.fscmauritius.org/media/137587/saqs-investment.pdf",
+    "snapshot": "2026-11-13"
+  },
+  {
+    "id": "financemarketindex",
+    "name": "Financemarketindex",
+    "domains": [
+      "financemarketindex.com"
+    ],
+    "alert_date": "2022-06-27",
+    "alert_url": "https://www.fscmauritius.org/media/129516/investor-alert-financemarketindex-_-billionaires-finance.pdf",
+    "source_url": "https://www.fscmauritius.org/media/129516/investor-alert-financemarketindex-_-billionaires-finance.pdf",
+    "snapshot": "2026-11-13"
+  },
+  {
+    "id": "billionaires_finance",
+    "name": "Billionaires Finance",
+    "domains": [
+      "financemarketindex.com"
+    ],
+    "alert_date": "2022-06-27",
+    "alert_url": "https://www.fscmauritius.org/media/129516/investor-alert-financemarketindex-_-billionaires-finance.pdf",
+    "source_url": "https://www.fscmauritius.org/media/129516/investor-alert-financemarketindex-_-billionaires-finance.pdf",
+    "snapshot": "2026-11-13"
+  },
+  {
+    "id": "fxtradeoptions",
+    "name": "FXTradeOptions Limited",
+    "domains": [
+      "fxtradeoptions.com"
+    ],
+    "alert_date": "2022-05-04",
+    "alert_url": "https://www.fscmauritius.org/media/123472/investor-alert.pdf",
+    "source_url": "https://www.fscmauritius.org/media/123472/investor-alert.pdf",
+    "snapshot": "2026-11-13"
+  },
+  {
+    "id": "everfxx",
+    "name": "Everfxx",
+    "domains": [
+      "everfxx.co.uk"
+    ],
+    "alert_date": "2022-03-28",
+    "alert_url": "https://www.fscmauritius.org/media/123389/investor-alert-everfxx.pdf",
+    "source_url": "https://www.fscmauritius.org/media/123389/investor-alert-everfxx.pdf",
+    "snapshot": "2026-11-13"
+  },
+  {
+    "id": "binary_fxcent",
+    "name": "Binary Fxcent",
+    "domains": [],
+    "alert_date": "2021-07-12",
+    "alert_url": "https://www.fscmauritius.org/media/105842/annex-6-investor-alert-binary-fxcent-rev-agr.pdf",
+    "source_url": "https://www.fscmauritius.org/media/105842/annex-6-investor-alert-binary-fxcent-rev-agr.pdf",
+    "snapshot": "2026-11-13"
+  },
+  {
+    "id": "24forexlive",
+    "name": "24FOREXLIVE LIMITED",
+    "domains": [],
+    "alert_date": "2019-01-30",
+    "alert_url": "https://www.fscmauritius.org/media/70748/investor-alert-forexlive.pdf",
+    "source_url": "https://www.fscmauritius.org/media/70748/investor-alert-forexlive.pdf",
+    "snapshot": "2026-11-13"
+  },
+  {
+    "id": "247_options_trade",
+    "name": "247 OPTIONS TRADE",
+    "domains": [],
+    "alert_date": "2017-12-12",
+    "alert_url": "https://www.fscmauritius.org/media/4214/investor-alert-247-options-trade-pdf.pdf",
+    "source_url": "https://www.fscmauritius.org/media/4214/investor-alert-247-options-trade-pdf.pdf",
+    "snapshot": "2026-11-13"
+  }
+]
