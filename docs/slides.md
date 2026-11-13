@@ -46,7 +46,7 @@ Speaker note: if the phone fails, play the 2-minute backup video.
 | Investment warnings | 21 organisations | FSC investor alerts, 2017–2026 |
 | Security alert campaigns | 5 alerts | CERT-MU, Feb–Oct 2026 |
 
-Every warning in the app shows its source and date. No personal names stored. No AI model: clear rules that anyone can check. 96 engine tests, including every demo message you just saw.
+Every warning in the app shows its source and date. No personal names stored. No AI model: clear rules that anyone can check. 104 engine tests, including every demo message you just saw.
 
 ---
 
