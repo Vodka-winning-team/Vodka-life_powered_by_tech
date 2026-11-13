@@ -2,7 +2,7 @@
 
 **Updated about every 10 minutes by Pushkar's Claude.** Pull, read your row, do it. To ask for something, use **Requests** at the bottom.
 
-Last update: **Fri 13 Nov 19:07** · Next check: about 19:16 · No new pushes since 18:58 · Deadline: **Sat 12:30**
+Last update: **Fri 13 Nov 19:16** · Next check: about 19:26 · **No pushes from anyone since 18:58: please push your work at least hourly** · Deadline: **Sat 12:30**
 
 ## How to use this file
 - **Check it:** `git pull`, then read **Next for each person**. Your Claude can read it too: "Read automation.md and do my next task".
@@ -16,7 +16,7 @@ Last update: **Fri 13 Nov 19:07** · Next check: about 19:16 · No new pushes si
 ## Status
 | Checkpoint | State |
 |---|---|
-| 18:00: APK on a real phone; agencies, fee rules, banks data | Data ✅ · Engine ✅ · **APK ⏳ not reported yet (Jayesh), 1 h overdue** |
+| 18:00: APK on a real phone; agencies, fee rules, banks data | Data ✅ · Engine ✅ · **APK ⏳ not reported yet (Jayesh), 1 h 15 overdue** |
 | 23:00: full flow with real data | Screens ✅ wired to the real engine · needs a run on a real phone |
 | 03:00: FSC/CERT in, job follow-up works | FSC/CERT ✅ in the engine |
 | 07:00: feature freeze | — |
