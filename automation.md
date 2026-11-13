@@ -2,7 +2,7 @@
 
 **Updated about every 10 minutes by Pushkar's Claude.** Pull, read your row, do it. To ask for something, use **Requests** at the bottom.
 
-Last update: **Fri 13 Nov 20:28** · Next check: about 20:36 · Deadline: **Sat 12:30**
+Last update: **Fri 13 Nov 20:37** · Next check: about 20:46 · Deadline: **Sat 12:30** · **Jayesh: hotspot request below is waiting**
 
 ## How to use this file
 - **Check it:** `git pull`, then read **Next for each person**. Your Claude can read it too: "Read automation.md and do my next task".
@@ -27,7 +27,7 @@ Last update: **Fri 13 Nov 20:28** · Next check: about 20:36 · Deadline: **Sat 
 - **Adiyen (A):** data with all register phones, validate, sources, 15 test cases, FR/Kreol strings, demo messages, decisions (13), user-test script.
 - **Pushkar (B):** engine, **all 71 tests pass** (engine + app); README and slides drafts; this board.
 - **Jayesh (C):** 6 screens, FR/Kreol + switch, finding titles, job follow-up (reopen case + new cost).
-- **Paveesh (D):** online 20:21; README finished (team, AI tools); taking over user tests.
+- **Paveesh (D):** online 20:21; README finished (team, AI tools); slides reviewed (allegation wording, 71 tests); taking over user tests.
 
 ## Next for each person
 **Adiyen (A)**
