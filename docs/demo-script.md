@@ -7,7 +7,7 @@ The messages are in [`demo-messages.md`](demo-messages.md) and the slides in [`s
 
 ## Before we go on stage (10 min before)
 
-- [ ] **Demo phone:** charged, brightness up, silent mode, notifications off ("Do not disturb"). **If Shield is in the demo**, add Verifye and WhatsApp to the Do-not-disturb exceptions, or the alert won't show.
+- [ ] **Demo phone:** charged, brightness up, silent mode, notifications off ("Do not disturb"). **Phone is the default dialler:** if Truecaller or another dialler is installed, tap Call once and choose Phone → Always, or the demo shows an "Open with" chooser. **If Shield is in the demo**, add Verifye and WhatsApp to the Do-not-disturb exceptions, or the alert won't show.
 - [ ] **Old FraudLens app removed:** uninstall the old FraudLens app (`com.fraudlens.shield`, from September) from every demo phone. It would also react to the same WhatsApp, and judges must only see code written this weekend (Rule 1: start from empty). In Android's Notification access list, only **"Verifye"** is on.
 - [ ] **App open on the Scan screen**, language set to English, **History cleared** (History → Clear history).
 - [ ] **Messages ready to paste:** keep demo messages 1, 3, 4 and 5 in a notes app on the phone, in order. Copy each one just before you need it.
@@ -108,7 +108,7 @@ Answer in **two sentences**, then stop. The person in brackets answers first; an
 1. **"Isn't this just another scam checker?"** (Paveesh)
    Most checkers guess from the words. Ours checks the actual job offer against the Ministry register and the Regulations, and cites the clause. "Employer pays the processing fee, reg 7(2)(e)" is a fact Kevin can show the agency.
 2. **"Is Kevin real?"** (Paveesh)
-   Kevin is a persona built from the reported cases: Radio One's Rs 50,000 case and the Ministry's warnings. Our testers *(fill in after the user tests)* are real people.
+   Kevin is a persona built from the reported cases: Radio One's Rs 50,000 case and the Ministry's warnings. The cases and the law are real; the message on the slide is fictional, and we say so.
 3. **"Why would Kevin open an app at that moment?"** (Jayesh)
    He doesn't copy anything: in WhatsApp he long-presses the message, taps Share, then Verifye, and the result opens. On iPhone or the web he pastes it. And if he turns on automatic checking (Android), the warning comes to him.
 
@@ -156,11 +156,11 @@ Answer in **two sentences**, then stop. The person in brackets answers first; an
 
 ### Our own work
 21. **"What did AI do, and what did you do?"** (Paveesh, then each person for their part)
-    The README lists every tool, and `docs/ai-log.md` has one line per AI step with what we checked. We made the decisions, checked the data against the PDFs, wrote the test cases and ran the user tests. Ask any of us to explain or change our part.
+    The README lists every tool, and `docs/ai-log.md` has one line per AI step with what we checked. We made the decisions, checked the data against the PDFs, wrote the test cases and tested the app on our own phones. Ask any of us to explain or change our part.
 22. **"Change something live: can you show us?"** (the person who owns that part)
     Wording is in `src/constants/strings.ts`, colours and sizes in `src/constants/theme.ts`, and rules in `src/engine/rules.ts`. *(Rehearse one small change each.)*
-23. **"What did you change after testing with users?"** (Paveesh)
-    *(Fill in after the user tests: the top 3 fixes, before and after.)*
+23. **"Did you test it with real users?"** (Paveesh)
+    Not with outside users yet, and we won't claim we did; that's the first step of a pilot. We tested the release APK on two real phones (Android 14 and 16): every demo message, wrong input, panic taps, share-in and automatic checking with a real WhatsApp. That found and fixed real problems, such as stacked Result screens after several shares, cut-off tags and a confusing label.
 24. **"How did you handle the surprise card?"** (Paveesh)
     The card was "survive a user doing the wrong thing" (20:46). We chose Kevin's key flow and one principle, fail safe: the engine never crashes, and garbage, empty or broken input never shows "No warning signs found" (decision 14). It's the "try to break it" minute in the demo, with 24 engine tests behind it, including 500 random messages.
 
@@ -170,4 +170,4 @@ Answer in **two sentences**, then stop. The person in brackets answers first; an
 - [ ] Run 1: full run with a timer. Cut words if it goes over 7 minutes.
 - [ ] Run 2: with the backup video switch, as if the phone failed at step 3.
 - [ ] Run 3: swap roles. Each person explains a part they didn't build (Q&A 5, 11, 14, 19).
-- [ ] On the day: update Q&A 9 (test count) and 23 (user tests); check Q24 matches what the app shows.
+- [ ] On the day: update Q&A 9 (test count); check Q23 and Q24 match what the app shows.

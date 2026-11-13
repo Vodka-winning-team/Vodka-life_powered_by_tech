@@ -6,7 +6,7 @@ Hackathon: **Life Powered by Tech**, Theme 1 *Powered to Protect*.
 
 *Verifye* is Kreol for “check”. Until Fri 13 Nov, 22:46, the app’s working name was FraudLens Moris (decision 17); some internal code names still use it.
 
-**Team documents:** plan in [`PROJECT.md`](PROJECT.md) and [`docs/TASKS.md`](docs/TASKS.md) · decision log in [`docs/decisions.md`](docs/decisions.md) · AI log in [`docs/ai-log.md`](docs/ai-log.md) · user tests in [`docs/user-tests.md`](docs/user-tests.md) · live team board in [`automation.md`](automation.md).
+**Team documents:** plan in [`PROJECT.md`](PROJECT.md) and [`docs/TASKS.md`](docs/TASKS.md) · decision log in [`docs/decisions.md`](docs/decisions.md) · AI log in [`docs/ai-log.md`](docs/ai-log.md) · user-test script in [`docs/user-tests.md`](docs/user-tests.md) (not run yet) · phone tests in [`docs/quick-test.md`](docs/quick-test.md) · live team board in [`automation.md`](automation.md).
 
 ## Problem
 Fake recruiters ask Mauritian jobseekers for "processing fees" for jobs abroad. Radio One reported about twenty Mauritians allegedly cheated by one fake recruiter ([25 Aug 2026](https://radio1.mu/faux-recruteur-le-reve-de-travailler-a-letranger-vire-au-cauchemar-pour-une-vingtaine-de-mauriciens/)), and four complainants who say they paid Rs 296,000 in total, one of them Rs 50,000 for a job in Dubai ([7 Sep 2026](https://radio1.mu/promesses-demplois-letranger-un-habitant-de-quatre-bornes-aurait-soutire-pres-de-rs-300-000-a-quatre-victimes/)). The Ministry of Labour warned the public about fake recruitment agencies offering jobs abroad ([communiqué, 28 Apr 2022](https://www.govmu.org/EN/Communique1/year%202022/May/Communiqu%C3%A9-%20Fausses%20agences%20de%20recrutement%2028.04.22.pdf)). Fake bank messages and links are common too: 913 of the 6,073 incidents reported to MAUCORS in 2025 were scams and fraud ([Defimedia, 24 Aug 2026](https://defimedia.info/risques-dusurpation-didentite-whatsapp-username-le-gm-veut-des-garanties-avant-tout-deploiement)).
@@ -65,7 +65,7 @@ AI tools were allowed by the organisers. We list them all here. Every AI-assiste
 - **Choices:** the user (Kevin), the job-fee check as our lead story, no AI model, no server, and every cut. See [`docs/decisions.md`](docs/decisions.md).
 - **The data:** every agency row compared by eye with the Ministry PDF; every law clause found word for word in the Act and the Regulations; every bank phone read on the bank's own website.
 - **The rules:** tested on the 6 demo messages and 15 test cases, including a real bank code SMS that must give no warning.
-- **Real people:** user tests with a jobseeker, a parent and a native Kreol reader ([`docs/user-tests.md`](docs/user-tests.md), in progress Fri evening).
+- **Real phones:** the team tested the release APK on two Android phones (Android 14 and 16): every demo message, wrong input, panic taps, share-in, and automatic checking with a real WhatsApp ([`docs/quick-test.md`](docs/quick-test.md)). **No tests with outside users yet:** that is the first step of a pilot (decision 18).
 
 Every teammate can explain and change their own part.
 
