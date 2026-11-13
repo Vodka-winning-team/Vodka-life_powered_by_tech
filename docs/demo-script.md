@@ -73,6 +73,12 @@ The messages are in [`demo-messages.md`](demo-messages.md) and the slides in [`s
 > "Whatever Kevin does wrong, the app never gives him a false green light. It fails safe. We tested it with 500 random messages."
 - *Before rehearsal: check each of these on the APK (Jayesh's app side was done at 21:00; `quick-test.md` section B2).*
 
+**Step 7 (optional): automatic checking, Shield (about 20 s)**. Only if it passed the quick test (section C) on the release APK.
+- **Before this step: turn airplane mode off** (Wi-Fi or data on), so the WhatsApp message can arrive. Shield must already be switched on, with Notification access granted.
+- Jayesh's phone sends demo message 1 by WhatsApp to the demo phone → **"Stop – warning signs found. Tap to see why, before you pay."** → tap → Result: **Stop**.
+> "And if Kevin turns it on, he doesn't even need to copy the message. It's his choice, and nothing is saved."
+- If the alert doesn't come within 5 seconds: skip it and say it's in the backup video.
+
 ### 5:15–5:45 · Slide 4, our data · Adiyen
 *(If time allows, Jayesh opens **Our sources** on the phone during this slide.)*
 > "79 agency licences from the Ministry of Labour, 8 fee rules from the Act and the Regulations, 18 banks and 3 payment apps from the Bank of Mauritius, 21 FSC investment warnings, and 5 CERT-MU alerts. Every row has its source link and date. We checked every agency row by eye against the PDF, and we store no personal names. No AI model: clear rules anyone can check, and tests run every demo message you just saw."

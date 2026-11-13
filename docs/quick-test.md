@@ -77,7 +77,9 @@ Mauritius Telecom Lucky Draw: you have won a prize! Send your details to mauriti
 - [ ] **Save to history** twice → **one** entry in History.
 - [ ] Close the app completely and reopen it → it doesn't crash; History is still there.
 
-## C. Shield, only if it was built ([proposal](proposal-shield-optin.md))
+## C. Shield ([proposal](proposal-shield-optin.md); built by Jayesh at 21:40)
+
+**Which test for which build:** the fake notification from the laptop (`adb`) only works in a **development build**. The **release APK** ignores it on purpose (decision 15; Jayesh's fix at 21:50). With the release APK, use a **real WhatsApp or SMS from another phone, with the network on**.
 
 - [ ] Switch off → the fake notification below gives **no** alert.
 - [ ] Switch on (explanation screen → Android Notification access) → with the phone on USB:
