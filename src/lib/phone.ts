@@ -11,11 +11,6 @@ export function formatPhone(phone: string): string {
   return phone;
 }
 
-/** True when a search looks like a phone number (digits, spaces, +, -, brackets, dots; at least 3 digits), e.g. "5256 8074" or "8971". */
-export function isPhoneQuery(query: string): boolean {
-  return /^[\d\s+().-]+$/.test(query.trim()) && query.replace(/\D/g, '').length >= 3;
-}
-
 /** Number for the dialler: "+" and digits only. */
 export function dialNumber(phone: string): string {
   return phone.replace(/[^\d+]/g, '');

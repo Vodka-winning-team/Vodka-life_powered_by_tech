@@ -12,7 +12,7 @@ import type { OfficialEntry } from '@/engine';
 import { useLook } from '@/hooks/use-look';
 import { useTheme } from '@/hooks/use-theme';
 import { engine } from '@/lib/data';
-import { dialNumber, formatPhone, isPhoneQuery } from '@/lib/phone';
+import { dialNumber, formatPhone } from '@/lib/phone';
 import { prettyDay } from '@/lib/time';
 
 function EntryCard({ entry, byNumber }: { entry: OfficialEntry; byNumber: boolean }) {
@@ -43,8 +43,9 @@ export default function NumbersScreen() {
   const theme = useTheme();
   const { scale } = useLook();
   const [query, setQuery] = useState('');
-  const { agencies, banks } = engine.officialNumbers(query);
-  const byNumber = isPhoneQuery(query);
+  const { agencies, banks, matchedBy } = engine.officialNumbers(query);
+  // The engine tells us when the search was a phone number.
+  const byNumber = matchedBy === 'number';
   // For the "not in our lists" card: how many records we searched.
   const all = engine.officialNumbers('');
 
