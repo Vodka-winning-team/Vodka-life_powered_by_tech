@@ -1,0 +1,337 @@
+[
+  {
+    "id": "abc",
+    "name": "ABC Banking Corporation Ltd",
+    "type": "bank",
+    "keywords": [
+      "abc banking"
+    ],
+    "domains": [
+      "abcbanking.mu"
+    ],
+    "phone": "+230 206 8000",
+    "phone_source": "https://abcbanking.mu/contact-us/",
+    "source_url": "https://www.bom.mu/financial-stability/supervision/licensees/list-of-licensees",
+    "snapshot": "2026-11-13"
+  },
+  {
+    "id": "absa",
+    "name": "Absa Bank (Mauritius) Limited",
+    "type": "bank",
+    "keywords": [
+      "absa"
+    ],
+    "domains": [
+      "absabank.mu"
+    ],
+    "phone": "+230 402 1000",
+    "phone_source": "https://www.absabank.mu/en/product-terms-and-conditions",
+    "source_url": "https://www.bom.mu/financial-stability/supervision/licensees/list-of-licensees",
+    "snapshot": "2026-11-13"
+  },
+  {
+    "id": "afrasia",
+    "name": "AfrAsia Bank Limited",
+    "type": "bank",
+    "keywords": [
+      "afrasia"
+    ],
+    "domains": [
+      "afrasiabank.com"
+    ],
+    "phone": "+230 403 5570",
+    "phone_source": "https://www.afrasiabank.com/en/private/security-tips-to-protect-yourself-online/how-to-report-suspected-fraud",
+    "source_url": "https://www.bom.mu/financial-stability/supervision/licensees/list-of-licensees",
+    "snapshot": "2026-11-13"
+  },
+  {
+    "id": "baroda",
+    "name": "Bank of Baroda",
+    "type": "bank",
+    "keywords": [
+      "bank of baroda",
+      "baroda"
+    ],
+    "domains": [
+      "bankofbaroda-mu.com"
+    ],
+    "phone": "+230 208 1504",
+    "phone_source": "https://www.bankofbaroda-mu.com/contact-us",
+    "source_url": "https://www.bom.mu/financial-stability/supervision/licensees/list-of-licensees",
+    "snapshot": "2026-11-13"
+  },
+  {
+    "id": "boc",
+    "name": "BANK OF CHINA (MAURITIUS) LIMITED",
+    "type": "bank",
+    "keywords": [
+      "bank of china"
+    ],
+    "domains": [
+      "bankofchina.com"
+    ],
+    "phone": "+230 203 4878",
+    "phone_source": "https://www.bankofchina.com/mu/",
+    "source_url": "https://www.bom.mu/financial-stability/supervision/licensees/list-of-licensees",
+    "snapshot": "2026-11-13"
+  },
+  {
+    "id": "bankone",
+    "name": "Bank One Limited",
+    "type": "bank",
+    "keywords": [
+      "bank one",
+      "bankone"
+    ],
+    "domains": [
+      "bankone.mu"
+    ],
+    "phone": "+230 202 9200",
+    "phone_source": "https://bankone.mu/",
+    "source_url": "https://www.bom.mu/financial-stability/supervision/licensees/list-of-licensees",
+    "snapshot": "2026-11-13"
+  },
+  {
+    "id": "patronus",
+    "name": "Banque Patronus Limitée",
+    "type": "bank",
+    "keywords": [
+      "banque patronus",
+      "patronus"
+    ],
+    "domains": [
+      "banquepatronus.com"
+    ],
+    "phone": "+230 490 4125",
+    "phone_source": "https://www.banquepatronus.com/",
+    "source_url": "https://www.bom.mu/financial-stability/supervision/licensees/list-of-licensees",
+    "snapshot": "2026-11-13"
+  },
+  {
+    "id": "bcp",
+    "name": "BCP Bank (Mauritius) Ltd",
+    "type": "bank",
+    "keywords": [
+      "bcp bank",
+      "bcp"
+    ],
+    "domains": [
+      "bcpbank.mu"
+    ],
+    "phone": "+230 207 1000",
+    "phone_source": "https://bcpbank.mu/personal/produit/loss-or-theft",
+    "source_url": "https://www.bom.mu/financial-stability/supervision/licensees/list-of-licensees",
+    "snapshot": "2026-11-13"
+  },
+  {
+    "id": "hsbc",
+    "name": "HSBC Bank (Mauritius) Limited",
+    "type": "bank",
+    "keywords": [
+      "hsbc"
+    ],
+    "domains": [
+      "hsbc.co.mu"
+    ],
+    "phone": "+230 403 8369",
+    "phone_source": "https://www.business.hsbc.co.mu/",
+    "source_url": "https://www.bom.mu/financial-stability/supervision/licensees/list-of-licensees",
+    "snapshot": "2026-11-13"
+  },
+  {
+    "id": "hsbc_corp",
+    "name": "The Hongkong and Shanghai Banking Corporation Limited",
+    "type": "bank",
+    "keywords": [
+      "hongkong and shanghai banking"
+    ],
+    "domains": [
+      "hsbc.co.mu"
+    ],
+    "phone": "+230 403 8369",
+    "phone_source": "https://www.business.hsbc.co.mu/",
+    "source_url": "https://www.bom.mu/financial-stability/supervision/licensees/list-of-licensees",
+    "snapshot": "2026-11-13"
+  },
+  {
+    "id": "investec",
+    "name": "Investec Bank (Mauritius) Limited",
+    "type": "bank",
+    "keywords": [
+      "investec"
+    ],
+    "domains": [
+      "investec.com",
+      "investec.co.mu"
+    ],
+    "phone": "+230 207 4004",
+    "phone_source": "https://www.investec.com/en_mu/welcome-to-investec/contact-us.html",
+    "source_url": "https://www.bom.mu/financial-stability/supervision/licensees/list-of-licensees",
+    "snapshot": "2026-11-13"
+  },
+  {
+    "id": "maubank",
+    "name": "MauBank Ltd",
+    "type": "bank",
+    "keywords": [
+      "maubank",
+      "mau bank"
+    ],
+    "domains": [
+      "maubank.mu"
+    ],
+    "phone": "+230 405 9400",
+    "phone_source": "https://www.maubank.mu/contact-us/",
+    "source_url": "https://www.bom.mu/financial-stability/supervision/licensees/list-of-licensees",
+    "snapshot": "2026-11-13"
+  },
+  {
+    "id": "sbi",
+    "name": "SBI (Mauritius) Ltd",
+    "type": "bank",
+    "keywords": [
+      "sbi",
+      "state bank of india"
+    ],
+    "domains": [
+      "sbimauritius.com",
+      "mu.statebank",
+      "onlinesbiglobal.statebank"
+    ],
+    "phone": "+230 404 4999",
+    "phone_source": "https://mu.statebank/contact-us",
+    "source_url": "https://www.bom.mu/financial-stability/supervision/licensees/list-of-licensees",
+    "snapshot": "2026-11-13"
+  },
+  {
+    "id": "sbm",
+    "name": "SBM Bank (Mauritius) Ltd",
+    "type": "bank",
+    "keywords": [
+      "sbm"
+    ],
+    "domains": [
+      "sbmgroup.mu"
+    ],
+    "phone": "+230 207 0111",
+    "phone_source": "https://www.sbmgroup.mu/",
+    "source_url": "https://www.bom.mu/financial-stability/supervision/licensees/list-of-licensees",
+    "snapshot": "2026-11-13"
+  },
+  {
+    "id": "standard_bank",
+    "name": "Standard Bank (Mauritius) Limited",
+    "type": "bank",
+    "keywords": [
+      "standard bank"
+    ],
+    "domains": [
+      "standardbank.mu"
+    ],
+    "phone": "+230 402 5200",
+    "phone_source": "https://www.standardbank.mu/",
+    "source_url": "https://www.bom.mu/financial-stability/supervision/licensees/list-of-licensees",
+    "snapshot": "2026-11-13"
+  },
+  {
+    "id": "standard_chartered",
+    "name": "Standard Chartered Bank (Mauritius) Limited",
+    "type": "bank",
+    "keywords": [
+      "standard chartered"
+    ],
+    "domains": [
+      "sc.com"
+    ],
+    "phone": "+230 403 6500",
+    "phone_source": "https://www.sc.com/mu/contact/",
+    "source_url": "https://www.bom.mu/financial-stability/supervision/licensees/list-of-licensees",
+    "snapshot": "2026-11-13"
+  },
+  {
+    "id": "mcb",
+    "name": "The Mauritius Commercial Bank Limited",
+    "type": "bank",
+    "keywords": [
+      "mcb",
+      "juice",
+      "mcb juice"
+    ],
+    "domains": [
+      "mcb.mu"
+    ],
+    "phone": "+230 202 6060",
+    "phone_source": "https://www.mcb.mu/contact-us",
+    "source_url": "https://www.bom.mu/financial-stability/supervision/licensees/list-of-licensees",
+    "snapshot": "2026-11-13"
+  },
+  {
+    "id": "warwyck",
+    "name": "Warwyck Private Bank Ltd",
+    "type": "bank",
+    "keywords": [
+      "warwyck"
+    ],
+    "domains": [
+      "warwyck.com",
+      "warwyckprivatebank.com"
+    ],
+    "phone": "+230 698 2700",
+    "phone_source": "https://www.warwyck.com",
+    "source_url": "https://www.bom.mu/financial-stability/supervision/licensees/list-of-licensees",
+    "snapshot": "2026-11-13"
+  },
+  {
+    "id": "cim",
+    "name": "CIM Financial Services Ltd",
+    "type": "psp",
+    "keywords": [
+      "cim finance",
+      "cim financial"
+    ],
+    "domains": [
+      "cimfinance.mu",
+      "cim.mu"
+    ],
+    "phone": "+230 203 6800",
+    "phone_source": "https://cimfinance.mu/",
+    "source_url": "https://bom.mu/sites/default/files/licensee.pdf",
+    "snapshot": "2026-11-13"
+  },
+  {
+    "id": "emtel_mfs",
+    "name": "Emtel MFS Co Ltd",
+    "type": "psp",
+    "keywords": [
+      "blink by emtel",
+      "blink wallet",
+      "blink app",
+      "emtel mfs"
+    ],
+    "domains": [
+      "emtel.com"
+    ],
+    "phone": "8971",
+    "phone_source": "https://blink.emtel.com",
+    "source_url": "https://bom.mu/sites/default/files/licensee.pdf",
+    "snapshot": "2026-11-13"
+  },
+  {
+    "id": "cellplus",
+    "name": "Cellplus Mobile Communications Limited",
+    "type": "psp",
+    "keywords": [
+      "my.t money",
+      "myt money",
+      "mytmoney"
+    ],
+    "domains": [
+      "myt.mu",
+      "telecom.mu"
+    ],
+    "phone": "8908",
+    "phone_source": "https://myt.mu/support/mytmoney/1/money",
+    "source_url": "https://bom.mu/sites/default/files/licensee.pdf",
+    "snapshot": "2026-11-13"
+  }
+]

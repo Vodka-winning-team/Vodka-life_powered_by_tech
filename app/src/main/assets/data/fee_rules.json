@@ -1,0 +1,198 @@
+[
+  {
+    "id": "any_recruitment_fee",
+    "cost": "Any fee for recruiting the worker",
+    "words_en": [
+      "recruitment fee",
+      "registration fee",
+      "placement fee",
+      "agency fee",
+      "job fee",
+      "service fee",
+      "commission"
+    ],
+    "words_fr": [
+      "frais de recrutement",
+      "frais d'inscription",
+      "frais de placement",
+      "frais d'agence",
+      "commission"
+    ],
+    "words_mfe": [
+      "fre rekritman",
+      "fre lagans",
+      "fre enskripsion",
+      "fre linskripsion",
+      "komisyon"
+    ],
+    "payer": "employer",
+    "ref": "Private Recruitment Agencies Act 2023, s.5(1)",
+    "source_url": "https://empment-labour.govmu.org/SiteAssets/MofedStyles/Doc/Recruitment%20%20Licence/The%20Private%20Recruitment%20Agencies%20Act%202023.pdf",
+    "snapshot": "2026-11-13"
+  },
+  {
+    "id": "air_ticket",
+    "cost": "Round trip air tickets",
+    "words_en": [
+      "air ticket",
+      "air tickets",
+      "plane ticket",
+      "flight ticket",
+      "airfare",
+      "air fare",
+      "return ticket",
+      "travel fee"
+    ],
+    "words_fr": [
+      "billet d'avion",
+      "billets d'avion",
+      "billet aller-retour",
+      "frais de voyage"
+    ],
+    "words_mfe": [
+      "tiket avion",
+      "biye avion",
+      "tiket aller-retour",
+      "fre vwayaz"
+    ],
+    "payer": "employer",
+    "ref": "Private Recruitment Agencies Regulations 2025, reg 7(2)(a)",
+    "source_url": "https://empment-labour.govmu.org/SiteAssets/MofedStyles/Doc/Recruitment%20%20Licence/The%20Private%20Recruitment%20Agencies%20Regulation%202025.pdf",
+    "snapshot": "2026-11-13"
+  },
+  {
+    "id": "police_report",
+    "cost": "Police report fee",
+    "words_en": [
+      "police report",
+      "police certificate",
+      "certificate of character",
+      "police clearance"
+    ],
+    "words_fr": [
+      "rapport de police",
+      "certificat de moralité",
+      "certificat de police",
+      "casier judiciaire"
+    ],
+    "words_mfe": [
+      "rapor lapolis",
+      "sertifika karakter",
+      "sertifika moralite",
+      "papie lapolis"
+    ],
+    "payer": "employer",
+    "ref": "Private Recruitment Agencies Regulations 2025, reg 7(2)(b)",
+    "source_url": "https://empment-labour.govmu.org/SiteAssets/MofedStyles/Doc/Recruitment%20%20Licence/The%20Private%20Recruitment%20Agencies%20Regulation%202025.pdf",
+    "snapshot": "2026-11-13"
+  },
+  {
+    "id": "passport",
+    "cost": "Passport issuance fee",
+    "words_en": [
+      "passport fee",
+      "passport"
+    ],
+    "words_fr": [
+      "frais de passeport",
+      "passeport"
+    ],
+    "words_mfe": [
+      "fre paspor",
+      "paspor"
+    ],
+    "payer": "employer",
+    "ref": "Private Recruitment Agencies Regulations 2025, reg 7(2)(c)",
+    "source_url": "https://empment-labour.govmu.org/SiteAssets/MofedStyles/Doc/Recruitment%20%20Licence/The%20Private%20Recruitment%20Agencies%20Regulation%202025.pdf",
+    "snapshot": "2026-11-13"
+  },
+  {
+    "id": "visa",
+    "cost": "Visa fee",
+    "words_en": [
+      "visa fee",
+      "visa"
+    ],
+    "words_fr": [
+      "frais de visa",
+      "visa"
+    ],
+    "words_mfe": [
+      "fre viza",
+      "viza"
+    ],
+    "payer": "employer",
+    "ref": "Private Recruitment Agencies Regulations 2025, reg 7(2)(d)",
+    "source_url": "https://empment-labour.govmu.org/SiteAssets/MofedStyles/Doc/Recruitment%20%20Licence/The%20Private%20Recruitment%20Agencies%20Regulation%202025.pdf",
+    "snapshot": "2026-11-13"
+  },
+  {
+    "id": "processing",
+    "cost": "Processing fee",
+    "words_en": [
+      "processing fee",
+      "processing fees",
+      "file fee",
+      "admin fee",
+      "administration fee",
+      "application fee"
+    ],
+    "words_fr": [
+      "frais de dossier",
+      "frais de traitement",
+      "frais administratifs"
+    ],
+    "words_mfe": [
+      "fre dosie",
+      "fre dosye",
+      "fre prosesing",
+      "fre administratif"
+    ],
+    "payer": "employer",
+    "ref": "Private Recruitment Agencies Regulations 2025, reg 7(2)(e)",
+    "source_url": "https://empment-labour.govmu.org/SiteAssets/MofedStyles/Doc/Recruitment%20%20Licence/The%20Private%20Recruitment%20Agencies%20Regulation%202025.pdf",
+    "snapshot": "2026-11-13"
+  },
+  {
+    "id": "work_permit",
+    "cost": "Work permit fee",
+    "words_en": [
+      "work permit fee",
+      "work permit"
+    ],
+    "words_fr": [
+      "frais de permis de travail",
+      "permis de travail"
+    ],
+    "words_mfe": [
+      "permi travay",
+      "permi de travay",
+      "fre permi"
+    ],
+    "payer": "employer",
+    "ref": "Private Recruitment Agencies Regulations 2025, reg 7(2)(f)",
+    "source_url": "https://empment-labour.govmu.org/SiteAssets/MofedStyles/Doc/Recruitment%20%20Licence/The%20Private%20Recruitment%20Agencies%20Regulation%202025.pdf",
+    "snapshot": "2026-11-13"
+  },
+  {
+    "id": "annual_fees",
+    "cost": "Annual fees",
+    "words_en": [
+      "annual fee",
+      "annual fees",
+      "yearly fee"
+    ],
+    "words_fr": [
+      "frais annuels",
+      "cotisation annuelle"
+    ],
+    "words_mfe": [
+      "fre aniel",
+      "fre chak lane"
+    ],
+    "payer": "employer",
+    "ref": "Private Recruitment Agencies Regulations 2025, reg 7(2)(g)",
+    "source_url": "https://empment-labour.govmu.org/SiteAssets/MofedStyles/Doc/Recruitment%20%20Licence/The%20Private%20Recruitment%20Agencies%20Regulation%202025.pdf",
+    "snapshot": "2026-11-13"
+  }
+]
