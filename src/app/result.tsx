@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { Linking, StyleSheet, TextInput } from 'react-native';
 
 import { Button, Card, HighlightedText, Label, LevelBanner, LevelTag, Screen } from '@/components/ui';
-import { findingTitle, t } from '@/constants/strings';
+import { findingDetail, findingTitle, t } from '@/constants/strings';
 import { FontSize, Radius, Spacing } from '@/constants/theme';
 import { useLook } from '@/hooks/use-look';
 import { useTheme } from '@/hooks/use-theme';
@@ -64,7 +64,7 @@ export default function ResultScreen() {
           {/* A NONE finding is just information (e.g. "listed"), so it gets a neutral tag. */}
           <LevelTag level={finding.level} label={finding.level === 'NONE' ? t('findingInfo') : undefined} />
           <Label variant="label">{findingTitle(finding)}</Label>
-          <Label>{finding.detail}</Label>
+          <Label>{findingDetail(finding)}</Label>
           {finding.source && (
             <Label variant="small">
               {t('sourceLabel')}: {finding.source.name} ({prettyDay(finding.source.date)})

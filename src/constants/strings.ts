@@ -2,6 +2,8 @@
 // A missing fr/mfe text falls back to English.
 // Wording rule: never "safe", "genuine", "scam" or "illegal" in any language.
 
+import { categoryTexts, costTexts, detailTexts, jobFeeGeneral } from './finding-texts';
+
 const en = {
   appName: 'Verifye',
   tagline: 'Verifye avan ou peye: check before you pay',
@@ -189,6 +191,9 @@ const fr: Partial<Record<StringKey, string>> = {
   sourcesChecked: "vérifié",
 };
 const mfe: Partial<Record<StringKey, string>> = {
+  grannySTOP: "Pa peye ni avoy nanye. Avan tou, apel nimero ofisiel anba la.",
+  grannyCAREFUL: "Fer atansion. Avan ou peye, apel nimero ofisiel la ou mem.",
+  grannyNONE: "Nou pa finn trouv okenn sinn danze. Kan mem, apel nimero ofisiel la avan ou peye.",
   grannyMode: "Mod granmer: ekritir ek bouton pli gro",
   numbersTitle: "Nimero ofisiel",
   numbersSearch: "Rod enn lazans ouswa enn labank",
@@ -319,4 +324,53 @@ export function findingTitle(finding: { kind: string; title: string }): string {
     text = text.replace('{' + name + '}', match[i + 1]);
   });
   return text;
+}
+
+// ---- Finding details, cost names and dates in the current language (Adiyen's tables, finding-texts.ts) ----
+
+const FR_MONTHS: Record<string, string> = {
+  Jan: 'janv.', Feb: 'févr.', Mar: 'mars', Apr: 'avr.', May: 'mai', Jun: 'juin',
+  Jul: 'juil.', Aug: 'août', Sep: 'sept.', Oct: 'oct.', Nov: 'nov.', Dec: 'déc.',
+};
+
+/** "30 Jun 2026" → "30 juin 2026" in French; other languages keep it as it is. */
+function localDate(date: string): string {
+  if (current !== 'fr') return date;
+  return date.replace(/\b(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\b/, (m) => FR_MONTHS[m] ?? m);
+}
+
+/** The cost name in the current language (by fee rule id), or the English one from the data. */
+export function costName(costId: string, english: string): string {
+  return costTexts[costId]?.[current] || english;
+}
+
+/** Same as costName, but found from the English name (the engine's vars.cost is the English cost). */
+function costFromEnglish(english: string): string {
+  const id = Object.keys(costTexts).find((k) => costTexts[k].en === english);
+  return id ? costName(id, english) : english;
+}
+
+/**
+ * The finding's explanation in the current language. Placeholders like {name} or {date} are filled from
+ * the engine's finding.vars. If the kind is unknown or a value is missing, the engine's English is shown.
+ */
+export function findingDetail(finding: { kind: string; detail: string; vars?: Record<string, string> }): string {
+  if (current === 'en') return finding.detail;
+  const vars = finding.vars ?? {};
+  const texts = finding.kind === 'job_fee' && vars.ref && vars.ref === vars.generalRef ? jobFeeGeneral : detailTexts[finding.kind];
+  const template = texts?.[current];
+  if (!template) return finding.detail;
+
+  let missing = false;
+  const text = template.replace(/\{(\w+)\}/g, (_, name: string) => {
+    if (name === 'cost' && vars.cost) return costFromEnglish(vars.cost);
+    if (name === 'categoryText' && vars.category) return categoryTexts[vars.category]?.[current] ?? vars.category;
+    const value = vars[name];
+    if (value === undefined || value === '') {
+      missing = true;
+      return '';
+    }
+    return name === 'date' || name === 'expiry' || name === 'validFrom' ? localDate(value) : value;
+  });
+  return missing ? finding.detail : text;
 }

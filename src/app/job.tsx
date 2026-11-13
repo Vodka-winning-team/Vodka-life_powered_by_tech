@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { StyleSheet, TextInput, View } from 'react-native';
 
 import { Button, Card, Chip, Label, Screen } from '@/components/ui';
-import { t } from '@/constants/strings';
+import { costName, t } from '@/constants/strings';
 import { FontSize, Radius, Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 import { engine } from '@/lib/data';
@@ -63,7 +63,7 @@ export default function JobScreen() {
       <Label variant="label">{t('jobCostLabel')}</Label>
       <View style={styles.wrap}>
         {engine.data.feeRules.map((rule) => (
-          <Chip key={rule.id} title={rule.cost} selected={rule.id === costId} onPress={() => setCostId(rule.id === costId ? null : rule.id)} />
+          <Chip key={rule.id} title={costName(rule.id, rule.cost)} selected={rule.id === costId} onPress={() => setCostId(rule.id === costId ? null : rule.id)} />
         ))}
       </View>
 
