@@ -73,7 +73,7 @@ object Text {
 
     /** Money amounts such as "Rs 50,000", "Rs50000", "MUR 1,500", "5000 roupi". */
     private val AMOUNT = Regex(
-        """(?i)(?:\b(?:rs|mur|roupi|rupees?)\.?\s?\d[\d,.\s]*\d|\b(?:rs|mur)\.?\s?\d|\b\d[\d,.]*\s?(?:rs|roupi|rupees|mur)\b)""",
+        """(?i)(?:\b(?:rs|mur|roupi|rupees?)\.?\s?\d[\d,.\s]*\d|\b(?:rs|mur)\.?\s?\d|\b\d[\d,.\s]*\s?(?:rs|roupies|roupi|rupees|mur)\b)""",
     )
 
     fun amounts(original: String): List<IntRange> = AMOUNT.findAll(original).map { it.range }.toList()

@@ -35,7 +35,7 @@ object Rules {
             "you have won", "you've won", "you won", "won a prize", "winner", "lucky draw", "cash gift", "free gift",
             "claim your prize", "claim your reward", "reward", "bonus", "congratulations",
             "vous avez gagne", "gagnant", "felicitations", "cadeau", "tirage au sort", "recompense",
-            "ou finn gagne", "ou finn gagn", "kado", "lot gagnan", "tiraz o sor",
+            "gagn enn pri", "gagne enn pri", "gagn enn lot", "gagne enn lot", "kado", "lot gagnan", "tiraz o sor",
         ),
     )
 
@@ -49,8 +49,8 @@ object Rules {
             "verify your account", "verify your details", "confirm your details", "update your details",
             "it will be blocked", "will be suspended",
             "compte bloque", "compte suspendu", "carte bloquee", "activite suspecte", "verifiez votre compte",
-            "confirmez vos informations",
-            "kont bloke", "ou kont inn bloke", "kart bloke", "verifye ou kont", "konfirm ou detay",
+            "confirmez vos informations", "a ete suspendu", "a ete bloque", "a ete bloquee",
+            "kont bloke", "kont inn bloke", "kart bloke", "kart inn bloke", "inn bloke", "verifye ou kont", "konfirm ou detay",
         ),
     )
 
@@ -84,7 +84,7 @@ object Rules {
     val JOB_CONTEXT = listOf(
         "job", "jobs", "work abroad", "work in", "vacancy", "vacancies", "recruitment", "recruiting", "recruiter",
         "hiring", "employment", "employer", "work contract", "job offer", "salary", "position", "agency",
-        "emploi", "travail", "poste", "recrutement", "embauche", "offre d'emploi", "contrat de travail", "salaire",
+        "emploi", "travail", "travailler", "candidature", "recrute", "poste", "recrutement", "embauche", "offre d'emploi", "contrat de travail", "salaire",
         "travay", "lanplwa", "anplwa", "rekritman", "lazans", "saler", "kontra travay",
     )
 
@@ -119,7 +119,7 @@ object Rules {
     // ---- Asking for money: a pay/send verb followed closely by money words or an amount ----
     private val PAY_VERBS = listOf(
         "pay", "send", "transfer", "deposit", "wire", "top up", "make a payment",
-        "payer", "payez", "envoyez", "virer", "virez", "transferez", "deposez", "regler", "reglez",
+        "payer", "payez", "envoyez", "envoyer", "envoie", "versez", "verser", "virer", "virez", "transferez", "deposez", "regler", "reglez",
         "peye", "avoy", "depoze",
     )
     private val MONEY_WORDS = listOf(
@@ -134,6 +134,12 @@ object Rules {
     fun paymentRequests(norm: String): List<IntRange> = PAY_REQUEST.findAll(norm).mapNotNull { m ->
         val verbStart = m.groups[1]!!.range.first
         val before = norm.substring(maxOf(0, verbStart - 25), verbStart)
-        if (NEGATIONS.any { Text.findPhrase(before, it).isNotEmpty() }) null else m.range
+        val justBefore = norm.substring(maxOf(0, verbStart - 12), verbStart)
+        val negated = NEGATIONS.any { Text.findPhrase(before, it).isNotEmpty() }
+        val alreadyDone = PAST_MARKERS.any { Text.findPhrase(justBefore, it).isNotEmpty() }
+        if (negated || alreadyDone) null else m.range
     }.toList()
+
+    /** "Mo finn peye", "j'ai envoye", "already paid": the writer says they paid; that is not a request. */
+    private val PAST_MARKERS = listOf("finn", "deja", "already", "j'ai", "i have", "i've", "nous avons", "on a")
 }
