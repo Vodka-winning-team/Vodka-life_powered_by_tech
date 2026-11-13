@@ -31,6 +31,17 @@ EXPECTED = {"local": 20, "abroad": 12, "non_citizen": 47}
 SN, NAME, DIRECTORS, ADDRESS, EMAIL, VALID_FROM, EXPIRY = range(7)
 
 
+# Names the PDF text breaks inside a word. Each fix was checked on the page image
+# (visual check of all 22 pages, 14 Nov 2026): page 20 prints "MAREEMOOTO" and "O LIMITED"
+# on two lines of the same cell.
+NAME_FIXES = {"DEEVALEN MAREEMOOTO O LIMITED": "DEEVALEN MAREEMOOTOO LIMITED"}
+
+
+def licensee_name(cell):
+    name = clean(cell)
+    return NAME_FIXES.get(name, name)
+
+
 def is_phone_line(line):
     return re.fullmatch(r"[\d\s/,.\-]+", line) and len(re.sub(r"\D", "", line)) >= 7
 
@@ -67,7 +78,7 @@ def main():
                         problems.append(f"page {page_no}: row {r[SN]} has {len(r)} filled cells, expected 7")
                         continue
                     sn = int(r[SN].strip().rstrip("."))
-                    name = clean(r[NAME])  # kept exactly as printed, even odd wraps
+                    name = licensee_name(r[NAME])
                     address, phones = split_address(r[ADDRESS])
                     if not phones:
                         problems.append(f"page {page_no} {cat} #{sn} {name}: no phone found")

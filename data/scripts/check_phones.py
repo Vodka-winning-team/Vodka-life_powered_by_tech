@@ -39,7 +39,7 @@ def register_phones():
                     r = [c for c in raw if c and c.strip()]
                     if len(r) == 7 and r[0].strip().rstrip(".").isdigit():
                         _, phones = register.split_address(r[register.ADDRESS])
-                        rows[(page_no, clean(r[register.NAME]))] = phones
+                        rows[(page_no, register.licensee_name(r[register.NAME]))] = phones
     return rows
 
 
@@ -101,19 +101,37 @@ def main(fix):
     return 1 if problems else 0
 
 
+VISUAL = ROOT / "data" / "visual-check.json"
+
+
+def signature(a):
+    """What a visual check of a row covers: name, licence type, dates, every number, page."""
+    return " | ".join([a["name"], a["category"], a["valid_from"], a["expiry"],
+                       " ".join(a.get("phones") or [a.get("phone") or ""]), str(a["page"])])
+
+
 def write_table(agencies):
+    checked = json.loads(VISUAL.read_text(encoding="utf-8")) if VISUAL.exists() else {"rows": {}}
+    ok = {a["id"] for a in agencies if checked["rows"].get(a["id"]) == signature(a)}
     lines = [
-        "# Agency phone check",
+        "# Agency check against the register PDF",
         "",
-        "Tick each row after comparing it with the register PDF "
-        "(`data/raw/register/agencies_register.pdf`, Ministry list as at 04 Nov 2026).",
-        "Made by `data/scripts/check_phones.py`; re-run it after any data change.",
+        "Each row is compared with the register PDF (`data/raw/register/agencies_register.pdf`, "
+        "Ministry list as at 04 Nov 2026): name, licence type, both dates, every phone number, page.",
+        f"**Visual check:** {checked.get('how', 'not done yet')}",
+        "A row is ticked only while its data still matches what was checked "
+        "(`data/visual-check.json`), so any later data change un-ticks it.",
+        "Made by `data/scripts/check_phones.py`. Re-run it after any data change.",
         "",
-        "| ✓ | id | name | phone | page |",
+        f"**{len(ok)} of {len(agencies)} rows checked.**",
+        "",
+        "| ✓ | id | name | phones | page |",
         "|---|---|---|---|---|",
     ]
     for a in agencies:
-        lines.append(f"| [ ] | {a['id']} | {a['name']} | {a.get('phone') or '**MISSING**'} | {a['page']} |")
+        tick = "[x]" if a["id"] in ok else "[ ]"
+        nums = ", ".join(a.get("phones") or []) or a.get("phone") or "**MISSING**"
+        lines.append(f"| {tick} | {a['id']} | {a['name']} | {nums} | {a['page']} |")
     TABLE.write_text("\n".join(lines) + "\n", encoding="utf-8")
     print(f"wrote {TABLE.relative_to(ROOT)} ({len(agencies)} rows)")
 

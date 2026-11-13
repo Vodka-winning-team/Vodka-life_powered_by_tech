@@ -76,9 +76,10 @@ def normalize_phone(raw):
 
 
 def phones_in(text):
-    """Mauritian numbers in a text, in the format '+230XXXXXXX' or '+2305XXXXXXX'."""
+    """Mauritian numbers in a text, in the format '+230XXXXXXX' or '+2305XXXXXXX'.
+    The register also prints some landlines as 4+3 digits ("4637 800", page 5)."""
     found = []
-    for m in re.finditer(r"(?<!\d)(\d{3,4})[\s-]?(\d{4})(?!\d)", text or ""):
+    for m in re.finditer(r"(?<!\d)(\d{3,4})[\s-]?(\d{3,4})(?!\d)", text or ""):
         phone = normalize_phone(m.group(1) + m.group(2))
         if phone:
             found.append(phone)
