@@ -60,13 +60,26 @@ def parse_date(text):
     raise ValueError(f"cannot read a date in {text!r}")
 
 
+PHONE_OK = re.compile(r"^\+230(\d{7}|5\d{7})$")
+
+
+def normalize_phone(raw):
+    """'212 3456', '(230) 5497-5200', '+230 212 3456' -> '+2302123456' / '+23054975200'.
+    Only changes the format. Returns None if the digits are not a Mauritian
+    landline (7 digits) or mobile (8 digits starting with 5)."""
+    digits = re.sub(r"\D", "", raw or "")
+    if len(digits) > 8 and digits.startswith("230"):
+        digits = digits[3:]
+    if len(digits) == 7 or (len(digits) == 8 and digits[0] == "5"):
+        return "+230" + digits
+    return None
+
+
 def phones_in(text):
-    """Mauritian numbers in a text, as '+230 XXX XXXX' (7 digits) or '+230 XXXX XXXX' (8 digits)."""
+    """Mauritian numbers in a text, in the format '+230XXXXXXX' or '+2305XXXXXXX'."""
     found = []
     for m in re.finditer(r"(?<!\d)(\d{3,4})[\s-]?(\d{4})(?!\d)", text or ""):
-        digits = m.group(1) + m.group(2)
-        if len(digits) == 7:
-            found.append(f"+230 {digits[:3]} {digits[3:]}")
-        elif len(digits) == 8 and digits[0] == "5":
-            found.append(f"+230 {digits[:4]} {digits[4:]}")
+        phone = normalize_phone(m.group(1) + m.group(2))
+        if phone:
+            found.append(phone)
     return found

@@ -4,7 +4,8 @@ Run:  python data/scripts/validate.py     (exit code 0 = all good)
 
 Checks: valid JSON array; exactly the fields of the contract (docs/TASKS.md §2,
 plus source_url and snapshot); unique ids; every row has source_url and
-snapshot; phones start with +230 (or are a 3-4 digit Mauritian short code);
+snapshot; agency phones are "+230" + 7 digits or 8 digits starting with 5,
+no spaces; other phones start with +230 (or are a 3-4 digit short code);
 dates are real YYYY-MM-DD dates; no person titles (Mr/Mrs/Ms) anywhere.
 """
 import json
@@ -14,7 +15,7 @@ from datetime import date
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
-from _common import OUT  # noqa: E402
+from _common import OUT, PHONE_OK  # noqa: E402
 
 COMMON = {"source_url", "snapshot"}
 FIELDS = {
@@ -77,7 +78,10 @@ def check_file(name, fields):
                 errors.append(f"{where}: {key} must be a list of non-empty strings")
             if (name, key) in ALLOWED and value not in ALLOWED[(name, key)]:
                 errors.append(f"{where}: {key} {value!r} not one of {sorted(ALLOWED[(name, key)])}")
-        if "phone" in row and not PHONE.match(str(row["phone"])):
+        if name == "agencies.json":
+            if not PHONE_OK.match(str(row.get("phone"))):
+                errors.append(f"{where}: phone {row.get('phone')!r} must be +230 then 7 digits, or 8 starting with 5")
+        elif "phone" in row and not PHONE.match(str(row["phone"])):
             errors.append(f"{where}: phone {row['phone']!r} must be '+230 ...' or a short code")
         for d in row.get("domains", []):
             if not DOMAIN.match(d):
