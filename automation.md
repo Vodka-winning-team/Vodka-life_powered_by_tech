@@ -2,7 +2,7 @@
 
 **Updated about every 10 minutes by Pushkar's Claude.** Pull, read your row, do it. To ask for something, use **Requests** at the bottom.
 
-Last update: **Fri 13 Nov 20:08** · Next check: about 20:16 · Deadline: **Sat 12:30**
+Last update: **Fri 13 Nov 20:18** · Next check: about 20:26 · Deadline: **Sat 12:30**
 
 ## How to use this file
 - **Check it:** `git pull`, then read **Next for each person**. Your Claude can read it too: "Read automation.md and do my next task".
@@ -16,33 +16,32 @@ Last update: **Fri 13 Nov 20:08** · Next check: about 20:16 · Deadline: **Sat 
 ## Status
 | Checkpoint | State |
 |---|---|
-| 18:00: APK on a real phone; agencies, fee rules, banks data | Data ✅ · Engine ✅ · **APK ⏳ delayed: Jayesh's laptop ran out of memory (20:07). Test in the browser or Expo Go meanwhile** |
-| 23:00: full flow with real data | Web build of the app ✅ compiles all 6 screens with the real engine (B checked 20:00) · needs a run on a real phone |
-| 03:00: FSC/CERT in, job follow-up works | FSC/CERT ✅ in the engine |
+| 18:00: APK on a real phone; data | Data ✅ · Engine ✅ · **APK ⏳ delayed (out of memory); demo backup: Expo Go** |
+| 23:00: full flow with real data | App ✅ builds with the real engine, FR/Kreol switch in · **to do: click-through on a real phone (Expo Go)** |
+| 03:00: FSC/CERT in, job follow-up works | FSC/CERT ✅ · job follow-up: engine ✅, app side (reopen case + new cost) → Jayesh |
 | 07:00: feature freeze | — |
 
 **Done so far**
-- **Adiyen (A):** 5 data files, phones audited, `validate.py`, `docs/sources.md`, `docs/test-cases.md` (15 cases), `docs/strings-fr-mfe.md` (FR + Kreol), slide-2 fact check.
-- **Pushkar (B):** TypeScript engine, **60 tests pass**; ready for agency `phones`; README draft with checked sources; this board.
-- **Jayesh (C):** Expo app, 6 screens wired to the engine; APK build in progress; FR/Kreol + language switch in progress.
-- **D:** nothing pushed yet.
+- **Adiyen (A):** 5 data files with all register phones, `validate.py`, sources, 15 test cases, FR/Kreol strings, demo messages, `docs/decisions.md` (13 decisions), slide-2 fact check.
+- **Pushkar (B):** engine, **64 tests pass** (incl. demo texts read from `docs/demo-messages.md`); README draft; `docs/slides.md` draft; this board.
+- **Jayesh (C):** 6 screens on the real engine; French + Kreol + language switch; finding titles by kind; dev sample removed.
+- **D:** nothing pushed yet (decisions, demo messages and slides drafts were done by others).
 
 ## Next for each person
 **Adiyen (A)**
-1. Add `phones: [...]` to agencies.json (both B and C said yes; the engine is ready).
-2. Push `docs/demo-messages.md` now (D still missing; due 18:00).
+1. Find 1 native Kreol reader and 1–2 testers (jobseeker or parent): 10 minutes each in the browser/Expo Go; notes in `docs/user-tests.md` *(user tests were due 19:00–21:00)*.
 
 **Pushkar (B)**
-1. Try the app in the browser (web build) with the demo messages; report screen problems to Jayesh here.
-2. Turn `docs/demo-messages.md` into engine tests when it lands.
+1. Click through the demo (`docs/demo-messages.md`) in the browser and on the phone with Expo Go; post screen problems here.
+2. Give your vote on Jayesh's AI proposal (open item in `docs/decisions.md`).
 
 **Jayesh (C)**
-1. APK on the demo phone *(18:00 checkpoint, 2 h overdue; out of memory)*. Backup for the demo: Expo Go on the phone.
-2. FR/Kreol strings + language switch (in progress).
-3. Your editor saved automation.md with Windows line endings (CRLF), so the whole file shows as changed. Please run `git config core.autocrlf true` once on your laptop.
+1. Job follow-up in the app: reopen a saved case, add a new cost, re-check (due 03:00; engine already supports it).
+2. APK again when memory allows; otherwise Expo Go is the demo plan.
+3. Please run `git config core.autocrlf true` (automation.md keeps getting Windows line endings).
 
-**D (pitch and testing), overdue, nothing pushed yet**
-1. `docs/decisions.md` *(due 16:30)* · 2. `docs/demo-messages.md` *(due 18:00)* · 3. user tests *(19:00–21:00, running late)* · 4. slides with the checked numbers in `README.md` "Problem".
+**D (pitch and testing): still missing**
+1. Review `docs/slides.md` and `docs/decisions.md`, finish `README.md` (AI tools, team names), record the backup video later.
 
 ## Requests
 <!-- Add new lines at the END of this list. Format: - [ ] HH:MM · Name: request -->
@@ -62,6 +61,6 @@ Last update: **Fri 13 Nov 20:08** · Next check: about 20:16 · Deadline: **Sat 
  · **Jayesh (C) online 20:04**: APK build running on C's laptop (fixed Windows path-length errors: repo moved to C:raudlens, CMake 3.31.6 / ninja 1.12); French + Kreol + language switch going in now.
 - [ ] 20:07 · Jayesh → **Adiyen, do these first, in order (don't wait for C or D):** 1) Push `docs/demo-messages.md` now (6 messages, PROJECT.md §9, LIFETIME CANADA LTD). 2) Add `phones: [...]`: **yes from B and C**, so go ahead (agencies.json + TASKS.md §2 + validate.py, one commit). 3) D is missing, so start `docs/decisions.md`: 5–10 decisions with the real times from `git log` and `docs/ai-log.md` (Theme 1, no ML, no server, Shield cut, Kotlin → Expo 18:15, juice rule...). 4) Find 1 native Kreol reader and 1–2 testers (a jobseeker or a parent): 10 minutes each on the web/Expo Go version; notes in `docs/user-tests.md`.
 - [~] 20:07 · Jayesh → **Pushkar, do these first, in order:** 1) **Test the app now, without waiting for the APK:** `git pull`, `npm install` (packages changed), `npx expo start`, then press `w` (browser) or scan the QR code with Expo Go. Paste every demo message and test case; post screen problems here (screen, message, what you saw). 2) Demo messages → engine tests when Adiyen pushes them. 3) `phones` in the contacts once Adiyen adds it. 4) Job follow-up by 23:00. 5) D is missing, so draft the 6 slides in `docs/slides.md` (Kevin's story, the problem with the checked numbers, demo, data, impact, surprise card + next).
-- [ ] 20:07 · Jayesh: **APK delayed**: the laptop ran out of memory during the native build. The app works in Expo Go and in the browser, so test there and don't wait for the APK. Doing now: French + Kreol + language switch, then the APK again. → B 20:12, in progress: 1) web build of the current app compiles all 6 screens and runs on Pushkar's laptop; testing the messages now. 2) waiting for Adiyen's demo-messages.md. 3) ✅ done (commit 2bddeee): engine reads `phones`. 4) engine side ✅: re-check the same case with a new cost already works (test 'demo 3'); the app side is yours. 5) ✅ `docs/slides.md` drafted 20:16: 6 slides with only checked numbers and speaker notes; D or anyone can edit.
-- [ ] 20:10 · Adiyen: done, B and Jayesh. 1) `docs/demo-messages.md` pushed (commit 5b7ca41): the 6 steps of PROJECT.md §9, texts identical to B's engine tests. I kept **THINK RECRUITMENT LTD** (not LIFETIME CANADA LTD) so the demo matches the tests already passing; say if you want it switched, and B's tests would change too. 2) `phones` added (commit 1483850): `phone` unchanged, `phones` = every register number (175; 55 agencies have 2–6). TASKS.md §2 and validate.py updated. 3) decisions.md: next, once A confirms.
-- [ ] 20:14 · Adiyen: `docs/decisions.md` started (commit ba8b14b): 13 decisions with real times, each with its record (commit, file or board line), plus 3 open items: C's AI proposal (not agreed by all 4, so not logged as a decision), the organisers' answer on FraudLens fonts, and the surprise card. D (or whoever does the README): please review it and add new decisions with the time.
+- [ ] 20:07 · Jayesh: **APK delayed**: the laptop ran out of memory during the native build. The app works in Expo Go and in the browser, so test there and don't wait for the APK. Doing now: French + Kreol + language switch, then the APK again. → B 20:12, in progress: 1) web build of the current app compiles all 6 screens and runs on Pushkar's laptop; testing the messages now. 2) waiting for Adiyen's demo-messages.md. 3) ✅ done (commit 2bddeee): engine reads `phones`. 4) engine side ✅: re-check the same case with a new cost already works (test 'demo 3'); the app side is yours. 5) ✅ `docs/slides.md` drafted 20:16: 6 slides with only checked numbers and speaker notes; D or anyone can edit. · B 20:18: 2) ✅ done (commit 4b7541c): `demo-messages.test.ts` reads `docs/demo-messages.md` and checks steps 1, 3, 4, 5 (level, regulation, official number). 1) web build with French/Kreol runs on Pushkar's laptop; Pushkar is clicking through the demo now and will post screen problems here.
+- [x] 20:10 · Adiyen: done, B and Jayesh. 1) `docs/demo-messages.md` pushed (commit 5b7ca41): the 6 steps of PROJECT.md §9, texts identical to B's engine tests. I kept **THINK RECRUITMENT LTD** (not LIFETIME CANADA LTD) so the demo matches the tests already passing; say if you want it switched, and B's tests would change too. 2) `phones` added (commit 1483850): `phone` unchanged, `phones` = every register number (175; 55 agencies have 2–6). TASKS.md §2 and validate.py updated. 3) decisions.md: next, once A confirms. → B 20:18: thanks. Keep THINK RECRUITMENT LTD (the tests now read your file directly, so if you switch the agency in the doc, the tests follow it automatically). `phones` works in the engine: every register number is shown as an official contact.
+- [ ] 20:14 · Adiyen: `docs/decisions.md` started (commit ba8b14b): 13 decisions with real times, each with its record (commit, file or board line), plus 3 open items: C's AI proposal (not agreed by all 4, so not logged as a decision), the organisers' answer on FraudLens fonts, and the surprise card. D (or whoever does the README): please review it and add new decisions with the time. → B 20:18: read it; matches the git log. On the open AI proposal, Pushkar will give his own vote (not decided by his Claude).
