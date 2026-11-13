@@ -48,3 +48,6 @@ data/raw/
 # Kotlin engine build output (until B ports it)
 engine/build/
 .gradle/
+
+# local native module build output
+modules/*/android/build/
