@@ -2,7 +2,7 @@
 
 **Updated about every 10 minutes by Pushkar's Claude.** Pull, read your row, do it. To ask for something, use **Requests** at the bottom.
 
-Last update: **Fri 13 Nov 20:37** · Next check: about 20:46 · Deadline: **Sat 12:30** · **Jayesh: hotspot request below is waiting**
+Last update: **Fri 13 Nov 20:52** · Next check: about 21:03 · Deadline: **Sat 12:30** · 🃏 **Surprise card is out: see Requests 20:46**
 
 ## How to use this file
 - **Check it:** `git pull`, then read **Next for each person**. Your Claude can read it too: "Read automation.md and do my next task".
@@ -16,36 +16,36 @@ Last update: **Fri 13 Nov 20:37** · Next check: about 20:46 · Deadline: **Sat 
 ## Status
 | Checkpoint | State |
 |---|---|
-| 18:00: APK on a real phone; data | Data ✅ · Engine ✅ · **APK ⏳ delayed (out of memory)** |
-| 23:00: full flow with real data | App ✅ builds (web build checked 20:27), FR/Kreol in · **to do: click-through on a real phone** |
-| 03:00: FSC/CERT in, job follow-up works | FSC/CERT ✅ · job follow-up ✅ (Jayesh 20:19) |
+| 18:00: APK on a real phone; data | ✅ APK running on a real phone (Jayesh 20:41), demo 1 passed on it |
+| 🃏 Surprise card: "survive wrong input, skipped steps, panic-tapping; show the key flow recovers safely" | Engine ✅ (fails safe, 24 robustness tests) · **App: double-tap guards, empty input, skipped steps → Jayesh** · Demo segment + slide → Paveesh · Wrong-input test cases → Adiyen · Decision log → Paveesh |
+| 23:00: full flow with real data, on the phone | Engine ✅ 88 tests · App ✅ on the APK · share-in in progress (target 22:00) |
+| 23:00: votes due | Jayesh's AI proposal · Paveesh's Shield opt-in proposal (`docs/proposal-shield-optin.md`) |
+| 03:00: FSC/CERT in, job follow-up works | ✅ both |
 | 07:00: feature freeze | — |
-
-⚠️ **Demo plan:** Expo Go needs the laptop on the same network (use a phone hotspot) and **does not work in airplane mode**. Offline on stage needs the APK; otherwise show offline only in the backup video.
 
 **Done so far**
 - **Adiyen (A):** data with all register phones, validate, sources, 15 test cases, FR/Kreol strings, demo messages, decisions (13), user-test script.
-- **Pushkar (B):** engine, **all 71 tests pass** (engine + app); README and slides drafts; this board.
-- **Jayesh (C):** 6 screens, FR/Kreol + switch, finding titles, job follow-up (reopen case + new cost).
-- **Paveesh (D):** online 20:21; README finished (team, AI tools); slides reviewed (allegation wording, 71 tests); taking over user tests.
+- **Pushkar (B):** engine, **88 tests** (demo texts, robustness, wording rule); `vars` for FR/Kreol details; README and slides drafts; this board.
+- **Jayesh (C):** APK on a real phone; 6 screens, FR/Kreol + switch, job follow-up; share-in in progress.
+- **Paveesh (D):** README, slides review, `docs/demo-script.md`, `docs/quick-test.md` (5-minute test per build), Shield opt-in proposal.
 
 ## Next for each person
 **Adiyen (A)**
-1. Help Paveesh find 1 native Kreol reader; check Kreol texts on screen.
+1. 🃏 Add ~10 "wrong input" cases to `docs/test-cases.md` (empty, emoji only, phone number only, bare link, all caps, words split over lines, very long paste, unknown agency) with the expected safe result; B turns them into tests.
+2. Kreol reader for the screen texts.
 
 **Pushkar (B)**
-1. Click through the demo on a phone (Expo Go over a hotspot) and in the browser; post screen problems here.
-2. Vote on Jayesh's AI proposal (open item in `docs/decisions.md`).
+1. Vote on both proposals (AI score; Shield opt-in) by 23:00.
+2. Turn Adiyen's wrong-input cases into tests; run Paveesh's quick test on the web build.
 
 **Jayesh (C)**
-0. **Now:** run `npx expo start` on your laptop over your phone's hotspot so B and D can test in Expo Go (request below).
-1. APK (needed for the airplane-mode part of the demo). If the laptop keeps running out of memory, say so here so we decide by 23:00.
-2. `git config core.autocrlf true` on your laptop.
+1. 🃏 App side of the surprise card: one action per tap on Check/Save/Call/Share; show `empty_message` instead of a result; Back or skipping Job check → never "No warning signs found"; Save twice → one entry; reopen after the app is killed. Translate the 4 new kinds (`empty_message`, `message_truncated`, `cost_unknown`, `check_failed`).
+2. Share-in (target 22:00, drop at 23:00 if not working).
+3. GitHub Release with the APK once tested.
 
 **Paveesh (D)**
-1. User tests (browser or Expo Go), notes in `docs/user-tests.md`.
-2. Organisers: FraudLens look/fonts answer → `docs/decisions.md`.
-3. Review `docs/slides.md`, write `docs/demo-script.md` (4 min + judge Q&A).
+1. 🃏 Hold the 10-minute surprise-card meeting, log the decision with the time in `docs/decisions.md`; add the "try to break it" segment to `docs/demo-script.md`, a slide, and the README "Surprise card" section.
+2. User tests with `docs/quick-test.md`.
 
 ## Requests
 <!-- Add new lines at the END of this list. Format: - [ ] HH:MM · Name: request -->
