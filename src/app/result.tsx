@@ -40,7 +40,8 @@ export default function ResultScreen() {
       {result.findings.length === 0 && <Label>{t('resultNoFindings')}</Label>}
       {result.findings.map((finding, i) => (
         <Card key={`${finding.kind}-${i}`}>
-          <LevelTag level={finding.level} />
+          {/* A NONE finding is just information (e.g. "listed"), so it gets a neutral tag. */}
+          <LevelTag level={finding.level} label={finding.level === 'NONE' ? t('findingInfo') : undefined} />
           <Label variant="label">{findingTitle(finding)}</Label>
           <Label>{finding.detail}</Label>
           {finding.source && (

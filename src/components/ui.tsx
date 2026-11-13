@@ -95,12 +95,12 @@ export function LevelBanner({ level }: { level: Level }) {
   );
 }
 
-/** Small coloured tag (used on each finding and in History). */
-export function LevelTag({ level }: { level: Level }) {
+/** Small coloured tag (used on each finding and in History). `label` replaces the level text. */
+export function LevelTag({ level, label }: { level: Level; label?: string }) {
   const colors = LevelColors[level];
   return (
     <View style={[styles.tag, { backgroundColor: colors.background }]}>
-      <Text style={[textStyles.small, { color: colors.text, fontWeight: '700' }]}>{t(`level${level}`)}</Text>
+      <Text style={[textStyles.small, { color: colors.text, fontWeight: '700' }]}>{label ?? t(`level${level}`)}</Text>
     </View>
   );
 }

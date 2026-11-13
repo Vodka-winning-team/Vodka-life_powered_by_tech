@@ -31,6 +31,7 @@ const en = {
   followUpPlaceholder: 'Paste their new message',
   followUpButton: 'Add to this case and check again',
   sourceLabel: 'Source',
+  findingInfo: 'Good to know',
 
   jobTitle: 'Job check',
   jobAgencyLabel: '1. Which agency is it?',
@@ -75,6 +76,7 @@ export type StringKey = keyof typeof en;
 export type Language = 'en' | 'fr' | 'mfe';
 
 const fr: Partial<Record<StringKey, string>> = {
+  findingInfo: "Bon à savoir",
   followUpLabel: "Ils demandent autre chose ?",
   followUpPlaceholder: "Collez leur nouveau message",
   followUpButton: "Ajouter à ce dossier et vérifier à nouveau",
