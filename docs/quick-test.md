@@ -81,6 +81,8 @@ Mauritius Telecom Lucky Draw: you have won a prize! Send your details to mauriti
 
 ## C. Shield ([proposal](proposal-shield-optin.md); built by Jayesh at 21:40)
 
+- [ ] **Old FraudLens app removed:** uninstall the old FraudLens app (`com.fraudlens.shield`, from September) from the test phone. It would also react to the same WhatsApp, and judges must only see code written this weekend (Rule 1: start from empty). In Android's Notification access list, only **"FraudLens Moris"** is on.
+
 **Which test for which build:** the fake notification from the laptop (`adb`) only works in a **development build**. The **release APK** ignores it on purpose (decision 15; Jayesh's fix at 21:50). With the release APK, use a **real WhatsApp or SMS from another phone, with the network on**.
 
 - [ ] Switch off → the fake notification below gives **no** alert.

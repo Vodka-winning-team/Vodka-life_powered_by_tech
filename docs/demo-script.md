@@ -8,6 +8,7 @@ The messages are in [`demo-messages.md`](demo-messages.md) and the slides in [`s
 ## Before we go on stage (10 min before)
 
 - [ ] **Demo phone:** charged, brightness up, silent mode, notifications off ("Do not disturb"). **If Shield is in the demo**, add FraudLens and WhatsApp to the Do-not-disturb exceptions, or the alert won't show.
+- [ ] **Old FraudLens app removed:** uninstall the old FraudLens app (`com.fraudlens.shield`, from September) from every demo phone. It would also react to the same WhatsApp, and judges must only see code written this weekend (Rule 1: start from empty). In Android's Notification access list, only **"FraudLens Moris"** is on.
 - [ ] **App open on the Scan screen**, language set to English, **History cleared** (History → Clear history).
 - [ ] **Messages ready to paste:** keep demo messages 1, 3, 4 and 5 in a notes app on the phone, in order. Copy each one just before you need it.
 - [ ] **Offline:**
