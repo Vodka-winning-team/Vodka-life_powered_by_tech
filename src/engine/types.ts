@@ -43,6 +43,8 @@ export type Agency = {
   name: string;
   category: string; // "abroad" | "local" | "non_citizen"
   phone: string;
+  /** All register numbers (first = `phone`). Optional in the data file; defaults to [phone]. */
+  phones: string[];
   address: string;
   validFrom: string; // YYYY-MM-DD
   expiry: string; // YYYY-MM-DD

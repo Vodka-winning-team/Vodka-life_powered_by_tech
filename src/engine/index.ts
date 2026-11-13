@@ -45,6 +45,7 @@ export class DataSet {
     return new DataSet(
       rows(agencies).map((r) => ({
         id: str(r, 'id'), name: str(r, 'name'), category: str(r, 'category'), phone: str(r, 'phone'),
+        phones: list(r, 'phones').length > 0 ? list(r, 'phones') : [str(r, 'phone')].filter(Boolean),
         address: str(r, 'address'), validFrom: str(r, 'valid_from'), expiry: str(r, 'expiry'),
         page: Number(r.page) || 0, sourceUrl: str(r, 'source_url'), snapshot: str(r, 'snapshot'),
       })),
@@ -276,7 +277,8 @@ export class Engine {
       });
     } else {
       const source = agencySource(agency);
-      contacts.push({ name: agency.name, phone: agency.phone, source });
+      // Every number the register lists for this agency (never a number from the message).
+      for (const phone of agency.phones.length > 0 ? agency.phones : [agency.phone]) contacts.push({ name: agency.name, phone, source });
       const valid = agency.validFrom <= this.today && this.today <= agency.expiry;
       if (!valid) {
         out.push({
