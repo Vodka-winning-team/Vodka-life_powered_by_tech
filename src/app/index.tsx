@@ -33,7 +33,6 @@ export default function ScanScreen() {
     router.push('/result');
   }
 
-
   return (
     <Screen>
       <View style={styles.languages} accessibilityLabel={t('languageLabel')}>

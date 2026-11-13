@@ -1,6 +1,10 @@
+import Constants from 'expo-constants';
 import { DarkTheme, DefaultTheme, Stack, ThemeProvider } from 'expo-router';
+import { ShareIntentProvider } from 'expo-share-intent';
+import { Platform } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 
+import { ShareIn } from '@/components/share-in';
 import { t } from '@/constants/strings';
 import { Colors } from '@/constants/theme';
 import { useColorScheme } from '@/hooks/use-color-scheme';
@@ -8,17 +12,23 @@ import { StoreProvider, useStore } from '@/lib/store';
 
 type ThemeColors = (typeof Colors)['light'] | (typeof Colors)['dark'];
 
+// Share-in from WhatsApp/SMS works in the APK only: Expo Go and the web don't have the native module.
+const shareInDisabled = Platform.OS === 'web' || Constants.executionEnvironment === 'storeClient';
+
 export default function RootLayout() {
   const scheme = useColorScheme() === 'dark' ? 'dark' : 'light';
   const colors = Colors[scheme];
 
   return (
-    <ThemeProvider value={scheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <StoreProvider>
-        <StatusBar style={scheme === 'dark' ? 'light' : 'dark'} />
-        <AppStack colors={colors} />
-      </StoreProvider>
-    </ThemeProvider>
+    <ShareIntentProvider options={{ disabled: shareInDisabled }}>
+      <ThemeProvider value={scheme === 'dark' ? DarkTheme : DefaultTheme}>
+        <StoreProvider>
+          <StatusBar style={scheme === 'dark' ? 'light' : 'dark'} />
+          <AppStack colors={colors} />
+          <ShareIn />
+        </StoreProvider>
+      </ThemeProvider>
+    </ShareIntentProvider>
   );
 }
 
