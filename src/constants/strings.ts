@@ -27,6 +27,9 @@ const en = {
   resultActionsButton: 'What to do now',
   resultSave: 'Save to history',
   resultSaved: 'Saved',
+  followUpLabel: 'They asked for something new?',
+  followUpPlaceholder: 'Paste their new message',
+  followUpButton: 'Add to this case and check again',
   sourceLabel: 'Source',
 
   jobTitle: 'Job check',
@@ -72,6 +75,9 @@ export type StringKey = keyof typeof en;
 export type Language = 'en' | 'fr' | 'mfe';
 
 const fr: Partial<Record<StringKey, string>> = {
+  followUpLabel: "Ils demandent autre chose ?",
+  followUpPlaceholder: "Collez leur nouveau message",
+  followUpButton: "Ajouter à ce dossier et vérifier à nouveau",
   languageLabel: "Langue",
   scanTitle: "Vérifier un message",
   scanHint: "Collez ci-dessous un SMS, un message WhatsApp ou un e-mail suspect. Rien ne quitte votre téléphone.",

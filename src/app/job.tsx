@@ -13,7 +13,7 @@ import { useStore } from '@/lib/store';
 
 export default function JobScreen() {
   const theme = useTheme();
-  const { current, runCheck } = useStore();
+  const { current, updateCase } = useStore();
   const text = current?.text ?? '';
 
   const [agencyId, setAgencyId] = useState<string | null>(current?.job?.agencyId ?? null);
@@ -29,7 +29,7 @@ export default function JobScreen() {
   const picked = engine.data.agencies.find((a) => a.id === agencyId);
 
   function checkAgain() {
-    runCheck(text, { agencyId, costId });
+    updateCase(text, { agencyId, costId });
     router.back();
   }
 

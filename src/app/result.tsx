@@ -1,13 +1,19 @@
 // Result screen: level banner, the message with X-Ray highlights, and each finding with its source.
 
 import { router } from 'expo-router';
+import { useState } from 'react';
+import { StyleSheet, TextInput } from 'react-native';
 
 import { Button, Card, HighlightedText, Label, LevelBanner, LevelTag, Screen } from '@/components/ui';
 import { findingTitle, t } from '@/constants/strings';
+import { FontSize, Radius, Spacing } from '@/constants/theme';
+import { useTheme } from '@/hooks/use-theme';
 import { useStore } from '@/lib/store';
 
 export default function ResultScreen() {
-  const { current, saveCurrent } = useStore();
+  const theme = useTheme();
+  const { current, saveCurrent, addToCase } = useStore();
+  const [newText, setNewText] = useState('');
 
   if (!current) {
     return (
@@ -52,6 +58,32 @@ export default function ResultScreen() {
         title={current.savedAt ? t('resultSaved') : t('resultSave')}
         onPress={saveCurrent}
       />
+
+      {/* Follow-up: they send a new demand later (e.g. "now Rs 15,000 for the air ticket"). */}
+      <Card>
+        <Label variant="label">{t('followUpLabel')}</Label>
+        <TextInput
+          value={newText}
+          onChangeText={setNewText}
+          placeholder={t('followUpPlaceholder')}
+          placeholderTextColor={theme.textSecondary}
+          multiline
+          accessibilityLabel={t('followUpPlaceholder')}
+          style={[styles.input, { color: theme.text, borderColor: theme.border }]}
+        />
+        <Button
+          kind="secondary"
+          title={t('followUpButton')}
+          onPress={() => {
+            addToCase(newText);
+            setNewText('');
+          }}
+        />
+      </Card>
     </Screen>
   );
 }
+
+const styles = StyleSheet.create({
+  input: { minHeight: 80, borderWidth: 1, borderRadius: Radius, padding: Spacing.two + 4, fontSize: FontSize.body, textAlignVertical: 'top' },
+});

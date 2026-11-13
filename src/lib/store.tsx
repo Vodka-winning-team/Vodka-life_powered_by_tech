@@ -20,6 +20,8 @@ type Store = {
   current: Check | null;
   history: Check[];
   runCheck: (text: string, job?: JobAnswers | null) => void;
+  updateCase: (text: string, job: JobAnswers | null) => void;
+  addToCase: (newText: string) => void;
   openCheck: (check: Check) => void;
   saveCurrent: () => void;
   clearHistory: () => void;
@@ -62,11 +64,30 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     AsyncStorage.setItem(HISTORY_KEY, JSON.stringify(next)).catch(() => {});
   }
 
+  /** A new check from the Scan screen: always a new case. */
   function runCheck(text: string, job: JobAnswers | null = null) {
     const result = engine.check(text, job);
-    // Re-checking the same message (e.g. after the Job check) keeps the same id.
-    const id = current && current.text === text ? current.id : String(Date.now());
-    setCurrent({ id, text, job, result, savedAt: null });
+    setCurrent({ id: String(Date.now()), text, job, result, savedAt: null });
+  }
+
+  /**
+   * Follow-up on the open case (Job check answers, or a new message from them).
+   * Keeps the same case; if it was saved, the saved copy in History is updated too.
+   */
+  function updateCase(text: string, job: JobAnswers | null) {
+    if (!current) return;
+    const updated: Check = { ...current, text, job, result: engine.check(text, job) };
+    if (current.savedAt) {
+      updated.savedAt = new Date().toISOString();
+      writeHistory([updated, ...history.filter((c) => c.id !== updated.id)]);
+    }
+    setCurrent(updated);
+  }
+
+  /** Adds their new message to the open case, then checks the whole case again. */
+  function addToCase(newText: string) {
+    if (!current || newText.trim() === '') return;
+    updateCase(current.text + '\n\n' + newText.trim(), current.job);
   }
 
   function saveCurrent() {
@@ -80,6 +101,8 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     current,
     history,
     runCheck,
+    updateCase,
+    addToCase,
     openCheck: setCurrent,
     saveCurrent,
     clearHistory: () => {
