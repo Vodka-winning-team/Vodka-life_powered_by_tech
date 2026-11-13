@@ -42,7 +42,9 @@ async def speak(request: SpeechRequest) -> Response:
     if answer.status_code != 200:
         # 401 = wrong key, 429 = budget or rate limit, 400 = text too long or unknown voice.
         raise HTTPException(status_code=502, detail=f"Text-to-speech service answered {answer.status_code}.")
-    return Response(content=answer.content, media_type="audio/mpeg")
+    # myt sends WAV audio even when MP3 is asked for, so label it by what it really is.
+    media_type = "audio/wav" if answer.content[:4] == b"RIFF" else "audio/mpeg"
+    return Response(content=answer.content, media_type=media_type)
 
 
 @router.get("", summary="Same as POST, for audio players that load a web address")
