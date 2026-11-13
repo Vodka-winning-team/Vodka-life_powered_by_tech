@@ -2,7 +2,7 @@
 
 **Updated about every 10 minutes by Pushkar's Claude.** Pull, read your row, do it. To ask for something, use **Requests** at the bottom.
 
-Last update: **Fri 13 Nov 18:48** · Next check: about 18:56 · Deadline: **Sat 12:30**
+Last update: **Fri 13 Nov 18:58** · Next check: about 19:06 · Deadline: **Sat 12:30**
 
 ## How to use this file
 - **Check it:** `git pull`, then read **Next for each person**. Your Claude can read it too: "Read automation.md and do my next task".
@@ -16,37 +16,37 @@ Last update: **Fri 13 Nov 18:48** · Next check: about 18:56 · Deadline: **Sat 
 ## Status
 | Checkpoint | State |
 |---|---|
-| 18:00: APK on a real phone; agencies, fee rules, banks data | Data ✅ · Engine ✅ · **APK ⏳ still building (Jayesh fixed a Windows build error at 18:43)** |
-| 23:00: full flow with real data (Scan → X-Ray → bank check → job check → what to do now → history) | Screens ✅ wired to the real engine · needs a run on a real phone |
-| 03:00: FSC/CERT in, job follow-up works | FSC/CERT ✅ already in the engine |
+| 18:00: APK on a real phone; agencies, fee rules, banks data | Data ✅ · Engine ✅ · **APK ⏳ not reported yet (Jayesh)** |
+| 23:00: full flow with real data | Screens ✅ wired to the real engine · needs a run on a real phone |
+| 03:00: FSC/CERT in, job follow-up works | FSC/CERT ✅ in the engine |
 | 07:00: feature freeze | — |
 
 **Done so far**
-- **Adiyen (A):** all 5 data files, phones audited (+230 format), `validate.py`, `docs/sources.md`, `docs/test-cases.md` (15 cases).
-- **Pushkar (B):** TypeScript engine, **59 tests pass** (demo 1 and 4 STOP, genuine bank code SMS NONE, 22 Kreol/French messages, Adiyen's 15 cases); README draft; this board.
-- **Jayesh (C):** Expo app with 6 screens wired to the engine; readable phone numbers; Our sources text; bigger Job check chips; keyboard fix.
+- **Adiyen (A):** 5 data files, phones audited, `validate.py`, `docs/sources.md`, `docs/test-cases.md` (15 cases), `docs/strings-fr-mfe.md` (French + Kreol for every screen text and finding title), slide-2 fact check.
+- **Pushkar (B):** TypeScript engine, **59 tests pass**; README draft, now with checked source links for every number in "Problem"; this board.
+- **Jayesh (C):** Expo app with 6 screens wired to the engine; readable phone numbers; Our sources text; Job check chips; keyboard fix.
 - **D:** nothing pushed yet.
 
 ## Next for each person
 **Adiyen (A)**
-1. `docs/strings-fr-mfe.md`: French and Kreol versions of the main screen texts (from `src/constants/strings.ts`) for Jayesh.
-2. Use "Security alert campaigns" instead of "Scam campaigns" in `docs/sources.md` (wording rule; Jayesh changed it on screen).
-3. If D is still missing at 19:30, write `docs/demo-messages.md` (6 demo messages from `PROJECT.md` §9; suggested real agency: LIFETIME CANADA LTD).
+1. If D is still missing at 19:30, write `docs/demo-messages.md` (6 demo messages from `PROJECT.md` §9; agency suggestion: LIFETIME CANADA LTD).
+2. `phones: [...]` in agencies.json once Jayesh also says yes (request below).
 
 **Pushkar (B)**
-1. Run the app (`npx expo start`, press `w`) and try the demo messages on the Scan screen; report anything that looks wrong to Jayesh here.
-2. Add D's demo messages as tests when they are pushed.
+1. Run the app (`npx expo start`, press `w`) and paste the demo messages into Scan; report problems to Jayesh here.
+2. Use `phones` in the engine's contacts once Adiyen adds it.
 
 **Jayesh (C)**
-1. Finish the APK and install it on the demo phone *(18:00 checkpoint, overdue)*.
-2. Remove the dev-only sample button once real results look right.
-3. Finding titles by `kind` in `strings.ts` (list in `src/engine/index.ts`): `code_request`, `bank_link`, `bank_phone`, `bank_alarm`, `fsc_alert`, `job_fee`, `agency_listed`, `agency_not_found`, `agency_wrong_category`, `agency_expired`, `urgency`, `payment_request`, `prize_gift`, `guaranteed_returns`, `new_number`, `odd_link`, `cert_alert`.
+1. APK on the demo phone *(18:00 checkpoint, overdue)*.
+2. Paste Adiyen's French and Kreol from `docs/strings-fr-mfe.md` into `strings.ts`, plus the language switch.
+3. Answer Adiyen's `phones` question below (yes/no).
+4. Remove the dev-only sample button once real results look right.
 
 **D (pitch and testing), overdue, nothing pushed yet**
-1. Ask the organisers whether reusing FraudLens's old look and fonts is allowed; answer + time in `docs/decisions.md` *(due 16:30)*.
-2. `docs/demo-messages.md`: the 6 demo messages from `PROJECT.md` §9, labelled fictional, each with its expected level *(due 18:00)*.
-3. Book 3 testers (jobseekers or parents) for 19:00–21:00; notes in `docs/user-tests.md`.
-4. Finish `README.md` (drafted 18:35): AI tools, surprise card, team names. Adiyen's request above has the data for slide 4.
+1. `docs/decisions.md`, with the organisers' answer on reusing FraudLens's look *(due 16:30)*.
+2. `docs/demo-messages.md`: 6 demo messages *(due 18:00)*.
+3. Testers for 19:00–21:00, notes in `docs/user-tests.md` *(starts now)*.
+4. Slides: use only the checked numbers (Adiyen's fact check + B's note below; links are in `README.md` "Problem").
 
 ## Requests
 <!-- Add new lines at the END of this list. Format: - [ ] HH:MM · Name: request -->
@@ -58,5 +58,5 @@ Last update: **Fri 13 Nov 18:48** · Next check: about 18:56 · Deadline: **Sat 
 - [x] 18:43 · Jayesh: FYI removed unused native packages (gesture-handler, reanimated, worklets, @expo/ui, expo-image...) to fix the Windows APK build; run `npm install` after pulling. Nothing in src/engine changed. → noted 18:48 (B): pulled, ran `npm install`; engine tests, `tsc` and lint still pass.
 - [x] 18:45 · Jayesh: FYI fixed from a Codex review: chips are 48 pt and can be unselected (Job check), "Saved" clears with Clear history, keyboard no longer covers buttons on iPhone.
 - [ ] 18:49 · Adiyen: Jayesh, `docs/strings-fr-mfe.md` is pushed (commit 67907bf): French and Kreol for all 43 keys in strings.ts, ready to paste into the `fr` and `mfe` objects (section 3), plus the 17 finding titles by `kind` with {name}/{date}/{campaign} placeholders (section 2). Kreol needs a native speaker's read before the demo; send corrections here and I'll update the file.
-- [ ] 18:51 · Adiyen: D, slide-2 fact check of PROJECT.md §2. ✅ "MAUCORS logged 913 scam reports in 2025" is confirmed: 913 "arnaques et fraudes" out of 6,073 incidents reported to MAUCORS in 2025 (Defimedia, 24 Aug 2026: https://defimedia.info/risques-dusurpation-didentite-whatsapp-username-le-gm-veut-des-garanties-avant-tout-deploiement). ❌ "Radio One 2026: 20+ alleged victims, Rs 296,000 from 4 complainants": no source found, so don't put it on a slide unless you have the link. ❌ "Ministry warnings in 2022 and 2023": no communiqué found online. A sourced alternative: Defimedia, 30 Jul 2021, about ten Mauritians cheated by fake recruiters for Canada, 6 complaints to the Ministry of Labour in 2 months, one person paid about Rs 350,000 (https://defimedia.info/immigration-letranger-les-faux-recruteurs-traques-intensivement-depuis-deux-mois).
-- [ ] 18:51 · Adiyen: B and Jayesh, a question (no change made). 55 of the 79 agencies list 2 or 3 phone numbers in the register, but agencies.json keeps only the first (the contract has one `phone`). A message using an agency's real second number can't be matched. Option: add `phones: [...]` (all register numbers) next to `phone`. That's a contract change: reply "yes" both, and I'll add it, update TASKS.md §2 and validate.py in one commit.
+- [ ] 18:51 · Adiyen: D, slide-2 fact check of PROJECT.md §2. ✅ "MAUCORS logged 913 scam reports in 2025" is confirmed: 913 "arnaques et fraudes" out of 6,073 incidents reported to MAUCORS in 2025 (Defimedia, 24 Aug 2026: https://defimedia.info/risques-dusurpation-didentite-whatsapp-username-le-gm-veut-des-garanties-avant-tout-deploiement). ❌ "Radio One 2026: 20+ alleged victims, Rs 296,000 from 4 complainants": no source found, so don't put it on a slide unless you have the link. ❌ "Ministry warnings in 2022 and 2023": no communiqué found online. A sourced alternative: Defimedia, 30 Jul 2021, about ten Mauritians cheated by fake recruiters for Canada, 6 complaints to the Ministry of Labour in 2 months, one person paid about Rs 350,000 (https://defimedia.info/immigration-letranger-les-faux-recruteurs-traques-intensivement-depuis-deux-mois). → B note 18:58 (sources opened and read today): ✅ Radio One, 25 Aug 2026: "une vingtaine de Mauriciens" (about twenty), one official complaint so far: https://radio1.mu/faux-recruteur-le-reve-de-travailler-a-letranger-vire-au-cauchemar-pour-une-vingtaine-de-mauriciens/ · ✅ Radio One, 7 Sep 2026: four complainants say they paid Rs 296,000 in total, one paid Rs 50,000 for a job in Dubai: https://radio1.mu/promesses-demplois-letranger-un-habitant-de-quatre-bornes-aurait-soutire-pres-de-rs-300-000-a-quatre-victimes/ · ✅ Ministry of Labour communiqué, 28 Apr 2022, "Attention aux fausses agences de recrutement offrant du travail à l'étranger": https://www.govmu.org/EN/Communique1/year%202022/May/Communiqu%C3%A9-%20Fausses%20agences%20de%20recrutement%2028.04.22.pdf · ❌ the 2023 warning link is dead (404), so say "warned in 2022" only. Slide wording: "about twenty", not "20+"; these are allegations, not convictions. README updated with these links.
+- [~] 18:51 · Adiyen: B and Jayesh, a question (no change made). 55 of the 79 agencies list 2 or 3 phone numbers in the register, but agencies.json keeps only the first (the contract has one `phone`). A message using an agency's real second number can't be matched. Option: add `phones: [...]` (all register numbers) next to `phone`. That's a contract change: reply "yes" both, and I'll add it, update TASKS.md §2 and validate.py in one commit. → B 18:58: **yes from B**, as an extra field: keep `phone` (main number, unchanged) and add `phones: [...]` with all register numbers. The engine will show the extra numbers only as official numbers to call. It will never treat a number in a message that matches the register as proof the message is real (scammers can copy numbers). Waiting for Jayesh's yes.
