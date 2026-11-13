@@ -86,6 +86,8 @@ Mauritius Telecom Lucky Draw: you have won a prize! Send your details to mauriti
   → **"Warning signs found. Tap to see why."** within 2 seconds → tap → Result: Stop.
 - [ ] The same command with message 4 (the MCB code SMS) → **no** alert.
 - [ ] One real WhatsApp message from a teammate's phone → alert.
+- [ ] A **long** WhatsApp message (demo message 1 pasted 3 times, with "processing fee" only in the last copy) → alert. This checks we read the whole message, not the shortened preview.
+- [ ] WhatsApp → Settings → Notifications → "Show preview" **off** → send again → no alert, and no crash. Turn previews back on.
 
 ## D. Results (add one line per run)
 

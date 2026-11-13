@@ -18,7 +18,12 @@ Shield was cut at 16:05 (decision 5). This brings it back **only as an opt-in sw
 
 - Same rules, same levels, same wording ("Warning signs found", never "scam" or "safe").
 - **Nothing is saved and nothing leaves the phone.** The notification text is checked in memory and then forgotten. History is still saved only when the user taps Save.
-- Off by default. Turning it on needs **two clear steps**: our explanation screen, then Android's own "Notification access" screen.
+- Off by default. Turning it on is a short setup, each step explained in plain words:
+  1. **Our explanation screen:** what the app reads (new WhatsApp and SMS notifications only), and that nothing is saved or sent.
+  2. **Android's "Notification access" screen:** the user switches FraudLens on.
+  3. **Allow notifications** (Android 13 and later), so FraudLens can show its alert.
+  4. **Battery: "Unrestricted"** for FraudLens. Some phones (Xiaomi, Oppo, some Samsung battery savers) otherwise stop background apps. Our screen opens the right settings page.
+  5. **A reminder to keep message previews on in WhatsApp** (WhatsApp → Settings → Notifications → "Show preview"). Without previews, the notification has no text to check.
 - It reads **WhatsApp and SMS app notifications only**. Every other app's notifications are ignored without being read.
 - **Android only.** The switch is hidden on iPhone and the web.
 
@@ -54,10 +59,21 @@ It is **never in the main demo path**. It's the last 20 seconds of the demo, and
   - Debug builds only: `com.android.shell`, for the quick test in section 6
 - **Ignore:** group summary notifications ("3 new messages"), and repeats of the same text within 1 minute.
 - **Posting the alert:** use `expo-notifications`. Android 13 and later asks for permission to show notifications, once, when the switch is turned on. Tapping the alert opens `/result` with the text. Use the same entry as share-in, so share-in and Shield share one path into the app.
-- **Known limits, which we say openly:**
-  - Notifications show only part of a long message.
-  - Newer Android versions may hide notifications that contain one-time codes from apps like ours.
-  - Background checks don't do the job check, which needs the agency and the cost; the alert opens the full check.
+- **What we read:** the data behind the notification, not what's shown on the screen. Read the message text from the notification's extras: `android.messages` (WhatsApp's chat-style notifications, one entry per message) first, then `android.bigText`, then `android.text`. That usually gives the **whole message**, even when the phone shows it shortened. Only extremely long messages may be cut by the sending app; the engine says so (`message_truncated`).
+- **Known limits, which we say openly.** Even with every permission on:
+
+  | Case | What happens | What we do |
+  |---|---|---|
+  | The offer is an **image or a voice note** (job flyers often are) | No text to read | Share-in or paste stays the way in; the setup screen says so |
+  | **WhatsApp previews are off** | The notification says only "New message" | Setup step 5 asks to keep previews on |
+  | The chat or WhatsApp is **muted** | No notification, nothing to read | None: share-in or paste |
+  | Kevin **already has that chat open** | WhatsApp shows no notification | None needed: he's reading it |
+  | **One-time-code** messages on Android 15 and later | Android hides them from apps like ours | Little harm: these are mostly real bank code SMS, which give no warning anyway |
+  | Phones that **stop background apps** | The listener can be stopped | Setup step 4 (battery "Unrestricted") |
+  | **iPhone** | Apple doesn't allow it | Switch hidden; share-in or paste |
+  | The **job check** | Needs the agency and the cost from Kevin | The alert opens the full check |
+
+  **In short:** with the setup done, it catches most **text** messages on most Android phones. Share-in stays essential for images, voice notes and muted chats.
 
 ## 6. Making it quick to test (no second phone, no WhatsApp needed)
 
