@@ -15,7 +15,15 @@ fun main(args: Array<String>) {
     println("FraudLens Moris engine: ${data.agencies.size} agencies, ${data.banks.size} banks/PSPs, " +
         "${data.feeRules.size} fee rules, ${data.fscAlerts.size} FSC alerts, ${data.certAlerts.size} CERT-MU alerts")
 
-    if (args.isNotEmpty()) { show(engine, args.joinToString(" "), null); return }
+    // One-shot mode (no typing needed): TRY_MSG="message" and optionally TRY_JOB="agency-id|none cost-id".
+    val envMsg = System.getenv("TRY_MSG")
+    if (!envMsg.isNullOrBlank() || args.isNotEmpty()) {
+        val job = System.getenv("TRY_JOB")?.trim()?.takeIf { it.isNotEmpty() }?.split(Regex("\\s+"))?.let {
+            JobAnswers(agencyId = it.getOrNull(0)?.takeIf { a -> a != "none" }, costId = it.getOrNull(1))
+        }
+        show(engine, envMsg?.takeIf { it.isNotBlank() } ?: args.joinToString(" "), job)
+        return
+    }
 
     println("Type a message (or: job <agency-id|none> [cost-id] · agencies <text> · costs · quit)")
     var job: JobAnswers? = null
