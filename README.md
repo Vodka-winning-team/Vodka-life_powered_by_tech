@@ -95,7 +95,7 @@ To try the engine on one message without the app:
 ```
 TRY_MSG="MCB: verify your account at mcb-login-secure.net" npx jest try-it
 ```
-APK: *(link added when the release build is uploaded)*.
+APK: https://github.com/Vodka-winning-team/Vodka-life_powered_by_tech/releases (test build of Fri 13 Nov 21:15; the final build is added before 12:00).
 
 ## Team
 | Person | Role |
