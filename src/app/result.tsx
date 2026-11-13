@@ -38,8 +38,8 @@ export default function ResultScreen() {
   const highlights = result.findings.flatMap((f) => f.highlights);
 
   return (
-    // A new case (shared message, follow-up) starts a fresh page at the top, so the level banner is always seen.
-    <Screen key={`${current.id}-${text}`}>
+    // A new case, follow-up or Job check answer starts a fresh page at the top, so the level banner is always seen.
+    <Screen key={`${current.id}-${text}-${current.job?.agencyId ?? ''}-${current.job?.costId ?? ''}`}>
       <LevelBanner level={result.level} />
 
       {/* The next step comes first. (Granny mode shows the Call buttons themselves, just below.) */}
