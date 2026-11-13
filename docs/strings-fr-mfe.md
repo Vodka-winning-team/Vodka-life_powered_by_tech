@@ -29,6 +29,7 @@ Kreol uses the standard Kreol Morisien spelling (*Grafi Larmoni*: mesaz, nimero,
 | resultSave | Save to history | Enregistrer dans l'historique | Gard dan istorik |
 | resultSaved | Saved | Enregistré | Finn gard |
 | sourceLabel | Source | Source | Sours |
+| findingInfo | Good to know | Bon à savoir | Bon pou kone |
 | followUpLabel | They asked for something new? | Ils demandent autre chose ? | Zot pe dimann enn lot zafer? |
 | followUpPlaceholder | Paste their new message | Collez leur nouveau message | Kol zot nouvo mesaz isi |
 | followUpButton | Add to this case and check again | Ajouter à ce dossier et vérifier à nouveau | Azout dan sa dosie la ek verifye ankor |
@@ -80,6 +81,10 @@ These are for Jayesh's task "translate finding titles by `kind`". The English is
 | new_number | Says they have a new number | Dit avoir un nouveau numéro | Dir ki li ena enn nouvo nimero |
 | odd_link | Suspicious link | Lien suspect | Lien sispe |
 | cert_alert | Matches a CERT-MU alert: {campaign} | Correspond à une alerte du CERT-MU : {campaign} | Parey kouma enn lalert CERT-MU: {campaign} |
+| empty_message | Paste the whole message to check it | Collez le message en entier pour le vérifier | Kol mesaz la an antie pou nou kapav verifye li |
+| message_truncated | Only the first part was checked | Seul le début du message a été vérifié | Nou finn verifye zis koumansman mesaz la |
+| cost_unknown | We couldn't match that cost | Nous n'avons pas reconnu ce coût | Nou pa finn rekonet sa fre la |
+| check_failed | We couldn't check this message | Nous n'avons pas pu vérifier ce message | Nou pa finn kapav verifye sa mesaz la |
 
 ## 3. Ready to paste into `strings.ts`
 
@@ -104,6 +109,7 @@ const fr: Partial<Record<StringKey, string>> = {
   resultSave: "Enregistrer dans l'historique",
   resultSaved: "Enregistré",
   sourceLabel: "Source",
+  findingInfo: "Bon à savoir",
   followUpLabel: "Ils demandent autre chose ?",
   followUpPlaceholder: "Collez leur nouveau message",
   followUpButton: "Ajouter à ce dossier et vérifier à nouveau",
@@ -153,6 +159,7 @@ const mfe: Partial<Record<StringKey, string>> = {
   resultSave: "Gard dan istorik",
   resultSaved: "Finn gard",
   sourceLabel: "Sours",
+  findingInfo: "Bon pou kone",
   followUpLabel: "Zot pe dimann enn lot zafer?",
   followUpPlaceholder: "Kol zot nouvo mesaz isi",
   followUpButton: "Azout dan sa dosie la ek verifye ankor",
