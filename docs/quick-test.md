@@ -79,7 +79,7 @@ Mauritius Telecom Lucky Draw: you have won a prize! Send your details to mauriti
 - [ ] **Save to history** twice → **one** entry in History.
 - [ ] Close the app completely and reopen it → it doesn't crash; History is still there.
 
-## C. Shield ([proposal](proposal-shield-optin.md); built by Jayesh at 21:40)
+## C. Shield ([proposal](proposal-shield-optin.md); built 21:40, passed on the release APK 22:33)
 
 - [ ] **Old FraudLens app removed:** uninstall the old FraudLens app (`com.fraudlens.shield`, from September) from the test phone. It would also react to the same WhatsApp, and judges must only see code written this weekend (Rule 1: start from empty). In Android's Notification access list, only **"FraudLens Moris"** is on.
 

@@ -35,7 +35,7 @@ Shield was cut at 16:05 (decision 5). This brings it back **only as an opt-in sw
 | The surprise card app work (tap guard, "paste the whole message", skipped Job check) is done | before work starts | Surprise card first |
 | The APK builds on the demo phone (it can't run in Expo Go) | by 23:00 | Not built; slide 6 line only |
 | Share-in from WhatsApp is done first (part of feature 1, never cut) | before work starts | Share-in first |
-| Shield works on the APK | **03:00, hard stop** | Removed; slide 6 line only |
+| Shield works on the APK | **03:00, hard stop** · ✅ **passed 22:33** (real WhatsApp test on the release APK) | Removed; slide 6 line only |
 
 It is **never in the main demo path**. It's the last 20 seconds of the demo, and it's also recorded in the backup video in case it fails live.
 

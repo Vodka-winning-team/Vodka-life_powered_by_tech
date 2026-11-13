@@ -31,6 +31,7 @@ Airplane mode **on** the whole time.
 3. What to do now: call the agency on the **register's** number, never the one in the message; share a summary with Mum.
 4. Fake MCB message with `mcb-login-secure.net` → **not MCB's official website** (mcb.mu, Bank of Mauritius list) → MCB's official number.
 5. A real MCB code SMS → **No warning signs found – still verify**. No false alarm.
+6. *(Optional, 20 s, airplane mode off)* **Automatic checking:** a WhatsApp arrives → *"Stop – warning signs found"* without touching the phone. Opt-in, nothing saved.
 
 Speaker note: if the phone fails, play the 2-minute backup video.
 
@@ -67,6 +68,5 @@ Every warning in the app shows its source and date. No personal names stored. No
   - **Arnak? Live:** a warning that appears *during* a call when a bank app is opened.
   - Updating the data automatically from the official sources.
   - A full Kreol voice mode.
-  - **Shield (opt-in, Android):** check new WhatsApp and SMS messages automatically, if the user turns it on. Nothing saved.
 
 Speaker note: finish with "Verifye avan ou peye."

@@ -74,7 +74,7 @@ The messages are in [`demo-messages.md`](demo-messages.md) and the slides in [`s
 > "Whatever Kevin does wrong, the app never gives him a false green light. It fails safe. We tested it with 500 random messages."
 - *Before rehearsal: check each of these on the APK (Jayesh's app side was done at 21:00; `quick-test.md` section B2).*
 
-**Step 7 (optional): automatic checking, Shield (about 20 s)**. Only if it passed the quick test (section C) on the release APK.
+**Step 7 (optional): automatic checking, Shield (about 20 s)**. Passed on the release APK at 22:33 (real WhatsApp test). Rehearse it once on the demo phone first.
 - **Before this step: turn airplane mode off** (Wi-Fi or data on), so the WhatsApp message can arrive. Shield must already be switched on, with Notification access granted.
 - Jayesh's phone sends demo message 1 by WhatsApp to the demo phone → **"Stop – warning signs found. Tap to see why, before you pay."** → tap → Result: **Stop**.
 > "And if Kevin turns it on, he doesn't even need to copy the message. It's his choice, and nothing is saved."
