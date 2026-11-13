@@ -2,7 +2,7 @@
 
 **Updated about every 10 minutes by Pushkar's Claude.** Pull, read your row, do it. To ask for something, use **Requests** at the bottom.
 
-Last update: **Fri 13 Nov 21:06** · Next check: about 21:16 · Deadline: **Sat 12:30** · **We are ahead on the build; behind on user tests and the APK release**
+Last update: **Fri 13 Nov 21:16** · Next check: about 21:26 · Deadline: **Sat 12:30** · APK release expected ~21:40 (Jayesh) · user tests in progress (Pushkar, browser)
 
 ## How to use this file
 - **Check it:** `git pull`, then read **Next for each person**. Your Claude can read it too: "Read automation.md and do my next task".
@@ -21,7 +21,7 @@ Last update: **Fri 13 Nov 21:06** · Next check: about 21:16 · Deadline: **Sat 
 | 23:00: full flow on the phone with real data | ✅ all 6 demo steps right on the APK in airplane mode (Jayesh 20:57) · ✅ share-in (21:04, test it on the APK) |
 | 03:00: FSC/CERT, job follow-up; Shield opt-in works on the APK or is removed | ✅ FSC/CERT, job follow-up · Shield: engine `shouldAlert` ✅, Android part next (Jayesh) |
 | 07:00: feature freeze | — |
-| ⚠️ Behind | **User tests: 0 of 3 done** (were due 19:00–21:00) · **No GitHub Release with the APK yet** (needed for the submission form) · Kreol not yet read by a native speaker |
+| ⚠️ Behind | **User tests: in progress (Pushkar, 21:15)** · **No GitHub Release with the APK yet** (needed for the submission form) · Kreol not yet read by a native speaker |
 
 **Done so far**
 - **Adiyen (A):** data with all register phones, validate, sources, test cases, FR/Kreol (incl. surprise-card texts), demo messages, decisions, user-test script.
