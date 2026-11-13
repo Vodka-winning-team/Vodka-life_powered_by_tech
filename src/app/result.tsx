@@ -1,8 +1,8 @@
 // Result screen: level banner, the message with X-Ray highlights, and each finding with its source.
 
 import { router } from 'expo-router';
-import { useState } from 'react';
-import { Linking, StyleSheet, TextInput } from 'react-native';
+import { useEffect, useState } from 'react';
+import { Linking, Pressable, StyleSheet, TextInput } from 'react-native';
 
 import { Button, Card, HighlightedText, Label, LevelBanner, LevelTag, Screen } from '@/components/ui';
 import { findingDetail, findingTitle, t } from '@/constants/strings';
@@ -10,6 +10,8 @@ import { FontSize, Radius, Spacing } from '@/constants/theme';
 import { useLook } from '@/hooks/use-look';
 import { useTheme } from '@/hooks/use-theme';
 import { dialNumber, formatPhone } from '@/lib/phone';
+import { sources } from '@/lib/data';
+import { speak, speechFor, stopSpeaking } from '@/lib/speak';
 import { useStore } from '@/lib/store';
 import { prettyDay } from '@/lib/time';
 
@@ -18,6 +20,10 @@ export default function ResultScreen() {
   const { current, saveCurrent, addToCase } = useStore();
   const { granny, scale } = useLook();
   const [newText, setNewText] = useState('');
+  const [reading, setReading] = useState(false);
+
+  // Stop reading aloud when leaving the screen.
+  useEffect(() => stopSpeaking, []);
 
   if (!current) {
     return (
@@ -35,6 +41,21 @@ export default function ResultScreen() {
     // A new case (shared message, follow-up) starts a fresh page at the top, so the level banner is always seen.
     <Screen key={`${current.id}-${text}`}>
       <LevelBanner level={result.level} />
+
+      {/* Read aloud: level, plain sentence, each finding, official numbers (EN/FR voices; Kreol uses French). */}
+      <Button
+        kind="secondary"
+        title={reading ? t('stopReading') : t('readAloud')}
+        onPress={() => {
+          if (reading) {
+            stopSpeaking();
+            setReading(false);
+          } else {
+            setReading(true);
+            speak(speechFor(result), () => setReading(false));
+          }
+        }}
+      />
 
       {/* Granny mode: one plain sentence, then the official number to call, first. Details stay below. */}
       {granny && (
@@ -73,6 +94,18 @@ export default function ResultScreen() {
           )}
         </Card>
       ))}
+
+      {/* How old is the data: every check uses these official records, with their dates. */}
+      <Pressable accessibilityRole="link" onPress={() => router.push('/sources')}>
+        <Card>
+          <Label variant="label">{t('checkedAgainst')}</Label>
+          {sources.map((s) => (
+            <Label key={s.title} variant="small">
+              {t(s.title)}: {prettyDay(s.snapshot)}
+            </Label>
+          ))}
+        </Card>
+      </Pressable>
 
       <Button title={t('resultActionsButton')} onPress={() => router.push('/actions')} />
       <Button kind="secondary" title={t('resultJobButton')} onPress={() => router.push('/job')} />

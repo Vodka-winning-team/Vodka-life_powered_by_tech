@@ -38,6 +38,9 @@ const en = {
   followUpPlaceholder: 'Paste their new message',
   followUpButton: 'Add to this case and check again',
   sourceLabel: 'Source',
+  readAloud: 'Read aloud',
+  stopReading: 'Stop reading',
+  checkedAgainst: 'Checked against these official records:',
   findingInfo: 'Good to know',
 
   jobTitle: 'Job check',
@@ -112,6 +115,9 @@ export type StringKey = keyof typeof en;
 export type Language = 'en' | 'fr' | 'mfe';
 
 const fr: Partial<Record<StringKey, string>> = {
+  readAloud: "Lire à voix haute",
+  stopReading: "Arrêter la lecture",
+  checkedAgainst: "Vérifié avec ces listes officielles :",
   grannyMode: "Mode grand-mère : texte et boutons plus grands",
   grannySTOP: "Ne payez et n'envoyez rien. Appelez d'abord le numéro officiel ci-dessous.",
   grannyCAREFUL: "Attention. Avant de payer, appelez vous-même le numéro officiel.",
