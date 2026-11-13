@@ -12,11 +12,11 @@ Android's own permission screens (Notification access, battery) are in the phone
 | shieldSwitch | Scan screen, switch label (Android only) | Check new messages automatically |
 | shieldSwitchHint | Under the switch | WhatsApp and SMS, on this phone only. Off unless you turn it on. |
 | shieldSetupTitle | Setup screen title | Automatic checking |
-| shieldSetupWhat | Setup, first paragraph | When this is on, FraudLens reads new WhatsApp and SMS notifications on this phone and checks them with the same rules. Nothing is saved or sent. |
+| shieldSetupWhat | Setup, first paragraph | When this is on, Verifye reads new WhatsApp and SMS notifications on this phone and checks them with the same rules. Nothing is saved or sent. |
 | shieldSetupNot | Setup, second paragraph | It doesn't read other apps, your photos or your contacts. You can turn it off at any time. |
 | shieldStepAccess | Setup step 1 | 1. Allow notification access |
-| shieldStepAccessHint | Under step 1 | Android will open a list. Turn on FraudLens Moris. |
-| shieldStepAlerts | Setup step 2 | 2. Allow FraudLens to show alerts |
+| shieldStepAccessHint | Under step 1 | Android will open a list. Turn on Verifye. |
+| shieldStepAlerts | Setup step 2 | 2. Allow Verifye to show alerts |
 | shieldStepBattery | Setup step 3 | 3. Set battery use to "Unrestricted" |
 | shieldStepBatteryHint | Under step 3 | Some phones stop apps in the background. This keeps the check running. |
 | shieldStepPreview | Setup step 4 | 4. Keep message previews on in WhatsApp |
@@ -42,11 +42,11 @@ The debug-only button **"Send test alert"** stays in English (it's for us, not f
 | shieldSwitch | Vérifier les nouveaux messages automatiquement | Verifye nouvo mesaz otomatikman |
 | shieldSwitchHint | WhatsApp et SMS, sur ce téléphone seulement. Désactivé tant que vous ne l'activez pas. | WhatsApp ek SMS, lor sa telefonn la selman. Li pa marse tanki ou pa met li. |
 | shieldSetupTitle | Vérification automatique | Verifikasion otomatik |
-| shieldSetupWhat | Quand c'est activé, FraudLens lit les nouvelles notifications WhatsApp et SMS de ce téléphone et les vérifie avec les mêmes règles. Rien n'est enregistré ni envoyé. | Kan sa li marse, FraudLens li bann nouvo notifikasion WhatsApp ek SMS lor sa telefonn la ek verifye zot avek mem bann reg. Nanye pa gard, nanye pa avoye. |
+| shieldSetupWhat | Quand c'est activé, Verifye lit les nouvelles notifications WhatsApp et SMS de ce téléphone et les vérifie avec les mêmes règles. Rien n'est enregistré ni envoyé. | Kan sa li marse, Verifye li bann nouvo notifikasion WhatsApp ek SMS lor sa telefonn la ek verifye zot avek mem bann reg. Nanye pa gard, nanye pa avoye. |
 | shieldSetupNot | Il ne lit pas les autres applications, vos photos ni vos contacts. Vous pouvez le désactiver à tout moment. | Li pa li lezot aplikasion, ou bann foto ou ou bann kontak. Ou kapav tengn li nimport kan. |
 | shieldStepAccess | 1. Autoriser l'accès aux notifications | 1. Permet akse ar notifikasion |
-| shieldStepAccessHint | Android va ouvrir une liste. Activez FraudLens Moris. | Android pou ouver enn lis. Met FraudLens Moris lor ON. |
-| shieldStepAlerts | 2. Autoriser FraudLens à afficher des alertes | 2. Permet FraudLens montre bann alert |
+| shieldStepAccessHint | Android va ouvrir une liste. Activez Verifye. | Android pou ouver enn lis. Met Verifye lor ON. |
+| shieldStepAlerts | 2. Autoriser Verifye à afficher des alertes | 2. Permet Verifye montre bann alert |
 | shieldStepBattery | 3. Régler la batterie sur « Non restreinte » | 3. Met batri lor « Unrestricted » |
 | shieldStepBatteryHint | Certains téléphones arrêtent les applications en arrière-plan. Cela permet à la vérification de continuer. | Sertin telefonn aret bann aplikasion ki pe marse andeor. Sa permet verifikasion la kontinie marse. |
 | shieldStepPreview | 4. Garder l'aperçu des messages dans WhatsApp | 4. Les aperçu mesaz lor ON dan WhatsApp |
@@ -72,11 +72,11 @@ Kreol notes for Paveesh: *marse* = running/on, *tengn* = turned off, *sinn danze
 shieldSwitch: 'Check new messages automatically',
 shieldSwitchHint: 'WhatsApp and SMS, on this phone only. Off unless you turn it on.',
 shieldSetupTitle: 'Automatic checking',
-shieldSetupWhat: 'When this is on, FraudLens reads new WhatsApp and SMS notifications on this phone and checks them with the same rules. Nothing is saved or sent.',
+shieldSetupWhat: 'When this is on, Verifye reads new WhatsApp and SMS notifications on this phone and checks them with the same rules. Nothing is saved or sent.',
 shieldSetupNot: "It doesn't read other apps, your photos or your contacts. You can turn it off at any time.",
 shieldStepAccess: '1. Allow notification access',
-shieldStepAccessHint: 'Android will open a list. Turn on FraudLens Moris.',
-shieldStepAlerts: '2. Allow FraudLens to show alerts',
+shieldStepAccessHint: 'Android will open a list. Turn on Verifye.',
+shieldStepAlerts: '2. Allow Verifye to show alerts',
 shieldStepBattery: '3. Set battery use to "Unrestricted"',
 shieldStepBatteryHint: 'Some phones stop apps in the background. This keeps the check running.',
 shieldStepPreview: '4. Keep message previews on in WhatsApp',
@@ -99,11 +99,11 @@ shieldChannelDescription: 'Alerts when a new message has warning signs.',
 shieldSwitch: "Vérifier les nouveaux messages automatiquement",
 shieldSwitchHint: "WhatsApp et SMS, sur ce téléphone seulement. Désactivé tant que vous ne l'activez pas.",
 shieldSetupTitle: "Vérification automatique",
-shieldSetupWhat: "Quand c'est activé, FraudLens lit les nouvelles notifications WhatsApp et SMS de ce téléphone et les vérifie avec les mêmes règles. Rien n'est enregistré ni envoyé.",
+shieldSetupWhat: "Quand c'est activé, Verifye lit les nouvelles notifications WhatsApp et SMS de ce téléphone et les vérifie avec les mêmes règles. Rien n'est enregistré ni envoyé.",
 shieldSetupNot: "Il ne lit pas les autres applications, vos photos ni vos contacts. Vous pouvez le désactiver à tout moment.",
 shieldStepAccess: "1. Autoriser l'accès aux notifications",
-shieldStepAccessHint: "Android va ouvrir une liste. Activez FraudLens Moris.",
-shieldStepAlerts: "2. Autoriser FraudLens à afficher des alertes",
+shieldStepAccessHint: "Android va ouvrir une liste. Activez Verifye.",
+shieldStepAlerts: "2. Autoriser Verifye à afficher des alertes",
 shieldStepBattery: "3. Régler la batterie sur « Non restreinte »",
 shieldStepBatteryHint: "Certains téléphones arrêtent les applications en arrière-plan. Cela permet à la vérification de continuer.",
 shieldStepPreview: "4. Garder l'aperçu des messages dans WhatsApp",
@@ -126,11 +126,11 @@ shieldChannelDescription: "Alertes quand un nouveau message présente des signes
 shieldSwitch: "Verifye nouvo mesaz otomatikman",
 shieldSwitchHint: "WhatsApp ek SMS, lor sa telefonn la selman. Li pa marse tanki ou pa met li.",
 shieldSetupTitle: "Verifikasion otomatik",
-shieldSetupWhat: "Kan sa li marse, FraudLens li bann nouvo notifikasion WhatsApp ek SMS lor sa telefonn la ek verifye zot avek mem bann reg. Nanye pa gard, nanye pa avoye.",
+shieldSetupWhat: "Kan sa li marse, Verifye li bann nouvo notifikasion WhatsApp ek SMS lor sa telefonn la ek verifye zot avek mem bann reg. Nanye pa gard, nanye pa avoye.",
 shieldSetupNot: "Li pa li lezot aplikasion, ou bann foto ou ou bann kontak. Ou kapav tengn li nimport kan.",
 shieldStepAccess: "1. Permet akse ar notifikasion",
-shieldStepAccessHint: "Android pou ouver enn lis. Met FraudLens Moris lor ON.",
-shieldStepAlerts: "2. Permet FraudLens montre bann alert",
+shieldStepAccessHint: "Android pou ouver enn lis. Met Verifye lor ON.",
+shieldStepAlerts: "2. Permet Verifye montre bann alert",
 shieldStepBattery: "3. Met batri lor « Unrestricted »",
 shieldStepBatteryHint: "Sertin telefonn aret bann aplikasion ki pe marse andeor. Sa permet verifikasion la kontinie marse.",
 shieldStepPreview: "4. Les aperçu mesaz lor ON dan WhatsApp",

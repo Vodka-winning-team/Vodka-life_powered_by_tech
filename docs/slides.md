@@ -24,7 +24,7 @@ Speaker note: the answer already exists in the law and in the official register.
 
 ---
 
-## 3. Live demo: FraudLens Moris, *Verifye avan ou peye*
+## 3. Live demo: Verifye, *avan ou peye*
 Airplane mode **on** the whole time.
 1. Paste Kevin's (fictional) message → X-Ray highlights "processing fee", "Rs 50,000", "today".
 2. Job check: the agency is **listed** for jobs abroad, but *"this does not prove the message is from them"*. The processing fee is the **employer's** (reg 7(2)(e)) → **Stop – high risk**.

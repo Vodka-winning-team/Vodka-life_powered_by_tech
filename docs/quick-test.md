@@ -4,7 +4,7 @@ Owner: D (Paveesh). Run this on **every new APK or Expo Go build**, on 2 phones 
 **Fast way to copy:** open this page on the phone in GitHub. Each message is in a grey box with a **copy button**. Tap it, then paste in the app.
 All messages are fictional; they come from [`demo-messages.md`](demo-messages.md) and [`test-cases.md`](test-cases.md).
 
-**Get the APK:** open the [GitHub Releases page](https://github.com/Vodka-winning-team/Vodka-life_powered_by_tech/releases) on the phone → download `FraudLens-Moris.apk` → open it → allow "Install unknown apps" if asked → **Install** (if Play Protect warns: More details → Install anyway). Write the build's name (for example `build-2026-11-13-2115`) in the results table. The 21:15 build doesn't have Shield, the latest Kreol or the app icon yet; skip section C on it.
+**Get the APK:** open the [GitHub Releases page](https://github.com/Vodka-winning-team/Vodka-life_powered_by_tech/releases) on the phone → download the `.apk` file → open it → allow "Install unknown apps" if asked → **Install** (if Play Protect warns: More details → Install anyway). Write the build's name (for example `build-2026-11-13-2115`) in the results table. The 21:15 build doesn't have Shield, the latest Kreol or the app icon yet; skip section C on it.
 
 ---
 
@@ -57,7 +57,7 @@ Mauritius Telecom Lucky Draw: you have won a prize! Send your details to mauriti
 
 ## B. Screens (1 minute)
 
-- [ ] **Share-in (APK only):** in WhatsApp, long-press message 1 → **Share** → **FraudLens Moris** → the Result opens with Stop.
+- [ ] **Share-in (APK only):** in WhatsApp, long-press message 1 → **Share** → **Verifye** → the Result opens with Stop.
 - [ ] **What to do now** → **Call the official number** opens the dialler with the register or bank number (don't call).
 - [ ] **Share a summary** opens the share sheet (don't send).
 - [ ] **Save to history** → **History** shows the case → **Clear history** empties it.
@@ -81,7 +81,7 @@ Mauritius Telecom Lucky Draw: you have won a prize! Send your details to mauriti
 
 ## C. Shield ([proposal](proposal-shield-optin.md); built 21:40, passed on the release APK 22:33)
 
-- [ ] **Old FraudLens app removed:** uninstall the old FraudLens app (`com.fraudlens.shield`, from September) from the test phone. It would also react to the same WhatsApp, and judges must only see code written this weekend (Rule 1: start from empty). In Android's Notification access list, only **"FraudLens Moris"** is on.
+- [ ] **Old FraudLens app removed:** uninstall the old FraudLens app (`com.fraudlens.shield`, from September) from the test phone. It would also react to the same WhatsApp, and judges must only see code written this weekend (Rule 1: start from empty). In Android's Notification access list, only **"Verifye"** is on.
 
 **Which test for which build:** the fake notification from the laptop (`adb`) only works in a **development build**. The **release APK** ignores it on purpose (decision 15; Jayesh's fix at 21:50). With the release APK, use a **real WhatsApp or SMS from another phone, with the network on**.
 

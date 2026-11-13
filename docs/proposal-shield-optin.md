@@ -20,9 +20,9 @@ Shield was cut at 16:05 (decision 5). This brings it back **only as an opt-in sw
 - **Nothing is saved and nothing leaves the phone.** The notification text is checked in memory and then forgotten. History is still saved only when the user taps Save.
 - Off by default. Turning it on is a short setup, each step explained in plain words:
   1. **Our explanation screen:** what the app reads (new WhatsApp and SMS notifications only), and that nothing is saved or sent.
-  2. **Android's "Notification access" screen:** the user switches FraudLens on.
-  3. **Allow notifications** (Android 13 and later), so FraudLens can show its alert.
-  4. **Battery: "Unrestricted"** for FraudLens. Some phones (Xiaomi, Oppo, some Samsung battery savers) otherwise stop background apps. Our screen opens the right settings page.
+  2. **Android's "Notification access" screen:** the user switches Verifye on.
+  3. **Allow notifications** (Android 13 and later), so Verifye can show its alert.
+  4. **Battery: "Unrestricted"** for Verifye. Some phones (Xiaomi, Oppo, some Samsung battery savers) otherwise stop background apps. Our screen opens the right settings page.
   5. **A reminder to keep message previews on in WhatsApp** (WhatsApp → Settings → Notifications → "Show preview"). Without previews, the notification has no text to check.
 - It reads **WhatsApp and SMS app notifications only**. Every other app's notifications are ignored without being read.
 - **Android only.** The switch is hidden on iPhone and the web.
@@ -82,7 +82,7 @@ It is **never in the main demo path**. It's the last 20 seconds of the demo, and
    ```
    adb shell cmd notification post -S bigtext -t "THINK RECRUITMENT" demo1 "Bonjour Kevin! THINK RECRUITMENT LTD here. Hotel job in Canada, salary CAD 3,000. To secure your place, pay the processing fee of Rs 50,000 today by Juice. Urgent, only 2 places left."
    ```
-   Expect the FraudLens alert within 2 seconds. Repeat with demo message 5 and expect **no** alert. (This works only in debug builds, because `com.android.shell` is allowed there.)
+   Expect the Verifye alert within 2 seconds. Repeat with demo message 5 and expect **no** alert. (This works only in debug builds, because `com.android.shell` is allowed there.)
 3. **"Send test alert" button**, debug builds only, under the switch. It runs demo message 1 through the same handler and posts the alert, so the alert → tap → Result path can be tested without notification access.
 4. **Once at the end:** a real WhatsApp message from a teammate's phone to the demo phone.
 

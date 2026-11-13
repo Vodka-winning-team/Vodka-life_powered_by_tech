@@ -7,8 +7,8 @@ The messages are in [`demo-messages.md`](demo-messages.md) and the slides in [`s
 
 ## Before we go on stage (10 min before)
 
-- [ ] **Demo phone:** charged, brightness up, silent mode, notifications off ("Do not disturb"). **If Shield is in the demo**, add FraudLens and WhatsApp to the Do-not-disturb exceptions, or the alert won't show.
-- [ ] **Old FraudLens app removed:** uninstall the old FraudLens app (`com.fraudlens.shield`, from September) from every demo phone. It would also react to the same WhatsApp, and judges must only see code written this weekend (Rule 1: start from empty). In Android's Notification access list, only **"FraudLens Moris"** is on.
+- [ ] **Demo phone:** charged, brightness up, silent mode, notifications off ("Do not disturb"). **If Shield is in the demo**, add Verifye and WhatsApp to the Do-not-disturb exceptions, or the alert won't show.
+- [ ] **Old FraudLens app removed:** uninstall the old FraudLens app (`com.fraudlens.shield`, from September) from every demo phone. It would also react to the same WhatsApp, and judges must only see code written this weekend (Rule 1: start from empty). In Android's Notification access list, only **"Verifye"** is on.
 - [ ] **App open on the Scan screen**, language set to English, **History cleared** (History → Clear history).
 - [ ] **Messages ready to paste:** keep demo messages 1, 3, 4 and 5 in a notes app on the phone, in order. Copy each one just before you need it.
 - [ ] **Offline:**
@@ -31,7 +31,7 @@ The messages are in [`demo-messages.md`](demo-messages.md) and the slides in [`s
 ### 0:30–1:15 · Slide 2, the problem · Paveesh
 > "This isn't made up. Radio One reported about twenty Mauritians who say one fake recruiter cheated them. Four complainants say they paid Rs 296,000 between them, and one paid Rs 50,000 for a job in Dubai. The Ministry of Labour has warned about fake recruitment agencies since at least 2022.
 > And the law already answers Kevin. No agency or employer may charge a worker a recruitment fee: Act 2023, section 5. The processing fee, the visa and the air ticket are paid by the employer: Regulations 2025, regulation 7(2).
-> The answer exists. Nobody checks it at the moment of paying. So we built FraudLens Moris. *Verifye avan ou peye.*"
+> The answer exists. Nobody checks it at the moment of paying. So we built *Verifye*: Kreol for “check”. *Verifye avan ou peye.*"
 
 ### 1:15–5:15 · Slide 3, live demo · Jayesh drives, Paveesh narrates
 
@@ -110,7 +110,7 @@ Answer in **two sentences**, then stop. The person in brackets answers first; an
 2. **"Is Kevin real?"** (Paveesh)
    Kevin is a persona built from the reported cases: Radio One's Rs 50,000 case and the Ministry's warnings. Our testers *(fill in after the user tests)* are real people.
 3. **"Why would Kevin open an app at that moment?"** (Jayesh)
-   He doesn't copy anything: in WhatsApp he long-presses the message, taps Share, then FraudLens Moris, and the result opens. On iPhone or the web he pastes it. And if he turns on automatic checking (Android), the warning comes to him.
+   He doesn't copy anything: in WhatsApp he long-presses the message, taps Share, then Verifye, and the result opens. On iPhone or the web he pastes it. And if he turns on automatic checking (Android), the warning comes to him.
 
 ### How it works
 4. **"Why no AI or machine learning?"** (Pushkar)

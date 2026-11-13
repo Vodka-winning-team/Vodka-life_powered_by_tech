@@ -1,5 +1,7 @@
 # TASKS.md: who does what, step by step (Fri 13 Nov 16:10 → Sat 12:30)
 
+> **Name change (22:46, decision 17):** the app is now **Verifye** (*avan ou peye*). “FraudLens Moris” below is the old working name. Internal code names (package `mu.fraudlens.moris`, module `fraudlens-shield`) stay as they are.
+
 Read `PROJECT.md` first. This file adds the exact tasks per person, which files each person owns, and how we use Claude.
 Changes since PROJECT.md (team review, 16:05): **Shield is cut**, the Arnak? Live plan is the "what's next" slide only, and the **job check is the lead story**.
 

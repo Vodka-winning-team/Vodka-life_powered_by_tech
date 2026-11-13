@@ -1,8 +1,10 @@
-# FraudLens Moris: *Verifye avan ou peye* (check before you pay)
+# Verifye: *avan ou peye* (check before you pay)
 
 An offline app that checks a suspicious SMS, WhatsApp or email **before you pay**. It shows the warning signs in the message (X-Ray), what **official Mauritian records** say about the bank, agency or company in it, and what to do now. Nothing leaves the phone.
 
 Hackathon: **Life Powered by Tech**, Theme 1 *Powered to Protect*.
+
+*Verifye* is Kreol for “check”. Until Fri 13 Nov, 22:46, the app’s working name was FraudLens Moris (decision 17); some internal code names still use it.
 
 **Team documents:** plan in [`PROJECT.md`](PROJECT.md) and [`docs/TASKS.md`](docs/TASKS.md) · decision log in [`docs/decisions.md`](docs/decisions.md) · AI log in [`docs/ai-log.md`](docs/ai-log.md) · user tests in [`docs/user-tests.md`](docs/user-tests.md) · live team board in [`automation.md`](automation.md).
 
@@ -15,7 +17,7 @@ The law is clear: no agency or employer may charge a worker a recruitment fee (P
 **Kevin, 24, from Triolet**, gets a WhatsApp offer for a hotel job in Canada. The "agency" wants Rs 50,000 today, and his mother is asked to lend it. The app gives both of them the same evidence before any money moves.
 
 ## What the app does
-1. **Scan:** paste a message, or share it straight from WhatsApp or SMS (Share → FraudLens Moris, Android APK).
+1. **Scan:** paste a message, or share it straight from WhatsApp or SMS (Share → Verifye, Android APK).
 2. **X-Ray:** highlights the tricks in English, French and Kreol: pressure to act fast, asking for a code or PIN, asking for money, prizes and gifts, account-blocked alarms, guaranteed profit, "I have a new number", odd links.
 3. **Official checks:**
    - **Job offer:** is the agency in the Ministry of Labour register, licensed for jobs **abroad**, and valid today? Is the fee one the employer must pay (with the exact clause)?
