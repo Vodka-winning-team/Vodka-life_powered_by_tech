@@ -19,8 +19,8 @@ export function ShieldWatcher() {
     shield.createChannel(t('shieldChannelName'), t('shieldChannelDescription'));
 
     const subscription = shield.addListener('onMessage', ({ app, text }) => {
-      // debug = true only lets adb test notifications through ("com.android.shell"); real users never get those.
-      const { alert, level } = engine.shouldAlert(app, text, true);
+      // Test notifications from adb ("com.android.shell") count only in development builds (decision 15).
+      const { alert, level } = engine.shouldAlert(app, text, __DEV__);
       if (!alert || level === 'NONE') return;
       const id = Date.now() % 1000000000; // a different id per alert, so each one stays visible
       shield.showAlert(id, t(`shieldAlertTitle${level}`), t('shieldAlertBody'), text);
