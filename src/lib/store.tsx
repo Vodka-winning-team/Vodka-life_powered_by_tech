@@ -27,16 +27,21 @@ type Store = {
   clearHistory: () => void;
   language: Language;
   setLanguage: (language: Language) => void;
+  /** Shield (automatic checking of new WhatsApp/SMS): off unless the user turns it on. */
+  shieldOn: boolean;
+  setShieldOn: (on: boolean) => void;
 };
 
 const HISTORY_KEY = 'history-v1';
 const LANGUAGE_KEY = 'language-v1';
+const SHIELD_KEY = 'shield-v1';
 const StoreContext = createContext<Store | null>(null);
 
 export function StoreProvider({ children }: { children: ReactNode }) {
   const [current, setCurrent] = useState<Check | null>(null);
   const [history, setHistory] = useState<Check[]>([]);
   const [language, setLanguageState] = useState<Language>('en');
+  const [shieldOn, setShieldOnState] = useState(false);
 
   // Load saved history once, when the app starts.
   useEffect(() => {
@@ -50,7 +55,15 @@ export function StoreProvider({ children }: { children: ReactNode }) {
         if (saved === 'en' || saved === 'fr' || saved === 'mfe') chooseLanguage(saved, false);
       })
       .catch(() => {});
+    AsyncStorage.getItem(SHIELD_KEY)
+      .then((saved) => setShieldOnState(saved === 'on'))
+      .catch(() => {});
   }, []);
+
+  function setShieldOn(on: boolean) {
+    setShieldOnState(on);
+    AsyncStorage.setItem(SHIELD_KEY, on ? 'on' : 'off').catch(() => {});
+  }
 
   /** Changing the state re-renders every screen, so all t() texts switch at once. */
   function chooseLanguage(next: Language, save = true) {
@@ -112,6 +125,8 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     },
     language,
     setLanguage: (next) => chooseLanguage(next),
+    shieldOn,
+    setShieldOn,
   };
 
   return <StoreContext.Provider value={store}>{children}</StoreContext.Provider>;

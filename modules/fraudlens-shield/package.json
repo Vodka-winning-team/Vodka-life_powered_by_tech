@@ -1,0 +1,6 @@
+{
+  "name": "fraudlens-shield",
+  "version": "0.1.0",
+  "description": "Shield for FraudLens Moris: opt-in check of new WhatsApp/SMS notifications (Android)",
+  "private": true
+}

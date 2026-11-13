@@ -3,9 +3,11 @@
 
 import { router } from 'expo-router';
 import { useState } from 'react';
-import { StyleSheet, TextInput, View } from 'react-native';
+import { StyleSheet, Switch, TextInput, View } from 'react-native';
 
-import { Button, Chip, Label, Screen } from '@/components/ui';
+import Shield from '../../modules/fraudlens-shield';
+
+import { Button, Card, Chip, Label, Screen } from '@/components/ui';
 import { findingTitle, t, type Language } from '@/constants/strings';
 import { FontSize, Radius, Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
@@ -13,7 +15,7 @@ import { useStore } from '@/lib/store';
 
 export default function ScanScreen() {
   const theme = useTheme();
-  const { runCheck, language, setLanguage } = useStore();
+  const { runCheck, language, setLanguage, shieldOn, setShieldOn } = useStore();
   const [text, setText] = useState('');
   const [error, setError] = useState('');
 
@@ -70,6 +72,26 @@ export default function ScanScreen() {
         </View>
       </View>
 
+      {/* Shield: Android APK only (the native part doesn't exist in Expo Go or on the web). Off unless turned on. */}
+      {Shield && (
+        <Card>
+          <View style={styles.switchRow}>
+            <View style={styles.half}>
+              <Label variant="label">{t('shieldSwitch')}</Label>
+            </View>
+            <Switch
+              value={shieldOn}
+              accessibilityLabel={t('shieldSwitch')}
+              onValueChange={(on) => (on ? router.push('/shield') : setShieldOn(false))}
+            />
+          </View>
+          <Label variant="small">{t('shieldSwitchHint')}</Label>
+          {shieldOn && Shield.isAccessEnabled() && <Label>✓ {t('shieldOnStatus')}</Label>}
+          {shieldOn && !Shield.isAccessEnabled() && (
+            <Button kind="secondary" title={t('shieldNeedsAccess')} onPress={() => router.push('/shield')} />
+          )}
+        </Card>
+      )}
     </Screen>
   );
 }
@@ -92,4 +114,5 @@ const styles = StyleSheet.create({
   },
   row: { flexDirection: 'row', gap: Spacing.two },
   half: { flex: 1 },
+  switchRow: { flexDirection: 'row', alignItems: 'center', gap: Spacing.two },
 });

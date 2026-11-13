@@ -1,0 +1,17 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+  <!-- To show "Stop – warning signs found" alerts (Android 13+ asks the user). -->
+  <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
+  <application>
+    <!-- Shield: reads new notifications ONLY after the user turns on notification access for FraudLens in Android settings. -->
+    <service
+      android:name="expo.modules.fraudlensshield.ShieldListenerService"
+      android:label="FraudLens Moris"
+      android:exported="true"
+      android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
+      <intent-filter>
+        <action android:name="android.service.notification.NotificationListenerService" />
+      </intent-filter>
+    </service>
+  </application>
+</manifest>

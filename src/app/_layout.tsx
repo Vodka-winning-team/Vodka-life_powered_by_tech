@@ -5,6 +5,7 @@ import { Platform } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 
 import { ShareIn } from '@/components/share-in';
+import { ShieldWatcher } from '@/components/shield-watcher';
 import { t } from '@/constants/strings';
 import { Colors } from '@/constants/theme';
 import { useColorScheme } from '@/hooks/use-color-scheme';
@@ -26,6 +27,7 @@ export default function RootLayout() {
           <StatusBar style={scheme === 'dark' ? 'light' : 'dark'} />
           <AppStack colors={colors} />
           <ShareIn />
+          <ShieldWatcher />
         </StoreProvider>
       </ThemeProvider>
     </ShareIntentProvider>
@@ -49,6 +51,7 @@ function AppStack({ colors }: { colors: ThemeColors }) {
       <Stack.Screen name="actions" options={{ title: t('actionsTitle') }} />
       <Stack.Screen name="history" options={{ title: t('historyTitle') }} />
       <Stack.Screen name="sources" options={{ title: t('sourcesTitle') }} />
+      <Stack.Screen name="shield" options={{ title: t('shieldSetupTitle') }} />
     </Stack>
   );
 }
