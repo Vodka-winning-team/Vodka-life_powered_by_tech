@@ -41,7 +41,7 @@ export default function JobScreen() {
         {suggested.length > 0 && <Label variant="small">{t('jobSuggested')}</Label>}
         <View style={styles.wrap}>
           {suggested.map((a) => (
-            <Chip key={a.id} title={a.name} selected={a.id === agencyId} onPress={() => setAgencyId(a.id)} />
+            <Chip key={a.id} title={a.name} selected={a.id === agencyId} onPress={() => setAgencyId(a.id === agencyId ? null : a.id)} />
           ))}
         </View>
         <TextInput
@@ -54,7 +54,7 @@ export default function JobScreen() {
         />
         <View style={styles.wrap}>
           {matches.map((a) => (
-            <Chip key={a.id} title={a.name} selected={a.id === agencyId} onPress={() => setAgencyId(a.id)} />
+            <Chip key={a.id} title={a.name} selected={a.id === agencyId} onPress={() => setAgencyId(a.id === agencyId ? null : a.id)} />
           ))}
         </View>
       </Card>
@@ -62,7 +62,7 @@ export default function JobScreen() {
       <Label variant="label">{t('jobCostLabel')}</Label>
       <View style={styles.wrap}>
         {engine.data.feeRules.map((rule) => (
-          <Chip key={rule.id} title={rule.cost} selected={rule.id === costId} onPress={() => setCostId(rule.id)} />
+          <Chip key={rule.id} title={rule.cost} selected={rule.id === costId} onPress={() => setCostId(rule.id === costId ? null : rule.id)} />
         ))}
       </View>
 

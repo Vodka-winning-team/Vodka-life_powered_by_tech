@@ -65,7 +65,10 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     runCheck,
     openCheck: setCurrent,
     saveCurrent,
-    clearHistory: () => writeHistory([]),
+    clearHistory: () => {
+      writeHistory([]);
+      if (current) setCurrent({ ...current, savedAt: null });
+    },
   };
 
   return <StoreContext.Provider value={store}>{children}</StoreContext.Provider>;

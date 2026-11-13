@@ -11,9 +11,10 @@ export default function SourcesScreen() {
     <Screen>
       <Label>{t('sourcesHint')}</Label>
       {sources.map((s) => (
-        <Pressable key={s.name} accessibilityRole="link" onPress={() => s.url && Linking.openURL(s.url)}>
+        <Pressable key={s.title} accessibilityRole="link" onPress={() => s.url && Linking.openURL(s.url)}>
           <Card>
-            <Label variant="label">{s.name}</Label>
+            <Label variant="label">{t(s.title)}</Label>
+            <Label>{t(s.text)}</Label>
             <Label variant="small">
               {s.count} {t('sourcesRecords')} · {t('sourcesChecked')} {s.snapshot}
             </Label>

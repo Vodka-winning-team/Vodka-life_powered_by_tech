@@ -14,7 +14,10 @@ export function Screen({ children }: { children: ReactNode }) {
   const theme = useTheme();
   return (
     <SafeAreaView edges={['bottom', 'left', 'right']} style={{ flex: 1, backgroundColor: theme.background }}>
-      <ScrollView contentContainerStyle={styles.scroll} keyboardShouldPersistTaps="handled">
+      <ScrollView
+        contentContainerStyle={styles.scroll}
+        keyboardShouldPersistTaps="handled"
+        automaticallyAdjustKeyboardInsets>
         <View style={styles.column}>{children}</View>
       </ScrollView>
     </SafeAreaView>
@@ -168,5 +171,5 @@ const styles = StyleSheet.create({
   button: { borderWidth: 1, borderRadius: Radius, paddingVertical: 15, paddingHorizontal: Spacing.three, minHeight: 52, justifyContent: 'center' },
   banner: { borderRadius: Radius, paddingVertical: Spacing.four, paddingHorizontal: Spacing.three },
   tag: { alignSelf: 'flex-start', borderRadius: 8, paddingHorizontal: Spacing.two, paddingVertical: 2 },
-  chip: { borderWidth: 1, borderRadius: 999, paddingHorizontal: Spacing.three, paddingVertical: Spacing.two, minHeight: 40, justifyContent: 'center' },
+  chip: { borderWidth: 1, borderRadius: 999, paddingHorizontal: Spacing.three, paddingVertical: Spacing.two, minHeight: 48, minWidth: 48, justifyContent: 'center' },
 });

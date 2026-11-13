@@ -1,5 +1,6 @@
 // Loads A's 5 official data files (bundled in the app, so it works offline) and builds the engine.
 
+import type { StringKey } from '@/constants/strings';
 import { DataSet, Engine } from '@/engine';
 
 const agencies = require('../../app/src/main/assets/data/agencies.json');
@@ -20,24 +21,26 @@ const dataSet = DataSet.fromJson(
 export const engine = new Engine(dataSet);
 
 /** One line on the "Our sources" screen. Read from the raw files, so it works even before B's parser. */
-export type SourceInfo = { name: string; count: number; snapshot: string; url: string };
+export type SourceInfo = { title: StringKey; text: StringKey; count: number; snapshot: string; url: string };
 
 type Row = { snapshot?: string; source_url?: string };
 
-function describe(name: string, rows: Row[]): SourceInfo {
+function describe(title: StringKey, text: StringKey, rows: Row[]): SourceInfo {
   const first = rows[0] ?? {};
   return {
-    name,
+    title,
+    text,
     count: rows.length,
     snapshot: first.snapshot ?? '',
     url: first.source_url ?? '',
   };
 }
 
+// The sentences come from A's docs/sources.md ("Text for the Our sources screen").
 export const sources: SourceInfo[] = [
-  describe('Recruitment agencies (Ministry of Labour register)', agencies),
-  describe('Who pays which fee (Act 2023, Regulations 2025)', feeRules),
-  describe('Banks and payment providers (Bank of Mauritius)', banks),
-  describe('FSC investor alerts', fscAlerts),
-  describe('CERT-MU security alerts', certAlerts),
+  describe('srcAgenciesTitle', 'srcAgenciesText', agencies),
+  describe('srcFeesTitle', 'srcFeesText', feeRules),
+  describe('srcBanksTitle', 'srcBanksText', banks),
+  describe('srcFscTitle', 'srcFscText', fscAlerts),
+  describe('srcCertTitle', 'srcCertText', certAlerts),
 ];
