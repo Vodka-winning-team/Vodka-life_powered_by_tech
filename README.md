@@ -4,10 +4,10 @@ An offline app that checks a suspicious SMS, WhatsApp or email **before you pay*
 
 Hackathon: **Life Powered by Tech**, Theme 1 *Powered to Protect*.
 
-> This README is a working draft (13 Nov, 18:35). D finishes it before submission. The plan is in [`PROJECT.md`](PROJECT.md) and [`docs/TASKS.md`](docs/TASKS.md); live team status is in [`automation.md`](automation.md).
+**Team documents:** plan in [`PROJECT.md`](PROJECT.md) and [`docs/TASKS.md`](docs/TASKS.md) · decision log in [`docs/decisions.md`](docs/decisions.md) · AI log in [`docs/ai-log.md`](docs/ai-log.md) · user tests in [`docs/user-tests.md`](docs/user-tests.md) · live team board in [`automation.md`](automation.md).
 
 ## Problem
-Fake recruiters ask Mauritian jobseekers for "processing fees" for jobs abroad. Radio One reported about twenty Mauritians caught by one fake recruiter ([25 Aug 2026](https://radio1.mu/faux-recruteur-le-reve-de-travailler-a-letranger-vire-au-cauchemar-pour-une-vingtaine-de-mauriciens/)), and four complainants who say they paid Rs 296,000 in total, one of them Rs 50,000 for a job in Dubai ([7 Sep 2026](https://radio1.mu/promesses-demplois-letranger-un-habitant-de-quatre-bornes-aurait-soutire-pres-de-rs-300-000-a-quatre-victimes/)). The Ministry of Labour warned the public about fake recruitment agencies offering jobs abroad ([communiqué, 28 Apr 2022](https://www.govmu.org/EN/Communique1/year%202022/May/Communiqu%C3%A9-%20Fausses%20agences%20de%20recrutement%2028.04.22.pdf)). Fake bank messages and links are common too: 913 of the 6,073 incidents reported to MAUCORS in 2025 were scams and fraud ([Defimedia, 24 Aug 2026](https://defimedia.info/risques-dusurpation-didentite-whatsapp-username-le-gm-veut-des-garanties-avant-tout-deploiement)).
+Fake recruiters ask Mauritian jobseekers for "processing fees" for jobs abroad. Radio One reported about twenty Mauritians allegedly cheated by one fake recruiter ([25 Aug 2026](https://radio1.mu/faux-recruteur-le-reve-de-travailler-a-letranger-vire-au-cauchemar-pour-une-vingtaine-de-mauriciens/)), and four complainants who say they paid Rs 296,000 in total, one of them Rs 50,000 for a job in Dubai ([7 Sep 2026](https://radio1.mu/promesses-demplois-letranger-un-habitant-de-quatre-bornes-aurait-soutire-pres-de-rs-300-000-a-quatre-victimes/)). The Ministry of Labour warned the public about fake recruitment agencies offering jobs abroad ([communiqué, 28 Apr 2022](https://www.govmu.org/EN/Communique1/year%202022/May/Communiqu%C3%A9-%20Fausses%20agences%20de%20recrutement%2028.04.22.pdf)). Fake bank messages and links are common too: 913 of the 6,073 incidents reported to MAUCORS in 2025 were scams and fraud ([Defimedia, 24 Aug 2026](https://defimedia.info/risques-dusurpation-didentite-whatsapp-username-le-gm-veut-des-garanties-avant-tout-deploiement)).
 
 The law is clear: no agency or employer may charge a worker a recruitment fee (Private Recruitment Agencies Act 2023, s.5), and processing, visa, passport, work-permit and air-ticket costs are paid by the employer (Regulations 2025, reg 7(2)). But at the moment of paying, nobody checks.
 
@@ -37,20 +37,34 @@ All real, official and dated. Every record in the app has its `source_url` and `
 | Who pays recruitment costs | 8 rules | [Private Recruitment Agencies Act 2023](https://empment-labour.govmu.org/SiteAssets/MofedStyles/Doc/Recruitment%20%20Licence/The%20Private%20Recruitment%20Agencies%20Act%202023.pdf) s.5, [Regulations 2025](https://empment-labour.govmu.org/SiteAssets/MofedStyles/Doc/Recruitment%20%20Licence/The%20Private%20Recruitment%20Agencies%20Regulation%202025.pdf) reg 7(2) |
 | Banks and payment providers | 18 banks + 3 payment providers | [Bank of Mauritius list of licensees](https://www.bom.mu/financial-stability/supervision/licensees/list-of-licensees); phones from each bank's own website |
 | Investment warnings | 21 organisations | [FSC Mauritius](https://www.fscmauritius.org/) investor alerts (2017–2026) |
-| Scam campaigns | 5 alerts | [CERT-MU security alerts](https://cert-mu.govmu.org/cert-mu/?page_id=1439) (Feb–Oct 2026) |
+| Security alert campaigns | 5 alerts | [CERT-MU security alerts](https://cert-mu.govmu.org/cert-mu/?page_id=1439) (Feb–Oct 2026) |
 
 No personal names are stored: directors' names and alerts naming individuals are left out.
 
 ## Stack
 - **App:** Expo SDK 58, React Native, TypeScript, Expo Router. One codebase: Android APK, iPhone through Expo Go, and web.
-- **Engine:** pure TypeScript in `src/engine/` (rules + official records), runs on the phone, offline. 44 automated tests (Jest).
+- **Engine:** pure TypeScript in `src/engine/` (rules + official records), runs on the phone, offline. Automated tests (Jest) run every demo message, the 15 test cases and the real data files: `npm test`.
 - **Data:** Python scripts in `data/scripts/` turn the official PDFs and pages into JSON; `validate.py` checks every row.
 - **No server, no accounts, no internet needed.**
 
 ## AI tools
-*(D completes this from [`docs/ai-log.md`](docs/ai-log.md), which has one line per AI-assisted step and what the team checked.)*
-- **Claude Code (Anthropic):** each teammate's coding assistant, used for the data scripts, the engine, the app screens, tests and documentation. Every step was checked by the teammate (see the AI log).
-- **OpenAI Codex CLI:** idea generation and critical review of the ideas before the build.
+AI tools were allowed by the organisers. We list them all here. Every AI-assisted step has a line in [`docs/ai-log.md`](docs/ai-log.md) (and [`docs/ai-log/A.md`](docs/ai-log/A.md)) saying what the AI did and what the teammate checked.
+
+| Tool | Who | What we used it for |
+|---|---|---|
+| **Claude Code (Anthropic)** | Adiyen (A, data) | Python scripts that turn the official PDFs into JSON; `validate.py`; test cases; French and Kreol strings; fact-checking the numbers on our slides |
+| **Claude Code** | Pushkar (B, engine) | The rules engine (first in Kotlin, then ported to TypeScript), its tests, a try-it tool, the README draft, the slide draft and the team board (`automation.md`) |
+| **Claude Code** | Jayesh (C, app) | The Expo app and its 6 screens, the phone-number format, the language switch |
+| **Claude Code** | Paveesh (D, pitch) | README, pitch documents and user-test write-ups |
+| **OpenAI Codex CLI** | Team | Critical review of our ideas before the build, and a read-only review of the app screens (4 fixes, 13 Nov 18:45) |
+
+**What we added ourselves, and checked:**
+- **Choices:** the user (Kevin), the job-fee check as our lead story, no AI model, no server, and every cut. See [`docs/decisions.md`](docs/decisions.md).
+- **The data:** every agency row compared by eye with the Ministry PDF; every law clause found word for word in the Act and the Regulations; every bank phone read on the bank's own website.
+- **The rules:** tested on the 6 demo messages and 15 test cases, including a real bank code SMS that must give no warning.
+- **Real people:** user tests with a jobseeker, a parent and a native Kreol reader ([`docs/user-tests.md`](docs/user-tests.md), in progress Fri evening).
+
+Every teammate can explain and change their own part.
 
 ## Surprise card
 *(To be filled in when the card is announced: what it was, and how it changed the app.)*
@@ -73,4 +87,4 @@ APK: *(link added when the release build is uploaded)*.
 | Adiyen | A: Data |
 | Pushkar | B: Engine |
 | Jayesh | C: App |
-| *(name)* | D: Pitch and testing |
+| Paveesh | D: Pitch and testing |
