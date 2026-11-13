@@ -7,17 +7,27 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { t } from '@/constants/strings';
 import { FontSize, LevelColors, MaxContentWidth, Radius, Spacing } from '@/constants/theme';
 import type { Highlight, Level } from '@/engine';
+import { useLook } from '@/hooks/use-look';
 import { useTheme } from '@/hooks/use-theme';
+
+/** Text style at the current size (Granny mode makes text 1.4x bigger). */
+function sized(style: TextStyle, scale: number): TextStyle {
+  return {
+    fontSize: (style.fontSize ?? FontSize.body) * scale,
+    lineHeight: style.lineHeight ? style.lineHeight * scale : undefined,
+  };
+}
 
 /** Scrolling page with safe margins and a max width (looks right on phones, tablets and the web). */
 export function Screen({ children, scrollRef }: { children: ReactNode; scrollRef?: RefObject<ComponentRef<typeof ScrollView> | null> }) {
   const theme = useTheme();
+  const { granny } = useLook();
   return (
     <SafeAreaView edges={['bottom', 'left', 'right']} style={{ flex: 1, backgroundColor: theme.background }}>
       {/* While typing, the keyboard pushes the page up instead of covering the buttons. */}
       <KeyboardAvoidingView behavior="padding" style={{ flex: 1 }}>
         <ScrollView ref={scrollRef} contentContainerStyle={styles.scroll} keyboardShouldPersistTaps="handled">
-          <View style={styles.column}>{children}</View>
+          <View style={[styles.column, granny && { gap: Spacing.four }]}>{children}</View>
         </ScrollView>
       </KeyboardAvoidingView>
     </SafeAreaView>
@@ -38,9 +48,11 @@ export function Label({
   numberOfLines?: number;
 }) {
   const theme = useTheme();
-  const color = variant === 'small' ? theme.textSecondary : theme.text;
+  const { granny, scale } = useLook();
+  // Granny mode: strong contrast, so no grey text.
+  const color = variant === 'small' && !granny ? theme.textSecondary : theme.text;
   return (
-    <Text numberOfLines={numberOfLines} style={[textStyles[variant], { color }, style]}>
+    <Text numberOfLines={numberOfLines} style={[textStyles[variant], sized(textStyles[variant], scale), { color }, style]}>
       {children}
     </Text>
   );
@@ -79,6 +91,7 @@ export function Button({
   kind?: 'primary' | 'secondary';
 }) {
   const theme = useTheme();
+  const { scale, buttonHeight } = useLook();
   const primary = kind === 'primary';
   const press = useOneTap(onPress, 1000);
   return (
@@ -91,9 +104,10 @@ export function Button({
           backgroundColor: primary ? theme.primary : theme.backgroundElement,
           borderColor: primary ? theme.primary : theme.border,
           opacity: pressed ? 0.75 : 1,
+          minHeight: buttonHeight,
         },
       ]}>
-      <Text style={[textStyles.label, { color: primary ? theme.onPrimary : theme.text, textAlign: 'center' }]}>
+      <Text style={[textStyles.label, sized(textStyles.label, scale), { color: primary ? theme.onPrimary : theme.text, textAlign: 'center' }]}>
         {title}
       </Text>
     </Pressable>
@@ -103,9 +117,10 @@ export function Button({
 /** Big coloured banner with the result level. */
 export function LevelBanner({ level }: { level: Level }) {
   const colors = LevelColors[level];
+  const { scale } = useLook();
   return (
     <View accessibilityRole="header" style={[styles.banner, { backgroundColor: colors.background }]}>
-      <Text style={[textStyles.banner, { color: colors.text }]}>{t(`level${level}`)}</Text>
+      <Text style={[textStyles.banner, sized(textStyles.banner, scale), { color: colors.text }]}>{t(`level${level}`)}</Text>
     </View>
   );
 }
@@ -113,9 +128,10 @@ export function LevelBanner({ level }: { level: Level }) {
 /** Small coloured tag (used on each finding and in History). `label` replaces the level text. */
 export function LevelTag({ level, label }: { level: Level; label?: string }) {
   const colors = LevelColors[level];
+  const { scale } = useLook();
   return (
     <View style={[styles.tag, { backgroundColor: colors.background }]}>
-      <Text numberOfLines={1} style={[textStyles.tag, { color: colors.text }]}>
+      <Text numberOfLines={1} style={[textStyles.tag, sized(textStyles.tag, scale), { color: colors.text }]}>
         {label ?? t(`level${level}`)}
       </Text>
     </View>
@@ -125,6 +141,7 @@ export function LevelTag({ level, label }: { level: Level; label?: string }) {
 /** The message, with the X-Ray highlights marked. */
 export function HighlightedText({ text, highlights }: { text: string; highlights: Highlight[] }) {
   const theme = useTheme();
+  const { scale } = useLook();
   const marked = new Array(text.length).fill(false);
   for (const h of highlights) {
     for (let i = Math.max(0, h.start); i < Math.min(text.length, h.end); i++) marked[i] = true;
@@ -139,7 +156,7 @@ export function HighlightedText({ text, highlights }: { text: string; highlights
   }
 
   return (
-    <Text style={[textStyles.body, { color: theme.text }]}>
+    <Text style={[textStyles.body, sized(textStyles.body, scale), { color: theme.text }]}>
       {parts.map((p, i) => (
         <Text
           key={i}
@@ -154,6 +171,7 @@ export function HighlightedText({ text, highlights }: { text: string; highlights
 /** Pill button for picking one option (costs, agencies). */
 export function Chip({ title, selected, onPress }: { title: string; selected: boolean; onPress: () => void }) {
   const theme = useTheme();
+  const { scale, chipHeight } = useLook();
   const press = useOneTap(onPress, 400);
   return (
     <Pressable
@@ -165,9 +183,10 @@ export function Chip({ title, selected, onPress }: { title: string; selected: bo
         {
           backgroundColor: selected ? theme.primary : theme.backgroundElement,
           borderColor: selected ? theme.primary : theme.border,
+          minHeight: chipHeight,
         },
       ]}>
-      <Text style={[textStyles.small, { color: selected ? theme.onPrimary : theme.text, fontWeight: '600' }]}>
+      <Text style={[textStyles.small, sized(textStyles.small, scale), { color: selected ? theme.onPrimary : theme.text, fontWeight: '600' }]}>
         {title}
       </Text>
     </Pressable>

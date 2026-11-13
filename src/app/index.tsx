@@ -10,12 +10,14 @@ import Shield from '../../modules/fraudlens-shield';
 import { Button, Card, Chip, Label, Screen } from '@/components/ui';
 import { findingTitle, t, type Language } from '@/constants/strings';
 import { FontSize, Radius, Spacing } from '@/constants/theme';
+import { useLook } from '@/hooks/use-look';
 import { useTheme } from '@/hooks/use-theme';
 import { useStore } from '@/lib/store';
 
 export default function ScanScreen() {
   const theme = useTheme();
-  const { runCheck, language, setLanguage, shieldOn, setShieldOn } = useStore();
+  const { runCheck, language, setLanguage, shieldOn, setShieldOn, granny, setGranny } = useStore();
+  const { scale } = useLook();
   const [text, setText] = useState('');
   const [error, setError] = useState('');
   const scrollRef = useRef<ComponentRef<typeof ScrollView>>(null);
@@ -43,6 +45,12 @@ export default function ScanScreen() {
           <Chip key={l.id} title={l.name} selected={l.id === language} onPress={() => setLanguage(l.id)} />
         ))}
       </View>
+      <View style={styles.switchRow}>
+        <View style={styles.half}>
+          <Label variant="label">{t('grannyMode')}</Label>
+        </View>
+        <Switch value={granny} accessibilityLabel={t('grannyMode')} onValueChange={setGranny} />
+      </View>
       <Label variant="small">{t('tagline')}</Label>
       <Label variant="title">{t('scanTitle')}</Label>
       <Label>{t('scanHint')}</Label>
@@ -59,7 +67,7 @@ export default function ScanScreen() {
         onFocus={() => setTimeout(() => scrollRef.current?.scrollToEnd({ animated: true }), 300)}
         style={[
           styles.input,
-          { color: theme.text, backgroundColor: theme.backgroundElement, borderColor: theme.border },
+          { color: theme.text, backgroundColor: theme.backgroundElement, borderColor: theme.border, fontSize: FontSize.body * scale },
         ]}
       />
       {error !== '' && <Label variant="small">{error}</Label>}

@@ -30,11 +30,15 @@ type Store = {
   /** Shield (automatic checking of new WhatsApp/SMS): off unless the user turns it on. */
   shieldOn: boolean;
   setShieldOn: (on: boolean) => void;
+  /** Granny mode: bigger text and buttons, strong contrast, simpler Result (display only). */
+  granny: boolean;
+  setGranny: (on: boolean) => void;
 };
 
 const HISTORY_KEY = 'history-v1';
 const LANGUAGE_KEY = 'language-v1';
 const SHIELD_KEY = 'shield-v1';
+const GRANNY_KEY = 'granny-v1';
 const StoreContext = createContext<Store | null>(null);
 
 export function StoreProvider({ children }: { children: ReactNode }) {
@@ -42,6 +46,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   const [history, setHistory] = useState<Check[]>([]);
   const [language, setLanguageState] = useState<Language>('en');
   const [shieldOn, setShieldOnState] = useState(false);
+  const [granny, setGrannyState] = useState(false);
 
   // Load saved history once, when the app starts.
   useEffect(() => {
@@ -58,7 +63,15 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     AsyncStorage.getItem(SHIELD_KEY)
       .then((saved) => setShieldOnState(saved === 'on'))
       .catch(() => {});
+    AsyncStorage.getItem(GRANNY_KEY)
+      .then((saved) => setGrannyState(saved === 'on'))
+      .catch(() => {});
   }, []);
+
+  function setGranny(on: boolean) {
+    setGrannyState(on);
+    AsyncStorage.setItem(GRANNY_KEY, on ? 'on' : 'off').catch(() => {});
+  }
 
   function setShieldOn(on: boolean) {
     setShieldOnState(on);
@@ -127,6 +140,8 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     setLanguage: (next) => chooseLanguage(next),
     shieldOn,
     setShieldOn,
+    granny,
+    setGranny,
   };
 
   return <StoreContext.Provider value={store}>{children}</StoreContext.Provider>;

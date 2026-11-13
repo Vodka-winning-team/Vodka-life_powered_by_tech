@@ -7,6 +7,11 @@ const en = {
   tagline: 'Verifye avan ou peye: check before you pay',
 
   languageLabel: 'Language',
+  // Granny mode (Adiyen, 22:45). The one plain sentence on the Result screen, per level.
+  grannyMode: 'Granny mode: bigger text and buttons',
+  grannySTOP: "Don't pay or send anything. First call the official number below.",
+  grannyCAREFUL: 'Be careful. Before you pay, call the official number yourself.',
+  grannyNONE: 'We found no warning signs. Still, call the official number before you pay.',
   scanTitle: 'Check a message',
   scanHint: 'Paste a suspicious SMS, WhatsApp or email below. Nothing leaves your phone.',
   scanPlaceholder: 'Paste the message here',
@@ -105,6 +110,10 @@ export type StringKey = keyof typeof en;
 export type Language = 'en' | 'fr' | 'mfe';
 
 const fr: Partial<Record<StringKey, string>> = {
+  grannyMode: "Mode grand-mère : texte et boutons plus grands",
+  grannySTOP: "Ne payez et n'envoyez rien. Appelez d'abord le numéro officiel ci-dessous.",
+  grannyCAREFUL: "Attention. Avant de payer, appelez vous-même le numéro officiel.",
+  grannyNONE: "Aucun signe d'alerte trouvé. Appelez quand même le numéro officiel avant de payer.",
   numbersTitle: "Numéros officiels",
   numbersSearch: "Chercher une agence ou une banque",
   numbersHint: "Numéros des listes officielles. Être sur la liste ne prouve pas que le message vient d'eux.",
@@ -180,6 +189,7 @@ const fr: Partial<Record<StringKey, string>> = {
   sourcesChecked: "vérifié",
 };
 const mfe: Partial<Record<StringKey, string>> = {
+  grannyMode: "Mod granmer: ekritir ek bouton pli gro",
   numbersTitle: "Nimero ofisiel",
   numbersSearch: "Rod enn lazans ouswa enn labank",
   numbersHint: "Nimero depi bann lis ofisiel. Lor lis pa pe dir ki mesaz la sorti kot zot.",

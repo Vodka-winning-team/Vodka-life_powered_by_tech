@@ -2,18 +2,21 @@
 
 import { router } from 'expo-router';
 import { useState } from 'react';
-import { StyleSheet, TextInput } from 'react-native';
+import { Linking, StyleSheet, TextInput } from 'react-native';
 
 import { Button, Card, HighlightedText, Label, LevelBanner, LevelTag, Screen } from '@/components/ui';
 import { findingTitle, t } from '@/constants/strings';
 import { FontSize, Radius, Spacing } from '@/constants/theme';
+import { useLook } from '@/hooks/use-look';
 import { useTheme } from '@/hooks/use-theme';
+import { dialNumber, formatPhone } from '@/lib/phone';
 import { useStore } from '@/lib/store';
 import { prettyDay } from '@/lib/time';
 
 export default function ResultScreen() {
   const theme = useTheme();
   const { current, saveCurrent, addToCase } = useStore();
+  const { granny, scale } = useLook();
   const [newText, setNewText] = useState('');
 
   if (!current) {
@@ -31,6 +34,23 @@ export default function ResultScreen() {
   return (
     <Screen>
       <LevelBanner level={result.level} />
+
+      {/* Granny mode: one plain sentence, then the official number to call, first. Details stay below. */}
+      {granny && (
+        <>
+          <Label variant="label">{t(`granny${result.level}`)}</Label>
+          {result.contacts.map((c) => (
+            <Button
+              key={c.name + c.phone}
+              title={`${c.name}: ${formatPhone(c.phone)}`}
+              onPress={() => Linking.openURL(`tel:${dialNumber(c.phone)}`).catch(() => {})}
+            />
+          ))}
+          {result.contacts.length === 0 && (
+            <Button title={t('resultActionsButton')} onPress={() => router.push('/actions')} />
+          )}
+        </>
+      )}
 
       <Card>
         <Label variant="label">{t('resultMessage')}</Label>
@@ -71,7 +91,7 @@ export default function ResultScreen() {
           placeholderTextColor={theme.textSecondary}
           multiline
           accessibilityLabel={t('followUpPlaceholder')}
-          style={[styles.input, { color: theme.text, borderColor: theme.border }]}
+          style={[styles.input, { color: theme.text, borderColor: theme.border, fontSize: FontSize.body * scale }]}
         />
         <Button
           kind="secondary"
