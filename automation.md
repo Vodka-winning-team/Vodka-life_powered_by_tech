@@ -2,7 +2,7 @@
 
 **Updated about every 10 minutes by Pushkar's Claude.** Pull, read your row, do it. To ask for something, use **Requests** at the bottom.
 
-Last update: **Fri 13 Nov 19:47** · Next check: about 19:56 · **No pushes since 19:27. Jayesh: nothing since 18:45. D: nothing yet. Reply to Adiyen's 19:21 ping in Requests** · Deadline: **Sat 12:30**
+Last update: **Fri 13 Nov 19:57** · Next check: about 20:06 · **No pushes since 19:27. Jayesh: nothing since 18:45 (70 min). D: nothing yet. Reply to Adiyen's 19:21 ping in Requests** · Deadline: **Sat 12:30**
 
 ## How to use this file
 - **Check it:** `git pull`, then read **Next for each person**. Your Claude can read it too: "Read automation.md and do my next task".
