@@ -29,6 +29,9 @@ Kreol uses the standard Kreol Morisien spelling (*Grafi Larmoni*: mesaz, nimero,
 | resultSave | Save to history | Enregistrer dans l'historique | Gard dan istorik |
 | resultSaved | Saved | Enregistré | Finn gard |
 | sourceLabel | Source | Source | Sours |
+| readAloud | Read aloud | Lire à voix haute | Lir for |
+| stopReading | Stop reading | Arrêter la lecture | Aret lir |
+| checkedAgainst | Checked against these official records: | Vérifié avec ces listes officielles : | Nou finn verifye avek sa bann lis ofisiel la: |
 | grannySTOP | Don't pay or send anything. First call the official number below. | Ne payez et n'envoyez rien. Appelez d'abord le numéro officiel ci-dessous. | Pa peye ni avoy nanye. Avan tou, apel nimero ofisiel anba la. |
 | grannyCAREFUL | Be careful. Before you pay, call the official number yourself. | Attention. Avant de payer, appelez vous-même le numéro officiel. | Fer atansion. Avan ou peye, apel nimero ofisiel la ou mem. |
 | grannyNONE | We found no warning signs. Still, call the official number before you pay. | Aucun signe d'alerte trouvé. Appelez quand même le numéro officiel avant de payer. | Nou pa finn trouv okenn sinn danze. Kan mem, apel nimero ofisiel la avan ou peye. |
@@ -112,6 +115,9 @@ const fr: Partial<Record<StringKey, string>> = {
   resultSave: "Enregistrer dans l'historique",
   resultSaved: "Enregistré",
   sourceLabel: "Source",
+  readAloud: "Lire à voix haute",
+  stopReading: "Arrêter la lecture",
+  checkedAgainst: "Vérifié avec ces listes officielles :",
   grannySTOP: "Ne payez et n'envoyez rien. Appelez d'abord le numéro officiel ci-dessous.",
   grannyCAREFUL: "Attention. Avant de payer, appelez vous-même le numéro officiel.",
   grannyNONE: "Aucun signe d'alerte trouvé. Appelez quand même le numéro officiel avant de payer.",
@@ -165,6 +171,9 @@ const mfe: Partial<Record<StringKey, string>> = {
   resultSave: "Gard dan istorik",
   resultSaved: "Finn gard",
   sourceLabel: "Sours",
+  readAloud: "Lir for",
+  stopReading: "Aret lir",
+  checkedAgainst: "Nou finn verifye avek sa bann lis ofisiel la:",
   grannySTOP: "Pa peye ni avoy nanye. Avan tou, apel nimero ofisiel anba la.",
   grannyCAREFUL: "Fer atansion. Avan ou peye, apel nimero ofisiel la ou mem.",
   grannyNONE: "Nou pa finn trouv okenn sinn danze. Kan mem, apel nimero ofisiel la avan ou peye.",
