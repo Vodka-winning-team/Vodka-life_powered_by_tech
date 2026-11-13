@@ -4,6 +4,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
 
+import { setLanguage as setStringsLanguage, type Language } from '@/constants/strings';
 import type { CheckResult, JobAnswers } from '@/engine';
 import { engine } from '@/lib/data';
 
@@ -22,14 +23,18 @@ type Store = {
   openCheck: (check: Check) => void;
   saveCurrent: () => void;
   clearHistory: () => void;
+  language: Language;
+  setLanguage: (language: Language) => void;
 };
 
 const HISTORY_KEY = 'history-v1';
+const LANGUAGE_KEY = 'language-v1';
 const StoreContext = createContext<Store | null>(null);
 
 export function StoreProvider({ children }: { children: ReactNode }) {
   const [current, setCurrent] = useState<Check | null>(null);
   const [history, setHistory] = useState<Check[]>([]);
+  const [language, setLanguageState] = useState<Language>('en');
 
   // Load saved history once, when the app starts.
   useEffect(() => {
@@ -38,7 +43,19 @@ export function StoreProvider({ children }: { children: ReactNode }) {
         if (saved) setHistory(JSON.parse(saved));
       })
       .catch(() => {});
+    AsyncStorage.getItem(LANGUAGE_KEY)
+      .then((saved) => {
+        if (saved === 'en' || saved === 'fr' || saved === 'mfe') chooseLanguage(saved, false);
+      })
+      .catch(() => {});
   }, []);
+
+  /** Changing the state re-renders every screen, so all t() texts switch at once. */
+  function chooseLanguage(next: Language, save = true) {
+    setStringsLanguage(next);
+    setLanguageState(next);
+    if (save) AsyncStorage.setItem(LANGUAGE_KEY, next).catch(() => {});
+  }
 
   function writeHistory(next: Check[]) {
     setHistory(next);
@@ -69,6 +86,8 @@ export function StoreProvider({ children }: { children: ReactNode }) {
       writeHistory([]);
       if (current) setCurrent({ ...current, savedAt: null });
     },
+    language,
+    setLanguage: (next) => chooseLanguage(next),
   };
 
   return <StoreContext.Provider value={store}>{children}</StoreContext.Provider>;

@@ -3,7 +3,7 @@
 import { router } from 'expo-router';
 
 import { Button, Card, HighlightedText, Label, LevelBanner, LevelTag, Screen } from '@/components/ui';
-import { t } from '@/constants/strings';
+import { findingTitle, t } from '@/constants/strings';
 import { useStore } from '@/lib/store';
 
 export default function ResultScreen() {
@@ -35,7 +35,7 @@ export default function ResultScreen() {
       {result.findings.map((finding, i) => (
         <Card key={`${finding.kind}-${i}`}>
           <LevelTag level={finding.level} />
-          <Label variant="label">{finding.title}</Label>
+          <Label variant="label">{findingTitle(finding)}</Label>
           <Label>{finding.detail}</Label>
           {finding.source && (
             <Label variant="small">

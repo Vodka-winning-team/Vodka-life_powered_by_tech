@@ -5,16 +5,15 @@ import { router } from 'expo-router';
 import { useState } from 'react';
 import { StyleSheet, TextInput, View } from 'react-native';
 
-import { Button, Label, Screen } from '@/components/ui';
-import { t } from '@/constants/strings';
+import { Button, Chip, Label, Screen } from '@/components/ui';
+import { t, type Language } from '@/constants/strings';
 import { FontSize, Radius, Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
-import { sampleCheck } from '@/lib/sample';
 import { useStore } from '@/lib/store';
 
 export default function ScanScreen() {
   const theme = useTheme();
-  const { runCheck, openCheck } = useStore();
+  const { runCheck, language, setLanguage } = useStore();
   const [text, setText] = useState('');
   const [error, setError] = useState('');
 
@@ -28,13 +27,14 @@ export default function ScanScreen() {
     router.push('/result');
   }
 
-  function trySample() {
-    openCheck(sampleCheck);
-    router.push('/result');
-  }
 
   return (
     <Screen>
+      <View style={styles.languages} accessibilityLabel={t('languageLabel')}>
+        {LANGUAGES.map((l) => (
+          <Chip key={l.id} title={l.name} selected={l.id === language} onPress={() => setLanguage(l.id)} />
+        ))}
+      </View>
       <Label variant="small">{t('tagline')}</Label>
       <Label variant="title">{t('scanTitle')}</Label>
       <Label>{t('scanHint')}</Label>
@@ -65,12 +65,19 @@ export default function ScanScreen() {
         </View>
       </View>
 
-      {__DEV__ && <Button kind="secondary" title={t('sampleButton')} onPress={trySample} />}
     </Screen>
   );
 }
 
+// Each language is written in its own language, so people can find theirs.
+const LANGUAGES: { id: Language; name: string }[] = [
+  { id: 'en', name: 'English' },
+  { id: 'fr', name: 'Français' },
+  { id: 'mfe', name: 'Kreol' },
+];
+
 const styles = StyleSheet.create({
+  languages: { flexDirection: 'row', flexWrap: 'wrap', gap: Spacing.two },
   input: {
     minHeight: 160,
     borderWidth: 1,

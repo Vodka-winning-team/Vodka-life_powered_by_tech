@@ -3,7 +3,7 @@
 import { Linking, Share } from 'react-native';
 
 import { Button, Card, Label, Screen } from '@/components/ui';
-import { t } from '@/constants/strings';
+import { findingTitle, t } from '@/constants/strings';
 import { dialNumber, formatPhone } from '@/lib/phone';
 import { useStore } from '@/lib/store';
 
@@ -24,7 +24,7 @@ export default function ActionsScreen() {
     if (!current) return;
     const lines = [
       `${t('appName')}: ${t(`level${current.result.level}`)}`,
-      ...current.result.findings.map((f) => `- ${f.title}`),
+      ...current.result.findings.map((f) => `- ${findingTitle(f)}`),
       '',
       current.text,
     ];
