@@ -145,6 +145,15 @@ export default function ResultScreen() {
         </Appear>
       ))}
 
+      {/* Offline mode and the message has a link: say that the link was NOT checked online. */}
+      {!onlineMode && /(https?:\/\/|www\.)\S+/i.test(text) && (
+        <Card>
+          <LevelTag level="CAREFUL" label={t('onlineMode')} />
+          <Label>{t('offlineLinkNote')}</Label>
+          <Button kind="secondary" title={t('settingsTitle')} onPress={() => router.push('/settings')} />
+        </Card>
+      )}
+
       {/* What our server adds: score, live link and number checks, reports from other users. */}
       <OnlineCheck state={online} text={text} />
 

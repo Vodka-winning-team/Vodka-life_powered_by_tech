@@ -10,6 +10,7 @@ const en = {
 
   languageLabel: 'Language',
   settingsTitle: 'Settings',
+  offlineLinkNote: 'Online checks are off, so the link in this message was not checked against the Google list of harmful websites or other live lists. Turn Online checks on in Settings to check it.',
   qrCautionTitle: 'A link from a QR code',
   qrCautionText: 'This link is not on our lists, but those only know links that were already reported. A QR code hides its address: open it only if you trust who gave you the code, and never enter a password, PIN or OTP on the page.',
   pasteShort: 'Paste',
@@ -192,6 +193,7 @@ export type Language = 'en' | 'fr' | 'mfe';
 
 const fr: Partial<Record<StringKey, string>> = {
   settingsTitle: "Réglages",
+  offlineLinkNote: "Les vérifications en ligne sont désactivées : le lien de ce message n'a pas été vérifié avec la liste de sites dangereux de Google ni d'autres listes en direct. Activez-les dans les Réglages pour le vérifier.",
   qrCautionTitle: "Un lien venant d'un code QR",
   qrCautionText: "Ce lien n'est pas sur nos listes, mais elles ne connaissent que les liens déjà signalés. Un code QR cache son adresse : ouvrez-le seulement si vous faites confiance à la personne qui vous l'a donné, et n'entrez jamais de mot de passe, PIN ou OTP sur la page.",
   pasteShort: "Coller",
@@ -361,6 +363,7 @@ const fr: Partial<Record<StringKey, string>> = {
 const mfe: Partial<Record<StringKey, string>> = {
   // Welcome page, speech, and the sources (draft Kreol, needs Paveesh's check)
   settingsTitle: "Reglaz",
+  offlineLinkNote: "Verifikasion anlinn tengn: lien dan sa mesaz la pa finn verifye ar lis sit danzere Google ni lezot lis an direk. Alim li dan Reglaz pou verifye li.",
   qrCautionTitle: "Enn lien ki sorti dan enn kod QR",
   qrCautionText: "Sa lien la pa lor nou bann lis, me zot kone zis bann lien ki finn deza signale. Enn kod QR kasiet so ladres: ouver li zis si ou fer konfians dimoun ki finn donn ou kod la, ek zame met enn mo-de-pas, PIN ou OTP lor paz la.",
   pasteShort: "Kole",
