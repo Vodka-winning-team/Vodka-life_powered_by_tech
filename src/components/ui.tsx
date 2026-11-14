@@ -83,6 +83,18 @@ export function Status({ children }: { children: ReactNode }) {
   );
 }
 
+/** Amber warning box for something the user should fix (e.g. the text is not a message). */
+export function Warning({ title, children }: { title: string; children: ReactNode }) {
+  const colors = LevelColors.CAREFUL;
+  const { scale } = useLook();
+  return (
+    <View accessibilityRole="alert" accessibilityLiveRegion="polite" style={[styles.warning, { backgroundColor: colors.background }]}>
+      <Text style={[textStyles.label, sized(textStyles.label, scale), { color: colors.text }]}>{title}</Text>
+      <Text style={[textStyles.body, sized(textStyles.body, scale), { color: colors.text }]}>{children}</Text>
+    </View>
+  );
+}
+
 export function Card({ children }: { children: ReactNode }) {
   const theme = useTheme();
   return (
@@ -241,6 +253,7 @@ const styles = StyleSheet.create({
   card: { borderWidth: 1, borderRadius: RadiusCard, padding: 20, gap: Spacing.two, ...CardShadow },
   button: { borderWidth: 1, borderRadius: 999, paddingVertical: 15, paddingHorizontal: Spacing.three, minHeight: 52, justifyContent: 'center' },
   banner: { borderRadius: RadiusCard, paddingVertical: Spacing.five, paddingHorizontal: Spacing.three, ...CardShadow },
+  warning: { borderRadius: RadiusCard, padding: Spacing.three, gap: Spacing.one },
   tag: { alignSelf: 'flex-start', borderRadius: 8, paddingHorizontal: Spacing.two, paddingVertical: 2 },
   chip: { borderWidth: 1, borderRadius: 999, paddingHorizontal: Spacing.three, paddingVertical: Spacing.two, minHeight: 48, minWidth: 48, justifyContent: 'center' },
 });

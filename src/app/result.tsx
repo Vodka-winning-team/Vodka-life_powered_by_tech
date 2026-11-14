@@ -6,7 +6,7 @@ import { Linking, Pressable, StyleSheet, TextInput } from 'react-native';
 
 import { OnlineCheck } from '@/components/online-check';
 import { TourTip } from '@/components/tour';
-import { Button, Card, HighlightedText, Label, LevelBanner, LevelTag, Screen } from '@/components/ui';
+import { Button, Card, HighlightedText, Label, LevelBanner, LevelTag, Screen, Warning } from '@/components/ui';
 import { findingDetail, findingTitle, t } from '@/constants/strings';
 import { FontSize, Radius, Spacing } from '@/constants/theme';
 import { useLook } from '@/hooks/use-look';
@@ -44,8 +44,7 @@ export default function ResultScreen() {
   if (result.findings.some((f) => f.kind === 'empty_message')) {
     return (
       <Screen>
-        <Label variant="title">{t('notMessageTitle')}</Label>
-        <Label>{t('notMessage')}</Label>
+        <Warning title={t('notMessageTitle')}>{t('notMessage')}</Warning>
         <Card>
           <Label variant="small">{text.slice(0, 300)}</Label>
         </Card>

@@ -8,7 +8,7 @@ import { useCallback, useEffect, useRef, useState, type ComponentRef } from 'rea
 import { Pressable, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
 
 import { TOUR_MESSAGE, TourTip } from '@/components/tour';
-import { Button, Chip, Label, Screen, Section } from '@/components/ui';
+import { Button, Chip, Label, Screen, Section, Warning } from '@/components/ui';
 import { findingTitle, t, type Language } from '@/constants/strings';
 import { FontSize, LevelColors, Radius, Spacing } from '@/constants/theme';
 import { useLook } from '@/hooks/use-look';
@@ -129,11 +129,7 @@ export default function ScanScreen() {
           <Text style={{ color: theme.primary, fontSize: FontSize.small * scale, fontWeight: '600' }}>{t('pasteButton')}</Text>
         </Pressable>
         {/* The error sits under its box and is read out by screen readers. */}
-        {error !== '' && (
-          <View accessibilityLiveRegion="polite">
-            <Label variant="label">{error}</Label>
-          </View>
-        )}
+        {error !== '' && <Warning title={t('notMessageTitle')}>{error}</Warning>}
         {/* Tour: the user taps the real button, so this tip has no "Next". */}
         <TourTip step={2} hideNext>
           {t('tourCheck')}
