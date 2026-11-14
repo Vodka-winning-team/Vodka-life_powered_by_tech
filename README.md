@@ -1,12 +1,12 @@
 # Verifye: *avan ou peye* (check before you pay)
 
-An offline app that checks a suspicious SMS, WhatsApp or email **before you pay**. It shows the warning signs in the message (X-Ray), what **official Mauritian records** say about the bank, agency or company in it, and what to do now. Nothing leaves the phone.
+An app that checks a suspicious SMS, WhatsApp or email **before you pay**. It shows the warning signs in the message (X-Ray), what **official Mauritian records** say about the bank, agency or company in it, and what to do now. **Every check works on the phone, offline.** When the phone can reach our optional server, the result adds live link checks, reports from other phones and a Kreol voice.
 
 Hackathon: **Life Powered by Tech**, Theme 1 *Powered to Protect*.
 
 *Verifye* is Kreol for “check”. Until Fri 13 Nov, 22:46, the app’s working name was FraudLens Moris (decision 17); some internal code names still use it.
 
-> **About the `backend/` folder (added Sat 14 Nov, 02:55):** it is the server of our earlier FraudLens project, from September 2026, added unchanged. **It was not written during this hackathon**, and the team has not agreed to use it (see "Open" in [`docs/decisions.md`](docs/decisions.md)). The released app described below does not use it: it works offline, with no server.
+> **About the server, for the record:** at 02:55 on Sat 14 Nov the server of our earlier FraudLens project (September 2026) was added to this repo as `backend/`. It was not written during this hackathon, so the team replaced it with a new server written from scratch that night (`server/`, from 04:30) and **removed `backend/` at 06:58** (commit eb2fc33). It stays visible in the git history; nothing from it is in the app or the server we submit. See decision 23 in [`docs/decisions.md`](docs/decisions.md).
 
 **Team documents:** plan in [`PROJECT.md`](PROJECT.md) and [`docs/TASKS.md`](docs/TASKS.md) · decision log in [`docs/decisions.md`](docs/decisions.md) · AI log in [`docs/ai-log.md`](docs/ai-log.md) · user-test script in [`docs/user-tests.md`](docs/user-tests.md) (not run yet) · phone tests in [`docs/quick-test.md`](docs/quick-test.md) · live team board in [`automation.md`](automation.md).
 
@@ -32,10 +32,17 @@ The law is clear: no agency or employer may charge a worker a recruitment fee (P
 7. **Automatic checking (opt-in, Android only):** if you switch it on, new WhatsApp and SMS notifications are checked on the phone with the same rules, and a warning appears: *"Stop – warning signs found. Tap to see why."* Off by default, nothing saved or sent, no other apps read. It can't read photos, voice notes or muted chats, so sharing or pasting stays the main way in.
 8. **Official numbers ("Search an agency or bank"):** look up any of the 79 agencies or 21 banks and payment apps without a message, and see every official number with its source. The Call button only opens the dialler. **"Is this number official?"**: type a phone number to see whether it is in the Ministry register or the bank list, and whose it is (in the 02:34 build, not released yet).
 9. **Granny mode:** one switch for bigger text and buttons, strong contrast, and a simpler result: one plain sentence, then the Call button.
-10. **Read aloud:** the result is read out with the phone's own voices, offline (English and French; Kreol is read with the French voice for now).
+10. **Read aloud:** the result is read out with the phone's own voices, offline (English and French). With the server, Kreol is read by a Mauritian voice (myt AI Cloud text-to-speech).
 11. **"Checked against these official records":** every result shows the date of each official list it used.
+12. **Four tabs:** Check · Is it official? · Learn · History, with Settings behind the gear on Check. A **Paste the copied message** button, a **home-screen widget** ("Check copied message", the newest CERT-MU alert) and a **first-time tour** with a practice message.
+13. **Learn the tricks:** 6 short lessons and a quiz in English, French and Kreol, written for Verifye from our official sources. Works offline.
+14. **Online check (optional, needs the server):** an extra card on the result: links on Google Safe Browsing or URLhaus blocklists, websites registered very recently or not at all, where a short link really goes, and messages reported by other phones.
+15. **Report this message:** it counts once 2 different phones report the same message or a near copy. The server keeps salted fingerprints only, never the words.
+16. **Before you pay:** a pay check that warns on large amounts and on account numbers seen in reported messages.
 
-No AI model: clear rules plus official records, so every warning can be explained and checked.
+**No AI model decides a result:** clear rules plus official records, so every warning can be explained and checked. The only AI service is the optional Kreol voice.
+
+**Privacy:** the phone's checks never send anything. The online check is optional: the server uses the message in memory for one request and never stores or logs it; outside providers get only links, domains and phone numbers. The app says so, and it works without the server.
 
 ## Data sources
 All real, official and dated. Every record in the app has its `source_url` and `snapshot` date. Details: [`docs/sources.md`](docs/sources.md).
@@ -54,7 +61,8 @@ No personal names are stored: directors' names and alerts naming individuals are
 - **App:** Expo SDK 58, React Native, TypeScript, Expo Router. One codebase: Android APK, iPhone through Expo Go, and web.
 - **Engine:** pure TypeScript in `src/engine/` (rules + official records), runs on the phone, offline. Automated tests (Jest) run every demo message, the 15 test cases and the real data files: `npm test`.
 - **Data:** Python scripts in `data/scripts/` turn the official PDFs and pages into JSON; `validate.py` checks every row.
-- **No server, no accounts, no internet needed.**
+- **Server (optional):** Python (FastAPI) in `server/`, written new on Sat 14 Nov. No trained model; it answers "high" only on hard evidence. 32 tests. Details: [`server/README.md`](server/README.md).
+- **No accounts. No internet needed for the checks.**
 
 ## AI tools
 AI tools were allowed by the organisers. We list them all here. Every AI-assisted step has a line in [`docs/ai-log.md`](docs/ai-log.md) (and [`docs/ai-log/A.md`](docs/ai-log/A.md)) saying what the AI did and what the teammate checked.
@@ -68,7 +76,7 @@ AI tools were allowed by the organisers. We list them all here. Every AI-assiste
 | **OpenAI Codex CLI** | Team | Critical review of our ideas before the build, and a read-only review of the app screens (4 fixes, 13 Nov 18:45) |
 
 **What we added ourselves, and checked:**
-- **Choices:** the user (Kevin), the job-fee check as our lead story, no AI model, no server, and every cut. See [`docs/decisions.md`](docs/decisions.md).
+- **Choices:** the user (Kevin), the job-fee check as our lead story, no AI model deciding a result, checks that work offline, a server written from scratch when we went online, and every cut. See [`docs/decisions.md`](docs/decisions.md).
 - **The data:** every agency row checked against the Ministry PDF, page by page (all 79, with 2 errors found and fixed), and a script checks every phone number against its row; every law clause found word for word in the Act and the Regulations; every bank phone read on the bank's own website.
 - **The rules:** tested on the 6 demo messages and 15 test cases, including a real bank code SMS that must give no warning.
 - **Real phones:** the team tested the release APK on two Android phones (Android 14 and 16): every demo message, wrong input, panic taps, share-in, and automatic checking with a real WhatsApp ([`docs/quick-test.md`](docs/quick-test.md)). **No tests with outside users yet:** that is the first step of a pilot (decision 18).
@@ -83,7 +91,7 @@ Every teammate can explain and change their own part.
 
 | Mistake | What the app does | Status |
 |---|---|---|
-| Empty paste, 2 letters, emojis only | "Paste the whole message to check it", never a result | ✅ engine 20:48 · app 21:00 |
+| Empty paste, 2 letters, emojis only, random typing ("asdf asdf") | An amber box, "Please check your text"; never a result | ✅ engine 20:48 · app 21:00 · stricter rules Sat 06:55 |
 | Very long paste | Checks the first 20,000 characters and says so | Engine ✅ |
 | Line breaks, tabs or extra spaces inside words ("processing / fee") | Still found, same result | Engine ✅ |
 | Panic-tapping any button | Same input always gives the same result; a second tap within 1 second is ignored (Check, Save, Call, Share) | ✅ engine 20:48 · app 21:00 |
@@ -104,7 +112,9 @@ To try the engine on one message without the app:
 ```
 TRY_MSG="MCB: verify your account at mcb-login-secure.net" npx jest try-it
 ```
-APK: https://github.com/Vodka-winning-team/Vodka-life_powered_by_tech/releases/tag/verifye-final-2026-11-14-0055 (final, Sat 14 Nov 00:55).
+APK: https://github.com/Vodka-winning-team/Vodka-life_powered_by_tech/releases/tag/verifye-2026-11-14-0656 (demo build, Sat 14 Nov 06:56). The final build is linked here before 12:00.
+
+Optional server, on the demo laptop: double-click `run_server.bat`, or follow [`server/README.md`](server/README.md). In the app: Settings → server address. Phone and laptop must be on the same network (a phone hotspot works).
 
 ## Team
 | Person | Role |

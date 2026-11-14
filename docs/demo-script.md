@@ -12,7 +12,8 @@ The messages are in [`demo-messages.md`](demo-messages.md) and the slides in [`s
 - [ ] **App open on the Scan screen**, language set to English, **History cleared** (History → Clear history).
 - [ ] **Messages ready to paste:** keep demo messages 1, 3, 4 and 5 in a notes app on the phone, in order. Copy each one just before you need it.
 - [ ] **Offline:**
-  - **With the APK:** airplane mode on for the whole demo.
+  - **With the APK:** airplane mode on for steps 1–6 (every check works offline). Turn the network on for the online step.
+  - **Server for the online step:** on Jayesh's laptop, double-click `run_server.bat`. The venue Wi-Fi blocks phone → laptop, so put the demo phone on **USB** (server address `http://127.0.0.1:8000`) or put both on a **phone hotspot** (laptop's hotspot address in Settings → Server address). Check the Online check card appears before going on stage.
   - **With Expo Go:** the app is loaded from the laptop, so the phone must stay connected to it. Put the laptop and the phone on a hotspot that has **no internet**. That way we can still say "no internet is used", and it's true. Don't reload the app on stage.
 - [ ] **Backup video** open on the laptop, paused at 0:00.
 - [ ] **Screen mirroring** checked (phone → projector), or a camera on the phone.
@@ -37,7 +38,7 @@ The messages are in [`demo-messages.md`](demo-messages.md) and the slides in [`s
 
 **Step 1: job offer (about 1 min)**
 - Paste demo message 1 → tap **Check message**.
-> "Kevin pastes the message. Nothing leaves the phone."
+> "Kevin pastes the message. The check runs on his phone, with no internet."
 - Result: **Stop – high risk**. Point to the highlights: "processing fee", "Urgent".
 > "X-Ray shows the tricks: a fee, and pressure to pay today."
 - Tap **Job offer? Check the agency**. Under **Found in the message**, the app already suggests THINK RECRUITMENT LTD. Pick it. Under **2. What are they asking you to pay for?**, pick **Processing fee**.
@@ -76,6 +77,10 @@ The messages are in [`demo-messages.md`](demo-messages.md) and the slides in [`s
 
 **Optional extras, only if there's time (10 s each; pick one, rehearsed):** **Granny mode** (Settings card on Scan → big text, one plain sentence, Call button first) · **Search an agency or bank** (type "think" → THINK RECRUITMENT LTD with both register numbers) · **Read aloud** on the Result · the **"Checked against these official records"** card: *"Every result shows the date of each official list it used."*
 
+**Online step (about 30 s, network on):** check demo message 4 again → the **Online check** card: *"Website address isn't registered"*. Tap **Report this message**; say that once a second phone reports it, everyone sees *"Reported by other phones"*. Tap **Read aloud** in Kreol.
+> "Offline, Verifye checks the law and the official lists. Online, it also checks the link itself, and one person's report protects the next. The server keeps no message, only a fingerprint."
+- If the card doesn't appear within 5 seconds: say "the checks you saw all ran offline; the online card is in the video", and move on.
+
 **Step 7 (optional): automatic checking, Shield (about 20 s)**. Passed on the release APK at 22:33 (real WhatsApp test). Rehearse it once on the demo phone first.
 - **Before this step: turn airplane mode off** (Wi-Fi or data on), so the WhatsApp message can arrive. Shield must already be switched on, with Notification access granted.
 - Jayesh's phone sends demo message 1 by WhatsApp to the demo phone → **"Stop – warning signs found. Tap to see why, before you pay."** → tap → Result: **Stop**.
@@ -87,7 +92,7 @@ The messages are in [`demo-messages.md`](demo-messages.md) and the slides in [`s
 > "79 agency licences from the Ministry of Labour, 8 fee rules from the Act and the Regulations, 18 banks and 3 payment apps from the Bank of Mauritius, 21 FSC investment warnings, and 5 CERT-MU alerts. Every row has its source link and date. Every agency row was checked against the official PDF, page by page, and a script checks every phone number against its row. We store no personal names. No AI model: clear rules anyone can check, and tests run every demo message you just saw."
 
 ### 5:45–6:30 · Slide 5, impact · Paveesh
-> "Who could run it? The Ministry of Labour's Recruitment Licence Unit and CERT-MU already publish this data. We'd propose a handover; we have no partnership today. Running cost: Rs 0. No server, it works offline, and keeping the data fresh is a few hours a month.
+> "Who could run it? The Ministry of Labour's Recruitment Licence Unit and CERT-MU already publish this data. We'd propose a handover; we have no partnership today. The checks cost Rs 0 to run: they work on the phone, offline. The optional online check needs one small server; keeping the data fresh is a few hours a month.
 > How it reaches people: employment offices, bank branches and community groups, on Android, iPhone and the web.
 > In a pilot we'd measure one thing: how many users call the official number before they pay."
 
@@ -140,7 +145,7 @@ Answer in **two sentences**, then stop. The person in brackets answers first; an
 
 ### Privacy and safety
 14. **"What data do you collect?"** (Paveesh)
-    None. Nothing leaves the phone, there are no accounts and no server, and a case is saved on the phone only when the user taps Save.
+    For the checks, none: they run on the phone, with no account. The online check is optional: the server uses the message in memory for one request and never stores or logs it, and outside providers get only links, domains and numbers. A report keeps a salted fingerprint, never the words. A case is saved on the phone only when the user taps Save.
 15. **"Could this be used to target people?"** (Adiyen)
     No. We store organisations only: no directors, and no FSC alerts that name a private person. The app never says a person or agency is a scammer; it says what the official record shows.
 16. **"What if the app is wrong and someone loses money?"** (Paveesh)
@@ -148,7 +153,7 @@ Answer in **two sentences**, then stop. The person in brackets answers first; an
 
 ### Impact and next steps
 17. **"Who would run this, and what does it cost?"** (Paveesh)
-    The Ministry of Labour's Recruitment Licence Unit and CERT-MU are the natural owners, since they already publish the data; we'd propose a handover, and there's no partnership today. Running cost is Rs 0, plus a few hours a month to refresh the data.
+    The Ministry of Labour's Recruitment Licence Unit and CERT-MU are the natural owners, since they already publish the data; we'd propose a handover, and there's no partnership today. The checks cost Rs 0 to run; the optional online check needs one small server. Add a few hours a month to refresh the data.
 18. **"How would you measure success?"** (Paveesh)
     In a pilot: how many users call the official number before paying. We don't claim losses prevented.
 19. **"What about iPhone users?"** (Jayesh)
