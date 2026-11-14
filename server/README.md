@@ -5,8 +5,8 @@ Written new on **Sat 14 Nov 2026** (from 04:20), replacing the September FraudLe
 ## What it adds
 | Check | How | Needs a key? |
 |---|---|---|
-| **Harmful links** | Google Safe Browsing and abuse.ch URLhaus blocklists | yes (both optional) |
-| **Very new or unregistered websites** | Domain registration record from public RDAP (under 30 days, or no record at all = warning) | no |
+| **Harmful links** | Google Safe Browsing (the exact link) and abuse.ch URLhaus (the website); shared platforms like Linktree, Google Drive or YouTube are never called harmful because of other people's pages | yes (both optional) |
+| **Very new or unregistered websites** | Domain registration record from public RDAP: under 30 days = warning; no record = warning only for endings whose registry answers (.com, .net, .xyz, .sbs…), never for .mu or .ee | no |
 | **Short links** | Asks the shortener where `bit.ly/…` really goes; never opens the final site | no |
 | **Risky phone numbers** | IPQualityScore fraud score, recent abuse, VOIP | optional |
 | **Reports from other phones** | "This message tried to trick me": counts once 2 different phones report the same message or a near copy | no |
@@ -41,7 +41,7 @@ See `.env.example`. All are optional:
 
 ## Tests
 ```
-cd server && .venv/bin/python -m pytest -q      # 32 tests, no network (providers are faked)
+cd server && .venv/bin/python -m pytest -q      # 33 tests, no network (providers are faked)
 ```
 
 ## Endpoints (all under `/api/v1`, as the app calls them)
