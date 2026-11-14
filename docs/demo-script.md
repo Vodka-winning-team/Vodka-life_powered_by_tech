@@ -23,11 +23,20 @@ The messages are in [`demo-messages.md`](demo-messages.md) and the slides in [`s
 
 ## The script (about 7 minutes)
 
-### 0:00–0:30 · Slide 1, Kevin's story · Paveesh
-> "This is Kevin. He's 24, from Triolet. On WhatsApp he gets a hotel job in Canada. To secure his place, he has to pay a Rs 50,000 processing fee, today. He doesn't have it, so he asks his mother to lend it.
-> Would you pay?"
+### 0:00–0:30 · Slide 1, Kevin's story, acted out (20 seconds) · two teammates + Paveesh
+**Who:** one teammate plays Kevin (with a phone), one plays his mother. Paveesh stands to the side. Slide 1 is on screen.
+1. Kevin's phone pings. He reads aloud: *"Hotel job in Canada. Salary 3,000 dollars. Pay the Rs 50,000 processing fee today to secure your place."*
+2. Kevin turns to his mother: *"Ma, to kapav pret mwa Rs 50,000?"* *(Kreol draft: Paveesh corrects it.)*
+3. She reaches for her purse.
+4. Paveesh steps in: **"Stop. Before she pays, let's check."**
 
-*(Pause 2 seconds. Kevin is a persona built from real reported cases.)*
+Then Paveesh, to the jury:
+> "This is Kevin. He's 24, from Triolet. This happens in Mauritius: about twenty people say one fake recruiter cheated them. Verifye is what Kevin opens before the money moves. *Verifye avan ou peye.*"
+
+- **Keep it to 20 seconds, and rehearse it twice.** A skit that stumbles is worse than no skit.
+- Say "fake offer" or "fake recruiter", not "scam".
+- The message is fictional, and Kevin is a persona built from real reported cases.
+- **Fallback, if the skit isn't rehearsed:** Paveesh says it alone: "This is Kevin. He's 24, from Triolet. On WhatsApp he gets a hotel job in Canada. To secure his place, he has to pay a Rs 50,000 processing fee, today. He doesn't have it, so he asks his mother to lend it. Would you pay?" Then pause 2 seconds.
 
 ### 0:30–1:15 · Slide 2, the problem · Paveesh
 > "This isn't made up. Radio One reported about twenty Mauritians who say one fake recruiter cheated them. Four complainants say they paid Rs 296,000 between them, and one paid Rs 50,000 for a job in Dubai. The Ministry of Labour has warned about fake recruitment agencies since at least 2022.

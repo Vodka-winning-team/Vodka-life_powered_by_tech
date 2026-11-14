@@ -2,8 +2,18 @@
 
 Owner: D (Paveesh). Pitches start at **13:00**: 10 minutes for the pitch and demo together. Aim for 7 minutes, leave 3 for questions. Full script: [`demo-script.md`](demo-script.md).
 
-## The opening (say it exactly)
+## The opening: act it out (20 seconds)
 
+**Who:** one teammate plays Kevin (with a phone), one plays his mother. Paveesh stands to the side. Slide 1 is on screen.
+1. Kevin's phone pings. He reads aloud: *"Hotel job in Canada. Salary 3,000 dollars. Pay the Rs 50,000 processing fee today to secure your place."*
+2. Kevin turns to his mother: *"Ma, to kapav pret mwa Rs 50,000?"* *(Kreol draft: Paveesh corrects it.)*
+3. She reaches for her purse.
+4. Paveesh steps in: **"Stop. Before she pays, let's check."**
+
+Then Paveesh says:
+> "This is Kevin. He's 24, from Triolet. This happens in Mauritius: about twenty people say one fake recruiter cheated them. Verifye is what Kevin opens before the money moves."
+
+**If the skit isn't rehearsed, say this alone instead:**
 > "This is Kevin. He's 24, from Triolet. On WhatsApp he gets a hotel job in Canada. To secure his place, he has to pay a Rs 50,000 processing fee, today. His mother is asked to lend it. Would you pay?"
 
 ## The one line (say it at the start and at the end)
@@ -22,7 +32,7 @@ Owner: D (Paveesh). Pitches start at **13:00**: 10 minutes for the pitch and dem
 
 | Time | Slide | Who | The point |
 |---|---|---|---|
-| 0:00 | 1 Kevin | Paveesh | Would you pay? |
+| 0:00 | 1 Kevin | Two teammates act it; Paveesh steps in | "Stop. Before she pays, let's check." |
 | 0:30 | 2 Problem | Paveesh | The answer exists in the law; nobody checks at the moment of paying |
 | 1:15 | 3 Demo | Jayesh drives, Paveesh talks | Job offer → Stop · call the official number · fake bank link → Stop · real code SMS → no false alarm · try to break it · online check |
 | 5:15 | 4 Data | Adiyen | Real, official, dated; no AI verdicts |
