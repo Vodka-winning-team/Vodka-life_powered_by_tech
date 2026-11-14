@@ -23,13 +23,16 @@ async def directory() -> dict:
 
 
 @router.get("/learn/tactics", tags=["Learn"], summary="Scam tactics with 30-second lessons")
-async def tactics() -> list[dict]:
-    return [asdict(t) for t in TACTICS.values()]
+async def tactics(lang: str = "en") -> list[dict]:
+    # lang = en, fr or mfe (Kreol). Texts without a translation stay in English.
+    texts = loader.learn_texts(lang).get("tactics", {})
+    return [{**asdict(t), **texts.get(t.id, {})} for t in TACTICS.values()]
 
 
 @router.get("/learn/quiz", tags=["Learn"], summary="Spot-the-scam quiz questions")
-async def quiz() -> list[dict]:
-    return loader.quiz()
+async def quiz(lang: str = "en") -> list[dict]:
+    texts = loader.learn_texts(lang).get("quiz", {})
+    return [{**q, **texts.get(q["id"], {})} for q in loader.quiz()]
 
 
 @router.get("/radar", tags=["Scam Radar"], summary="Anonymised scam trends (for banks / regulators)")

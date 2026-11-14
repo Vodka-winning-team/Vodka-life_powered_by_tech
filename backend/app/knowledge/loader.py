@@ -39,3 +39,8 @@ def samples() -> list[dict]:
 @lru_cache
 def quiz() -> list[dict]:
     return _load("quiz.json")
+
+
+def learn_texts(lang: str) -> dict:
+    """French ('fr') or Kreol ('mfe') texts for the lessons and the quiz; empty for English or an unknown language."""
+    return _load("learn_i18n.json").get(lang, {}) if lang in ("fr", "mfe") else {}

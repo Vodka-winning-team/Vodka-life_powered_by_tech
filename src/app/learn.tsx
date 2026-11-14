@@ -9,7 +9,7 @@ import { getOnline, type Lesson, type QuizQuestion } from '@/lib/online';
 import { useStore } from '@/lib/store';
 
 export default function LearnScreen() {
-  const { serverUrl } = useStore();
+  const { serverUrl, language } = useStore();
   const [lessons, setLessons] = useState<Lesson[] | null>(null);
   const [quiz, setQuiz] = useState<QuizQuestion[] | null>(null);
   const [failed, setFailed] = useState(false);
@@ -20,7 +20,7 @@ export default function LearnScreen() {
 
   useEffect(() => {
     let cancelled = false;
-    Promise.all([getOnline<Lesson[]>(serverUrl, '/learn/tactics'), getOnline<QuizQuestion[]>(serverUrl, '/learn/quiz')]).then(
+    Promise.all([getOnline<Lesson[]>(serverUrl, `/learn/tactics?lang=${language}`), getOnline<QuizQuestion[]>(serverUrl, `/learn/quiz?lang=${language}`)]).then(
       ([newLessons, newQuiz]) => {
         if (cancelled) return;
         if (newLessons === null || newQuiz === null) setFailed(true);
@@ -31,7 +31,7 @@ export default function LearnScreen() {
     return () => {
       cancelled = true;
     };
-  }, [serverUrl]);
+  }, [serverUrl, language]);
 
   if (failed) {
     return (

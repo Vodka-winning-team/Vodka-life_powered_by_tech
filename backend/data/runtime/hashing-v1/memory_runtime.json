@@ -1,0 +1,1 @@
+{"confirmed": [], "pending": [{"id": "2ddc8dc88d", "label": "scam", "text": "MCB: Unusual activity on your account. Verify your account at mcb-login-secure.net or it will be blocked.", "category": "bank_impersonation", "source": "report", "reports": 1, "reporters": ["d8d85822beffd36b"], "confirmed": false, "created_at": 1794614946.710302, "last_seen": 1794614946.7103722}]}
