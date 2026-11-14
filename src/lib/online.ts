@@ -1,4 +1,4 @@
-// Online checks: the app sends the message to our server (backend/, FastAPI), which adds
+// Online checks: the app sends the message to our server (server/, FastAPI), which adds
 // the hybrid score, live link and number checks, and the memory of reported messages.
 // If the server can't be reached, the app keeps working with the checks on the phone.
 
