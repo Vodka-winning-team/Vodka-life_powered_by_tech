@@ -277,3 +277,19 @@ def test_nothing_found_summary_does_not_tell_a_harmless_message_to_pay(tmp_path)
     client, _ = make_client(tmp_path)
     r = client.post("/api/v1/analyze", json={"text": "Listen to this song https://www.youtube.com/watch?v=abc"}).json()
     assert r["risk_level"] == "low" and "pay" not in r["summary"]
+
+
+@pytest.mark.parametrize("lang,word", [("fr", "employeur"), ("mfe", "patron")])
+def test_lessons_and_quiz_in_french_and_kreol(tmp_path, lang, word):
+    client, _ = make_client(tmp_path)
+    en = client.get("/api/v1/learn/quiz").json()
+    other = client.get(f"/api/v1/learn/quiz?lang={lang}").json()
+    lessons = client.get(f"/api/v1/learn/tactics?lang={lang}").json()
+    assert [q["id"] for q in other] == [q["id"] for q in en]
+    assert all(a["answer"] == b["answer"] and a["message"] == b["message"] and len(a["options"]) == len(b["options"])
+               for a, b in zip(en, other))
+    assert word in json.dumps(other, ensure_ascii=False).lower() and lessons[0]["label"] != "A fee for a job abroad"
+    assert "reg 7(2)" in lessons[0]["lesson"]
+    texts = json.dumps([lessons, other], ensure_ascii=False).lower()
+    assert not any(w in texts for w in ("arnaque", "illégal", "ilegal", "arnak", "escroquerie"))
+    assert client.get("/api/v1/learn/quiz?lang=xx").json() == en

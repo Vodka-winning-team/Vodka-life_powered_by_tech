@@ -11,7 +11,7 @@ Written new on **Sat 14 Nov 2026** (from 04:20), replacing the September FraudLe
 | **Risky phone numbers** | IPQualityScore fraud score, recent abuse, VOIP | optional |
 | **Reports from other phones** | "This message tried to trick me": counts once 2 different phones report the same message or a near copy | no |
 | **Pay check** | Warns on large amounts and on account numbers that appeared in reported messages | no |
-| **Lessons and quiz** | 6 lessons, 6 questions, written for Verifye from our official sources | no |
+| **Lessons and quiz** | 6 lessons, 6 questions, in English, French and Kreol (`?lang=fr` or `mfe`; Kreol is a draft), written for Verifye from our official sources | no |
 | **Kreol read-aloud** | myt AI Cloud text-to-speech; the key stays on the server | yes (myt) |
 
 **Fail-safe:** the server only answers "high" on hard evidence (a blocklisted link, a message confirmed by 2+ phones, a phone number with recent abuse reports). Soft signs (new website, short link, one unconfirmed report) are capped at "medium". Every provider has a time limit; a slow or missing one is skipped, never an error.
@@ -41,7 +41,7 @@ See `.env.example`. All are optional:
 
 ## Tests
 ```
-cd server && .venv/bin/python -m pytest -q      # 30 tests, no network (providers are faked)
+cd server && .venv/bin/python -m pytest -q      # 32 tests, no network (providers are faked)
 ```
 
 ## Endpoints (all under `/api/v1`, as the app calls them)

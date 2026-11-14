@@ -136,12 +136,12 @@ def create_app(settings: Settings | None = None, transport: httpx.AsyncBaseTrans
 
     # ---------------------------------------------------------------- learn
     @app.get("/api/v1/learn/tactics")
-    def lessons() -> list[dict]:
-        return content.LESSONS
+    def lessons(lang: str = "en") -> list[dict]:
+        return content.lessons(lang)
 
     @app.get("/api/v1/learn/quiz")
-    def quiz() -> list[dict]:
-        return content.QUIZ
+    def quiz(lang: str = "en") -> list[dict]:
+        return content.quiz(lang)
 
     # ---------------------------------------------------------------- speech (myt AI Cloud)
     @app.get("/api/v1/speech/status")
