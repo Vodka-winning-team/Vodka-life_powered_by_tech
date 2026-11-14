@@ -11,11 +11,13 @@ from urllib.parse import urlsplit
 
 TLDS = (
     "com|net|org|mu|info|xyz|top|cam|click|co|uk|io|app|link|site|online|live|me|biz|cc|ly|gl|in|fr|us|tk|ml|"
-    "ga|cf|gq|shop|store|vip|win|bid|loan|work|ru|cn|za|ng|ke"
+    "ga|cf|gq|shop|store|vip|win|bid|loan|work|ru|cn|za|ng|ke|sbs|bond|cfd|icu|buzz|rest|today|cloud|lat|"
+    "de|ae|pk|xin|support|help|services|digital|pro"
 )
 LINK_RE = re.compile(
     rf"(?i)\b(?:https?://)?(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+(?:{TLDS})\b(?:[/?#][^\s]*)?"
 )
+SCHEME_LINK_RE = re.compile(r"(?i)\bhttps?://[^\s<>\"']+")  # any ending when http(s):// is written
 IP_LINK_RE = re.compile(r"(?i)\bhttps?://\d{1,3}(?:\.\d{1,3}){3}(?::\d+)?(?:/[^\s]*)?")
 PHONE_RE = re.compile(r"(?<![\d.])(?:\+|00)?(?:230[\s-]?)?(?:5\d{3}[\s-]?\d{4}|\d{3}[\s-]?\d{4})(?![\d.])")
 TWO_LEVEL_SUFFIXES = {"co.uk", "org.uk", "com.mu", "org.mu", "gov.mu", "ac.mu", "net.mu", "co.za", "com.au", "co.in"}
@@ -25,10 +27,14 @@ SHORTENERS = {"bit.ly", "tinyurl.com", "t.co", "goo.gl", "is.gd", "cutt.ly", "sh
 def links(text: str) -> list[str]:
     """Every link in the text, normalised to start with http(s)://, without duplicates, in order."""
     found: list[str] = []
-    for match in list(IP_LINK_RE.finditer(text)) + list(LINK_RE.finditer(text)):
+    spans: list[tuple[int, int]] = []
+    for match in list(SCHEME_LINK_RE.finditer(text)) + list(LINK_RE.finditer(text)):
         start = match.start()
         if start > 0 and text[start - 1] == "@":  # part of an email address
             continue
+        if any(a <= start < b for a, b in spans):  # inside a link already found (e.g. its path)
+            continue
+        spans.append(match.span())
         raw = match.group(0).rstrip(".,)!?;:\"'")
         url = raw if re.match(r"(?i)^https?://", raw) else "http://" + raw
         if url.lower() not in (u.lower() for u in found):

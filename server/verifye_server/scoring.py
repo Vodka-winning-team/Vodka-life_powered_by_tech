@@ -76,7 +76,7 @@ def score(intel: IntelResult, match: Match, ip_links: int, reported_identifiers:
         names = {"rdap": "website age", "short": "short links", "safe_browsing": "Google Safe Browsing",
                  "urlhaus": "URLhaus", "ipqs": "phone number check"}
         checked = ", ".join(names.get(c, c) for c in intel.checked) or "reports from other phones"
-        category, summary = "Nothing extra found online", f"The live checks found nothing more (checked: {checked}). That doesn't prove anything: the phone's own checks above still count, and still call the official number before you pay."
+        category, summary = "Nothing extra found online", f"The online checks found nothing more (checked: {checked})."
     return {
         "risk_score": value,
         "risk_level": level,

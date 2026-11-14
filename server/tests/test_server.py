@@ -264,3 +264,16 @@ def test_unregistered_website_is_a_soft_warning(tmp_path):
     assert r["risk_level"] == "medium"
     assert any(t["tactic"] == "unregistered_website" for t in r["tactics"])
     assert any("isn't registered" in f["title"] for f in r["intel"]["findings"])
+
+
+def test_links_with_any_ending_are_found_when_http_is_written():
+    assert extract.links("see http://malware.testing.google.test/testing/malware/ now") == [
+        "http://malware.testing.google.test/testing/malware/"]
+    assert extract.links("go to https://kotak-secure.de/login.com today") == ["https://kotak-secure.de/login.com"]
+    assert extract.links("mail me at a@b.com or visit mcb-login.sbs") == ["http://mcb-login.sbs"]
+
+
+def test_nothing_found_summary_does_not_tell_a_harmless_message_to_pay(tmp_path):
+    client, _ = make_client(tmp_path)
+    r = client.post("/api/v1/analyze", json={"text": "Listen to this song https://www.youtube.com/watch?v=abc"}).json()
+    assert r["risk_level"] == "low" and "pay" not in r["summary"]
