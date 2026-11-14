@@ -9,7 +9,7 @@ The organisers' list ("What to submit"): Git repo link · the app · backup demo
 |---|---|---|---|
 | 1 | **Git repo link:** public, commits from kick-off, sent through their Google Form | https://github.com/Vodka-winning-team/Vodka-life_powered_by_tech | ✅ public; first commit Fri 12:32 |
 | 2 | **The app:** Android APK or Expo/test link | Newest release on https://github.com/Vodka-winning-team/Vodka-life_powered_by_tech/releases Final build: https://github.com/Vodka-winning-team/Vodka-life_powered_by_tech/releases/tag/verifye-final-2026-11-14-1145 | ✅ released 11:45 (no speech-to-text) |
-| 3 | **Backup demo video:** about 2 minutes, core feature working | *(link: add it here)* | ❌ to record 11:30–12:00; script: [`backup-video-script.md`](backup-video-script.md) |
+| 3 | **Backup demo video:** about 2 minutes, core feature working | [`Demo Video.mp4`](../Demo%20Video.mp4) in the repo: https://github.com/Vodka-winning-team/Vodka-life_powered_by_tech/blob/main/Demo%20Video.mp4 | ✅ in the repo (1 min 40 s, the real app on a real phone, no narration) |
 | 4 | **Pitch slides:** maximum 6 | [`Verifye-pitch.pptx`](Verifye-pitch.pptx): 6 slides, with speaker notes. Text version: [`slides.md`](slides.md) | ✅ file in the repo (11:17); open it once on the presentation laptop |
 | 5 | **README:** problem, user, data sources, stack, AI tools, surprise card, how to run | [`README.md`](../README.md): all seven sections are there | ⏳ final pass at the freeze (APK link, features, test counts) |
 | 6 | **Decision log:** 5–10 key decisions, with times | [`decisions.md`](decisions.md): 25 decisions with times and records | ✅ add any new ones before submitting |
@@ -63,7 +63,7 @@ Claude Code (Anthropic) by each teammate for code, tests, data scripts and docum
 **Links:**
 - Repo: https://github.com/Vodka-winning-team/Vodka-life_powered_by_tech
 - APK: https://github.com/Vodka-winning-team/Vodka-life_powered_by_tech/releases/tag/verifye-final-2026-11-14-1145
-- Video: *(link)*
+- Video: https://github.com/Vodka-winning-team/Vodka-life_powered_by_tech/blob/main/Demo%20Video.mp4
 - Slides: *(file or link)*
 
 ## 4. Who does what between 11:00 and 12:15
