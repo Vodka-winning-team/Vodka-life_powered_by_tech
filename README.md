@@ -40,15 +40,14 @@ The law is clear: no agency or employer may charge a worker a recruitment fee (P
 15. **Report this message:** it counts once 2 different phones report the same message or a near copy. The server keeps salted fingerprints only, never the words.
 16. **Before you pay:** a pay check that warns on large amounts and on account numbers seen in reported messages.
 17. **Scan a QR code:** Verifye reads what the code holds and checks the link before anything opens. It never opens the link itself. A link from a QR code that isn't on our lists still gets a caution, because a QR code hides its address.
-18. **"Say the message"** (in Granny mode): speak the message instead of typing it.
-19. **A welcome page** on first launch (language, night mode, Granny mode, online checks), **night mode**, and **one "Online checks" switch**: off means fully offline, every check runs on the phone and nothing is sent.
-20. **The "notice" look:** black, white and one sand accent, like an official notice, with strong contrast in any light. "No warning signs found" is black, never green: it doesn't mean "safe".
+18. **A welcome page** on first launch (language, night mode, Granny mode, online checks), **night mode**, and **one "Online checks" switch**: off means fully offline, every check runs on the phone and nothing is sent.
+19. **The "notice" look:** black, white and one sand accent, like an official notice, with strong contrast in any light. "No warning signs found" is black, never green: it doesn't mean "safe".
 
 **No AI model decides a result:** clear rules plus official records, so every warning can be explained and checked. The only AI service is the optional Kreol voice.
 
 **Privacy:** the phone's checks never send anything. The online check is optional: the server uses the message in memory for one request and never stores or logs it; outside providers get only links, domains and phone numbers. The app says so, and it works without the server.
 
-Two permissions, each asked only when you use the feature: the **camera**, to read a QR code (nothing is recorded or saved), and the **microphone**, for "Say the message". With online checks off, speech is recognised on the phone. With online checks on, Android's speech service may send the audio to Google, so we don't say "nothing leaves the phone" about voice input.
+One permission, asked only when you use the feature: the **camera**, to read a QR code (nothing is recorded or saved). The app does not use the microphone.
 
 ## Data sources
 All real, official and dated. Every record in the app has its `source_url` and `snapshot` date. Details: [`docs/sources.md`](docs/sources.md).
@@ -77,7 +76,7 @@ AI tools were allowed by the organisers. We list them all here. Every AI-assiste
 |---|---|---|
 | **Claude Code (Anthropic)** | Adiyen (A, data) | Python scripts that turn the official PDFs into JSON; `validate.py`; test cases; French and Kreol strings; fact-checking the numbers on our slides |
 | **Claude Code** | Pushkar (B, engine) | The rules engine (first in Kotlin, then ported to TypeScript), its tests, the new server written on Sat 14 Nov (`server/`) and its tests, the README and slide drafts, and the team board (`automation.md`) |
-| **Claude Code** | Jayesh (C, app) | The Expo app and its screens, tabs, widget, tour, Granny mode, automatic checking, the animations, the QR scanner, speech input and the final look |
+| **Claude Code** | Jayesh (C, app) | The Expo app and its screens, tabs, widget, tour, Granny mode, automatic checking, the animations, the QR scanner and the final look |
 | **Claude Code** | Paveesh (D, pitch) | README, decision log, pitch documents, test checklists, the slide deck, the poster and leaflet |
 | **OpenAI Codex CLI** | Team | Critical review of our ideas before the build, and read-only reviews of the app during the build |
 | **myt AI Cloud text-to-speech** (Mauritius Telecom) | In the app, optional | The Kreol read-aloud voice, through our server. It reads our result text aloud; it decides nothing. |

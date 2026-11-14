@@ -97,7 +97,7 @@ Mauritius Telecom Lucky Draw: you have won a prize! Send your details to mauriti
 - [ ] **Online checks OFF** → check message 3 → the result comes from the phone only, and it says the link was not checked online. Nothing is sent.
 - [ ] **Online checks ON** (server running) → the Online check card appears.
 - [ ] **Scan a QR code** → allow the camera → scan any QR code with a link → Verifye shows a result or "A link from a QR code" caution, and **does not open the link**.
-- [ ] **Granny mode → Say the message** → allow the microphone → speak a short message → the text appears. If the phone can't do it offline, a message says so (the button must not look dead).
+- [ ] **No "Say the message" button** in Granny mode (speech-to-text was removed at 11:23; the 10:56 release still shows it until the next build).
 - [ ] Animations: press a button (it dips), Check (the line sweeps once; tap skips it), the level word settles in. With the phone's "Remove animations" on, nothing moves.
 - [ ] **Back** works during the scan animation, and 6 fast taps on Check give 1 Result.
 - [ ] French and Kreol in the new look: nothing cut off.

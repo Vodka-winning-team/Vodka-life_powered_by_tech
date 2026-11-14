@@ -159,7 +159,7 @@ Answer in **two sentences**, then stop. The person in brackets answers first; an
 ### Privacy and safety
 14. **"What data do you collect?"** (Paveesh)
     For the checks, none: they run on the phone, with no account. The online check is optional: the server uses the message in memory for one request and never stores or logs it, and outside providers get only links, domains and numbers. A report keeps a salted fingerprint, never the words. A case is saved on the phone only when the user taps Save.
-    Two permissions, asked only when used: the camera, to read a QR code (nothing recorded), and the microphone, for "Say the message". With online checks on, Android's speech service may send the audio to Google, so we never say "nothing leaves the phone" about voice input.
+    One permission, asked only when used: the camera, to read a QR code (nothing is recorded or saved). The app does not use the microphone.
 15. **"Could this be used to target people?"** (Adiyen)
     No. We store organisations only: no directors, and no FSC alerts that name a private person. The app never says a person or agency is a scammer; it says what the official record shows.
 16. **"What if the app is wrong and someone loses money?"** (Paveesh)
