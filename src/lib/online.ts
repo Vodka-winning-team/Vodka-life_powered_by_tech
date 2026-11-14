@@ -71,3 +71,43 @@ export async function reportOnline(server: string, text: string): Promise<Report
     return null;
   }
 }
+
+/** A short lesson about one trick used in fake messages. */
+export type Lesson = { id: string; label: string; lesson: string; safe_action: string };
+export type QuizQuestion = { id: string; message: string; question: string; options: string[]; answer: number; explanation: string };
+
+/** Read something from the server. Returns null when the server can't be reached. */
+export async function getOnline<T>(server: string, path: string): Promise<T | null> {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), TIMEOUT_MS);
+  try {
+    const response = await fetch(`${server.replace(/\/+$/, '')}/api/v1${path}`, { signal: controller.signal });
+    if (!response.ok) return null;
+    return (await response.json()) as T;
+  } catch {
+    return null;
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+/** The server's answer to "should I make this payment?". */
+export type PaymentAnswer = {
+  decision: 'allow' | 'warn' | 'pause';
+  headline: string;
+  reasons: { severity: string; text: string }[];
+  safe_actions: { id: string; title: string; detail: string }[];
+  cooldown_seconds: number;
+};
+
+/** Check a payment before making it. Returns null when the server can't be reached. */
+export async function checkPayment(
+  server: string,
+  payment: { payee_name: string | null; payee_account: string; amount: number },
+): Promise<PaymentAnswer | null> {
+  try {
+    return (await post(server, '/payments/check', payment)) as PaymentAnswer;
+  } catch {
+    return null;
+  }
+}

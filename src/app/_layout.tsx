@@ -53,6 +53,8 @@ function AppStack({ colors }: { colors: ThemeColors }) {
       <Stack.Screen name="sources" options={{ title: t('sourcesTitle', language) }} />
       <Stack.Screen name="shield" options={{ title: t('shieldSetupTitle', language) }} />
       <Stack.Screen name="numbers" options={{ title: t('numbersTitle', language) }} />
+      <Stack.Screen name="learn" options={{ title: t('learnTitle', language) }} />
+      <Stack.Screen name="pay" options={{ title: t('payTitle', language) }} />
     </Stack>
   );
 }

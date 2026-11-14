@@ -89,6 +89,9 @@ export default function ScanScreen() {
       <Section>
         {/* Look up an agency or bank (e.g. a name heard from a friend). */}
         <Button kind="secondary" title={t('scanNumbersButton')} onPress={() => router.push('/numbers')} />
+        {/* Online extras: check a payment before making it, and short lessons with a quiz. */}
+        <Button kind="secondary" title={t('payTitle')} onPress={() => router.push('/pay')} />
+        <Button kind="secondary" title={t('learnTitle')} onPress={() => router.push('/learn')} />
         <View style={granny ? styles.column : styles.row}>
           <View style={granny ? undefined : styles.half}>
             <Button kind="secondary" title={t('openHistory')} onPress={() => router.push('/history')} />
