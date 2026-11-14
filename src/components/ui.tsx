@@ -1,13 +1,14 @@
 // Small building blocks used by every screen. Colours and sizes come from constants/theme.ts.
 
-import { useRef, type ComponentRef, type ReactNode, type RefObject } from 'react';
-import { KeyboardAvoidingView, Pressable, ScrollView, StyleSheet, Text, View, type TextStyle } from 'react-native';
+import { useEffect, useRef, useState, type ComponentRef, type ReactNode, type RefObject } from 'react';
+import { Animated, Easing, KeyboardAvoidingView, Pressable, ScrollView, StyleSheet, Text, View, type TextStyle } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { t } from '@/constants/strings';
 import { CardShadow, FontSize, LevelColors, MaxContentWidth, RadiusCard, Spacing } from '@/constants/theme';
 import type { Highlight, Level } from '@/engine';
 import { useLook } from '@/hooks/use-look';
+import { useReduceMotion } from '@/hooks/use-reduce-motion';
 import { useTheme } from '@/hooks/use-theme';
 
 /** Text style at the current size (Granny mode makes text 1.4x bigger). */
@@ -131,35 +132,63 @@ export function Button({
   const { scale, buttonHeight } = useLook();
   const primary = kind === 'primary';
   const press = useOneTap(onPress, 1000);
+  const reduce = useReduceMotion();
+  // Pressed: the button eases to 97% of its size in 100 ms, and back on release, so every tap is felt.
+  const size = useState(() => new Animated.Value(1))[0];
+  function ease(to: number) {
+    if (reduce) return; // "Remove animations" is on: the button only dims
+    Animated.timing(size, { toValue: to, duration: 100, easing: Easing.out(Easing.quad), useNativeDriver: true }).start();
+  }
   return (
-    <Pressable
-      accessibilityRole="button"
-      onPress={press}
-      style={({ pressed }) => [
-        styles.button,
-        {
-          backgroundColor: primary ? theme.primary : theme.primarySoft,
-          borderColor: primary ? theme.primary : theme.primarySoft,
-          // Pressed: slightly smaller and dimmer, so every tap is felt.
-          opacity: pressed ? 0.85 : 1,
-          transform: [{ scale: pressed ? 0.97 : 1 }],
-          minHeight: buttonHeight,
-        },
-      ]}>
-      <Text style={[textStyles.label, sized(textStyles.label, scale), { color: primary ? theme.onPrimary : theme.primary, textAlign: 'center' }]}>
-        {title}
-      </Text>
+    <Pressable accessibilityRole="button" onPress={press} onPressIn={() => ease(0.97)} onPressOut={() => ease(1)}>
+      {({ pressed }) => (
+        <Animated.View
+          style={[
+            styles.button,
+            {
+              backgroundColor: primary ? theme.primary : theme.primarySoft,
+              borderColor: primary ? theme.primary : theme.primarySoft,
+              opacity: pressed ? 0.85 : 1,
+              transform: [{ scale: size }],
+              minHeight: buttonHeight,
+            },
+          ]}>
+          <Text style={[textStyles.label, sized(textStyles.label, scale), { color: primary ? theme.onPrimary : theme.primary, textAlign: 'center' }]}>
+            {title}
+          </Text>
+        </Animated.View>
+      )}
     </Pressable>
   );
 }
 
 /** Big coloured banner with the result level, and (optionally) one plain sentence saying what to do. */
-export function LevelBanner({ level, detail }: { level: Level; detail?: string }) {
+export function LevelBanner({ level, detail, stamp = false }: { level: Level; detail?: string; stamp?: boolean }) {
   const colors = LevelColors[level];
-  const { scale } = useLook();
+  const { scale, granny } = useLook();
+  const reduce = useReduceMotion();
+  // The "stamp" (new results only): the level lands from 135% to 100% in 400 ms, no bounce.
+  // Granny mode or "Remove animations": a 150 ms fade, nothing moves.
+  const still = granny || reduce;
+  const landed = useState(() => new Animated.Value(stamp ? 0 : 1))[0];
+  useEffect(() => {
+    if (!stamp) return;
+    Animated.timing(landed, {
+      toValue: 1,
+      duration: still ? 150 : 400,
+      easing: Easing.bezier(0.16, 1, 0.3, 1),
+      useNativeDriver: true,
+    }).start();
+    // Runs once, when the banner first appears.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  const stampSize = still ? 1 : landed.interpolate({ inputRange: [0, 1], outputRange: [1.35, 1] });
   return (
     <View accessibilityRole="header" style={[styles.banner, { backgroundColor: colors.background }]}>
-      <Text style={[textStyles.banner, sized(textStyles.banner, scale), { color: colors.text }]}>{t(`level${level}`)}</Text>
+      <Animated.Text
+        style={[textStyles.banner, sized(textStyles.banner, scale), { color: colors.text, opacity: landed, transform: [{ scale: stampSize }] }]}>
+        {t(`level${level}`)}
+      </Animated.Text>
       {detail ? (
         <Text style={[textStyles.body, sized(textStyles.body, scale), { color: colors.text, textAlign: 'center', marginTop: Spacing.two }]}>
           {detail}

@@ -8,6 +8,7 @@ import { setLanguage as setStringsLanguage, type Language } from '@/constants/st
 import type { CheckResult, JobAnswers } from '@/engine';
 import { engine } from '@/lib/data';
 import { looksLikeMessage } from '@/lib/input-check';
+import { markFresh } from '@/lib/once';
 import { DEFAULT_SERVER } from '@/lib/online';
 
 export type Check = {
@@ -126,6 +127,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     // Surprise card (wrong input): random typing is treated like an empty message, so it never gets a result.
     const result = looksLikeMessage(text) ? engine.check(text, job) : engine.check('');
     const check: Check = { id: String(Date.now()), text, job, result, savedAt: null };
+    markFresh(check.id);
     setCurrent(check);
     return check;
   }
