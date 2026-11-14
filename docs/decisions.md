@@ -5,7 +5,7 @@ Started by A (Adiyen) at 20:15 because D was missing (Jayesh's request on `autom
 
 ## Decisions
 
-1. **14:00 · Theme 1 and a FraudLens rebuild.** The organisers approved it, and the team already knew the idea. *Record: PROJECT.md §10.*
+1. **14:00 · Theme 1 and inspiration take from FraudLens.** The organisers approved it, and the team already knew the idea. *Record: PROJECT.md §10.*
 2. **15:00 · No AI model: rules plus official registers.** The rules ask for real data, and the app must work offline. Every warning points to a rule or an official record. *Record: PROJECT.md §10, CLAUDE.md "No AI/ML models".*
 3. **15:00 · No server: all data is bundled on the phone.** It works with no signal and sends nothing anywhere. *Record: PROJECT.md §10.*
 4. **15:00 · The overseas-job check is the lead story.** There is documented local harm and a clear legal rule: Private Recruitment Agencies Act 2023 s.5 and Regulations 2025 reg 7(2). *Record: PROJECT.md §10.*
