@@ -7,8 +7,9 @@ const VOWEL = /[aeiouyàâäéèêëîïôöùûü]/i;
 /** Things people type to test a box: not words. */
 const FILLER = new Set(['asdf', 'asdfg', 'asdfgh', 'qwerty', 'qwertyuiop', 'zxcv', 'zxcvbn', 'blah', 'xyz', 'abc', 'abcd', 'test', 'foo', 'bar']);
 
-/** Endings of real web addresses (for an address typed without http). */
-const WEB_ENDING = /\b[\w-]+\.(com|net|org|mu|info|xyz|top|co|io|app|site|online|link|click|ly|in|fr|uk)(\/\S*)?(?=\s|$)/i;
+/** Endings of web addresses, including the cheap ones fake bank links use (same list as the server). For an address typed without http. */
+const WEB_ENDING =
+  /\b[\w-]+\.(com|net|org|mu|info|xyz|top|co|io|app|site|online|link|click|ly|in|fr|uk|sbs|bond|cfd|icu|buzz|cam|shop|store|vip|win|bid|loan|work|live|me|biz|cc|tk|ml|ga|cf|gq|ru|cn|za|ng|ke|de|ae|pk|cloud|lat|today|rest|support|help|services|digital|pro|gl)(\/\S*)?(?=[\s.,!?;:)]|$)/i;
 
 /** A token that looks like a word: letters only, with a vowel, and no long run of consonants. Short capitals (MCB, OTP) count too. */
 function isWord(token: string): boolean {

@@ -30,5 +30,7 @@ test('real messages are accepted, in English, French and Kreol', () => {
 test('a link or a phone number on its own is worth checking', () => {
   expect(looksLikeMessage('https://bit.ly/parcel-mu')).toBe(true);
   expect(looksLikeMessage('mcb-login-secure.net')).toBe(true);
+  expect(looksLikeMessage('Visit mcb-login.sbs')).toBe(true);
+  expect(looksLikeMessage('mcb-login.net.')).toBe(true);
   expect(looksLikeMessage('+230 5256 8074')).toBe(true);
 });
