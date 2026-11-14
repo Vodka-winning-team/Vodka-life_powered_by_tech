@@ -191,14 +191,6 @@ export default function ScanScreen() {
             },
           ]}
         />
-        {/* One tap instead of long-press → Paste in the box. */}
-        <Pressable
-          accessibilityRole="button"
-          onPress={paste}
-          style={({ pressed }) => [styles.paste, { borderColor: theme.border, opacity: pressed ? 0.7 : 1 }]}>
-          <Ionicons name="clipboard-outline" size={18 * scale} color={theme.primary} />
-          <Text style={{ color: theme.primary, fontSize: FontSize.small * scale, fontWeight: '600' }}>{t('pasteButton')}</Text>
-        </Pressable>
         {/* Granny mode: say the message out loud instead of typing it. */}
         {granny && <Button kind="secondary" title={listening ? t('sttStop') : t('sttSpeak')} onPress={speakMessage} />}
         {/* The error sits under its box and is read out by screen readers. */}
@@ -207,7 +199,20 @@ export default function ScanScreen() {
         <TourTip step={2} hideNext>
           {t('tourCheck')}
         </TourTip>
-        <Button title={t('scanButton')} onPress={check} />
+        {/* Paste (one tap instead of long-press → Paste) next to Check. Granny mode stacks them: bigger targets. */}
+        <View style={granny ? styles.actionsStacked : styles.actions}>
+          <Pressable
+            accessibilityRole="button"
+            accessibilityLabel={t('pasteButton')}
+            onPress={paste}
+            style={({ pressed }) => [styles.paste, { borderColor: theme.border, opacity: pressed ? 0.7 : 1 }]}>
+            <Ionicons name="clipboard-outline" size={18 * scale} color={theme.primary} />
+            <Text style={{ color: theme.primary, fontSize: FontSize.body * scale, fontWeight: '700' }}>{granny ? t('pasteButton') : t('pasteShort')}</Text>
+          </Pressable>
+          <View style={granny ? undefined : styles.grow}>
+            <Button title={t('scanButton')} onPress={check} />
+          </View>
+        </View>
       </View>
 
       {/* Before paying: the other lookups are in the tabs below. */}
@@ -249,12 +254,15 @@ const styles = StyleSheet.create({
     fontSize: FontSize.body,
   },
   field: { gap: Spacing.two },
+  actions: { flexDirection: 'row', gap: 10, alignItems: 'stretch' },
+  actionsStacked: { gap: Spacing.two },
+  grow: { flex: 1 },
   paste: {
     flexDirection: 'row',
     alignItems: 'center',
-    alignSelf: 'flex-start',
+    justifyContent: 'center',
     gap: Spacing.two,
-    minHeight: 44,
+    minHeight: 58,
     paddingHorizontal: Spacing.three,
     borderWidth: 2,
     borderRadius: Radius,

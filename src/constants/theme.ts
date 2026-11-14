@@ -3,7 +3,7 @@
 import type { Level } from '@/engine';
 
 /**
- * "Notice style": black, white and yellow, like an official notice. One look for everyone,
+ * "Notice style": black, white and one calm sand accent ("Soft Sand"), like an official notice. One look for everyone,
  * so the light and dark entries are the same (strong contrast in any lighting).
  */
 const NOTICE = {
@@ -11,32 +11,32 @@ const NOTICE = {
   textSecondary: '#5C5C5C',
   background: '#FFFFFF',
   backgroundElement: '#FFFFFF',
-  backgroundSelected: '#F2C230',
+  backgroundSelected: '#D7B982',
   border: '#111111', // strong rule (inputs, outlined buttons, section headings)
   hairline: '#DADAD4', // thin rule between rows
-  primary: '#111111', // main buttons: black, with yellow text
+  primary: '#111111', // main buttons: black, with sand text
   primarySoft: '#FFFFFF',
-  onPrimary: '#F2C230',
-  accent: '#F2C230', // the yellow band, number squares, highlights
-  onAccent: '#111111', // text on yellow (the same in night mode)
-  highlight: '#F2C230',
+  onPrimary: '#D7B982',
+  accent: '#D7B982', // the sand band, number squares, highlights
+  onAccent: '#111111', // text on the accent (the same in night mode)
+  highlight: '#D7B982',
 } as const;
 
-/** Night mode: the same notice, inverted. Black page, white text, yellow buttons. */
+/** Night mode: the same notice, inverted. Near-black page, warm white text, sand buttons. */
 const NOTICE_NIGHT = {
-  text: '#FFFFFF',
+  text: '#F5F2EB',
   textSecondary: '#B9B9B2',
-  background: '#111111',
-  backgroundElement: '#111111',
-  backgroundSelected: '#F2C230',
-  border: '#FFFFFF',
+  background: '#191815',
+  backgroundElement: '#191815',
+  backgroundSelected: '#D7B982',
+  border: '#F5F2EB',
   hairline: '#3A3A36',
-  primary: '#F2C230', // main buttons: yellow, with black text
-  primarySoft: '#111111',
+  primary: '#D7B982', // main buttons: sand, with black text
+  primarySoft: '#191815',
   onPrimary: '#111111',
-  accent: '#F2C230',
+  accent: '#D7B982',
   onAccent: '#111111',
-  highlight: '#F2C230',
+  highlight: '#D7B982',
 } as const;
 
 export const Colors = { light: NOTICE, dark: NOTICE_NIGHT } as const;
@@ -46,7 +46,7 @@ export type ThemeColor = keyof typeof Colors.light;
 /** Banner colours per result level. NONE is black, never green: "no signs found" is not "safe". */
 export const LevelColors: Record<Level, { background: string; text: string }> = {
   STOP: { background: '#B3261E', text: '#FFFFFF' },
-  CAREFUL: { background: '#F2C230', text: '#111111' },
+  CAREFUL: { background: '#946200', text: '#FFFFFF' },
   NONE: { background: '#111111', text: '#FFFFFF' },
 };
 

@@ -4,6 +4,7 @@
 import { useState } from 'react';
 
 import { Button, Card, Label, Status } from '@/components/ui';
+import { onlineCategory, onlineTacticLabel } from '@/constants/online-texts';
 import { t } from '@/constants/strings';
 import { reportOnline, type OnlineResult } from '@/lib/online';
 import { useStore } from '@/lib/store';
@@ -12,7 +13,7 @@ import { useStore } from '@/lib/store';
 export type OnlineState = 'loading' | 'offline' | 'off' | OnlineResult;
 
 export function OnlineCheck({ state, text }: { state: OnlineState; text: string }) {
-  const { serverUrl } = useStore();
+  const { serverUrl, language } = useStore();
   const [reportMessage, setReportMessage] = useState('');
   const [sending, setSending] = useState(false);
 
@@ -46,6 +47,8 @@ export function OnlineCheck({ state, text }: { state: OnlineState; text: string 
 
   const reports = state.verification?.community_reports ?? 0;
   const intelFindings = state.intel?.findings ?? [];
+  // The server answers in English: show its fixed sentences in the app's language.
+  const category = onlineCategory(state.category_label, state.summary, language);
   // Nothing found online (e.g. an ordinary link): one short line, no score and no advice about paying.
   const nothing = state.risk_score === 0 && state.tactics.length === 0 && intelFindings.length === 0 && reports === 0;
 
@@ -57,15 +60,16 @@ export function OnlineCheck({ state, text }: { state: OnlineState; text: string 
       ) : (
         <>
           <Status>
-            {t('onlineScore')}: {state.risk_score}/100 · {state.category_label}
+            {t('onlineScore')}: {state.risk_score}/100 · {category.label}
           </Status>
-          <Label>{state.summary}</Label>
+          <Label>{category.summary}</Label>
         </>
       )}
 
       {state.tactics.map((tactic) => (
         <Label key={tactic.tactic} variant="small">
-          • {tactic.label} (+{tactic.contribution}){tactic.details.length > 0 ? `: ${tactic.details.join(' ')}` : ''}
+          • {onlineTacticLabel(tactic.tactic, tactic.label, language)} (+{tactic.contribution})
+          {language === 'en' && tactic.details.length > 0 ? `: ${tactic.details.join(' ')}` : ''}
         </Label>
       ))}
 

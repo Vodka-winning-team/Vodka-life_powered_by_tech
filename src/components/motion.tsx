@@ -46,7 +46,7 @@ export function Appear({ play, index = 0, children }: { play: boolean; index?: n
 }
 
 const SWEEP_MS = 700; // the whole scan stays under 800 ms
-const LINE_COLOR = '#F2C230';
+const LINE_COLOR = '#D7B982';
 
 /**
  * The scanner. Shown on top of the Check tab while `visible`; calls `onDone` when the sweep ends
