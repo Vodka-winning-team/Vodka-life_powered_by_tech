@@ -10,6 +10,7 @@ const en = {
 
   languageLabel: 'Language',
   settingsTitle: 'Settings',
+  bandTag: 'Check before you pay',
   welcomeTitle: 'Set up Verifye',
   welcomeHint: 'Choose what suits you. You can change these any time in Settings.',
   welcomeStart: 'Start',
@@ -188,6 +189,7 @@ export type Language = 'en' | 'fr' | 'mfe';
 
 const fr: Partial<Record<StringKey, string>> = {
   settingsTitle: "Réglages",
+  bandTag: "Vérifiez avant de payer",
   welcomeTitle: "Réglez Verifye",
   welcomeHint: "Choisissez ce qui vous convient. Vous pouvez changer cela à tout moment dans les Réglages.",
   welcomeStart: "Commencer",
@@ -353,6 +355,7 @@ const fr: Partial<Record<StringKey, string>> = {
 const mfe: Partial<Record<StringKey, string>> = {
   // Welcome page, speech, and the sources (draft Kreol, needs Paveesh's check)
   settingsTitle: "Reglaz",
+  bandTag: "Verifye avan ou peye",
   welcomeTitle: "Regle Verifye",
   welcomeHint: "Swazir seki bon pou ou. Ou kapav sanz sa ninport ki ler dan Reglaz.",
   welcomeStart: "Koumanse",

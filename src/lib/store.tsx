@@ -68,7 +68,8 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   const [shieldOn, setShieldOnState] = useState(false);
   const [granny, setGrannyState] = useState(false);
   const [serverUrl, setServerUrlState] = useState(DEFAULT_SERVER);
-  const [online, setOnlineState] = useState(true);
+  // Starts off, so a phone set to offline never contacts the server while the saved choice is loading.
+  const [online, setOnlineState] = useState(false);
   const [welcomeDue, setWelcomeDue] = useState(false);
   const [tourStep, setTourStepState] = useState<number | null>(null);
 

@@ -94,7 +94,7 @@ export function ScanOverlay({ visible, text, onDone }: { visible: boolean; text:
               extrapolate: 'clamp',
             });
             return (
-              <Animated.Text key={name} numberOfLines={1} style={[styles.source, { color: theme.text, opacity }]}>
+              <Animated.Text key={name} numberOfLines={2} style={[styles.source, { color: theme.text, opacity }]}>
                 ✓ {name}
               </Animated.Text>
             );

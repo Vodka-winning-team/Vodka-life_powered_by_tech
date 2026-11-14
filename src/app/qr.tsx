@@ -4,7 +4,7 @@
 import { CameraView, useCameraPermissions } from 'expo-camera';
 import { router } from 'expo-router';
 import { useRef } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { Linking, StyleSheet, View } from 'react-native';
 
 import { Button, Label, Screen, Warning } from '@/components/ui';
 import { t } from '@/constants/strings';
@@ -48,7 +48,8 @@ export default function QrScreen() {
     return (
       <Screen>
         <Warning title={t('qrTitle')}>{t('qrNeedsCamera')}</Warning>
-        <Button title={t('qrAllow')} onPress={askPermission} />
+        {/* If Android won't ask again (refused twice), open the app's settings so it can be allowed there. */}
+        <Button title={t('qrAllow')} onPress={() => (permission.canAskAgain ? askPermission() : Linking.openSettings())} />
       </Screen>
     );
   }

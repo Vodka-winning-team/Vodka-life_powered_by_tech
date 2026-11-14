@@ -237,7 +237,7 @@ export function LevelTag({ level, label }: { level: Level; label?: string }) {
   const { scale } = useLook();
   return (
     <View style={[styles.tag, { backgroundColor: colors.background }]}>
-      <Text numberOfLines={1} style={[textStyles.tag, sized(textStyles.tag, scale), { color: colors.text }]}>
+      <Text numberOfLines={2} style={[textStyles.tag, sized(textStyles.tag, scale), { color: colors.text }]}>
         {label ?? t(`level${level}`)}
       </Text>
     </View>

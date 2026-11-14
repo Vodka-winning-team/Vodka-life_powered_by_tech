@@ -24,7 +24,7 @@ import { useStore } from '@/lib/store';
 
 export default function ScanScreen() {
   const theme = useTheme();
-  const { runCheck, language, setLanguage, tourStep, setTourStep, welcomeDue } = useStore();
+  const { runCheck, language, setLanguage, tourStep, setTourStep, welcomeDue, online } = useStore();
   const { scale, granny } = useLook();
   const [text, setText] = useState('');
   const [error, setError] = useState('');
@@ -56,7 +56,13 @@ export default function ScanScreen() {
     }
     setError('');
     // English or French voice; Kreol is heard with the French one (the closest the phone has).
-    ExpoSpeechRecognitionModule.start({ lang: language === 'en' ? 'en-GB' : 'fr-FR', interimResults: true, continuous: false });
+    // Offline mode: only the recogniser on the phone itself, so nothing is sent anywhere.
+    ExpoSpeechRecognitionModule.start({
+      lang: language === 'en' ? 'en-GB' : 'fr-FR',
+      interimResults: true,
+      continuous: false,
+      requiresOnDeviceRecognition: !online,
+    });
   }
 
   // First launch: show the welcome page (language, night mode, Granny mode, online checks) once.
@@ -129,7 +135,7 @@ export default function ScanScreen() {
       {/* The yellow band: tagline, language (EN / FR / KM), the name in poster type, and what the app does. */}
       <View style={[styles.band, { backgroundColor: theme.accent }]}>
         <View style={styles.bandTop}>
-          <Text style={[styles.bandTag, { color: theme.onAccent }]}>{t('tagline').split(': ').pop()?.toUpperCase()}</Text>
+          <Text style={[styles.bandTag, { color: theme.onAccent }]}>{t('bandTag').toUpperCase()}</Text>
           <View style={styles.languages} accessibilityLabel={t('languageLabel')}>
             {LANGUAGES.map((l) => {
               const selected = l.id === language;
