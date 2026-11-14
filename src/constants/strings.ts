@@ -151,6 +151,17 @@ const en = {
   srcCertTitle: 'Security alert campaigns',
   srcCertText: '5 CERT-MU security alerts (Feb–Oct 2026).',
 
+  // Tabs, paste button and home screen widget (05:30)
+  tabCheck: 'Check',
+  tabNumbers: 'Is it official?',
+  tabLearn: 'Learn',
+  tabHistory: 'History',
+  pasteButton: 'Paste the copied message',
+  clipboardEmpty: 'Nothing is copied yet. Copy the message in WhatsApp or SMS first, then try again.',
+  widgetCheck: 'Check copied message',
+  widgetAlertLabel: 'Latest security alert',
+  widgetShieldOn: 'Automatic checking: on',
+  widgetShieldOff: 'Automatic checking: off',
 };
 
 export type StringKey = keyof typeof en;
@@ -279,6 +290,17 @@ const fr: Partial<Record<StringKey, string>> = {
   sourcesHint: "Chaque vérification utilise ces données officielles, incluses dans l'application.",
   sourcesRecords: "entrées",
   sourcesChecked: "vérifié",
+  // Tabs, paste button and widget (draft French, 05:30)
+  tabCheck: "Vérifier",
+  tabNumbers: "C'est officiel ?",
+  tabLearn: "Apprendre",
+  tabHistory: "Historique",
+  pasteButton: "Coller le message copié",
+  clipboardEmpty: "Rien n'est copié. Copiez d'abord le message dans WhatsApp ou SMS, puis réessayez.",
+  widgetCheck: "Vérifier le message copié",
+  widgetAlertLabel: "Dernière alerte de sécurité",
+  widgetShieldOn: "Vérification automatique : activée",
+  widgetShieldOff: "Vérification automatique : désactivée",
 };
 const mfe: Partial<Record<StringKey, string>> = {
   // First-time tour (draft Kreol, needs Paveesh's check)
@@ -405,6 +427,17 @@ const mfe: Partial<Record<StringKey, string>> = {
   sourcesHint: "Sak verifikasion servi sa bann done ofisiel la, ki deza dan aplikasion la.",
   sourcesRecords: "antre",
   sourcesChecked: "verifye",
+  // Tabs, paste button and widget (draft Kreol, 05:30, needs Paveesh's check)
+  tabCheck: "Verifye",
+  tabNumbers: "Li ofisiel?",
+  tabLearn: "Aprann",
+  tabHistory: "Istorik",
+  pasteButton: "Kol mesaz ki ou finn kopye",
+  clipboardEmpty: "Narien pa finn kopye ankor. Kopye mesaz la dan WhatsApp ouswa SMS avan, apre esey ankor.",
+  widgetCheck: "Verifye mesaz kopye",
+  widgetAlertLabel: "Dernie lalert ofisiel",
+  widgetShieldOn: "Verifikasion otomatik: pe marse",
+  widgetShieldOff: "Verifikasion otomatik: pa pe marse",
 };
 
 const all = { en, fr, mfe };

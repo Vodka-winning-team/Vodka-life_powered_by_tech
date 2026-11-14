@@ -1,5 +1,6 @@
 // Learn: the tricks used in fake messages (short lessons), then a 5-question quiz.
-// The lessons and questions come from our server.
+// The lessons and questions come from our server; with no internet, the same lessons bundled in the
+// app (src/constants/learn-content.json, exported from server/verifye_server/content.py) are shown.
 
 import { useEffect, useState } from 'react';
 
@@ -8,11 +9,12 @@ import { t } from '@/constants/strings';
 import { getOnline, type Lesson, type QuizQuestion } from '@/lib/online';
 import { useStore } from '@/lib/store';
 
+const bundled: { lessons: Lesson[]; quiz: QuizQuestion[] } = require('@/constants/learn-content.json');
+
 export default function LearnScreen() {
   const { serverUrl, language } = useStore();
   const [lessons, setLessons] = useState<Lesson[] | null>(null);
   const [quiz, setQuiz] = useState<QuizQuestion[] | null>(null);
-  const [failed, setFailed] = useState(false);
   // Quiz progress: which question, the option picked for it (null = not answered yet), and the score.
   const [index, setIndex] = useState(0);
   const [picked, setPicked] = useState<number | null>(null);
@@ -23,9 +25,10 @@ export default function LearnScreen() {
     Promise.all([getOnline<Lesson[]>(serverUrl, `/learn/tactics?lang=${language}`), getOnline<QuizQuestion[]>(serverUrl, `/learn/quiz?lang=${language}`)]).then(
       ([newLessons, newQuiz]) => {
         if (cancelled) return;
-        if (newLessons === null || newQuiz === null) setFailed(true);
-        setLessons(newLessons);
-        setQuiz(newQuiz);
+        // Offline (or server down): use the lessons bundled in the app, so this tab always works.
+        const offline = newLessons === null || newQuiz === null;
+        setLessons(offline ? bundled.lessons : newLessons);
+        setQuiz(offline ? bundled.quiz : newQuiz);
       },
     );
     return () => {
@@ -33,13 +36,6 @@ export default function LearnScreen() {
     };
   }, [serverUrl, language]);
 
-  if (failed) {
-    return (
-      <Screen>
-        <Label>{t('onlineOffline')}</Label>
-      </Screen>
-    );
-  }
   if (lessons === null || quiz === null) {
     return (
       <Screen>

@@ -33,7 +33,7 @@ export default function ResultScreen() {
     return (
       <Screen>
         <Label>{t('scanEmpty')}</Label>
-        <Button title={t('scanTitle')} onPress={() => router.replace('/')} />
+        <Button title={t('scanTitle')} onPress={() => router.dismissTo('/')} />
       </Screen>
     );
   }
