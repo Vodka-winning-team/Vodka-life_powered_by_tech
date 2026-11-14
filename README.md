@@ -39,10 +39,16 @@ The law is clear: no agency or employer may charge a worker a recruitment fee (P
 14. **Online check (optional, needs the server):** an extra card on the result: links on Google Safe Browsing or URLhaus blocklists, websites registered very recently or not at all, where a short link really goes, and messages reported by other phones.
 15. **Report this message:** it counts once 2 different phones report the same message or a near copy. The server keeps salted fingerprints only, never the words.
 16. **Before you pay:** a pay check that warns on large amounts and on account numbers seen in reported messages.
+17. **Scan a QR code:** Verifye reads what the code holds and checks the link before anything opens. It never opens the link itself. A link from a QR code that isn't on our lists still gets a caution, because a QR code hides its address.
+18. **"Say the message"** (in Granny mode): speak the message instead of typing it.
+19. **A welcome page** on first launch (language, night mode, Granny mode, online checks), **night mode**, and **one "Online checks" switch**: off means fully offline, every check runs on the phone and nothing is sent.
+20. **The "notice" look:** black, white and one sand accent, like an official notice, with strong contrast in any light. "No warning signs found" is black, never green: it doesn't mean "safe".
 
 **No AI model decides a result:** clear rules plus official records, so every warning can be explained and checked. The only AI service is the optional Kreol voice.
 
 **Privacy:** the phone's checks never send anything. The online check is optional: the server uses the message in memory for one request and never stores or logs it; outside providers get only links, domains and phone numbers. The app says so, and it works without the server.
+
+Two permissions, each asked only when you use the feature: the **camera**, to read a QR code (nothing is recorded or saved), and the **microphone**, for "Say the message". With online checks off, speech is recognised on the phone. With online checks on, Android's speech service may send the audio to Google, so we don't say "nothing leaves the phone" about voice input.
 
 ## Data sources
 All real, official and dated. Every record in the app has its `source_url` and `snapshot` date. Details: [`docs/sources.md`](docs/sources.md).

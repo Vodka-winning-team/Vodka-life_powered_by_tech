@@ -25,7 +25,7 @@ Speaker note: the answer already exists in the law and in the official register.
 ---
 
 ## 3. Live demo: Verifye, *avan ou peye*
-Airplane mode **on** for steps 1–6: every check works offline. Then network on for the online check.
+**Online checks switch OFF** for steps 1–6 ("fully offline: every check runs on this phone and nothing is sent"). Then switch it ON for the online check.
 1. Paste Kevin's (fictional) message → X-Ray highlights "processing fee", "Rs 50,000", "today".
 2. Job check: the agency is **listed** for jobs abroad, but *"this does not prove the message is from them"*. The processing fee is the **employer's** (reg 7(2)(e)) → **Stop – high risk**.
 3. What to do now: call the agency on the **register's** number, never the one in the message; share a summary with Mum.

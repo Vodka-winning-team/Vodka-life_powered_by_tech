@@ -13,6 +13,7 @@ The messages are in [`demo-messages.md`](demo-messages.md) and the slides in [`s
 - [ ] **Messages ready to paste:** keep demo messages 1, 3, 4 and 5 in a notes app on the phone, in order. Copy each one just before you need it.
 - [ ] **Offline:**
   - **With the APK:** airplane mode on for steps 1–6 (every check works offline). Turn the network on for the online step.
+  - **Final look:** finish the welcome page and the tour before going on stage. **Online checks switch: OFF for steps 1–6** (it says "fully offline", so you can show it instead of airplane mode), then **ON** for the online step.
   - **Server for the online step:** on Jayesh's laptop, double-click `run_server.bat`. The venue Wi-Fi blocks phone → laptop, so put the demo phone on **USB** (server address `http://127.0.0.1:8000`) or put both on a **phone hotspot** (laptop's hotspot address in Settings → Server address). Check the Online check card appears before going on stage.
   - **With Expo Go:** the app is loaded from the laptop, so the phone must stay connected to it. Put the laptop and the phone on a hotspot that has **no internet**. That way we can still say "no internet is used", and it's true. Don't reload the app on stage.
 - [ ] **Backup video** open on the laptop, paused at 0:00.
@@ -90,6 +91,9 @@ Then Paveesh, to the jury:
 > "Offline, Verifye checks the law and the official lists. Online, it also checks the link itself, and one person's report protects the next. The server keeps no message, only a fingerprint."
 - If the card doesn't appear within 5 seconds: say "the checks you saw all ran offline; the online card is in the video", and move on.
 
+**QR step (optional, about 20 s; only if rehearsed on the demo phone):** tap **Scan a QR code**, point it at the QR code on our own poster → Verifye shows what the code holds and its check, without opening the link.
+> "A QR code hides its address. Verifye checks it before anything opens."
+
 **Step 7 (optional): automatic checking, Shield (about 20 s)**. Passed on the release APK at 22:33 (real WhatsApp test). Rehearse it once on the demo phone first.
 - **Before this step: turn airplane mode off** (Wi-Fi or data on), so the WhatsApp message can arrive. Shield must already be switched on, with Notification access granted.
 - Jayesh's phone sends demo message 1 by WhatsApp to the demo phone → **"Stop – warning signs found. Tap to see why, before you pay."** → tap → Result: **Stop**.
@@ -155,6 +159,7 @@ Answer in **two sentences**, then stop. The person in brackets answers first; an
 ### Privacy and safety
 14. **"What data do you collect?"** (Paveesh)
     For the checks, none: they run on the phone, with no account. The online check is optional: the server uses the message in memory for one request and never stores or logs it, and outside providers get only links, domains and numbers. A report keeps a salted fingerprint, never the words. A case is saved on the phone only when the user taps Save.
+    Two permissions, asked only when used: the camera, to read a QR code (nothing recorded), and the microphone, for "Say the message". With online checks on, Android's speech service may send the audio to Google, so we never say "nothing leaves the phone" about voice input.
 15. **"Could this be used to target people?"** (Adiyen)
     No. We store organisations only: no directors, and no FSC alerts that name a private person. The app never says a person or agency is a scammer; it says what the official record shows.
 16. **"What if the app is wrong and someone loses money?"** (Paveesh)

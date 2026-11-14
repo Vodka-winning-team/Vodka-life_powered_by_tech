@@ -69,7 +69,7 @@ Then Paveesh says:
 ## Before going on stage
 
 - [ ] Phone: charged, bright, silent, Phone app as default dialler, old FraudLens app removed.
-- [ ] App on the Check tab, English, History cleared, tour already done.
+- [ ] App on the Check tab, English, History cleared, welcome page and tour already done. **Online checks switch OFF** for the first part of the demo, ON for the online step.
 - [ ] Demo messages in the notes app, in order.
 - [ ] Server running on Jayesh's laptop; phone on USB or hotspot; Online check card seen once.
 - [ ] Backup video open and paused.

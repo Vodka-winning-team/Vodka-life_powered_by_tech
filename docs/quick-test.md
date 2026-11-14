@@ -89,6 +89,19 @@ Mauritius Telecom Lucky Draw: you have won a prize! Send your details to mauriti
 - [ ] **"This offer sounds too good"** (in git since 07:27; in builds after the 06:56 release): paste `Data entry job, $20/hour, work from home, no experience needed. WhatsApp 5XXX XXXX` → **Be careful**, "This offer sounds too good". Paste `ABC Ltd is hiring a data entry clerk in Ebene. Rs 18,000 a month. Send your CV to hr@abc.mu by 30 Nov.` → no such warning.
 - [ ] **Server off:** the card says the online check isn't available, and the phone's result is unchanged.
 
+## B1c. Final look (builds after the 10:53 merge, 2 minutes)
+
+- [ ] First launch: the **welcome page** ("Set up Verifye": language, night mode, Granny mode, online checks) → **Start**.
+- [ ] The look is black, white and sand; text is readable in bright light. **Night mode** switches to a near-black page and back.
+- [ ] Labels: **"Be careful – check first"** and **"No warning signs found – still check"** (black banner, never green).
+- [ ] **Online checks OFF** → check message 3 → the result comes from the phone only, and it says the link was not checked online. Nothing is sent.
+- [ ] **Online checks ON** (server running) → the Online check card appears.
+- [ ] **Scan a QR code** → allow the camera → scan any QR code with a link → Verifye shows a result or "A link from a QR code" caution, and **does not open the link**.
+- [ ] **Granny mode → Say the message** → allow the microphone → speak a short message → the text appears. If the phone can't do it offline, a message says so (the button must not look dead).
+- [ ] Animations: press a button (it dips), Check (the line sweeps once; tap skips it), the level word settles in. With the phone's "Remove animations" on, nothing moves.
+- [ ] **Back** works during the scan animation, and 6 fast taps on Check give 1 Result.
+- [ ] French and Kreol in the new look: nothing cut off.
+
 ## B2. Try to break it (surprise card, 1 minute)
 
 - [ ] Tap **Check message** with nothing pasted → *"Paste a message first."*
