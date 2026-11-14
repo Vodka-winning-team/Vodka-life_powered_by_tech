@@ -245,7 +245,7 @@ const styles = StyleSheet.create({
   band: { marginHorizontal: -PageMargin, marginTop: -PageMargin, paddingHorizontal: PageMargin, paddingBottom: 22, gap: 8 },
   bandTop: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
   bandTag: { flex: 1, fontFamily: HeadingFont, fontWeight: 'normal', fontSize: 13, letterSpacing: 2 },
-  bandName: { fontFamily: HeadingFont, fontWeight: 'normal', fontSize: 84, lineHeight: 84, letterSpacing: -1 },
+  bandName: { fontFamily: HeadingFont, fontWeight: 'normal', fontSize: 84, lineHeight: 104, letterSpacing: -1 },
   input: {
     minHeight: 160,
     borderWidth: 2,

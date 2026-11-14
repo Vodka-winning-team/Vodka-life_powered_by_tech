@@ -10,6 +10,8 @@ const en = {
 
   languageLabel: 'Language',
   settingsTitle: 'Settings',
+  qrCautionTitle: 'A link from a QR code',
+  qrCautionText: 'This link is not on our lists, but those only know links that were already reported. A QR code hides its address: open it only if you trust who gave you the code, and never enter a password, PIN or OTP on the page.',
   pasteShort: 'Paste',
   bandTag: 'Check before you pay',
   welcomeTitle: 'Set up Verifye',
@@ -190,6 +192,8 @@ export type Language = 'en' | 'fr' | 'mfe';
 
 const fr: Partial<Record<StringKey, string>> = {
   settingsTitle: "Réglages",
+  qrCautionTitle: "Un lien venant d'un code QR",
+  qrCautionText: "Ce lien n'est pas sur nos listes, mais elles ne connaissent que les liens déjà signalés. Un code QR cache son adresse : ouvrez-le seulement si vous faites confiance à la personne qui vous l'a donné, et n'entrez jamais de mot de passe, PIN ou OTP sur la page.",
   pasteShort: "Coller",
   bandTag: "Vérifiez avant de payer",
   welcomeTitle: "Réglez Verifye",
@@ -357,6 +361,8 @@ const fr: Partial<Record<StringKey, string>> = {
 const mfe: Partial<Record<StringKey, string>> = {
   // Welcome page, speech, and the sources (draft Kreol, needs Paveesh's check)
   settingsTitle: "Reglaz",
+  qrCautionTitle: "Enn lien ki sorti dan enn kod QR",
+  qrCautionText: "Sa lien la pa lor nou bann lis, me zot kone zis bann lien ki finn deza signale. Enn kod QR kasiet so ladres: ouver li zis si ou fer konfians dimoun ki finn donn ou kod la, ek zame met enn mo-de-pas, PIN ou OTP lor paz la.",
   pasteShort: "Kole",
   bandTag: "Verifye avan ou peye",
   welcomeTitle: "Regle Verifye",

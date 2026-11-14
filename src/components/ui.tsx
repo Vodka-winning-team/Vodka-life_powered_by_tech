@@ -218,7 +218,7 @@ export function LevelBanner({ level, detail, stamp = false }: { level: Level; de
       <Animated.Text
         style={[
           textStyles.poster,
-          { color: colors.text, fontSize: big, lineHeight: big * 0.95, opacity: landed, transform: [{ scale: stampSize }], transformOrigin: 'left center' },
+          { color: colors.text, fontSize: big, lineHeight: big * 1.2, opacity: landed, transform: [{ scale: stampSize }], transformOrigin: 'left center' },
         ]}>
         {word}.
       </Animated.Text>
@@ -300,7 +300,7 @@ export function Chip({ title, selected, onPress }: { title: string; selected: bo
 }
 
 const textStyles = StyleSheet.create({
-  title: { fontSize: FontSize.title, fontWeight: 'normal', lineHeight: FontSize.title * 1.0, letterSpacing: -0.5, fontFamily: HeadingFont, textTransform: 'uppercase' },
+  title: { fontSize: FontSize.title, fontWeight: 'normal', lineHeight: FontSize.title * 1.25, letterSpacing: -0.5, fontFamily: HeadingFont, textTransform: 'uppercase' },
   overline: { fontSize: FontSize.overline, lineHeight: FontSize.overline * 1.4, fontWeight: 'normal', letterSpacing: 1.5, fontFamily: HeadingFont },
   poster: { fontSize: FontSize.poster, fontWeight: 'normal', letterSpacing: -1, fontFamily: HeadingFont },
   number: { fontSize: 30, lineHeight: 34, fontWeight: 'normal', fontFamily: HeadingFont },

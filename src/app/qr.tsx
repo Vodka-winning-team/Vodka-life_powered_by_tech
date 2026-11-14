@@ -11,6 +11,7 @@ import { t } from '@/constants/strings';
 import { RadiusCard } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 import { leaveNotice } from '@/lib/notice';
+import { markFromQr } from '@/lib/once';
 import { useStore } from '@/lib/store';
 
 export default function QrScreen() {
@@ -31,6 +32,7 @@ export default function QrScreen() {
       leaveNotice('notMessage');
       router.dismissTo('/');
     } else {
+      if (check) markFromQr(check.id);
       router.replace('/result');
     }
   }

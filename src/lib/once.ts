@@ -28,3 +28,14 @@ export function takeFresh(id: string | undefined): boolean {
   freshId = null;
   return true;
 }
+
+// Which check came from a QR code. A QR code hides its address, so its result is never "no warning signs".
+let qrId: string | null = null;
+
+export function markFromQr(id: string) {
+  qrId = id;
+}
+
+export function isFromQr(id: string | undefined): boolean {
+  return id !== undefined && id === qrId;
+}

@@ -15,7 +15,7 @@ import { useOnlineCheck } from '@/hooks/use-online-check';
 import { useTheme } from '@/hooks/use-theme';
 import { dialNumber, formatPhone } from '@/lib/phone';
 import { sources } from '@/lib/data';
-import { takeFresh } from '@/lib/once';
+import { isFromQr, takeFresh } from '@/lib/once';
 import { speak, speechFor, stopSpeaking } from '@/lib/speak';
 import { useStore } from '@/lib/store';
 import { prettyDay } from '@/lib/time';
@@ -60,7 +60,11 @@ export default function ResultScreen() {
   const highlights = result.findings.flatMap((f) => f.highlights);
   // The banner shows the stronger of the two answers: the checks on the phone, or the server's score.
   const onlineLevel = typeof online === 'object' ? (online.risk_level === 'high' ? 'STOP' : online.risk_level === 'medium' ? 'CAREFUL' : 'NONE') : 'NONE';
-  const level = result.level === 'STOP' || onlineLevel === 'STOP' ? 'STOP' : result.level === 'CAREFUL' || onlineLevel === 'CAREFUL' ? 'CAREFUL' : 'NONE';
+  const found = result.level === 'STOP' || onlineLevel === 'STOP' ? 'STOP' : result.level === 'CAREFUL' || onlineLevel === 'CAREFUL' ? 'CAREFUL' : 'NONE';
+  // A link from a QR code: our lists only know links that were already reported, so "nothing found"
+  // is not good news. The result is at least "Be careful".
+  const qrCaution = isFromQr(current.id) && found === 'NONE';
+  const level = qrCaution ? 'CAREFUL' : found;
 
   return (
     // A new case, follow-up or Job check answer starts a fresh page at the top, so the level banner is always seen.
@@ -105,6 +109,15 @@ export default function ResultScreen() {
             <Button title={t('resultActionsButton')} onPress={() => router.push('/actions')} />
           )}
         </>
+      )}
+
+      {/* A link from a QR code that is on no list: say plainly that this is not a green light. */}
+      {qrCaution && (
+        <Card>
+          <LevelTag level="CAREFUL" />
+          <Label variant="label">{t('qrCautionTitle')}</Label>
+          <Label>{t('qrCautionText')}</Label>
+        </Card>
       )}
 
       {/* Tour, last step: the highlights and the findings. */}
