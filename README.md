@@ -20,7 +20,7 @@ The law is clear: no agency or employer may charge a worker a recruitment fee (P
 
 ## What the app does
 1. **Scan:** paste a message, or share it straight from WhatsApp or SMS (Share → Verifye, Android APK).
-2. **X-Ray:** highlights the tricks in English, French and Kreol: pressure to act fast, asking for a code or PIN, asking for money, prizes and gifts, account-blocked alarms, guaranteed profit, "I have a new number", odd links.
+2. **X-Ray:** highlights the tricks in English, French and Kreol: pressure to act fast, asking for a code or PIN, asking for money, prizes and gifts, account-blocked alarms, guaranteed profit, "I have a new number", odd links, and offers that sound too good (high pay for simple work, no experience, contact only by WhatsApp: *Be careful*, never *Stop*).
 3. **Official checks:**
    - **Job offer:** is the agency in the Ministry of Labour register, licensed for jobs **abroad**, and valid today? Is the fee one the employer must pay (with the exact clause)?
    - **Bank link:** is the link the bank's official website, per the Bank of Mauritius list? (`mcb-login-secure.net` is not `mcb.mu`.)

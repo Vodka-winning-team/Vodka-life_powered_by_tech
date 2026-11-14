@@ -85,6 +85,7 @@ Mauritius Telecom Lucky Draw: you have won a prize! Send your details to mauriti
 - [ ] **Learn** → lessons open and the quiz scores, in airplane mode too; switch to Kreol.
 - [ ] Random typing (`asdf asdf`) → amber box **"Please check your text"**, no Result.
 - [ ] **Online (server running, phone on USB or hotspot):** message 3 → the **Online check** card with "Website address isn't registered". **Report this message** → saved; after a 2nd phone reports it → "Reported by other phones". **Read aloud** in Kreol plays; **Stop reading** stops it.
+- [ ] **"This offer sounds too good"** (in git since 07:27; in builds after the 06:56 release): paste `Data entry job, $20/hour, work from home, no experience needed. WhatsApp 5XXX XXXX` → **Be careful**, "This offer sounds too good". Paste `ABC Ltd is hiring a data entry clerk in Ebene. Rs 18,000 a month. Send your CV to hr@abc.mu by 30 Nov.` → no such warning.
 - [ ] **Server off:** the card says the online check isn't available, and the phone's result is unchanged.
 
 ## B2. Try to break it (surprise card, 1 minute)

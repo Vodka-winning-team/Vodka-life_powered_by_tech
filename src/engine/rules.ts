@@ -155,3 +155,67 @@ export function paymentRequests(norm: string): Highlight[] {
     })
     .map((m) => ({ start: m.index, end: m.index + m[0].length }));
 }
+
+// ---- "This offer sounds too good" (D's request, 07:19): an ad-style job offer. CAREFUL only, and only when
+// 2 or more DIFFERENT clues appear together; one clue alone ("work from home on Fridays") means nothing.
+export const TOO_GOOD = {
+  kind: 'too_good',
+  level: 'CAREFUL' as Level,
+  title: 'This offer sounds too good',
+  detail: 'High pay for simple work is a common way to draw people in. A real employer gives a company name and never asks you to pay to start.',
+};
+
+// A pay rate: an amount followed by "per hour / a day / par jour / par zour / a month"...
+const MONEY = String.raw`(?:[$€]\s?\d[\d,.]*|\d[\d,.]*\s?(?:[$€]|usd|eur|euros?|dollars?)|(?:rs|mur|usd|eur)\.?\s?\d[\d,.]*)`;
+const PER = String.raw`\s*(?:\/|per|par|a|an|each|chaque)\s*(?:hour|hr|h|day|jour|zour|week|semaine|semenn|month|mois|mwa)\b`;
+const PAY_RATE = new RegExp(MONEY + PER, 'g');
+const FOREIGN_MONEY = /(?:[$€]\s?\d|\d[\d,.]*\s?(?:[$€]|usd|eur|euros?|dollars?)(?![\p{L}])|\b(?:usd|eur)\s?\d)/gu;
+const REFERRAL = /\b(?:bring|invite|refer|amenn|amene|amenez|invitez|invit)\b[^.!?]{0,20}?\b(?:friends?|amis?|kamarad|dimoun)\b/g;
+
+const EARN_WORDS = ['earn', 'earning', 'make', 'income', 'gagnez', 'gagner', 'revenu', 'gagn', 'gagne'];
+const SIMPLE_WORK = [
+  'data entry', 'typing', 'copy paste', 'copy and paste', 'like videos', 'liking videos', 'like posts', 'liking posts',
+  'watch videos', 'watching videos', 'packing', 'pack products', 'rate products', 'review products', 'simple task', 'simple tasks',
+  'online tasks', 'saisie de donnees', 'saisie', 'en likant', 'liker des videos', 'regarder des videos', 'taches simples',
+  'emballage', 'tap', 'like bann video', 'gete bann video', 'travay fasil',
+];
+const NO_EFFORT = [
+  'no experience', 'no experience needed', 'no experience required', 'no interview', 'no skills needed', 'no skills required',
+  '1 hour a day', 'one hour a day', '2 hours a day', 'two hours a day', 'few hours a day', 'easy money', 'easy job',
+  'sans experience', 'aucune experience', 'sans entretien', '1 heure par jour', 'une heure par jour', 'argent facile',
+  'pa bizin lexperians', 'pa bizin experians', 'pena lexperians', 'okenn lexperians', 'pa bizin entervyou',
+  '1 erdtan par zour', 'enn erdtan par zour', 'larzan fasil',
+];
+const FROM_HOME = [
+  'work from home', 'from home', 'from your phone', 'on your phone', 'using your phone', 'online job', 'home based',
+  'travail a domicile', 'depuis chez vous', 'depuis la maison', 'sur votre telephone', 'depuis votre telephone',
+  'travay lakaz', 'depi lakaz', 'lor ou telefonn', 'lor to telefonn', 'depi ou telefonn',
+];
+const CHAT_ONLY = ['whatsapp', 'telegram'];
+/** A job abroad is normally paid in foreign money, so dollars/euros only count as a clue for an offer that isn't abroad. */
+const ABROAD = [
+  'abroad', 'overseas', 'canada', 'dubai', 'uae', 'qatar', 'australia', 'new zealand', 'usa', 'united states', 'europe',
+  'france', 'uk', 'united kingdom', 'germany', 'italy', 'malta', 'poland', 'romania', 'croatia', 'seychelles', 'maldives',
+  'cruise', "a l'etranger", 'etranger', 'lot pei', 'deor',
+];
+
+const hitsOf = (re: RegExp, norm: string): Highlight[] =>
+  allMatches(re, norm).map((m) => ({ start: m.index, end: m.index + m[0].length }));
+const phraseHits = (norm: string, phrases: string[]) => phrases.flatMap((p) => findPhrase(norm, p));
+
+/**
+ * The "too good" clues found in the message, one entry per clue that is present (a–f in D's request):
+ * high pay for simple work, no effort, from home/phone, chat-only contact, foreign money for a local offer, referral.
+ */
+export function tooGoodClues(norm: string): Highlight[][] {
+  const rates = hitsOf(PAY_RATE, norm);
+  const clues: Highlight[][] = [
+    rates.length > 0 && (phraseHits(norm, SIMPLE_WORK).length > 0 || phraseHits(norm, EARN_WORDS).length > 0) ? rates : [],
+    phraseHits(norm, NO_EFFORT),
+    phraseHits(norm, FROM_HOME),
+    phraseHits(norm, CHAT_ONLY),
+    phraseHits(norm, ABROAD).length === 0 ? hitsOf(FOREIGN_MONEY, norm) : [],
+    hitsOf(REFERRAL, norm),
+  ];
+  return clues.filter((c) => c.length > 0);
+}
