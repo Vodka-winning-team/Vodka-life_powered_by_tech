@@ -5,7 +5,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 /** Default server address. It can be changed in Settings on the Scan screen. */
-export const DEFAULT_SERVER = process.env.EXPO_PUBLIC_API_URL ?? 'http://10.231.16.165:8000';
+export const DEFAULT_SERVER = process.env.EXPO_PUBLIC_API_URL ?? 'http://127.0.0.1:8000';
 
 const TIMEOUT_MS = 10000;
 const DEVICE_KEY = 'device-v1';

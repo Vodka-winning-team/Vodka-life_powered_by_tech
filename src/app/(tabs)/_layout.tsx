@@ -11,6 +11,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { t } from '@/constants/strings';
 import { FontSize, Spacing } from '@/constants/theme';
 import { useLook } from '@/hooks/use-look';
+import { goToTop } from '@/lib/tab-top';
 import { useTheme } from '@/hooks/use-theme';
 import { useStore } from '@/lib/store';
 
@@ -32,6 +33,12 @@ export default function TabsLayout() {
 
   return (
     <Tabs
+      // Tapping the tab you are already on brings its page back to the top.
+      screenListeners={({ navigation }) => ({
+        tabPress: () => {
+          if (navigation.isFocused()) goToTop();
+        },
+      })}
       screenOptions={{
         headerStyle: { backgroundColor: theme.background },
         headerTintColor: theme.text,
@@ -67,7 +74,7 @@ export default function TabsLayout() {
               hitSlop={12}
               onPress={() => router.push('/settings')}
               style={({ pressed }) => ({ paddingHorizontal: Spacing.three, opacity: pressed ? 0.6 : 1 })}>
-              <Ionicons name="settings-outline" size={FontSize.banner * scale} color={theme.text} />
+              <Ionicons name="settings-outline" size={FontSize.banner * scale} color={theme.onAccent} />
             </Pressable>
           ),
         }}

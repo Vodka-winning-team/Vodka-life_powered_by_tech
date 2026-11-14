@@ -7,13 +7,13 @@ import { analyzeOnline } from '@/lib/online';
 import { useStore } from '@/lib/store';
 
 export function useOnlineCheck(text: string): OnlineState {
-  const { serverUrl } = useStore();
+  const { serverUrl, online } = useStore();
   // Remember which message the answer belongs to, so a new message shows 'loading' straight away.
   const [answer, setAnswer] = useState<{ key: string; state: OnlineState } | null>(null);
   const key = `${serverUrl}|${text}`;
 
   useEffect(() => {
-    if (text === '') return;
+    if (text === '' || !online) return;
     let cancelled = false;
     analyzeOnline(serverUrl, text).then((result) => {
       if (!cancelled) setAnswer({ key: `${serverUrl}|${text}`, state: result ?? 'offline' });
@@ -21,7 +21,8 @@ export function useOnlineCheck(text: string): OnlineState {
     return () => {
       cancelled = true;
     };
-  }, [serverUrl, text]);
+  }, [serverUrl, text, online]);
 
+  if (!online) return 'off';
   return answer && answer.key === key ? answer.state : 'loading';
 }

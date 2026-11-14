@@ -20,10 +20,28 @@ const NOTICE = {
   primarySoft: '#FFFFFF',
   onPrimary: '#F2C230',
   accent: '#F2C230', // the yellow band, number squares, highlights
+  onAccent: '#111111', // text on yellow (the same in night mode)
   highlight: '#F2C230',
 } as const;
 
-export const Colors = { light: NOTICE, dark: NOTICE } as const;
+/** Night mode: the same notice, inverted. Black page, white text, yellow buttons. */
+const NOTICE_NIGHT = {
+  text: '#FFFFFF',
+  textSecondary: '#B9B9B2',
+  background: '#111111',
+  backgroundElement: '#111111',
+  backgroundSelected: '#F2C230',
+  border: '#FFFFFF',
+  hairline: '#3A3A36',
+  primary: '#F2C230', // main buttons: yellow, with black text
+  primarySoft: '#111111',
+  onPrimary: '#111111',
+  accent: '#F2C230',
+  onAccent: '#111111',
+  highlight: '#F2C230',
+} as const;
+
+export const Colors = { light: NOTICE, dark: NOTICE_NIGHT } as const;
 
 export type ThemeColor = keyof typeof Colors.light;
 
@@ -43,7 +61,7 @@ export const Spacing = {
 } as const;
 
 /** Multiply every font size by this. Set to 1.25 for "large text". */
-export const TextScale = 1;
+export const TextScale = 1.1;
 
 export const FontSize = {
   small: 14 * TextScale,
@@ -54,9 +72,9 @@ export const FontSize = {
   banner: 22 * TextScale,
 } as const;
 
-/** Corner radius: none. Everything is square, like a printed notice. */
-export const Radius = 0;
-export const RadiusCard = 0;
+/** Corner radius: 3 px everywhere, so the squares are not sharp. */
+export const Radius = 3;
+export const RadiusCard = 3;
 
 /** No shadows in the notice style (kept so components can still spread it). */
 export const CardShadow = {

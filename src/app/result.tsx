@@ -4,6 +4,7 @@ import { router } from 'expo-router';
 import { useEffect, useState } from 'react';
 import { Linking, Pressable, StyleSheet, TextInput } from 'react-native';
 
+import { Appear } from '@/components/motion';
 import { OnlineCheck } from '@/components/online-check';
 import { TourTip } from '@/components/tour';
 import { Button, Card, HighlightedText, Label, LevelBanner, LevelTag, Screen, Warning } from '@/components/ui';
@@ -14,16 +15,20 @@ import { useOnlineCheck } from '@/hooks/use-online-check';
 import { useTheme } from '@/hooks/use-theme';
 import { dialNumber, formatPhone } from '@/lib/phone';
 import { sources } from '@/lib/data';
+import { takeFresh } from '@/lib/once';
 import { speak, speechFor, stopSpeaking } from '@/lib/speak';
 import { useStore } from '@/lib/store';
 import { prettyDay } from '@/lib/time';
 
 export default function ResultScreen() {
   const theme = useTheme();
-  const { current, saveCurrent, addToCase, serverUrl } = useStore();
+  const { current, saveCurrent, addToCase, serverUrl, online: onlineMode } = useStore();
   const { granny, scale } = useLook();
   const [newText, setNewText] = useState('');
   const [reading, setReading] = useState(false);
+  // Motion: only a brand-new check gets the stamp; a case reopened from History doesn't.
+  const [stampedId] = useState(() => (takeFresh(current?.id) ? current?.id : undefined));
+  const play = current !== null && stampedId === current.id;
   const online = useOnlineCheck(current?.text ?? '');
 
   // Stop reading aloud when leaving the screen.
@@ -61,7 +66,7 @@ export default function ResultScreen() {
     // A new case, follow-up or Job check answer starts a fresh page at the top, so the level banner is always seen.
     <Screen key={`${current.id}-${text}-${current.job?.agencyId ?? ''}-${current.job?.costId ?? ''}`}>
       {/* The banner says the level and what to do. (Granny mode shows that sentence in big text just below.) */}
-      <LevelBanner level={level} detail={granny ? undefined : t(`granny${level}`)} />
+      <LevelBanner level={level} detail={granny ? undefined : t(`granny${level}`)} stamp={play} />
       <TourTip step={3}>{t('tourLevel')}</TourTip>
 
       {/* The next step comes first. (Granny mode shows the Call buttons themselves, just below.) */}
@@ -80,7 +85,7 @@ export default function ResultScreen() {
             setReading(false);
           } else {
             setReading(true);
-            speak(speechFor(result, level), () => setReading(false), serverUrl);
+            speak(speechFor(result, level), () => setReading(false), onlineMode ? serverUrl : '');
           }
         }}
       />
@@ -112,7 +117,8 @@ export default function ResultScreen() {
       <Label variant="label">{t('resultFindings')}</Label>
       {result.findings.length === 0 && <Label>{t('resultNoFindings')}</Label>}
       {result.findings.map((finding, i) => (
-        <Card key={`${finding.kind}-${i}`}>
+        <Appear key={`${finding.kind}-${i}`} play={play} index={i + 1}>
+        <Card>
           {/* A NONE finding is just information (e.g. "listed"), so it gets a neutral tag. */}
           <LevelTag level={finding.level} label={finding.level === 'NONE' ? t('findingInfo') : undefined} />
           <Label variant="label">{findingTitle(finding)}</Label>
@@ -123,6 +129,7 @@ export default function ResultScreen() {
             </Label>
           )}
         </Card>
+        </Appear>
       ))}
 
       {/* What our server adds: score, live link and number checks, reports from other users. */}

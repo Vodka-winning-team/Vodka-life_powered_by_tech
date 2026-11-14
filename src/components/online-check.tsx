@@ -9,7 +9,7 @@ import { reportOnline, type OnlineResult } from '@/lib/online';
 import { useStore } from '@/lib/store';
 
 /** 'loading' while waiting, 'offline' when the server can't be reached, else the server's answer. */
-export type OnlineState = 'loading' | 'offline' | OnlineResult;
+export type OnlineState = 'loading' | 'offline' | 'off' | OnlineResult;
 
 export function OnlineCheck({ state, text }: { state: OnlineState; text: string }) {
   const { serverUrl } = useStore();
@@ -22,6 +22,9 @@ export function OnlineCheck({ state, text }: { state: OnlineState; text: string 
     setReportMessage(answer ? answer.message : t('onlineOffline'));
     setSending(false);
   }
+
+  // Offline mode (the switch in Settings): no online card at all.
+  if (state === 'off') return null;
 
   if (state === 'loading') {
     return (

@@ -10,6 +10,10 @@ const en = {
 
   languageLabel: 'Language',
   settingsTitle: 'Settings',
+  nightMode: 'Night mode',
+  onlineMode: 'Online checks',
+  onlineModeOnHint: 'On: links and numbers are also checked online, through our server.',
+  onlineModeOffHint: 'Off: fully offline. Every check runs on this phone and nothing is sent.',
   tourWelcome: 'Welcome to Verifye! Take a 1-minute tour with a practice message. It is made up, and nothing is sent to anyone.',
   tourStart: 'Start the tour',
   tourSkip: 'Skip',
@@ -172,6 +176,10 @@ export type Language = 'en' | 'fr' | 'mfe';
 
 const fr: Partial<Record<StringKey, string>> = {
   settingsTitle: "Réglages",
+  nightMode: "Mode nuit",
+  onlineMode: "Vérifications en ligne",
+  onlineModeOnHint: "Activé : les liens et numéros sont aussi vérifiés en ligne, par notre serveur.",
+  onlineModeOffHint: "Désactivé : entièrement hors ligne. Tout est vérifié sur ce téléphone et rien n'est envoyé.",
   tourWelcome: "Bienvenue sur Verifye ! Faites une visite d'une minute avec un message d'essai. Il est inventé, et rien n'est envoyé à personne.",
   tourStart: "Commencer la visite",
   tourSkip: "Passer",
@@ -309,6 +317,11 @@ const fr: Partial<Record<StringKey, string>> = {
   widgetShieldOff: "Vérification automatique : désactivée",
 };
 const mfe: Partial<Record<StringKey, string>> = {
+  // Settings switches (draft Kreol, needs Paveesh's check)
+  nightMode: "Mod lanwit",
+  onlineMode: "Verifikasion anlinn",
+  onlineModeOnHint: "Alime: bann lien ek nimero verifye anlinn osi, par nou server.",
+  onlineModeOffHint: "Tengn: net san internet. Tou verifye lor sa telefonn la ek nanye pa avoye.",
   // First-time tour (draft Kreol, needs Paveesh's check)
   tourWelcome: "Bienvini lor Verifye! Fer enn ti vizit 1 minit avek enn mesaz pou pratike. Li invante, ek nanye pa avoye ar personn.",
   tourStart: "Koumans vizit la",

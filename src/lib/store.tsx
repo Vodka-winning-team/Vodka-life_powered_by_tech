@@ -8,6 +8,7 @@ import { setLanguage as setStringsLanguage, type Language } from '@/constants/st
 import type { CheckResult, JobAnswers } from '@/engine';
 import { engine } from '@/lib/data';
 import { looksLikeMessage } from '@/lib/input-check';
+import { markFresh } from '@/lib/once';
 import { DEFAULT_SERVER } from '@/lib/online';
 
 export type Check = {
@@ -35,6 +36,9 @@ type Store = {
   /** Granny mode: bigger text and buttons, strong contrast, simpler Result (display only). */
   granny: boolean;
   setGranny: (on: boolean) => void;
+  /** Online checks on or off. Off = fully offline: nothing is sent, every check runs on the phone. */
+  online: boolean;
+  setOnline: (on: boolean) => void;
   /** Address of our server for the online checks. */
   serverUrl: string;
   setServerUrl: (url: string) => void;
@@ -49,6 +53,7 @@ const LANGUAGE_KEY = 'language-v1';
 const SHIELD_KEY = 'shield-v1';
 const GRANNY_KEY = 'granny-v1';
 const SERVER_KEY = 'server-v1';
+const ONLINE_KEY = 'online-v1';
 const TOUR_KEY = 'tour-v1';
 const StoreContext = createContext<Store | null>(null);
 
@@ -59,6 +64,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   const [shieldOn, setShieldOnState] = useState(false);
   const [granny, setGrannyState] = useState(false);
   const [serverUrl, setServerUrlState] = useState(DEFAULT_SERVER);
+  const [online, setOnlineState] = useState(true);
   const [tourStep, setTourStepState] = useState<number | null>(null);
 
   // Load saved history once, when the app starts.
@@ -83,6 +89,9 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     AsyncStorage.getItem(TOUR_KEY)
       .then((saved) => { if (saved !== 'done') setTourStepState(0); })
       .catch(() => {});
+    AsyncStorage.getItem(ONLINE_KEY)
+      .then((saved) => setOnlineState(saved !== 'off'))
+      .catch(() => {});
     AsyncStorage.getItem(SERVER_KEY)
       .then((saved) => { if (saved) setServerUrlState(saved); })
       .catch(() => {});
@@ -91,6 +100,11 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   function setTourStep(step: number | null) {
     setTourStepState(step);
     if (step === null) AsyncStorage.setItem(TOUR_KEY, 'done').catch(() => {});
+  }
+
+  function setOnline(on: boolean) {
+    setOnlineState(on);
+    AsyncStorage.setItem(ONLINE_KEY, on ? 'on' : 'off').catch(() => {});
   }
 
   function setServerUrl(url: string) {
@@ -126,6 +140,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     // Surprise card (wrong input): random typing is treated like an empty message, so it never gets a result.
     const result = looksLikeMessage(text) ? engine.check(text, job) : engine.check('');
     const check: Check = { id: String(Date.now()), text, job, result, savedAt: null };
+    markFresh(check.id);
     setCurrent(check);
     return check;
   }
@@ -175,6 +190,8 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     setShieldOn,
     granny,
     setGranny,
+    online,
+    setOnline,
     serverUrl,
     setServerUrl,
     tourStep,
