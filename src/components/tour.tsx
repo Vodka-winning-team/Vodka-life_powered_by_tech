@@ -50,24 +50,28 @@ export function TourTip({
   return (
     <View accessibilityLiveRegion="polite">
       <View style={[styles.tip, { backgroundColor: theme.primary }]}>
-        <Text style={[styles.count, { color: theme.onPrimary }]}>
-          {step + 1}/{TOUR_STEPS}
-        </Text>
-        <Text style={text}>{children}</Text>
-        <View style={styles.buttons}>
+        {/* Top row: the step counter on the left, "Skip" on the right (the same place on every tip). */}
+        <View style={styles.top}>
+          <Text style={[styles.count, { color: theme.onPrimary }]}>
+            {step + 1}/{TOUR_STEPS}
+          </Text>
           {!last && (
-            <Pressable accessibilityRole="button" onPress={() => setTourStep(null)} style={styles.skip}>
-              <Text style={[text, styles.bold]}>{t('tourSkip')}</Text>
+            <Pressable accessibilityRole="button" onPress={() => setTourStep(null)} hitSlop={12} style={styles.skip}>
+              <Text style={[styles.bold, { color: theme.onPrimary, fontSize: FontSize.small * scale }]}>{t('tourSkip')}</Text>
             </Pressable>
           )}
-          {!hideNext && (
+        </View>
+        <Text style={text}>{children}</Text>
+        {/* The main button. A tip that asks the user to tap something on the screen has none. */}
+        {!hideNext && (
+          <View style={styles.buttons}>
             <Pressable accessibilityRole="button" onPress={next} style={[styles.next, { backgroundColor: theme.onPrimary }]}>
               <Text style={[styles.bold, { color: theme.primary, fontSize: FontSize.body * scale }]}>
                 {nextTitle ?? (last ? t('tourDone') : t('tourNext'))}
               </Text>
             </Pressable>
-          )}
-        </View>
+          </View>
+        )}
       </View>
       {/* The arrow: a small square turned 45 degrees, half hidden behind the tip. */}
       <View style={[styles.arrow, { backgroundColor: theme.primary }]} />
@@ -78,8 +82,9 @@ export function TourTip({
 const styles = StyleSheet.create({
   tip: { borderRadius: RadiusCard, padding: 20, gap: Spacing.two, ...CardShadow },
   count: { fontSize: FontSize.overline, fontWeight: '700', letterSpacing: 1, opacity: 0.8 },
-  buttons: { flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center', gap: Spacing.three, marginTop: Spacing.one },
-  skip: { minHeight: 48, justifyContent: 'center', paddingHorizontal: Spacing.two },
+  top: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
+  buttons: { flexDirection: 'row', justifyContent: 'flex-end', marginTop: Spacing.one },
+  skip: { minHeight: 32, justifyContent: 'center', paddingHorizontal: Spacing.two },
   next: { minHeight: 48, justifyContent: 'center', paddingHorizontal: Spacing.four, borderRadius: 999 },
   bold: { fontWeight: '700' },
   arrow: { width: 18, height: 18, transform: [{ rotate: '45deg' }], alignSelf: 'center', marginTop: -10 },
