@@ -67,7 +67,7 @@ No personal names are stored: directors' names and alerts naming individuals are
 - **App:** Expo SDK 58, React Native, TypeScript, Expo Router. One codebase: Android APK, iPhone through Expo Go, and web.
 - **Engine:** pure TypeScript in `src/engine/` (rules + official records), runs on the phone, offline. Automated tests (Jest) run every demo message, the 15 test cases and the real data files: `npm test`.
 - **Data:** Python scripts in `data/scripts/` turn the official PDFs and pages into JSON; `validate.py` checks every row.
-- **Server (optional):** Python (FastAPI) in `server/`, written new on Sat 14 Nov. No trained model; it answers "high" only on hard evidence. 32 tests. Details: [`server/README.md`](server/README.md).
+- **Server (optional):** Python (FastAPI) in `server/`, written new on Sat 14 Nov. No trained model; it answers "high" only on hard evidence. 33 tests. Details: [`server/README.md`](server/README.md).
 - **No accounts. No internet needed for the checks.**
 
 ## AI tools
