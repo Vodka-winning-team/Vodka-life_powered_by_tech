@@ -5,7 +5,7 @@ import { KeyboardAvoidingView, Pressable, ScrollView, StyleSheet, Text, View, ty
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { t } from '@/constants/strings';
-import { CardShadow, FontSize, LevelColors, MaxContentWidth, RadiusCard, Spacing } from '@/constants/theme';
+import { CardShadow, FontSize, HeadingFont, LevelColors, MaxContentWidth, PageMargin, RadiusCard, Spacing } from '@/constants/theme';
 import type { Highlight, Level } from '@/engine';
 import { useLook } from '@/hooks/use-look';
 import { useTheme } from '@/hooks/use-theme';
@@ -50,7 +50,7 @@ export function Label({
   const theme = useTheme();
   const { granny, scale } = useLook();
   // Granny mode: strong contrast, so no grey text.
-  const color = (variant === 'small' || variant === 'overline') && !granny ? theme.textSecondary : theme.text;
+  const color = variant === 'small' && !granny ? theme.textSecondary : theme.text;
   return (
     <Text numberOfLines={numberOfLines} style={[textStyles[variant], sized(textStyles[variant], scale), { color }, style]}>
       {children}
@@ -62,13 +62,28 @@ export function Label({
  * A group of related items (a heading and its controls): tight spacing inside,
  * while the page puts more space between groups. Granny mode spreads it a little more.
  */
-export function Section({ title, children }: { title?: string; children: ReactNode }) {
+export function Section({ title, number, children }: { title?: string; number?: number; children: ReactNode }) {
+  const theme = useTheme();
   const { granny } = useLook();
-  return (
-    <View style={{ gap: granny ? Spacing.three : Spacing.two }}>
-      {/* Small uppercase heading above a group. */}
-      {title ? <Label variant="overline">{title.toUpperCase()}</Label> : null}
+  const body = (
+    <View style={{ flex: 1, gap: granny ? Spacing.three : Spacing.two }}>
+      {/* Uppercase heading with a strong rule under it. */}
+      {title ? (
+        <View style={{ borderBottomWidth: 2, borderBottomColor: theme.border, paddingBottom: 6 }}>
+          <Label variant="overline">{title.toUpperCase()}</Label>
+        </View>
+      ) : null}
       {children}
+    </View>
+  );
+  if (number === undefined) return body;
+  // A numbered step: a yellow square with the number, then the step.
+  return (
+    <View style={{ flexDirection: 'row', gap: 14 }}>
+      <View style={[styles.number, { backgroundColor: theme.accent }]}>
+        <Text style={[textStyles.number, { color: theme.text }]}>{number}</Text>
+      </View>
+      {body}
     </View>
   );
 }
@@ -98,7 +113,7 @@ export function Warning({ title, children }: { title: string; children: ReactNod
 export function Card({ children }: { children: ReactNode }) {
   const theme = useTheme();
   return (
-    <View style={[styles.card, { backgroundColor: theme.backgroundElement, borderColor: theme.border }]}>
+    <View style={[styles.card, { borderBottomColor: theme.hairline }]}>
       {children}
     </View>
   );
@@ -139,16 +154,25 @@ export function Button({
         styles.button,
         {
           backgroundColor: primary ? theme.primary : theme.primarySoft,
-          borderColor: primary ? theme.primary : theme.primarySoft,
+          borderColor: theme.primary,
           // Pressed: slightly smaller and dimmer, so every tap is felt.
           opacity: pressed ? 0.85 : 1,
           transform: [{ scale: pressed ? 0.97 : 1 }],
-          minHeight: buttonHeight,
+          minHeight: buttonHeight + 6,
+          justifyContent: primary ? 'space-between' : 'center',
         },
       ]}>
-      <Text style={[textStyles.label, sized(textStyles.label, scale), { color: primary ? theme.onPrimary : theme.primary, textAlign: 'center' }]}>
+      <Text
+        style={[
+          textStyles.label,
+          sized(textStyles.label, scale),
+          { color: primary ? theme.onPrimary : theme.primary, flexShrink: 1 },
+          primary ? { fontFamily: HeadingFont, fontWeight: '800', letterSpacing: 0.3 } : { textAlign: 'center' },
+        ]}>
         {title}
       </Text>
+      {/* The main button points forward. */}
+      {primary ? <Text style={[textStyles.label, sized(textStyles.label, scale), { color: theme.onPrimary }]}>→</Text> : null}
     </Pressable>
   );
 }
@@ -157,11 +181,16 @@ export function Button({
 export function LevelBanner({ level, detail }: { level: Level; detail?: string }) {
   const colors = LevelColors[level];
   const { scale } = useLook();
+  // "Stop – high risk" becomes the word "Stop." with "HIGH RISK" above it.
+  const [word, note] = t(`level${level}`).split(' – ');
+  // A short word is set poster-size; a longer phrase ("No warning signs found") is set smaller so it fits.
+  const big = word.length <= 6 ? FontSize.poster : word.length <= 12 ? 56 : 34;
   return (
-    <View accessibilityRole="header" style={[styles.banner, { backgroundColor: colors.background }]}>
-      <Text style={[textStyles.banner, sized(textStyles.banner, scale), { color: colors.text }]}>{t(`level${level}`)}</Text>
+    <View accessibilityRole="header" accessibilityLabel={t(`level${level}`)} style={[styles.banner, { backgroundColor: colors.background }]}>
+      {note ? <Text style={[textStyles.overline, { color: colors.text }]}>{note.toUpperCase()}</Text> : null}
+      <Text style={[textStyles.poster, { color: colors.text, fontSize: big, lineHeight: big * 0.95 }]}>{word}.</Text>
       {detail ? (
-        <Text style={[textStyles.body, sized(textStyles.body, scale), { color: colors.text, textAlign: 'center', marginTop: Spacing.two }]}>
+        <Text style={[textStyles.body, sized(textStyles.body, scale), { color: colors.text, fontWeight: '600', marginTop: Spacing.one }]}>
           {detail}
         </Text>
       ) : null}
@@ -226,7 +255,7 @@ export function Chip({ title, selected, onPress }: { title: string; selected: bo
         styles.chip,
         {
           backgroundColor: selected ? theme.primary : theme.backgroundElement,
-          borderColor: selected ? theme.primary : theme.border,
+          borderColor: theme.border,
           minHeight: chipHeight,
         },
       ]}>
@@ -238,8 +267,10 @@ export function Chip({ title, selected, onPress }: { title: string; selected: bo
 }
 
 const textStyles = StyleSheet.create({
-  title: { fontSize: FontSize.title, fontWeight: '800', lineHeight: FontSize.title * 1.2, letterSpacing: -0.5 },
-  overline: { fontSize: FontSize.overline, lineHeight: FontSize.overline * 1.4, fontWeight: '700', letterSpacing: 1 },
+  title: { fontSize: FontSize.title, fontWeight: '900', lineHeight: FontSize.title * 1.0, letterSpacing: -0.5, fontFamily: HeadingFont, textTransform: 'uppercase' },
+  overline: { fontSize: FontSize.overline, lineHeight: FontSize.overline * 1.4, fontWeight: '800', letterSpacing: 1.5, fontFamily: HeadingFont },
+  poster: { fontSize: FontSize.poster, fontWeight: '900', letterSpacing: -1, fontFamily: HeadingFont },
+  number: { fontSize: 30, lineHeight: 34, fontWeight: '900', fontFamily: HeadingFont },
   body: { fontSize: FontSize.body, lineHeight: FontSize.body * 1.45 },
   small: { fontSize: FontSize.small, lineHeight: FontSize.small * 1.4 },
   tag: { fontSize: FontSize.small, lineHeight: FontSize.small * 1.4, fontWeight: '700' },
@@ -248,12 +279,14 @@ const textStyles = StyleSheet.create({
 });
 
 const styles = StyleSheet.create({
-  scroll: { padding: 20, alignItems: 'center' },
+  scroll: { padding: PageMargin, alignItems: 'center' },
   column: { width: '100%', maxWidth: MaxContentWidth, gap: Spacing.three },
-  card: { borderWidth: 1, borderRadius: RadiusCard, padding: 20, gap: Spacing.two, ...CardShadow },
-  button: { borderWidth: 1, borderRadius: 999, paddingVertical: 15, paddingHorizontal: Spacing.three, minHeight: 52, justifyContent: 'center' },
-  banner: { borderRadius: RadiusCard, paddingVertical: Spacing.five, paddingHorizontal: Spacing.three, ...CardShadow },
+  card: { borderBottomWidth: 1, paddingBottom: 14, gap: Spacing.one + 2, ...CardShadow },
+  number: { width: 48, height: 48, alignItems: 'center', justifyContent: 'center' },
+  button: { borderWidth: 2, borderRadius: 0, paddingVertical: 14, paddingHorizontal: 18, minHeight: 58, flexDirection: 'row', alignItems: 'center', gap: Spacing.two },
+  // The band reaches the screen edges and the top of the page.
+  banner: { marginHorizontal: -PageMargin, marginTop: -PageMargin, paddingHorizontal: PageMargin, paddingTop: Spacing.three, paddingBottom: 22, gap: 4 },
   warning: { borderRadius: RadiusCard, padding: Spacing.three, gap: Spacing.one },
-  tag: { alignSelf: 'flex-start', borderRadius: 8, paddingHorizontal: Spacing.two, paddingVertical: 2 },
-  chip: { borderWidth: 1, borderRadius: 999, paddingHorizontal: Spacing.three, paddingVertical: Spacing.two, minHeight: 48, minWidth: 48, justifyContent: 'center' },
+  tag: { alignSelf: 'flex-start', borderRadius: 0, paddingHorizontal: 9, paddingVertical: 4 },
+  chip: { borderWidth: 2, borderRadius: 0, paddingHorizontal: Spacing.three, paddingVertical: Spacing.two, minHeight: 48, minWidth: 48, justifyContent: 'center' },
 });

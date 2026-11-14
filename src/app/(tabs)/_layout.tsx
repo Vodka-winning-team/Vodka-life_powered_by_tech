@@ -43,6 +43,7 @@ export default function TabsLayout() {
         tabBarStyle: {
           backgroundColor: theme.backgroundElement,
           borderTopColor: theme.border,
+          borderTopWidth: 2,
           height: (granny ? 84 : 68) + insets.bottom,
           paddingTop: Spacing.one,
           paddingBottom: insets.bottom,
@@ -53,7 +54,9 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: t('appName', language),
+          // The name is set in poster type on the yellow band just below, so the header itself is plain yellow.
+          title: '',
+          headerStyle: { backgroundColor: theme.accent },
           tabBarLabel: t('tabCheck', language),
           tabBarIcon: tabIcon('shield-checkmark-outline', 'shield-checkmark'),
           // Settings (Granny mode, automatic checking, tour) behind a gear, top right.

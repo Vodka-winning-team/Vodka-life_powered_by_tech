@@ -50,7 +50,7 @@ export default function ActionsScreen() {
 
   return (
     <Screen>
-      <Section title={t('actionsCall')}>
+      <Section number={1} title={t('actionsCall')}>
         <Label variant="small">{t('actionsCallHint')}</Label>
         {groups.length === 0 && <Label>{t('actionsNoContacts')}</Label>}
         {groups.map((g) => (
@@ -66,11 +66,11 @@ export default function ActionsScreen() {
         ))}
       </Section>
 
-      <Section title={t('actionsShare')}>
+      <Section number={2} title={t('actionsShare')}>
         <Button kind="secondary" title={t('actionsShareButton')} onPress={share} />
       </Section>
 
-      <Section title={t('actionsReport')}>
+      <Section number={3} title={t('actionsReport')}>
         <Button kind="secondary" title={t('reportMaucors')} onPress={() => Linking.openURL(MAUCORS_URL)} />
         <Button kind="secondary" title={t('reportMinistry')} onPress={() => Linking.openURL(MINISTRY_EMAIL)} />
       </Section>

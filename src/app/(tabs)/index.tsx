@@ -8,9 +8,9 @@ import { useCallback, useEffect, useRef, useState, type ComponentRef } from 'rea
 import { Pressable, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
 
 import { TOUR_MESSAGE, TourTip } from '@/components/tour';
-import { Button, Chip, Label, Screen, Section, Warning } from '@/components/ui';
+import { Button, Screen, Section, Warning } from '@/components/ui';
 import { findingTitle, t, type Language } from '@/constants/strings';
-import { FontSize, LevelColors, Radius, Spacing } from '@/constants/theme';
+import { FontSize, HeadingFont, PageMargin, Radius, Spacing } from '@/constants/theme';
 import { useLook } from '@/hooks/use-look';
 import { useTheme } from '@/hooks/use-theme';
 import { looksLikeMessage } from '@/lib/input-check';
@@ -78,10 +78,31 @@ export default function ScanScreen() {
 
   return (
     <Screen scrollRef={scrollRef}>
-      <View style={styles.languages} accessibilityLabel={t('languageLabel')}>
-        {LANGUAGES.map((l) => (
-          <Chip key={l.id} title={l.name} selected={l.id === language} onPress={() => setLanguage(l.id)} />
-        ))}
+      {/* The yellow band: tagline, language (EN / FR / KM), the name in poster type, and what the app does. */}
+      <View style={[styles.band, { backgroundColor: theme.accent }]}>
+        <View style={styles.bandTop}>
+          <Text style={[styles.bandTag, { color: theme.text }]}>{t('tagline').split(': ').pop()?.toUpperCase()}</Text>
+          <View style={styles.languages} accessibilityLabel={t('languageLabel')}>
+            {LANGUAGES.map((l) => {
+              const selected = l.id === language;
+              return (
+                <Pressable
+                  key={l.id}
+                  accessibilityRole="button"
+                  accessibilityLabel={l.name}
+                  accessibilityState={{ selected }}
+                  onPress={() => setLanguage(l.id)}
+                  style={[styles.language, selected && { backgroundColor: theme.text }]}>
+                  <Text style={{ fontWeight: '700', fontSize: FontSize.small, color: selected ? theme.accent : theme.text }}>
+                    {l.id === 'mfe' ? 'KM' : l.id.toUpperCase()}
+                  </Text>
+                </Pressable>
+              );
+            })}
+          </View>
+        </View>
+        <Text style={[styles.bandName, { color: theme.text }]}>{t('appName')}</Text>
+        <Text style={{ color: theme.text, fontSize: FontSize.body * scale, lineHeight: FontSize.body * scale * 1.4, fontWeight: '500' }}>{t('scanHint')}</Text>
       </View>
 
       {/* First-time tour, step 1: welcome. "Start" puts the practice message in the box. */}
@@ -90,11 +111,7 @@ export default function ScanScreen() {
       </TourTip>
 
       {/* The main task first: paste (or share) a message and check it. */}
-      <Section>
-        <Label variant="small">{t('tagline')}</Label>
-        <Label variant="title">{t('scanTitle')}</Label>
-        <Label>{t('scanHint')}</Label>
-      </Section>
+      <Section title={t('scanTitle')}>{null}</Section>
 
       <TourTip step={1}>{t('tourPaste')}</TourTip>
 
@@ -114,7 +131,7 @@ export default function ScanScreen() {
             {
               color: theme.text,
               backgroundColor: theme.backgroundElement,
-              borderColor: error !== '' ? LevelColors.CAREFUL.background : theme.border,
+              borderColor: theme.border,
               fontSize: FontSize.body * scale,
               lineHeight: FontSize.body * scale * 1.45,
             },
@@ -159,12 +176,18 @@ const LANGUAGES: { id: Language; name: string }[] = [
 ];
 
 const styles = StyleSheet.create({
-  languages: { flexDirection: 'row', flexWrap: 'wrap', gap: Spacing.two },
+  languages: { flexDirection: 'row', gap: 2 },
+  language: { minWidth: 44, height: 44, alignItems: 'center', justifyContent: 'center' },
+  // The band reaches the screen edges and the top of the page (under the yellow header).
+  band: { marginHorizontal: -PageMargin, marginTop: -PageMargin, paddingHorizontal: PageMargin, paddingBottom: 22, gap: 8 },
+  bandTop: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
+  bandTag: { flex: 1, fontFamily: HeadingFont, fontWeight: '700', fontSize: 13, letterSpacing: 2 },
+  bandName: { fontFamily: HeadingFont, fontWeight: '900', fontSize: 84, lineHeight: 84, letterSpacing: -1 },
   input: {
     minHeight: 160,
-    borderWidth: 1,
+    borderWidth: 2,
     borderRadius: Radius,
-    padding: Spacing.three,
+    padding: 14,
     fontSize: FontSize.body,
   },
   field: { gap: Spacing.two },
@@ -175,8 +198,8 @@ const styles = StyleSheet.create({
     gap: Spacing.two,
     minHeight: 44,
     paddingHorizontal: Spacing.three,
-    borderWidth: 1,
-    borderRadius: 999,
+    borderWidth: 2,
+    borderRadius: 0,
   },
   sourcesLink: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: Spacing.one, minHeight: 44 },
 });
