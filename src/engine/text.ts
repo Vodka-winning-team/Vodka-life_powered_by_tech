@@ -82,11 +82,30 @@ const LINK = new RegExp(
   'gi',
 );
 
+/** Web endings that are also everyday words ("used.Today", "us.Help"): see isSentenceBreak. */
+const WORD_ENDINGS = new Set([
+  'today', 'help', 'support', 'services', 'digital', 'pro', 'rest', 'cloud', 'lat', 'buzz', 'bond', 'live', 'me', 'us',
+  'in', 'work', 'win', 'loan', 'store', 'shop', 'online', 'info', 'link', 'site', 'app', 'click', 'top', 'co', 'cam',
+]);
+
+/**
+ * "Your card was used.Today at 10:42": a missing space after a full stop, not a web address.
+ * True when there is no http(s):// or www., no path, the ending is an everyday word, and it starts with a
+ * capital right after a lowercase letter (a new sentence). "mcb-secure.support" and "MCB-SECURE.SUPPORT" stay links.
+ */
+function isSentenceBreak(raw: string): boolean {
+  if (/^(https?:\/\/|www\.)/i.test(raw) || /[/?#]/.test(raw)) return false;
+  const dot = raw.lastIndexOf('.');
+  const ending = raw.slice(dot + 1);
+  return WORD_ENDINGS.has(ending.toLowerCase()) && /^\p{Lu}/u.test(ending) && /\p{Ll}/u.test(raw[dot - 1] ?? '');
+}
+
 export function links(original: string): Link[] {
   const out: Link[] = [];
   for (const m of allMatches(LINK, original)) {
     if (m.index > 0 && original[m.index - 1] === '@') continue; // part of an email address
     const raw = m[0].replace(/[.,)!?;:"']+$/, '');
+    if (isSentenceBreak(raw)) continue;
     const range = { start: m.index, end: m.index + raw.length };
     const host = raw
       .toLowerCase()
