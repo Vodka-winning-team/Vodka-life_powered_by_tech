@@ -7,8 +7,6 @@ import { router, useFocusEffect } from 'expo-router';
 import { useCallback, useEffect, useRef, useState, type ComponentRef } from 'react';
 import { Pressable, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
 
-import { ExpoSpeechRecognitionModule, useSpeechRecognitionEvent } from 'expo-speech-recognition';
-
 import { ScanOverlay } from '@/components/motion';
 import { TOUR_MESSAGE, TourTip } from '@/components/tour';
 import { Button, Screen, Section, Warning } from '@/components/ui';
@@ -24,7 +22,7 @@ import { useStore } from '@/lib/store';
 
 export default function ScanScreen() {
   const theme = useTheme();
-  const { runCheck, language, setLanguage, tourStep, setTourStep, welcomeDue, online } = useStore();
+  const { runCheck, language, setLanguage, tourStep, setTourStep, welcomeDue } = useStore();
   const { scale, granny } = useLook();
   const [text, setText] = useState('');
   const [error, setError] = useState('');
@@ -34,40 +32,6 @@ export default function ScanScreen() {
   const [scanning, setScanning] = useState(false);
   const finishScan = useRef<() => void>(() => {});
   const reduceMotion = useReduceMotion();
-  // Speech-to-text (Granny mode): say the message instead of typing it.
-  const [listening, setListening] = useState(false);
-  useSpeechRecognitionEvent('start', () => setListening(true));
-  useSpeechRecognitionEvent('end', () => setListening(false));
-  useSpeechRecognitionEvent('error', () => {
-    // The phone could not hear or has no voice model for this language: say so instead of failing silently.
-    setListening(false);
-    setError(t('sttFailed'));
-  });
-  useSpeechRecognitionEvent('result', (event) => {
-    const heard = event.results[0]?.transcript ?? '';
-    if (heard !== '') setText(heard);
-  });
-
-  async function speakMessage() {
-    if (listening) {
-      ExpoSpeechRecognitionModule.stop();
-      return;
-    }
-    const permission = await ExpoSpeechRecognitionModule.requestPermissionsAsync();
-    if (!permission.granted) {
-      setError(t('sttNeedsMic'));
-      return;
-    }
-    setError('');
-    // English or French voice; Kreol is heard with the French one (the closest the phone has).
-    // Offline mode: only the recogniser on the phone itself, so nothing is sent anywhere.
-    ExpoSpeechRecognitionModule.start({
-      lang: language === 'en' ? 'en-GB' : 'fr-FR',
-      interimResults: true,
-      continuous: false,
-      requiresOnDeviceRecognition: !online,
-    });
-  }
 
   // First launch: show the welcome page (language, night mode, Granny mode, online checks) once.
   useEffect(() => {
@@ -195,8 +159,6 @@ export default function ScanScreen() {
             },
           ]}
         />
-        {/* Granny mode: say the message out loud instead of typing it. */}
-        {granny && <Button kind="secondary" title={listening ? t('sttStop') : t('sttSpeak')} onPress={speakMessage} />}
         {/* The error sits under its box and is read out by screen readers. */}
         {error !== '' && <Warning title={t('notMessageTitle')}>{error}</Warning>}
         {/* Tour: the user taps the real button, so this tip has no "Next". */}
