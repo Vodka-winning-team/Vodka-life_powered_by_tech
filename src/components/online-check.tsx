@@ -43,14 +43,22 @@ export function OnlineCheck({ state, text }: { state: OnlineState; text: string 
 
   const reports = state.verification?.community_reports ?? 0;
   const intelFindings = state.intel?.findings ?? [];
+  // Nothing found online (e.g. an ordinary link): one short line, no score and no advice about paying.
+  const nothing = state.risk_score === 0 && state.tactics.length === 0 && intelFindings.length === 0 && reports === 0;
 
   return (
     <Card>
       <Label variant="label">{t('onlineTitle')}</Label>
-      <Status>
-        {t('onlineScore')}: {state.risk_score}/100 · {state.category_label}
-      </Status>
-      <Label>{state.summary}</Label>
+      {nothing ? (
+        <Label>{t('onlineNothing')}</Label>
+      ) : (
+        <>
+          <Status>
+            {t('onlineScore')}: {state.risk_score}/100 · {state.category_label}
+          </Status>
+          <Label>{state.summary}</Label>
+        </>
+      )}
 
       {state.tactics.map((tactic) => (
         <Label key={tactic.tactic} variant="small">

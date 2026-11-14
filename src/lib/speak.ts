@@ -28,6 +28,8 @@ export function speechFor(result: CheckResult, level: Level = result.level): str
 
 /** The online voice that is playing now, if any. */
 let player: AudioPlayer | null = null;
+/** Goes up on every speak() and stopSpeaking(), so a voice that is still loading knows it was cancelled. */
+let turn = 0;
 
 /** Asks the server whether text-to-speech is set up (3 seconds at most). */
 async function onlineVoiceReady(server: string): Promise<boolean> {
@@ -47,8 +49,12 @@ async function onlineVoiceReady(server: string): Promise<boolean> {
 /** Reads the text aloud: the server's voice when it is available, else the phone's voice. */
 export async function speak(text: string, onDone: () => void, server = '') {
   stopSpeaking();
+  const myTurn = turn;
   const root = server.replace(/\/+$/, '');
-  if (root !== '' && (await onlineVoiceReady(root))) {
+  const online = root !== '' && (await onlineVoiceReady(root));
+  // "Stop reading" was tapped while we were asking the server: don't start.
+  if (myTurn !== turn) return;
+  if (online) {
     const audio = createAudioPlayer({ uri: `${root}/api/v1/speech?text=${encodeURIComponent(text.slice(0, 1500))}` });
     player = audio;
     audio.addListener('playbackStatusUpdate', (status) => {
@@ -67,9 +73,16 @@ export async function speak(text: string, onDone: () => void, server = '') {
 }
 
 export function stopSpeaking() {
+  turn += 1;
   Speech.stop();
   if (player) {
-    player.remove();
+    // Pause first (stops the sound at once), then free the player.
+    try {
+      player.pause();
+      player.remove();
+    } catch {
+      // The player was already gone: nothing to stop.
+    }
     player = null;
   }
 }
