@@ -32,8 +32,7 @@ def score(intel: IntelResult, match: Match, ip_links: int, reported_identifiers:
     soft: list[Tactic] = []
 
     if intel.blocklisted:
-        hard.append(Tactic("blocklisted_link", "Link on a list of harmful websites", 95,
-                           [f.target for f in intel.findings if f.severity == "danger" and f.source != "phone_ipqs"]))
+        hard.append(Tactic("blocklisted_link", "Link on a list of harmful websites", 95))
     if any(f.source == "phone_ipqs" and f.severity == "danger" for f in intel.findings):
         hard.append(Tactic("abused_number", "Phone number with recent abuse reports", 75))
     if match.confirmed:
@@ -42,12 +41,15 @@ def score(intel: IntelResult, match: Match, ip_links: int, reported_identifiers:
     elif match.reporters > 0:
         soft.append(Tactic("community_pending", "Reported by another phone (not confirmed yet)", 20,
                            [f"Needs {confirmations} different phones to be confirmed."]))
-    new_sites = [f for f in intel.findings if f.source == "domain_age"]
+    new_sites = [f for f in intel.findings if f.source == "domain_age" and f.title == "Very new website"]
     if new_sites:
-        soft.append(Tactic("new_website", "Very new website", 35, [f.detail for f in new_sites]))
+        soft.append(Tactic("new_website", "Very new website", 35))  # detail is in intel.findings
+    unregistered = [f for f in intel.findings if f.source == "domain_age" and f.title != "Very new website"]
+    if unregistered:
+        soft.append(Tactic("unregistered_website", "Website address isn't registered", 30))
     shorts = [f for f in intel.findings if f.source == "short_links"]
     if shorts:
-        soft.append(Tactic("hidden_link", "Short link hides the real address", 10, [f.detail for f in shorts]))
+        soft.append(Tactic("hidden_link", "Short link hides the real address", 10))
     if ip_links:
         soft.append(Tactic("ip_link", "Link uses a bare number instead of a name", 15))
     if reported_identifiers:
@@ -71,8 +73,10 @@ def score(intel: IntelResult, match: Match, ip_links: int, reported_identifiers:
     elif tactics:
         category, summary = "Signs worth checking", "The online checks found signs worth checking before you pay or open any link."
     else:
-        checked = ", ".join(intel.checked) or "no live checks"
-        category, summary = "No online warnings", f"The online checks found nothing ({checked}). That doesn't prove anything: still call the official number before you pay."
+        names = {"rdap": "website age", "short": "short links", "safe_browsing": "Google Safe Browsing",
+                 "urlhaus": "URLhaus", "ipqs": "phone number check"}
+        checked = ", ".join(names.get(c, c) for c in intel.checked) or "reports from other phones"
+        category, summary = "Nothing extra found online", f"The live checks found nothing more (checked: {checked}). That doesn't prove anything: the phone's own checks above still count, and still call the official number before you pay."
     return {
         "risk_score": value,
         "risk_level": level,

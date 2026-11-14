@@ -98,6 +98,8 @@ class Intel:
         async def go() -> int | None:
             async with self._client(2.5) as client:
                 resp = await client.get(f"https://rdap.org/domain/{domain}", follow_redirects=True)
+            if resp.status_code == 404:
+                return -1  # no registration record: the address isn't registered (or was taken down)
             if resp.status_code != 200:
                 return None
             for event in resp.json().get("events", []):
@@ -201,7 +203,12 @@ class Intel:
                 f"It really goes to {final_host}." + ("" if is_official(final_host, self.official)
                                                        else " That is not an official bank site in our list."),
                 target, "short_links"))
-        elif kind == "rdap" and value is not None and value < NEW_DOMAIN_DAYS:
+        elif kind == "rdap" and value == -1:
+            result.findings.append(Finding(
+                "warning", "Website address isn't registered",
+                f"{target} has no registration record. The link may be fake, mistyped on purpose, or already taken down.",
+                target, "domain_age"))
+        elif kind == "rdap" and value is not None and 0 <= value < NEW_DOMAIN_DAYS:
             result.findings.append(Finding(
                 "warning", "Very new website",
                 f"{target} was registered {value} day{'s' if value != 1 else ''} ago. Websites used to trick people are often brand new.",

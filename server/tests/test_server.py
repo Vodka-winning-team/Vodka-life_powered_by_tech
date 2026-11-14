@@ -22,7 +22,8 @@ REAL_OTP = "MCB: Your OTP for the online payment of Rs 1,250.00 at DARTY is 4829
 class FakeProviders:
     """Pretends to be RDAP, Safe Browsing, URLhaus, IPQS, a URL shortener and myt; records what was sent."""
 
-    def __init__(self, harmful=(), new_domains=(), urlhaus_hosts=(), abused_numbers=(), fail=()):
+    def __init__(self, harmful=(), new_domains=(), urlhaus_hosts=(), abused_numbers=(), fail=(), unregistered=()):
+        self.unregistered = set(unregistered)
         self.harmful, self.new_domains, self.urlhaus_hosts = set(harmful), set(new_domains), set(urlhaus_hosts)
         self.abused_numbers, self.fail = set(abused_numbers), set(fail)
         self.requests: list[httpx.Request] = []
@@ -34,6 +35,8 @@ class FakeProviders:
             raise httpx.ConnectError("down", request=request)
         if host == "rdap.org":
             domain = request.url.path.rsplit("/", 1)[-1]
+            if domain in self.unregistered:
+                return httpx.Response(404)
             date = "2026-11-10T00:00:00Z" if domain in self.new_domains else "2009-01-01T00:00:00Z"
             return httpx.Response(200, json={"events": [{"eventAction": "registration", "eventDate": date}]})
         if host == "safebrowsing.googleapis.com":
@@ -104,7 +107,8 @@ def test_official_bank_site_is_not_checked_for_age(tmp_path):
 def test_real_code_sms_has_no_online_warnings(tmp_path):
     client, providers = make_client(tmp_path)
     r = client.post("/api/v1/analyze", json={"text": REAL_OTP}).json()
-    assert r["risk_level"] == "low" and r["tactics"] == [] and r["category_label"] == "No online warnings"
+    assert r["risk_level"] == "low" and r["tactics"] == [] and r["category_label"] == "Nothing extra found online"
+    assert "rdap" not in r["summary"]
 
 
 def test_abused_phone_number_is_high(tmp_path):
@@ -252,3 +256,11 @@ def test_env_file_is_read(tmp_path):
 ])
 def test_phone_extraction(text, expected):
     assert extract.phones(text) == expected
+
+
+def test_unregistered_website_is_a_soft_warning(tmp_path):
+    client, _ = make_client(tmp_path, FakeProviders(unregistered={"mcb-login-secure.net"}))
+    r = client.post("/api/v1/analyze", json={"text": FAKE_MCB}).json()
+    assert r["risk_level"] == "medium"
+    assert any(t["tactic"] == "unregistered_website" for t in r["tactics"])
+    assert any("isn't registered" in f["title"] for f in r["intel"]["findings"])
