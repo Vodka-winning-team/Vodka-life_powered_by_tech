@@ -12,7 +12,7 @@ const MCB = 'MCB: Unusual activity on your account. Verify your account at mcb-l
 test('read-aloud text has the level, the plain sentence, the findings and the official number', () => {
   const words = speechFor(engine.check(MCB));
   expect(words).toContain('Stop – high risk');
-  expect(words).toContain("Don't pay or send anything");
+  expect(words).toContain("Don't open links, pay or share anything");
   expect(words).toContain("Link is not The Mauritius Commercial Bank Limited's official website");
   expect(words).toContain('+230 202 6060');
 });
