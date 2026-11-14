@@ -1,3 +1,4 @@
+'use no memo'; // drawn outside the app's React tree: the React Compiler must leave this file alone
 // Home screen widget (Android APK only). Drawn by react-native-android-widget, not by the app's screens.
 //
 //   Verifye · avan ou peye

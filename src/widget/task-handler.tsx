@@ -1,3 +1,4 @@
+'use no memo'; // drawn outside the app's React tree: the React Compiler must leave this file alone
 // Draws the home screen widget. Android calls this when the widget is added, resized or due an update
 // (every 30 minutes at most); the app also asks for a redraw when the language or automatic checking changes.
 

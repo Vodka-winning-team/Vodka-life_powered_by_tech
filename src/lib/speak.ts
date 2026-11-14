@@ -7,14 +7,15 @@ import { createAudioPlayer, type AudioPlayer } from 'expo-audio';
 import * as Speech from 'expo-speech';
 
 import { findingDetail, findingTitle, getLanguage, t } from '@/constants/strings';
-import type { CheckResult } from '@/engine';
+import type { CheckResult, Level } from '@/engine';
 import { formatPhone } from '@/lib/phone';
 
 const VOICE: Record<string, string> = { en: 'en-GB', fr: 'fr-FR', mfe: 'fr-FR' };
 
 /** The words to read: level, the plain sentence, each finding, then the official numbers. */
-export function speechFor(result: CheckResult): string {
-  const parts = [t(`level${result.level}`), t(`granny${result.level}`)];
+export function speechFor(result: CheckResult, level: Level = result.level): string {
+  // `level` is the level shown on the banner (it can be stronger than the phone's own, after the online check).
+  const parts = [t(`level${level}`), t(`granny${level}`)];
   for (const finding of result.findings) {
     parts.push(findingTitle(finding), findingDetail(finding));
   }

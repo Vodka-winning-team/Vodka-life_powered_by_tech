@@ -66,7 +66,7 @@ export default function ResultScreen() {
             setReading(false);
           } else {
             setReading(true);
-            speak(speechFor(result), () => setReading(false), serverUrl);
+            speak(speechFor(result, level), () => setReading(false), serverUrl);
           }
         }}
       />
