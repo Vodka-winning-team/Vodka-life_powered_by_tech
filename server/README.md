@@ -41,7 +41,7 @@ See `.env.example`. All are optional:
 
 ## Tests
 ```
-cd server && .venv/bin/python -m pytest -q      # 28 tests, no network (providers are faked)
+cd server && .venv/bin/python -m pytest -q      # 30 tests, no network (providers are faked)
 ```
 
 ## Endpoints (all under `/api/v1`, as the app calls them)
