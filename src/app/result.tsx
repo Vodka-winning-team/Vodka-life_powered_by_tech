@@ -39,6 +39,20 @@ export default function ResultScreen() {
   }
 
   const { result, text } = current;
+
+  // Surprise card (wrong input): never show a level for random typing or an empty share.
+  if (result.findings.some((f) => f.kind === 'empty_message')) {
+    return (
+      <Screen>
+        <Label variant="title">{t('notMessageTitle')}</Label>
+        <Label>{t('notMessage')}</Label>
+        <Card>
+          <Label variant="small">{text.slice(0, 300)}</Label>
+        </Card>
+        <Button title={t('scanTitle')} onPress={() => router.dismissTo('/')} />
+      </Screen>
+    );
+  }
   const highlights = result.findings.flatMap((f) => f.highlights);
   // The banner shows the stronger of the two answers: the checks on the phone, or the server's score.
   const onlineLevel = typeof online === 'object' ? (online.risk_level === 'high' ? 'STOP' : online.risk_level === 'medium' ? 'CAREFUL' : 'NONE') : 'NONE';

@@ -7,6 +7,7 @@ import { createContext, useContext, useEffect, useState, type ReactNode } from '
 import { setLanguage as setStringsLanguage, type Language } from '@/constants/strings';
 import type { CheckResult, JobAnswers } from '@/engine';
 import { engine } from '@/lib/data';
+import { looksLikeMessage } from '@/lib/input-check';
 import { DEFAULT_SERVER } from '@/lib/online';
 
 export type Check = {
@@ -122,7 +123,9 @@ export function StoreProvider({ children }: { children: ReactNode }) {
 
   /** A new check from the Scan screen: always a new case. */
   function runCheck(text: string, job: JobAnswers | null = null): Check {
-    const check: Check = { id: String(Date.now()), text, job, result: engine.check(text, job), savedAt: null };
+    // Surprise card (wrong input): random typing is treated like an empty message, so it never gets a result.
+    const result = looksLikeMessage(text) ? engine.check(text, job) : engine.check('');
+    const check: Check = { id: String(Date.now()), text, job, result, savedAt: null };
     setCurrent(check);
     return check;
   }

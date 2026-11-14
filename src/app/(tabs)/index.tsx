@@ -13,6 +13,7 @@ import { findingTitle, t, type Language } from '@/constants/strings';
 import { FontSize, LevelColors, Radius, Spacing } from '@/constants/theme';
 import { useLook } from '@/hooks/use-look';
 import { useTheme } from '@/hooks/use-theme';
+import { looksLikeMessage } from '@/lib/input-check';
 import { takeNotice } from '@/lib/notice';
 import { useStore } from '@/lib/store';
 
@@ -56,6 +57,10 @@ export default function ScanScreen() {
   function check() {
     if (text.trim() === '') {
       setError(t('scanEmpty'));
+      return;
+    }
+    if (!looksLikeMessage(text)) {
+      setError(t('notMessage'));
       return;
     }
     const check = runCheck(text.trim());

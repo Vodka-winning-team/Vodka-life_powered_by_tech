@@ -26,7 +26,7 @@ export default function CheckCopiedScreen() {
         const check = text === '' ? null : runCheck(text);
         const tooShort = check?.result.findings.some((f) => f.kind === 'empty_message') ?? true;
         if (tooShort) {
-          leaveNotice('clipboardEmpty');
+          leaveNotice(text === '' ? 'clipboardEmpty' : 'notMessage');
           router.dismissTo('/');
         } else {
           router.replace('/result');
