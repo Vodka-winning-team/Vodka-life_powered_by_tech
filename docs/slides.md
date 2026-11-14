@@ -25,13 +25,15 @@ Speaker note: the answer already exists in the law and in the official register.
 ---
 
 ## 3. Live demo: Verifye, *avan ou peye*
-Airplane mode **on** the whole time.
+Airplane mode **on** for steps 1–6: every check works offline. Then network on for the online check.
 1. Paste Kevin's (fictional) message → X-Ray highlights "processing fee", "Rs 50,000", "today".
 2. Job check: the agency is **listed** for jobs abroad, but *"this does not prove the message is from them"*. The processing fee is the **employer's** (reg 7(2)(e)) → **Stop – high risk**.
 3. What to do now: call the agency on the **register's** number, never the one in the message; share a summary with Mum.
 4. Fake MCB message with `mcb-login-secure.net` → **not MCB's official website** (mcb.mu, Bank of Mauritius list) → MCB's official number.
 5. A real MCB code SMS → **No warning signs found – still verify**. No false alarm.
-6. *(Optional, 20 s, airplane mode off)* **Automatic checking:** a WhatsApp arrives → *"Stop – warning signs found"* without touching the phone. Opt-in, nothing saved.
+6. **Try to break it** (surprise card): empty paste, random typing, panic taps → never a false result.
+7. **Network on → Online check:** the same message now shows live link checks ("Website address isn't registered"), and **"Reported by other phones"** once 2 phones report it. Kreol read-aloud.
+8. *(Optional, 20 s)* **Automatic checking:** a WhatsApp arrives → *"Stop – warning signs found"* without touching the phone. Opt-in, nothing saved.
 
 Speaker note: if the phone fails, play the 2-minute backup video.
 
@@ -46,13 +48,13 @@ Speaker note: if the phone fails, play the 2-minute backup video.
 | Investment warnings | 21 organisations | FSC investor alerts, 2017–2026 |
 | Security alert campaigns | 5 alerts | CERT-MU, Feb–Oct 2026 |
 
-Every warning in the app shows its source and date. No personal names stored. No AI model: clear rules that anyone can check. 118 automated tests, including every demo message you just saw. Every result shows the date of each official list it used.
+Every warning in the app shows its source and date. No personal names stored. No AI model decides a result: clear rules that anyone can check. 127 app tests and 32 server tests, including every demo message you just saw. Every result shows the date of each official list it used.
 
 ---
 
 ## 5. Impact: who runs it, cost, reach
 - **Who could run it:** the Ministry of Labour's Recruitment Licence Unit and CERT-MU, which already publish this data. We'd propose a handover; there is no partnership today.
-- **Cost:** Rs 0 to run. No server, works offline; keeping the data fresh takes a person a few hours a month.
+- **Cost:** Rs 0 for the checks: they run on the phone, offline. The optional server is one small machine plus a few usage-priced services (link blocklists, the Kreol voice); keeping the data fresh takes a person a few hours a month.
 - **Reach:** jobseekers and their families, through employment information offices, bank branches and community groups; works on Android, iPhone and the web.
 - **What we'd measure in a pilot:** how many users call the official number before paying. We don't claim losses prevented.
 
@@ -67,6 +69,6 @@ Every warning in the app shows its source and date. No personal names stored. No
 - **What's next:**
   - **Arnak? Live:** a warning that appears *during* a call when a bank app is opened.
   - Updating the data automatically from the official sources.
-  - A full Kreol voice mode.
+  - The server run by CERT-MU, so one person's report protects everyone.
 
 Speaker note: finish with "Verifye avan ou peye."

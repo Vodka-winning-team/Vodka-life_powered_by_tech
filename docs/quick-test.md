@@ -4,7 +4,7 @@ Owner: D (Paveesh). Run this on **every new APK or Expo Go build**, on 2 phones 
 **Fast way to copy:** open this page on the phone in GitHub. Each message is in a grey box with a **copy button**. Tap it, then paste in the app.
 All messages are fictional; they come from [`demo-messages.md`](demo-messages.md) and [`test-cases.md`](test-cases.md).
 
-**Get the APK:** open the [final release](https://github.com/Vodka-winning-team/Vodka-life_powered_by_tech/releases/tag/verifye-final-2026-11-14-0055) on the phone (Sat 14 Nov, 00:55) → download the `.apk` file → open it → allow "Install unknown apps" if asked → **Install** (if Play Protect warns: More details → Install anyway). Install it over the old build and write the build's name (`verifye-final-2026-11-14-0055`) in the results table. Remove the old September FraudLens app, and set Phone as the default dialler.
+**Get the APK:** open the [newest release](https://github.com/Vodka-winning-team/Vodka-life_powered_by_tech/releases/tag/verifye-2026-11-14-0656) on the phone (demo build, Sat 14 Nov 06:56; check the Releases page for a newer one) → download the `.apk` file → open it → allow "Install unknown apps" if asked → **Install** (if Play Protect warns: More details → Install anyway). Install it over the old build and write the build's name (for example `verifye-2026-11-14-0656`) in the results table. Remove the old September FraudLens app, and set Phone as the default dialler.
 
 ---
 
@@ -75,6 +75,18 @@ Mauritius Telecom Lucky Draw: you have won a prize! Send your details to mauriti
 - [ ] The Result shows **"Checked against these official records"** with dates (agencies 4 Nov 2026; banks, FSC and CERT-MU 13 Nov 2026) → tap → Our sources.
 - [ ] In French and Kreol, the finding details, cost names and dates are translated.
 
+## B1b. Tabs, widget, tour and online (builds from 05:58, 2 minutes)
+
+- [ ] First start: the **tour** runs with a practice message; **Skip** works.
+- [ ] Four tabs: **Check · Is it official? · Learn · History**; the tab bar sits above the phone's navigation buttons. Settings (Granny mode, automatic checking, tour, server) open from the gear on Check.
+- [ ] **Paste the copied message** fills the box with what you copied; nothing copied → "Nothing is copied yet".
+- [ ] **Widget:** add the Verifye widget to the home screen → "Check copied message" opens the app and checks it; it shows the newest CERT-MU alert.
+- [ ] **Is it official?** → type `5256 8074` → THINK RECRUITMENT LTD. Type a made-up number → not listed.
+- [ ] **Learn** → lessons open and the quiz scores, in airplane mode too; switch to Kreol.
+- [ ] Random typing (`asdf asdf`) → amber box **"Please check your text"**, no Result.
+- [ ] **Online (server running, phone on USB or hotspot):** message 3 → the **Online check** card with "Website address isn't registered". **Report this message** → saved; after a 2nd phone reports it → "Reported by other phones". **Read aloud** in Kreol plays; **Stop reading** stops it.
+- [ ] **Server off:** the card says the online check isn't available, and the phone's result is unchanged.
+
 ## B2. Try to break it (surprise card, 1 minute)
 
 - [ ] Tap **Check message** with nothing pasted → *"Paste a message first."*
@@ -118,6 +130,9 @@ Mauritius Telecom Lucky Draw: you have won a prize! Send your details to mauriti
 | 23:40 | Verifye.apk (verifye-2026-11-13-2330) | Samsung Galaxy A72, Android 14 | Pushkar | Retest: name, keyboard fix and the rest of the quick test | 2 small issues (Result not starting at the top for a new case; empty sections in Official numbers), fixed 23:42 | board 23:40 |
 | 00:53–00:56 | Final Verifye.apk (verifye-final-2026-11-14-0055) | Jayesh's phone, Android 16 | Jayesh | Phone-tested before release (icon, UI polish, Read aloud, records card, FR/Kreol, agency fixes) | — | board 00:56 |
 | 01:28 | Final Verifye.apk (verifye-final-2026-11-14-0055) | Samsung Galaxy A72, Android 14 | Pushkar | Full quick test on the final APK: new Scan layout, demo 1 via share-in, Read aloud and records card on the Result, Job check, one card per organisation, demos 4 and 5, wrong-input checks | 1 small note: Result did not open at the top after Job check → Check again (fixed in git 01:30, commit 46513e3; not in this APK) | board 01:28 |
+| 06:00 | App on the new `server/` | Pushkar's phone | Pushkar | Online check card, Report (2 phones → "Reported by other phones"), Learn, Before you pay | myt voice and Safe Browsing not tested (no keys) | board 06:00 |
+| 06:16–06:35 | Demo build 06:25, new `server/` with keys | Jayesh's phone, Android 16 | Jayesh | myt voice, Safe Browsing ("Known harmful link", 100/100), site checks, report from another phone | — | board 06:20, 06:35 |
+| 06:51 | Release 06:31 | Samsung Galaxy A72, Android 14 | Pushkar | Paste button and widget work | Tab bar under the navigation buttons + 3 small notes (fixed 06:55) | board 06:51 |
 | | | | | | | |
 
 **A failure?** Open a GitHub Issue: the message number, the phone, what you expected and what you saw (a screenshot helps). Post the issue link on the board for the owner: engine → Pushkar, screens → Jayesh, data → Adiyen.
