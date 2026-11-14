@@ -1,0 +1,114 @@
+{
+ "lessons": [
+  {
+   "id": "job_fee",
+   "label": "A fee for a job abroad",
+   "lesson": "In Mauritius, no recruitment agency or employer may charge a worker for recruiting them (Private Recruitment Agencies Act 2023, s.5). Processing, visa, passport, work permit and air ticket costs are paid by the employer (Regulations 2025, reg 7(2)).",
+   "safe_action": "Don't pay. Look the agency up in Verifye and call it on the number from the Ministry list."
+  },
+  {
+   "id": "bank_link",
+   "label": "A link that pretends to be your bank",
+   "lesson": "Fake bank messages use addresses that look close to the real one, like mcb-login-secure.net instead of mcb.mu. Banks don't send you links to 'verify' your account.",
+   "safe_action": "Don't open the link. Call your bank on the number from its official website."
+  },
+  {
+   "id": "code_request",
+   "label": "Someone asks for a code or PIN",
+   "lesson": "A one-time code or PIN is a key to your money. Your bank, MCB Juice, my.t money or blink will never ask you to send it by message or call.",
+   "safe_action": "Never share it, even with someone who says they are from the bank."
+  },
+  {
+   "id": "new_number",
+   "label": "\"I lost my phone, this is my new number\"",
+   "lesson": "A message from an unknown number pretending to be family or a friend, then asking for money, is a common trick on WhatsApp in Mauritius (CERT-MU alert, Feb 2026).",
+   "safe_action": "Call the person on the number you already have before sending anything."
+  },
+  {
+   "id": "guaranteed_returns",
+   "label": "Guaranteed profit",
+   "lesson": "No real investment can promise a fixed profit. Firms offering trading or investments in Mauritius must be licensed by the FSC, and the FSC publishes warnings about unlicensed ones.",
+   "safe_action": "Search the firm in Verifye and on the FSC website before sending money."
+  },
+  {
+   "id": "prize_gift",
+   "label": "A prize or cash gift you didn't expect",
+   "lesson": "Fake 'cash gifts' and lucky draws (for example the Divali cash gift alert from CERT-MU, Oct 2026) ask you to click a link or pay a small fee to receive a bigger prize.",
+   "safe_action": "Don't click and don't pay a fee to receive a prize."
+  }
+ ],
+ "quiz": [
+  {
+   "id": "q1",
+   "message": "Hotel job in Canada! Pay the processing fee of Rs 50,000 today to secure your place.",
+   "question": "Who should pay the processing fee?",
+   "options": [
+    "You",
+    "The employer",
+    "Half each"
+   ],
+   "answer": 1,
+   "explanation": "Regulations 2025, reg 7(2)(e): processing fees are paid by the employer, never the worker."
+  },
+  {
+   "id": "q2",
+   "message": "MCB: Unusual activity on your account. Verify at mcb-login-secure.net",
+   "question": "Is mcb-login-secure.net MCB's website?",
+   "options": [
+    "Yes",
+    "No",
+    "Can't tell"
+   ],
+   "answer": 1,
+   "explanation": "MCB's official website is mcb.mu (Bank of Mauritius list). Anything else is not MCB."
+  },
+  {
+   "id": "q3",
+   "message": "MCB: Your OTP is 482913. Never share this code with anyone, including MCB staff.",
+   "question": "What should you do with this code?",
+   "options": [
+    "Send it back",
+    "Use it yourself only",
+    "Share it with MCB staff"
+   ],
+   "answer": 1,
+   "explanation": "A code sent to you is for you only. Nobody, not even the bank, should ask for it."
+  },
+  {
+   "id": "q4",
+   "message": "Salam, mo finn perdi mo telefonn, sa mo nouvo nimero. Avoy Rs 3000 urzan.",
+   "question": "What do you do first?",
+   "options": [
+    "Send the money",
+    "Call the person on their old number",
+    "Reply with your PIN"
+   ],
+   "answer": 1,
+   "explanation": "Check with the person on the number you already have. A 'new number' asking for money is a common trick."
+  },
+  {
+   "id": "q5",
+   "message": "Earn 5% per day with AI trading, guaranteed profit, join now!",
+   "question": "What is the warning sign?",
+   "options": [
+    "AI",
+    "Guaranteed profit",
+    "The word 'join'"
+   ],
+   "answer": 1,
+   "explanation": "No real investment guarantees profit. Check the firm with the FSC."
+  },
+  {
+   "id": "q6",
+   "message": "Happy Divali! Divali Cash Gift of Rs. 2,000 for you. View Now: bit.ly/divali-gift",
+   "question": "Why is the short link a problem?",
+   "options": [
+    "It is too short",
+    "It hides where it really goes",
+    "It is in English"
+   ],
+   "answer": 1,
+   "explanation": "Short links hide the real address. CERT-MU warned about this exact Divali cash gift message."
+  }
+ ]
+}

@@ -1,28 +1,57 @@
-// Scan screen: paste a message, then check it.
-// TODO(C): share-in from WhatsApp/SMS needs a development build (not Expo Go); add after the 18:00 sync.
+// Check tab: paste (or share) a message, then check it. Settings are behind the gear, top right.
+// Share-in from WhatsApp/SMS and the home screen widget also land on the Result (APK only).
 
-import { router } from 'expo-router';
-import { useRef, useState, type ComponentRef } from 'react';
-import { ScrollView, StyleSheet, Switch, TextInput, View } from 'react-native';
-
-import Shield from '../../modules/fraudlens-shield';
+import Ionicons from '@expo/vector-icons/Ionicons';
+import * as Clipboard from 'expo-clipboard';
+import { router, useFocusEffect } from 'expo-router';
+import { useCallback, useEffect, useRef, useState, type ComponentRef } from 'react';
+import { Pressable, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
 
 import { TOUR_MESSAGE, TourTip } from '@/components/tour';
-import { Button, Card, Chip, Label, Screen, Section, Status } from '@/components/ui';
+import { Button, Chip, Label, Screen, Section } from '@/components/ui';
 import { findingTitle, t, type Language } from '@/constants/strings';
 import { FontSize, LevelColors, Radius, Spacing } from '@/constants/theme';
 import { useLook } from '@/hooks/use-look';
 import { useTheme } from '@/hooks/use-theme';
+import { takeNotice } from '@/lib/notice';
 import { useStore } from '@/lib/store';
 
 export default function ScanScreen() {
   const theme = useTheme();
-  const { runCheck, language, setLanguage, shieldOn, setShieldOn, granny, setGranny, serverUrl, setServerUrl, tourStep, setTourStep } = useStore();
+  const { runCheck, language, setLanguage, tourStep, setTourStep } = useStore();
   const { scale } = useLook();
   const [text, setText] = useState('');
   const [error, setError] = useState('');
   const scrollRef = useRef<ComponentRef<typeof ScrollView>>(null);
   const [inputY, setInputY] = useState(0);
+
+  // A note left by another screen (e.g. the widget found nothing copied).
+  useFocusEffect(
+    useCallback(() => {
+      const notice = takeNotice();
+      if (notice) setError(t(notice));
+    }, []),
+  );
+
+  // "Show the tour again" (Settings): start from an empty box.
+  useEffect(() => {
+    if (tourStep === 0) {
+      setText('');
+      setError('');
+      scrollRef.current?.scrollTo({ y: 0, animated: true });
+    }
+  }, [tourStep]);
+
+  /** Fills the box with what was copied in WhatsApp or SMS. The user still taps Check. */
+  async function paste() {
+    const copied = (await Clipboard.getStringAsync().catch(() => '')).trim();
+    if (copied === '') {
+      setError(t('clipboardEmpty'));
+      return;
+    }
+    setText(copied);
+    setError('');
+  }
 
   function check() {
     if (text.trim() === '') {
@@ -86,6 +115,14 @@ export default function ScanScreen() {
             },
           ]}
         />
+        {/* One tap instead of long-press → Paste in the box. */}
+        <Pressable
+          accessibilityRole="button"
+          onPress={paste}
+          style={({ pressed }) => [styles.paste, { borderColor: theme.border, opacity: pressed ? 0.7 : 1 }]}>
+          <Ionicons name="clipboard-outline" size={18 * scale} color={theme.primary} />
+          <Text style={{ color: theme.primary, fontSize: FontSize.small * scale, fontWeight: '600' }}>{t('pasteButton')}</Text>
+        </Pressable>
         {/* The error sits under its box and is read out by screen readers. */}
         {error !== '' && (
           <View accessibilityLiveRegion="polite">
@@ -99,73 +136,16 @@ export default function ScanScreen() {
         <Button title={t('scanButton')} onPress={check} />
       </View>
 
-      {/* Look things up without a message. */}
+      {/* Before paying: the other lookups are in the tabs below. */}
       <Section>
-        {/* Look up an agency or bank (e.g. a name heard from a friend). */}
-        <Button kind="secondary" title={t('scanNumbersButton')} onPress={() => router.push('/numbers')} />
-        {/* Online extras: check a payment before making it, and short lessons with a quiz. */}
         <Button kind="secondary" title={t('payTitle')} onPress={() => router.push('/pay')} />
-        <Button kind="secondary" title={t('learnTitle')} onPress={() => router.push('/learn')} />
-        <View style={granny ? styles.column : styles.row}>
-          <View style={granny ? undefined : styles.half}>
-            <Button kind="secondary" title={t('openHistory')} onPress={() => router.push('/history')} />
-          </View>
-          <View style={granny ? undefined : styles.half}>
-            <Button kind="secondary" title={t('openSources')} onPress={() => router.push('/sources')} />
-          </View>
-        </View>
+        <Pressable accessibilityRole="link" onPress={() => router.push('/sources')} style={styles.sourcesLink}>
+          <Ionicons name="document-text-outline" size={16 * scale} color={theme.textSecondary} />
+          <Text style={{ color: theme.textSecondary, fontSize: FontSize.small * scale, textDecorationLine: 'underline' }}>
+            {t('openSources')}
+          </Text>
+        </Pressable>
       </Section>
-
-      {/* Settings: Granny mode for everyone; Shield in the Android APK only (no native part in Expo Go or on the web). */}
-      <Card>
-        <Label variant="label">{t('settingsTitle')}</Label>
-        <View style={styles.switchRow}>
-          <View style={styles.half}>
-            <Label>{t('grannyMode')}</Label>
-          </View>
-          <Switch value={granny} accessibilityLabel={t('grannyMode')} onValueChange={setGranny} />
-        </View>
-        {Shield && (
-          <>
-            <View style={styles.switchRow}>
-              <View style={styles.half}>
-                <Label>{t('shieldSwitch')}</Label>
-              </View>
-              <Switch
-                value={shieldOn}
-                accessibilityLabel={t('shieldSwitch')}
-                onValueChange={(on) => (on ? router.push('/shield') : setShieldOn(false))}
-              />
-            </View>
-            <Label variant="small">{t('shieldSwitchHint')}</Label>
-            {shieldOn && Shield.isAccessEnabled() && <Status>{t('shieldOnStatus')}</Status>}
-            {shieldOn && !Shield.isAccessEnabled() && (
-              <Button kind="secondary" title={t('shieldNeedsAccess')} onPress={() => router.push('/shield')} />
-            )}
-          </>
-        )}
-        <Button
-          kind="secondary"
-          title={t('tourAgain')}
-          onPress={() => {
-            setText('');
-            setTourStep(0);
-            scrollRef.current?.scrollTo({ y: 0, animated: true });
-          }}
-        />
-        {/* Where the online checks go (our server). Saved when the keyboard closes. */}
-        <Label variant="small">{t('serverLabel')}</Label>
-        <TextInput
-          defaultValue={serverUrl}
-          key={serverUrl}
-          onEndEditing={(e) => setServerUrl(e.nativeEvent.text)}
-          autoCapitalize="none"
-          autoCorrect={false}
-          keyboardType="url"
-          accessibilityLabel={t('serverLabel')}
-          style={[styles.server, { color: theme.text, backgroundColor: theme.background, borderColor: theme.border }]}
-        />
-      </Card>
     </Screen>
   );
 }
@@ -186,10 +166,16 @@ const styles = StyleSheet.create({
     padding: Spacing.three,
     fontSize: FontSize.body,
   },
-  row: { flexDirection: 'row', gap: Spacing.two },
-  half: { flex: 1 },
-  server: { borderWidth: 1, borderRadius: Radius, padding: Spacing.two, fontSize: FontSize.small, minHeight: 48 },
-  column: { gap: Spacing.two },
   field: { gap: Spacing.two },
-  switchRow: { flexDirection: 'row', alignItems: 'center', gap: Spacing.two },
+  paste: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    alignSelf: 'flex-start',
+    gap: Spacing.two,
+    minHeight: 44,
+    paddingHorizontal: Spacing.three,
+    borderWidth: 1,
+    borderRadius: 999,
+  },
+  sourcesLink: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: Spacing.one, minHeight: 44 },
 });

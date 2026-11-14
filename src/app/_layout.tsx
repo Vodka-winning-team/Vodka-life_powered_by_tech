@@ -10,6 +10,11 @@ import { t } from '@/constants/strings';
 import { Colors } from '@/constants/theme';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { StoreProvider, useStore } from '@/lib/store';
+import { WidgetSync } from '@/widget/widget-sync';
+
+// A link that opens a screen directly (the widget, a Shield alert) still has the tabs underneath,
+// so Back always returns to the app instead of closing it.
+export const unstable_settings = { anchor: '(tabs)' };
 
 type ThemeColors = (typeof Colors)['light'] | (typeof Colors)['dark'];
 
@@ -28,6 +33,7 @@ export default function RootLayout() {
           <AppStack colors={colors} />
           <ShareIn />
           <ShieldWatcher />
+          <WidgetSync />
         </StoreProvider>
       </ThemeProvider>
     </ShareIntentProvider>
@@ -45,16 +51,18 @@ function AppStack({ colors }: { colors: ThemeColors }) {
         headerShadowVisible: false,
         contentStyle: { backgroundColor: colors.background },
       }}>
-      <Stack.Screen name="index" options={{ title: t('appName', language) }} />
+      {/* The 4 tabs (Check, Is it official?, Learn, History) have their own headers. */}
+      <Stack.Screen name="(tabs)" options={{ headerShown: false, title: t('appName', language) }} />
+      {/* The key flow and the other screens open on top of the tabs. */}
       <Stack.Screen name="result" options={{ title: t('resultTitle', language) }} />
       <Stack.Screen name="job" options={{ title: t('jobTitle', language) }} />
       <Stack.Screen name="actions" options={{ title: t('actionsTitle', language) }} />
-      <Stack.Screen name="history" options={{ title: t('historyTitle', language) }} />
       <Stack.Screen name="sources" options={{ title: t('sourcesTitle', language) }} />
       <Stack.Screen name="shield" options={{ title: t('shieldSetupTitle', language) }} />
-      <Stack.Screen name="numbers" options={{ title: t('numbersTitle', language) }} />
-      <Stack.Screen name="learn" options={{ title: t('learnTitle', language) }} />
       <Stack.Screen name="pay" options={{ title: t('payTitle', language) }} />
+      <Stack.Screen name="settings" options={{ title: t('settingsTitle', language) }} />
+      {/* Opened by the home screen widget: checks the copied message, then shows the Result. */}
+      <Stack.Screen name="check" options={{ headerShown: false, animation: 'fade' }} />
     </Stack>
   );
 }
