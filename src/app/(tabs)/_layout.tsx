@@ -11,6 +11,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { t } from '@/constants/strings';
 import { FontSize, Spacing } from '@/constants/theme';
 import { useLook } from '@/hooks/use-look';
+import { setNight, useNight } from '@/lib/night';
 import { goToTop } from '@/lib/tab-top';
 import { useTheme } from '@/hooks/use-theme';
 import { useStore } from '@/lib/store';
@@ -28,6 +29,7 @@ export default function TabsLayout() {
   const theme = useTheme();
   const { language } = useStore(); // titles are re-read when the language changes
   const { granny, scale } = useLook();
+  const night = useNight();
   // Space taken by Android's navigation buttons at the bottom of the screen (0 on phones without them).
   const insets = useSafeAreaInsets();
 
@@ -67,6 +69,18 @@ export default function TabsLayout() {
           tabBarLabel: t('tabCheck', language),
           tabBarIcon: tabIcon('shield-checkmark-outline', 'shield-checkmark'),
           // Settings (Granny mode, automatic checking, tour) behind a gear, top right.
+          // Night mode in one tap: a moon (go dark) or a sun (go light), top left.
+          headerLeft: () => (
+            <Pressable
+              accessibilityRole="button"
+              accessibilityLabel={t('nightMode', language)}
+              accessibilityState={{ selected: night }}
+              hitSlop={12}
+              onPress={() => setNight(!night)}
+              style={({ pressed }) => ({ paddingHorizontal: Spacing.three, opacity: pressed ? 0.6 : 1 })}>
+              <Ionicons name={night ? 'sunny-outline' : 'moon-outline'} size={FontSize.banner * scale} color={theme.onAccent} />
+            </Pressable>
+          ),
           headerRight: () => (
             <Pressable
               accessibilityRole="button"

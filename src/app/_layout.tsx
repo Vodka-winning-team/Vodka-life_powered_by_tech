@@ -2,12 +2,13 @@ import Constants from 'expo-constants';
 import { DarkTheme, DefaultTheme, Stack, ThemeProvider } from 'expo-router';
 import { ShareIntentProvider } from 'expo-share-intent';
 import { Platform } from 'react-native';
+import { useFonts } from 'expo-font';
 import { StatusBar } from 'expo-status-bar';
 
 import { ShareIn } from '@/components/share-in';
 import { ShieldWatcher } from '@/components/shield-watcher';
 import { t } from '@/constants/strings';
-import { Colors } from '@/constants/theme';
+import { Colors, Fonts } from '@/constants/theme';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { StoreProvider, useStore } from '@/lib/store';
 import { WidgetSync } from '@/widget/widget-sync';
@@ -23,6 +24,8 @@ const shareInDisabled = Platform.OS === 'web' || Constants.executionEnvironment 
 
 export default function RootLayout() {
   const scheme = useColorScheme() === 'dark' ? 'dark' : 'light';
+  // The heading font. Text shows in the phone's font for a moment until it is ready.
+  useFonts(Fonts);
   const colors = Colors[scheme];
 
   return (
@@ -61,6 +64,7 @@ function AppStack({ colors }: { colors: ThemeColors }) {
       <Stack.Screen name="shield" options={{ title: t('shieldSetupTitle', language) }} />
       <Stack.Screen name="pay" options={{ title: t('payTitle', language) }} />
       <Stack.Screen name="qr" options={{ title: t('qrTitle', language) }} />
+      <Stack.Screen name="welcome" options={{ title: t('appName', language), headerBackVisible: false }} />
       <Stack.Screen name="settings" options={{ title: t('settingsTitle', language) }} />
       {/* Opened by the home screen widget: checks the copied message, then shows the Result. */}
       <Stack.Screen name="check" options={{ headerShown: false, animation: 'fade' }} />

@@ -36,6 +36,9 @@ type Store = {
   /** Granny mode: bigger text and buttons, strong contrast, simpler Result (display only). */
   granny: boolean;
   setGranny: (on: boolean) => void;
+  /** True until the user has seen the welcome page (first launch). */
+  welcomeDue: boolean;
+  finishWelcome: () => void;
   /** Online checks on or off. Off = fully offline: nothing is sent, every check runs on the phone. */
   online: boolean;
   setOnline: (on: boolean) => void;
@@ -54,6 +57,7 @@ const SHIELD_KEY = 'shield-v1';
 const GRANNY_KEY = 'granny-v1';
 const SERVER_KEY = 'server-v1';
 const ONLINE_KEY = 'online-v1';
+const WELCOME_KEY = 'welcome-v1';
 const TOUR_KEY = 'tour-v1';
 const StoreContext = createContext<Store | null>(null);
 
@@ -65,6 +69,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   const [granny, setGrannyState] = useState(false);
   const [serverUrl, setServerUrlState] = useState(DEFAULT_SERVER);
   const [online, setOnlineState] = useState(true);
+  const [welcomeDue, setWelcomeDue] = useState(false);
   const [tourStep, setTourStepState] = useState<number | null>(null);
 
   // Load saved history once, when the app starts.
@@ -89,6 +94,9 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     AsyncStorage.getItem(TOUR_KEY)
       .then((saved) => { if (saved !== 'done') setTourStepState(0); })
       .catch(() => {});
+    AsyncStorage.getItem(WELCOME_KEY)
+      .then((saved) => setWelcomeDue(saved !== 'done'))
+      .catch(() => {});
     AsyncStorage.getItem(ONLINE_KEY)
       .then((saved) => setOnlineState(saved !== 'off'))
       .catch(() => {});
@@ -100,6 +108,11 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   function setTourStep(step: number | null) {
     setTourStepState(step);
     if (step === null) AsyncStorage.setItem(TOUR_KEY, 'done').catch(() => {});
+  }
+
+  function finishWelcome() {
+    setWelcomeDue(false);
+    AsyncStorage.setItem(WELCOME_KEY, 'done').catch(() => {});
   }
 
   function setOnline(on: boolean) {
@@ -190,6 +203,8 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     setShieldOn,
     granny,
     setGranny,
+    welcomeDue,
+    finishWelcome,
     online,
     setOnline,
     serverUrl,

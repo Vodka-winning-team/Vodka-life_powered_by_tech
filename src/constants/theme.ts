@@ -1,7 +1,5 @@
 // ALL colours and sizes live here, so a surprise-card change (bigger text, high contrast...) is one edit.
 
-import { Platform } from 'react-native';
-
 import type { Level } from '@/engine';
 
 /**
@@ -86,8 +84,13 @@ export const CardShadow = {
 } as const;
 export const MaxContentWidth = 720;
 
-/** Condensed heavy face for headings (Roboto Condensed on Android; the normal face elsewhere). */
-export const HeadingFont = Platform.OS === 'android' ? 'sans-serif-condensed' : undefined;
+/** Heading font: Oswald Bold (loaded in src/app/_layout.tsx from assets/fonts). */
+export const HeadingFont = 'Oswald-Bold';
+/** The font files, by the names used in styles. */
+export const Fonts = {
+  'Oswald-Bold': require('../../assets/fonts/Oswald-Bold.ttf'),
+  'Oswald-SemiBold': require('../../assets/fonts/Oswald-SemiBold.ttf'),
+};
 
 /** Page margin. Full-width bands use the same number, negative, to reach the screen edges. */
 export const PageMargin = 24;

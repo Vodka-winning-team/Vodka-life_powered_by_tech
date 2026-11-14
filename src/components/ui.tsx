@@ -157,10 +157,11 @@ export function Button({
   const [size] = useState(() => new Animated.Value(1));
   function ease(to: number) {
     if (reduce) return; // "Remove animations" is on: the button only dims
-    Animated.timing(size, { toValue: to, duration: 100, easing: Easing.out(Easing.quad), useNativeDriver: true }).start();
+    // In: quick (90 ms). Out: a touch slower (180 ms), so the button settles instead of snapping back.
+    Animated.timing(size, { toValue: to, duration: to < 1 ? 90 : 180, easing: Easing.out(Easing.cubic), useNativeDriver: true }).start();
   }
   return (
-    <Pressable accessibilityRole="button" onPress={press} onPressIn={() => ease(0.97)} onPressOut={() => ease(1)}>
+    <Pressable accessibilityRole="button" onPress={press} onPressIn={() => ease(0.96)} onPressOut={() => ease(1)}>
       {({ pressed }) => (
         <Animated.View
           style={[
@@ -179,7 +180,7 @@ export function Button({
               textStyles.label,
               sized(textStyles.label, scale),
               { color: primary ? theme.onPrimary : theme.primary, flexShrink: 1 },
-              primary ? { fontFamily: HeadingFont, fontWeight: '800', letterSpacing: 0.3 } : { textAlign: 'center' },
+              primary ? { fontFamily: HeadingFont, fontWeight: 'normal', letterSpacing: 0.3 } : { textAlign: 'center' },
             ]}>
             {title}
           </Text>
@@ -299,10 +300,10 @@ export function Chip({ title, selected, onPress }: { title: string; selected: bo
 }
 
 const textStyles = StyleSheet.create({
-  title: { fontSize: FontSize.title, fontWeight: '900', lineHeight: FontSize.title * 1.0, letterSpacing: -0.5, fontFamily: HeadingFont, textTransform: 'uppercase' },
-  overline: { fontSize: FontSize.overline, lineHeight: FontSize.overline * 1.4, fontWeight: '800', letterSpacing: 1.5, fontFamily: HeadingFont },
-  poster: { fontSize: FontSize.poster, fontWeight: '900', letterSpacing: -1, fontFamily: HeadingFont },
-  number: { fontSize: 30, lineHeight: 34, fontWeight: '900', fontFamily: HeadingFont },
+  title: { fontSize: FontSize.title, fontWeight: 'normal', lineHeight: FontSize.title * 1.0, letterSpacing: -0.5, fontFamily: HeadingFont, textTransform: 'uppercase' },
+  overline: { fontSize: FontSize.overline, lineHeight: FontSize.overline * 1.4, fontWeight: 'normal', letterSpacing: 1.5, fontFamily: HeadingFont },
+  poster: { fontSize: FontSize.poster, fontWeight: 'normal', letterSpacing: -1, fontFamily: HeadingFont },
+  number: { fontSize: 30, lineHeight: 34, fontWeight: 'normal', fontFamily: HeadingFont },
   body: { fontSize: FontSize.body, lineHeight: FontSize.body * 1.45 },
   small: { fontSize: FontSize.small, lineHeight: FontSize.small * 1.4 },
   tag: { fontSize: FontSize.small, lineHeight: FontSize.small * 1.4, fontWeight: '700' },

@@ -7,6 +7,8 @@ import { router, useFocusEffect } from 'expo-router';
 import { useCallback, useEffect, useRef, useState, type ComponentRef } from 'react';
 import { Pressable, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
 
+import { ExpoSpeechRecognitionModule, useSpeechRecognitionEvent } from 'expo-speech-recognition';
+
 import { ScanOverlay } from '@/components/motion';
 import { TOUR_MESSAGE, TourTip } from '@/components/tour';
 import { Button, Screen, Section, Warning } from '@/components/ui';
@@ -22,7 +24,7 @@ import { useStore } from '@/lib/store';
 
 export default function ScanScreen() {
   const theme = useTheme();
-  const { runCheck, language, setLanguage, tourStep, setTourStep } = useStore();
+  const { runCheck, language, setLanguage, tourStep, setTourStep, welcomeDue } = useStore();
   const { scale, granny } = useLook();
   const [text, setText] = useState('');
   const [error, setError] = useState('');
@@ -32,6 +34,35 @@ export default function ScanScreen() {
   const [scanning, setScanning] = useState(false);
   const finishScan = useRef<() => void>(() => {});
   const reduceMotion = useReduceMotion();
+  // Speech-to-text (Granny mode): say the message instead of typing it.
+  const [listening, setListening] = useState(false);
+  useSpeechRecognitionEvent('start', () => setListening(true));
+  useSpeechRecognitionEvent('end', () => setListening(false));
+  useSpeechRecognitionEvent('error', () => setListening(false));
+  useSpeechRecognitionEvent('result', (event) => {
+    const heard = event.results[0]?.transcript ?? '';
+    if (heard !== '') setText(heard);
+  });
+
+  async function speakMessage() {
+    if (listening) {
+      ExpoSpeechRecognitionModule.stop();
+      return;
+    }
+    const permission = await ExpoSpeechRecognitionModule.requestPermissionsAsync();
+    if (!permission.granted) {
+      setError(t('sttNeedsMic'));
+      return;
+    }
+    setError('');
+    // English or French voice; Kreol is heard with the French one (the closest the phone has).
+    ExpoSpeechRecognitionModule.start({ lang: language === 'en' ? 'en-GB' : 'fr-FR', interimResults: true, continuous: false });
+  }
+
+  // First launch: show the welcome page (language, night mode, Granny mode, online checks) once.
+  useEffect(() => {
+    if (welcomeDue) router.push('/welcome');
+  }, [welcomeDue]);
 
   // A note left by another screen (e.g. the widget found nothing copied).
   useFocusEffect(
@@ -162,6 +193,8 @@ export default function ScanScreen() {
           <Ionicons name="clipboard-outline" size={18 * scale} color={theme.primary} />
           <Text style={{ color: theme.primary, fontSize: FontSize.small * scale, fontWeight: '600' }}>{t('pasteButton')}</Text>
         </Pressable>
+        {/* Granny mode: say the message out loud instead of typing it. */}
+        {granny && <Button kind="secondary" title={listening ? t('sttStop') : t('sttSpeak')} onPress={speakMessage} />}
         {/* The error sits under its box and is read out by screen readers. */}
         {error !== '' && <Warning title={t('notMessageTitle')}>{error}</Warning>}
         {/* Tour: the user taps the real button, so this tip has no "Next". */}
@@ -200,8 +233,8 @@ const styles = StyleSheet.create({
   // The band reaches the screen edges and the top of the page (under the yellow header).
   band: { marginHorizontal: -PageMargin, marginTop: -PageMargin, paddingHorizontal: PageMargin, paddingBottom: 22, gap: 8 },
   bandTop: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
-  bandTag: { flex: 1, fontFamily: HeadingFont, fontWeight: '700', fontSize: 13, letterSpacing: 2 },
-  bandName: { fontFamily: HeadingFont, fontWeight: '900', fontSize: 84, lineHeight: 84, letterSpacing: -1 },
+  bandTag: { flex: 1, fontFamily: HeadingFont, fontWeight: 'normal', fontSize: 13, letterSpacing: 2 },
+  bandName: { fontFamily: HeadingFont, fontWeight: 'normal', fontSize: 84, lineHeight: 84, letterSpacing: -1 },
   input: {
     minHeight: 160,
     borderWidth: 2,

@@ -13,7 +13,7 @@ type LearnContent = { lessons: Lesson[]; quiz: QuizQuestion[] };
 const bundled: Record<string, LearnContent> = require('@/constants/learn-content.json');
 
 export default function LearnScreen() {
-  const { serverUrl, language } = useStore();
+  const { serverUrl, language, online } = useStore();
   const [lessons, setLessons] = useState<Lesson[] | null>(null);
   const [quiz, setQuiz] = useState<QuizQuestion[] | null>(null);
   // Quiz progress: which question, the option picked for it (null = not answered yet), and the score.
@@ -23,7 +23,9 @@ export default function LearnScreen() {
 
   useEffect(() => {
     let cancelled = false;
-    Promise.all([getOnline<Lesson[]>(serverUrl, `/learn/tactics?lang=${language}`), getOnline<QuizQuestion[]>(serverUrl, `/learn/quiz?lang=${language}`)]).then(
+    // Offline mode: never ask the server, use the lessons bundled in the app.
+    const ask = <T,>(path: string) => (online ? getOnline<T>(serverUrl, path) : Promise.resolve(null));
+    Promise.all([ask<Lesson[]>(`/learn/tactics?lang=${language}`), ask<QuizQuestion[]>(`/learn/quiz?lang=${language}`)]).then(
       ([newLessons, newQuiz]) => {
         if (cancelled) return;
         // Offline (or server down): use the lessons bundled in the app, so this tab always works.
@@ -36,7 +38,7 @@ export default function LearnScreen() {
     return () => {
       cancelled = true;
     };
-  }, [serverUrl, language]);
+  }, [serverUrl, language, online]);
 
   if (lessons === null || quiz === null) {
     return (

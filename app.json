@@ -74,6 +74,16 @@
           "cameraPermission": "Verifye uses the camera to read a QR code and check its link before it opens.",
           "recordAudioAndroid": false
         }
+      ],
+      [
+        "expo-speech-recognition",
+        {
+          "microphonePermission": "Verifye uses the microphone so you can say a message instead of typing it.",
+          "speechRecognitionPermission": "Verifye turns what you say into text so it can be checked.",
+          "androidSpeechServicePackages": [
+            "com.google.android.googlequicksearchbox"
+          ]
+        }
       ]
     ],
     "experiments": {
