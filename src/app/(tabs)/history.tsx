@@ -5,6 +5,7 @@ import { Pressable } from 'react-native';
 
 import { Button, Card, Label, LevelTag, Screen } from '@/components/ui';
 import { t } from '@/constants/strings';
+import { shownLevel } from '@/lib/level';
 import { useStore, type Check } from '@/lib/store';
 import { localDateTime } from '@/lib/time';
 
@@ -22,7 +23,7 @@ export default function HistoryScreen() {
       {history.map((check) => (
         <Pressable key={check.id} accessibilityRole="button" onPress={() => open(check)}>
           <Card>
-            <LevelTag level={check.result.level} />
+            <LevelTag level={shownLevel(check)} />
             <Label numberOfLines={2}>{check.text}</Label>
             <Label variant="small">{localDateTime(check.savedAt)}</Label>
           </Card>

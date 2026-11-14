@@ -95,6 +95,7 @@ export default function SettingsScreen() {
           accessibilityLabel={t('serverLabel')}
           style={[styles.server, { color: theme.text, backgroundColor: theme.background, borderColor: theme.border }]}
         />
+        <Label variant="small">{t('serverHint')}</Label>
       </Card>
     </Screen>
   );

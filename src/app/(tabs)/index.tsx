@@ -38,7 +38,11 @@ export default function ScanScreen() {
   const [listening, setListening] = useState(false);
   useSpeechRecognitionEvent('start', () => setListening(true));
   useSpeechRecognitionEvent('end', () => setListening(false));
-  useSpeechRecognitionEvent('error', () => setListening(false));
+  useSpeechRecognitionEvent('error', () => {
+    // The phone could not hear or has no voice model for this language: say so instead of failing silently.
+    setListening(false);
+    setError(t('sttFailed'));
+  });
   useSpeechRecognitionEvent('result', (event) => {
     const heard = event.results[0]?.transcript ?? '';
     if (heard !== '') setText(heard);

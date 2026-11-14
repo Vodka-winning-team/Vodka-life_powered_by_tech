@@ -21,7 +21,8 @@ export type OnlineResult = {
   category_label: string;
   tactics: OnlineTactic[];
   /** `checked`: the live services that answered (safe_browsing, urlhaus, rdap, short_links, ipqs). */
-  intel: { findings: OnlineIntelFinding[]; blocklisted: boolean; checked?: string[] };
+  /** `skipped`: the live services that did not answer in time (so the check is not complete). */
+  intel: { findings: OnlineIntelFinding[]; blocklisted: boolean; checked?: string[]; skipped?: string[] };
   verification: { community_reports: number };
 };
 

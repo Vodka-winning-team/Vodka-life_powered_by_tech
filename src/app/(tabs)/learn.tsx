@@ -43,7 +43,7 @@ export default function LearnScreen() {
   if (lessons === null || quiz === null) {
     return (
       <Screen>
-        <Label>{t('onlineLoading')}</Label>
+        <Label>{t('onlineLoading', language)}</Label>
       </Screen>
     );
   }
@@ -70,13 +70,13 @@ export default function LearnScreen() {
 
   return (
     <Screen>
-      <Section title={t('quizTitle')}>
+      <Section title={t('quizTitle', language)}>
         {finished ? (
           <Card>
             <Status>
-              {t('quizScore')}: {score}/{quiz.length}
+              {t('quizScore', language)}: {score}/{quiz.length}
             </Status>
-            <Button kind="secondary" title={t('quizAgain')} onPress={restart} />
+            <Button kind="secondary" title={t('quizAgain', language)} onPress={restart} />
           </Card>
         ) : (
           <Card>
@@ -95,16 +95,16 @@ export default function LearnScreen() {
             ))}
             {picked !== null && (
               <>
-                <Status>{picked === question.answer ? t('quizRight') : t('quizWrong')}</Status>
+                <Status>{picked === question.answer ? t('quizRight', language) : t('quizWrong', language)}</Status>
                 <Label>{question.explanation}</Label>
-                <Button title={t('quizNext')} onPress={next} />
+                <Button title={t('quizNext', language)} onPress={next} />
               </>
             )}
           </Card>
         )}
       </Section>
 
-      <Section title={t('learnTricksTitle')}>
+      <Section title={t('learnTricksTitle', language)}>
         {lessons.map((lesson) => (
           <Card key={lesson.id}>
             <Label variant="label">{lesson.label}</Label>

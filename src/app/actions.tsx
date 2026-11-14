@@ -51,7 +51,8 @@ export default function ActionsScreen() {
   return (
     <Screen>
       <Section number={1} title={t('actionsCall')}>
-        <Label variant="small">{t('actionsCallHint')}</Label>
+        {/* The hint only makes sense when there is a number to call. */}
+        {groups.length > 0 && <Label variant="small">{t('actionsCallHint')}</Label>}
         {groups.length === 0 && <Label>{t('actionsNoContacts')}</Label>}
         {groups.map((g) => (
           <Card key={g.key}>

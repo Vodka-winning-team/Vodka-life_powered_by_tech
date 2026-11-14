@@ -52,6 +52,27 @@ export function onlineCategory(category: string, summary: string, language: Lang
   return { label: known.label[language], summary: known.summary[language] };
 }
 
+/** The server's English titles for live findings, and the warning sign (TACTICS id) each one matches. */
+const FINDING_TACTIC: Record<string, string> = {
+  "Website address isn't registered": 'unregistered_website',
+  'Very new website': 'new_website',
+  'Short link hides the real address': 'hidden_link',
+  'Listed as a dangerous website': 'blocklisted_link',
+  'Listed for spreading malware': 'blocklisted_link',
+  'Phone number with recent abuse reports': 'abused_number',
+  'Internet phone number': 'voip_number',
+};
+
+/**
+ * One live finding as a line of text. English: the title and the server's explanation.
+ * French and Kreol: the translated title only (the explanation exists in English only).
+ */
+export function onlineFindingText(title: string, detail: string, language: Language): string {
+  if (language === 'en') return `${title}: ${detail}`;
+  const id = FINDING_TACTIC[title];
+  return (id && TACTICS[id]?.[language]) || title;
+}
+
 /** The live services our server asks, by the id it reports. Product names stay as they are. */
 const SERVICES: Record<string, Record<Language, string>> = {
   safe_browsing: { en: 'Google Safe Browsing', fr: 'Google Safe Browsing', mfe: 'Google Safe Browsing' },

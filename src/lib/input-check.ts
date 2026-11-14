@@ -22,6 +22,11 @@ function isWord(token: string): boolean {
   return !/[^aeiouyàâäéèêëîïôöùûü'’-]{5,}/i.test(word);
 }
 
+/** True when the text has a web link: with http or www, or a bare address with a known ending (mcb-login.net). */
+export function hasLink(text: string): boolean {
+  return /(https?:\/\/|www\.)\S+/i.test(text) || WEB_ENDING.test(text);
+}
+
 /** True when the text is worth checking: 2 or more different real words, or a link, or a phone number. */
 export function looksLikeMessage(text: string): boolean {
   const clean = text.trim();

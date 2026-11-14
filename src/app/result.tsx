@@ -16,14 +16,16 @@ import { useOnlineCheck } from '@/hooks/use-online-check';
 import { useTheme } from '@/hooks/use-theme';
 import { dialNumber, formatPhone } from '@/lib/phone';
 import { sources } from '@/lib/data';
-import { isFromQr, takeFresh } from '@/lib/once';
+import { hasLink as textHasLink } from '@/lib/input-check';
+import { needsQrCaution, strongest } from '@/lib/level';
+import { takeFresh } from '@/lib/once';
 import { speak, speechFor, stopSpeaking } from '@/lib/speak';
 import { useStore } from '@/lib/store';
 import { prettyDay } from '@/lib/time';
 
 export default function ResultScreen() {
   const theme = useTheme();
-  const { current, saveCurrent, addToCase, serverUrl, online: onlineMode, language } = useStore();
+  const { current, saveCurrent, addToCase, serverUrl, online: onlineMode, language, noteOnlineLevel } = useStore();
   const { granny, scale } = useLook();
   const [newText, setNewText] = useState('');
   const [reading, setReading] = useState(false);
@@ -31,6 +33,13 @@ export default function ResultScreen() {
   const [stampedId] = useState(() => (takeFresh(current?.id) ? current?.id : undefined));
   const play = current !== null && stampedId === current.id;
   const online = useOnlineCheck(current?.text ?? '');
+  // Remember the online answer with the case, so History shows the same level later.
+  const onlineAnswer = typeof online === 'object' ? (online.risk_level === 'high' ? 'STOP' : online.risk_level === 'medium' ? 'CAREFUL' : 'NONE') : null;
+  useEffect(() => {
+    if (onlineAnswer) noteOnlineLevel(onlineAnswer);
+    // Only when the answer changes.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [onlineAnswer]);
 
   // Stop reading aloud when leaving the screen.
   useEffect(() => stopSpeaking, []);
@@ -60,14 +69,19 @@ export default function ResultScreen() {
   }
   const highlights = result.findings.flatMap((f) => f.highlights);
   // The banner shows the stronger of the two answers: the checks on the phone, or the server's score.
-  const onlineLevel = typeof online === 'object' ? (online.risk_level === 'high' ? 'STOP' : online.risk_level === 'medium' ? 'CAREFUL' : 'NONE') : 'NONE';
-  const found = result.level === 'STOP' || onlineLevel === 'STOP' ? 'STOP' : result.level === 'CAREFUL' || onlineLevel === 'CAREFUL' ? 'CAREFUL' : 'NONE';
+  // The level: the strongest of the phone's checks and the online answer (live, or remembered with the case).
+  const found = strongest(result.level, onlineAnswer ?? current.onlineLevel ?? 'NONE');
   // A link from a QR code: our lists only know links that were already reported, so "nothing found"
-  // is not good news. The result is at least "Be careful".
-  const qrCaution = isFromQr(current.id) && found === 'NONE';
+  // is not good news. The result is at least "Be careful". (Plain text in a QR code gets no such note.)
+  const qrCaution = needsQrCaution(current, found);
   const level = qrCaution ? 'CAREFUL' : found;
   // Wait for the live answer before showing a level for a link (it can turn a quiet result into Stop).
-  const hasLink = /(https?:\/\/|www\.)\S+/i.test(text);
+  const hasLink = textHasLink(text);
+  // Is this about a job? (a job or agency finding, an earlier Job check, or job words in the message)
+  const aboutJob =
+    current.job !== null ||
+    result.findings.some((f) => /job|agency|fee/i.test(f.kind)) ||
+    /\b(job|jobs|work|recruit\w*|agency|salary|visa|emploi|travail|recrutement|agence|salaire|travay|lazans|rekritman|saler)\b/i.test(text);
   const checking = hasLink && online === 'loading';
   // The live services that answered for this message (shown under "Checked against").
   const live = typeof online === 'object' ? liveServices(online.intel?.checked, language) : '';
@@ -96,19 +110,22 @@ export default function ResultScreen() {
       <TourTip step={5}>{t('tourRead')}</TourTip>
 
       {/* Read aloud: level, plain sentence, each finding, official numbers (EN/FR voices; Kreol uses French). */}
-      <Button
-        kind="secondary"
-        title={reading ? t('stopReading') : t('readAloud')}
-        onPress={() => {
-          if (reading) {
-            stopSpeaking();
-            setReading(false);
-          } else {
-            setReading(true);
-            speak(speechFor(result, level), () => setReading(false), onlineMode ? serverUrl : '');
-          }
-        }}
-      />
+      {!checking && (
+        <Button
+          kind="secondary"
+          guard={300}
+          title={reading ? t('stopReading') : t('readAloud')}
+          onPress={() => {
+            if (reading) {
+              stopSpeaking();
+              setReading(false);
+            } else {
+              setReading(true);
+              speak(speechFor(result, level), () => setReading(false), onlineMode ? serverUrl : '');
+            }
+          }}
+        />
+      )}
 
       {/* Granny mode: one plain sentence, then the official number to call, first. Details stay below. */}
       {granny && (
@@ -162,7 +179,7 @@ export default function ResultScreen() {
       ))}
 
       {/* Offline mode and the message has a link: say that the link was NOT checked online. */}
-      {!onlineMode && /(https?:\/\/|www\.)\S+/i.test(text) && (
+      {!onlineMode && hasLink && (
         <Card>
           <LevelTag level="CAREFUL" label={t('onlineMode')} />
           <Label>{t('offlineLinkNote')}</Label>
@@ -191,7 +208,8 @@ export default function ResultScreen() {
         </Card>
       </Pressable>
 
-      <Button kind="secondary" title={t('resultJobButton')} onPress={() => router.push('/job')} />
+      {/* Job check: only offered when the message is about a job or an agency. */}
+      {aboutJob && <Button kind="secondary" title={t('resultJobButton')} onPress={() => router.push('/job')} />}
       <Button
         kind="secondary"
         title={current.savedAt ? t('resultSaved') : t('resultSave')}

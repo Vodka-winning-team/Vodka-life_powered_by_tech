@@ -143,15 +143,18 @@ export function Button({
   title,
   onPress,
   kind = 'primary',
+  guard = 1000,
 }: {
   title: string;
   onPress: () => void;
   kind?: 'primary' | 'secondary';
+  /** A second tap within this many milliseconds is ignored (panic-tapping). */
+  guard?: number;
 }) {
   const theme = useTheme();
   const { scale, buttonHeight } = useLook();
   const primary = kind === 'primary';
-  const press = useOneTap(onPress, 1000);
+  const press = useOneTap(onPress, guard);
   const reduce = useReduceMotion();
   // Pressed: the button eases to 97% of its size in 100 ms, and back on release, so every tap is felt.
   const [size] = useState(() => new Animated.Value(1));

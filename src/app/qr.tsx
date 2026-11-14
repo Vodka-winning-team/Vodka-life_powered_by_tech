@@ -11,7 +11,6 @@ import { t } from '@/constants/strings';
 import { RadiusCard } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 import { leaveNotice } from '@/lib/notice';
-import { markFromQr } from '@/lib/once';
 import { useStore } from '@/lib/store';
 
 export default function QrScreen() {
@@ -25,14 +24,13 @@ export default function QrScreen() {
     if (done.current) return;
     done.current = true;
     const text = data.trim();
-    const check = text === '' ? null : runCheck(text);
+    const check = text === '' ? null : runCheck(text, null, true);
     const notUsable = check?.result.findings.some((f) => f.kind === 'empty_message') ?? true;
     if (notUsable) {
       // The code holds nothing we can check (random characters): back to Check with the warning.
       leaveNotice('notMessage');
       router.dismissTo('/');
     } else {
-      if (check) markFromQr(check.id);
       router.replace('/result');
     }
   }

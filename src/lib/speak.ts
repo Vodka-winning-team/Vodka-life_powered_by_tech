@@ -30,6 +30,29 @@ export function speechFor(result: CheckResult, level: Level = result.level): str
 let player: AudioPlayer | null = null;
 /** Goes up on every speak() and stopSpeaking(), so a voice that is still loading knows it was cancelled. */
 let turn = 0;
+/** Timer that falls back to the phone's voice if the online voice never starts. */
+let startTimer: ReturnType<typeof setTimeout> | null = null;
+
+/** How long the online voice may take to start before we use the phone's voice instead. */
+const START_LIMIT_MS = 8000;
+
+function clearStartTimer() {
+  if (startTimer) {
+    clearTimeout(startTimer);
+    startTimer = null;
+  }
+}
+
+/** Reads the text with the phone's own voice (works offline). */
+function phoneVoice(text: string, onDone: () => void) {
+  Speech.speak(text, {
+    language: VOICE[getLanguage()] ?? 'en-GB',
+    rate: 0.95,
+    onDone,
+    onStopped: onDone,
+    onError: onDone,
+  });
+}
 
 /** Asks the server whether text-to-speech is set up (3 seconds at most). */
 async function onlineVoiceReady(server: string): Promise<boolean> {
@@ -57,23 +80,35 @@ export async function speak(text: string, onDone: () => void, server = '') {
   if (online) {
     const audio = createAudioPlayer({ uri: `${root}/api/v1/speech?text=${encodeURIComponent(text.slice(0, 1500))}` });
     player = audio;
+    let started = false;
     audio.addListener('playbackStatusUpdate', (status) => {
-      if (status.didJustFinish) onDone();
+      if (status.playing) started = true;
+      if (status.didJustFinish) {
+        clearStartTimer();
+        onDone();
+      }
     });
     audio.play();
+    // If the audio never starts (the voice service failed), don't stay silent: use the phone's voice.
+    startTimer = setTimeout(() => {
+      startTimer = null;
+      if (started || player !== audio || myTurn !== turn) return;
+      try {
+        audio.remove();
+      } catch {
+        // The player was already gone.
+      }
+      player = null;
+      phoneVoice(text, onDone);
+    }, START_LIMIT_MS);
     return;
   }
-  Speech.speak(text, {
-    language: VOICE[getLanguage()] ?? 'en-GB',
-    rate: 0.95,
-    onDone,
-    onStopped: onDone,
-    onError: onDone,
-  });
+  phoneVoice(text, onDone);
 }
 
 export function stopSpeaking() {
   turn += 1;
+  clearStartTimer();
   Speech.stop();
   if (player) {
     // Pause first (stops the sound at once), then free the player.

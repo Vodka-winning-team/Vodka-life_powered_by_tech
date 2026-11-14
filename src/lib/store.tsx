@@ -5,7 +5,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
 
 import { setLanguage as setStringsLanguage, type Language } from '@/constants/strings';
-import type { CheckResult, JobAnswers } from '@/engine';
+import type { CheckResult, JobAnswers, Level } from '@/engine';
 import { engine } from '@/lib/data';
 import { looksLikeMessage } from '@/lib/input-check';
 import { markFresh } from '@/lib/once';
@@ -17,12 +17,18 @@ export type Check = {
   job: JobAnswers | null;
   result: CheckResult;
   savedAt: string | null;
+  /** The online check's answer for this case, kept so History shows the same level as the Result did. */
+  onlineLevel?: Level;
+  /** True when the text was read from a QR code. */
+  fromQr?: boolean;
 };
 
 type Store = {
   current: Check | null;
   history: Check[];
-  runCheck: (text: string, job?: JobAnswers | null) => Check;
+  runCheck: (text: string, job?: JobAnswers | null, fromQr?: boolean) => Check;
+  /** Remember the online check's answer with the current case (and its saved copy). */
+  noteOnlineLevel: (level: Level) => void;
   updateCase: (text: string, job: JobAnswers | null) => void;
   addToCase: (newText: string) => void;
   openCheck: (check: Check) => void;
@@ -150,10 +156,10 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   }
 
   /** A new check from the Scan screen: always a new case. */
-  function runCheck(text: string, job: JobAnswers | null = null): Check {
+  function runCheck(text: string, job: JobAnswers | null = null, fromQr = false): Check {
     // Surprise card (wrong input): random typing is treated like an empty message, so it never gets a result.
     const result = looksLikeMessage(text) ? engine.check(text, job) : engine.check('');
-    const check: Check = { id: String(Date.now()), text, job, result, savedAt: null };
+    const check: Check = { id: String(Date.now()), text, job, result, savedAt: null, fromQr };
     markFresh(check.id);
     setCurrent(check);
     return check;
@@ -179,6 +185,13 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     updateCase(current.text + '\n\n' + newText.trim(), current.job);
   }
 
+  function noteOnlineLevel(level: Level) {
+    if (!current || current.onlineLevel === level) return;
+    const updated = { ...current, onlineLevel: level };
+    setCurrent(updated);
+    if (updated.savedAt) writeHistory(history.map((c) => (c.id === updated.id ? updated : c)));
+  }
+
   function saveCurrent() {
     if (!current) return;
     const saved = { ...current, savedAt: new Date().toISOString() };
@@ -194,6 +207,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     addToCase,
     openCheck: setCurrent,
     saveCurrent,
+    noteOnlineLevel,
     clearHistory: () => {
       writeHistory([]);
       if (current) setCurrent({ ...current, savedAt: null });
