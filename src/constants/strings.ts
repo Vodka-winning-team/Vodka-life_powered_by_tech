@@ -484,6 +484,7 @@ const findingTitles: Record<string, Record<Language, string>> = {
   agency_wrong_category: { en: "{name} is listed, but not for jobs abroad", fr: "{name} figure sur la liste, mais pas pour les emplois à l'étranger", mfe: "{name} lor lis, me pa pou travay aletranze" },
   agency_expired: { en: "{name}: licence not valid today", fr: "{name} : licence non valide aujourd'hui", mfe: "{name}: lisans pa valid zordi" },
   urgency: { en: "Pressure to act fast", fr: "Pression pour agir vite", mfe: "Pe fors ou azir vit" },
+  too_good: { en: "This offer sounds too good", fr: "Cette offre est trop belle", mfe: "Sa lofer la tro bon pou vre" },
   payment_request: { en: "Asks you to pay or send money", fr: "Vous demande de payer ou d'envoyer de l'argent", mfe: "Pe dimann ou peye ouswa avoy larzan" },
   prize_gift: { en: "Prize, gift or bonus", fr: "Prix, cadeau ou bonus", mfe: "Pri, kado ouswa bonis" },
   guaranteed_returns: { en: "Promise of guaranteed profit", fr: "Promesse de profit garanti", mfe: "Promes enn profi garanti" },
