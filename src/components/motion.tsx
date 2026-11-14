@@ -8,6 +8,7 @@
 import { useEffect, useState, type ReactNode } from 'react';
 import { Animated, Easing, Modal, Pressable, StyleSheet, Text, View } from 'react-native';
 
+import { t } from '@/constants/strings';
 import { CardShadow, FontSize, RadiusCard, Spacing } from '@/constants/theme';
 import { useLook } from '@/hooks/use-look';
 import { useReduceMotion } from '@/hooks/use-reduce-motion';
@@ -56,7 +57,7 @@ export function ScanOverlay({ visible, text, onDone }: { visible: boolean; text:
   const sweep = useState(() => new Animated.Value(0))[0];
   const [boxHeight, setBoxHeight] = useState(160);
   // The 4 official sources that tick off during the sweep.
-  const names = sources.slice(0, 4).map((s) => s.title);
+  const names = sources.slice(0, 4).map((s) => t(s.title));
 
   useEffect(() => {
     if (!visible) return;
