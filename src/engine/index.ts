@@ -176,6 +176,7 @@ export class Engine {
     findings.push(...this.phraseCheck(m, Rules.PRIZE));
     findings.push(...this.phraseCheck(m, Rules.RETURNS));
     findings.push(...this.phraseCheck(m, Rules.NEW_NUMBER));
+    findings.push(...this.tooGoodCheck(m));
     findings.push(...this.oddLinkCheck(m));
     findings.push(...this.certCheck(m));
 
@@ -539,6 +540,15 @@ export class Engine {
       });
     }
     return out;
+  }
+
+  /** "This offer sounds too good": 2+ different clues of an ad-style job offer. CAREFUL, never STOP. */
+  private tooGoodCheck(m: Message): Finding[] {
+    const clues = Rules.tooGoodClues(m.norm);
+    if (clues.length < 2) return [];
+    const highlights = clues.flat().sort((a, b) => a.start - b.start);
+    const r = Rules.TOO_GOOD;
+    return [{ kind: r.kind, level: r.level, title: r.title, detail: r.detail, highlights, source: null, vars: { clues: String(clues.length) } }];
   }
 
   private phraseCheck(m: Message, rule: Rules.PhraseRule): Finding[] {
