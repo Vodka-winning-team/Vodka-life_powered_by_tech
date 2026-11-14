@@ -161,6 +161,16 @@ Answer in **two sentences**, then stop. The person in brackets answers first; an
 20. **"What about scams by phone call?"** (Paveesh)
     That's our next step, *Arnak? Live*: a warning during a call when a bank app is opened. We cut it this weekend to finish the job check properly (decision 5).
 
+### Launch and money (full plan: [`go-to-market.md`](go-to-market.md))
+25. **"How will you roll it out?"** (Paveesh)
+    We go where the fake offers are, Facebook job groups and WhatsApp, and where job seekers are, employment offices and job fairs, with a poster and a QR code. We start with a pilot of 100 real users, because we haven't tested with outside users yet.
+26. **"How do you make money?"** (Paveesh)
+    Verifye stays free for users: no ads, no data sold. Fraud costs banks and the state real money, so they would fund it: first a sponsored pilot, then licensing our checks into banking apps. We haven't signed anyone.
+27. **"Why would a bank pay?"** (Paveesh)
+    Fake messages use banks' names, and the payment often goes out by Juice or my.t money; banks pay for that in refunds and complaints. We'd put our checks inside their own apps, right before the payment. One bank as a pilot, then a yearly licence.
+28. **"What does it cost, and what's the price?"** (Paveesh)
+    The checks cost nothing to run; the optional server is one small machine plus a few usage-priced services. We haven't set a price: we'd set it in the pilot, against what one prevented fraud case saves a bank.
+
 ### Our own work
 21. **"What did AI do, and what did you do?"** (Paveesh, then each person for their part)
     The README lists every tool, and `docs/ai-log.md` has one line per AI step with what we checked. We made the decisions, checked the data against the PDFs, wrote the test cases and tested the app on our own phones. Ask any of us to explain or change our part.

@@ -56,6 +56,8 @@ Every warning in the app shows its source and date. No personal names stored. No
 - **Who could run it:** the Ministry of Labour's Recruitment Licence Unit and CERT-MU, which already publish this data. We'd propose a handover; there is no partnership today.
 - **Cost:** Rs 0 for the checks: they run on the phone, offline. The optional server is one small machine plus a few usage-priced services (link blocklists, the Kreol voice); keeping the data fresh takes a person a few hours a month.
 - **Reach:** jobseekers and their families, through employment information offices, bank branches and community groups; works on Android, iPhone and the web.
+- **Rollout:** a pilot with 100 real users (months 1–2) → free on Google Play, Kreol videos, posters with a QR code (months 3–6) → handover to a host institution (months 6–12).
+- **Funding:** free for people. Paid for by the institutions that fraud costs money: a sponsored pilot, then licensing our checks into banking and mobile-money apps. Nobody signed yet. Details: `docs/go-to-market.md`.
 - **What we'd measure in a pilot:** how many users call the official number before paying. We don't claim losses prevented.
 
 ---
