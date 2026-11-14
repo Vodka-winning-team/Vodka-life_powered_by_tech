@@ -7,6 +7,7 @@ import { ScrollView, StyleSheet, Switch, TextInput, View } from 'react-native';
 
 import Shield from '../../modules/fraudlens-shield';
 
+import { TOUR_MESSAGE, TourTip } from '@/components/tour';
 import { Button, Card, Chip, Label, Screen, Section, Status } from '@/components/ui';
 import { findingTitle, t, type Language } from '@/constants/strings';
 import { FontSize, LevelColors, Radius, Spacing } from '@/constants/theme';
@@ -16,7 +17,7 @@ import { useStore } from '@/lib/store';
 
 export default function ScanScreen() {
   const theme = useTheme();
-  const { runCheck, language, setLanguage, shieldOn, setShieldOn, granny, setGranny, serverUrl, setServerUrl } = useStore();
+  const { runCheck, language, setLanguage, shieldOn, setShieldOn, granny, setGranny, serverUrl, setServerUrl, tourStep, setTourStep } = useStore();
   const { scale } = useLook();
   const [text, setText] = useState('');
   const [error, setError] = useState('');
@@ -36,6 +37,8 @@ export default function ScanScreen() {
       return;
     }
     setError('');
+    // The tour was waiting for this tap: carry on with the tips on the Result screen.
+    if (tourStep === 2) setTourStep(3);
     router.push('/result');
   }
 
@@ -47,12 +50,19 @@ export default function ScanScreen() {
         ))}
       </View>
 
+      {/* First-time tour, step 1: welcome. "Start" puts the practice message in the box. */}
+      <TourTip step={0} nextTitle={t('tourStart')} onNext={() => setText(TOUR_MESSAGE)}>
+        {t('tourWelcome')}
+      </TourTip>
+
       {/* The main task first: paste (or share) a message and check it. */}
       <Section>
         <Label variant="small">{t('tagline')}</Label>
         <Label variant="title">{t('scanTitle')}</Label>
         <Label>{t('scanHint')}</Label>
       </Section>
+
+      <TourTip step={1}>{t('tourPaste')}</TourTip>
 
       <View style={styles.field} onLayout={(e) => setInputY(e.nativeEvent.layout.y)}>
         <TextInput
@@ -82,6 +92,10 @@ export default function ScanScreen() {
             <Label variant="label">{error}</Label>
           </View>
         )}
+        {/* Tour: the user taps the real button, so this tip has no "Next". */}
+        <TourTip step={2} hideNext>
+          {t('tourCheck')}
+        </TourTip>
         <Button title={t('scanButton')} onPress={check} />
       </View>
 
@@ -130,6 +144,15 @@ export default function ScanScreen() {
             )}
           </>
         )}
+        <Button
+          kind="secondary"
+          title={t('tourAgain')}
+          onPress={() => {
+            setText('');
+            setTourStep(0);
+            scrollRef.current?.scrollTo({ y: 0, animated: true });
+          }}
+        />
         {/* Where the online checks go (our server). Saved when the keyboard closes. */}
         <Label variant="small">{t('serverLabel')}</Label>
         <TextInput

@@ -5,7 +5,7 @@ import { KeyboardAvoidingView, Pressable, ScrollView, StyleSheet, Text, View, ty
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { t } from '@/constants/strings';
-import { FontSize, LevelColors, MaxContentWidth, Radius, Spacing } from '@/constants/theme';
+import { CardShadow, FontSize, LevelColors, MaxContentWidth, RadiusCard, Spacing } from '@/constants/theme';
 import type { Highlight, Level } from '@/engine';
 import { useLook } from '@/hooks/use-look';
 import { useTheme } from '@/hooks/use-theme';
@@ -34,7 +34,7 @@ export function Screen({ children, scrollRef }: { children: ReactNode; scrollRef
   );
 }
 
-type Variant = 'title' | 'body' | 'small' | 'label';
+type Variant = 'title' | 'body' | 'small' | 'label' | 'overline';
 
 export function Label({
   children,
@@ -50,7 +50,7 @@ export function Label({
   const theme = useTheme();
   const { granny, scale } = useLook();
   // Granny mode: strong contrast, so no grey text.
-  const color = variant === 'small' && !granny ? theme.textSecondary : theme.text;
+  const color = (variant === 'small' || variant === 'overline') && !granny ? theme.textSecondary : theme.text;
   return (
     <Text numberOfLines={numberOfLines} style={[textStyles[variant], sized(textStyles[variant], scale), { color }, style]}>
       {children}
@@ -66,7 +66,8 @@ export function Section({ title, children }: { title?: string; children: ReactNo
   const { granny } = useLook();
   return (
     <View style={{ gap: granny ? Spacing.three : Spacing.two }}>
-      {title ? <Label variant="label">{title}</Label> : null}
+      {/* Small uppercase heading above a group. */}
+      {title ? <Label variant="overline">{title.toUpperCase()}</Label> : null}
       {children}
     </View>
   );
@@ -125,13 +126,15 @@ export function Button({
       style={({ pressed }) => [
         styles.button,
         {
-          backgroundColor: primary ? theme.primary : theme.backgroundElement,
-          borderColor: primary ? theme.primary : theme.border,
-          opacity: pressed ? 0.75 : 1,
+          backgroundColor: primary ? theme.primary : theme.primarySoft,
+          borderColor: primary ? theme.primary : theme.primarySoft,
+          // Pressed: slightly smaller and dimmer, so every tap is felt.
+          opacity: pressed ? 0.85 : 1,
+          transform: [{ scale: pressed ? 0.97 : 1 }],
           minHeight: buttonHeight,
         },
       ]}>
-      <Text style={[textStyles.label, sized(textStyles.label, scale), { color: primary ? theme.onPrimary : theme.text, textAlign: 'center' }]}>
+      <Text style={[textStyles.label, sized(textStyles.label, scale), { color: primary ? theme.onPrimary : theme.primary, textAlign: 'center' }]}>
         {title}
       </Text>
     </Pressable>
@@ -218,7 +221,8 @@ export function Chip({ title, selected, onPress }: { title: string; selected: bo
 }
 
 const textStyles = StyleSheet.create({
-  title: { fontSize: FontSize.title, fontWeight: '700', lineHeight: FontSize.title * 1.25 },
+  title: { fontSize: FontSize.title, fontWeight: '800', lineHeight: FontSize.title * 1.2, letterSpacing: -0.5 },
+  overline: { fontSize: FontSize.overline, lineHeight: FontSize.overline * 1.4, fontWeight: '700', letterSpacing: 1 },
   body: { fontSize: FontSize.body, lineHeight: FontSize.body * 1.45 },
   small: { fontSize: FontSize.small, lineHeight: FontSize.small * 1.4 },
   tag: { fontSize: FontSize.small, lineHeight: FontSize.small * 1.4, fontWeight: '700' },
@@ -227,11 +231,11 @@ const textStyles = StyleSheet.create({
 });
 
 const styles = StyleSheet.create({
-  scroll: { padding: Spacing.three, alignItems: 'center' },
+  scroll: { padding: 20, alignItems: 'center' },
   column: { width: '100%', maxWidth: MaxContentWidth, gap: Spacing.three },
-  card: { borderWidth: 1, borderRadius: Radius, padding: Spacing.three, gap: Spacing.two },
-  button: { borderWidth: 1, borderRadius: Radius, paddingVertical: 15, paddingHorizontal: Spacing.three, minHeight: 52, justifyContent: 'center' },
-  banner: { borderRadius: Radius, paddingVertical: Spacing.four, paddingHorizontal: Spacing.three },
+  card: { borderWidth: 1, borderRadius: RadiusCard, padding: 20, gap: Spacing.two, ...CardShadow },
+  button: { borderWidth: 1, borderRadius: 999, paddingVertical: 15, paddingHorizontal: Spacing.three, minHeight: 52, justifyContent: 'center' },
+  banner: { borderRadius: RadiusCard, paddingVertical: Spacing.five, paddingHorizontal: Spacing.three, ...CardShadow },
   tag: { alignSelf: 'flex-start', borderRadius: 8, paddingHorizontal: Spacing.two, paddingVertical: 2 },
   chip: { borderWidth: 1, borderRadius: 999, paddingHorizontal: Spacing.three, paddingVertical: Spacing.two, minHeight: 48, minWidth: 48, justifyContent: 'center' },
 });

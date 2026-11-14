@@ -6,11 +6,12 @@ export const Colors = {
   light: {
     text: '#14171F',
     textSecondary: '#5B6170',
-    background: '#F6F7F9',
+    background: '#EEF1F6', // tinted neutral, so white cards stand out
     backgroundElement: '#FFFFFF',
     backgroundSelected: '#E6E9EF',
-    border: '#DDE1E8',
+    border: '#E2E6EE',
     primary: '#1F4FD8',
+    primarySoft: '#E3EAFC', // light tint of the accent, for secondary buttons
     onPrimary: '#FFFFFF',
     highlight: '#FFE08A',
   },
@@ -22,6 +23,7 @@ export const Colors = {
     backgroundSelected: '#252B35',
     border: '#2C3340',
     primary: '#7EA2FF',
+    primarySoft: '#1C2740',
     onPrimary: '#0E1116',
     highlight: '#7A5C00',
   },
@@ -50,9 +52,21 @@ export const TextScale = 1;
 export const FontSize = {
   small: 14 * TextScale,
   body: 17 * TextScale,
-  title: 26 * TextScale,
+  title: 30 * TextScale,
+  overline: 12 * TextScale,
   banner: 22 * TextScale,
 } as const;
 
-export const Radius = 14;
+/** Corner radius: inputs and small items. Cards and banners use RadiusCard; buttons and chips are pills. */
+export const Radius = 16;
+export const RadiusCard = 24;
+
+/** Soft, low shadow for cards (large and faint, never harsh black). */
+export const CardShadow = {
+  shadowColor: '#101828',
+  shadowOpacity: 0.08,
+  shadowRadius: 12,
+  shadowOffset: { width: 0, height: 4 },
+  elevation: 2,
+} as const;
 export const MaxContentWidth = 720;

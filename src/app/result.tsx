@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { Linking, Pressable, StyleSheet, TextInput } from 'react-native';
 
 import { OnlineCheck } from '@/components/online-check';
+import { TourTip } from '@/components/tour';
 import { Button, Card, HighlightedText, Label, LevelBanner, LevelTag, Screen } from '@/components/ui';
 import { findingDetail, findingTitle, t } from '@/constants/strings';
 import { FontSize, Radius, Spacing } from '@/constants/theme';
@@ -47,9 +48,13 @@ export default function ResultScreen() {
     // A new case, follow-up or Job check answer starts a fresh page at the top, so the level banner is always seen.
     <Screen key={`${current.id}-${text}-${current.job?.agencyId ?? ''}-${current.job?.costId ?? ''}`}>
       <LevelBanner level={level} />
+      <TourTip step={3}>{t('tourLevel')}</TourTip>
 
       {/* The next step comes first. (Granny mode shows the Call buttons themselves, just below.) */}
+      <TourTip step={4}>{t('tourActions')}</TourTip>
       {!granny && <Button title={t('resultActionsButton')} onPress={() => router.push('/actions')} />}
+
+      <TourTip step={5}>{t('tourRead')}</TourTip>
 
       {/* Read aloud: level, plain sentence, each finding, official numbers (EN/FR voices; Kreol uses French). */}
       <Button
@@ -83,6 +88,8 @@ export default function ResultScreen() {
         </>
       )}
 
+      {/* Tour, last step: the highlights and the findings. */}
+      <TourTip step={6}>{t('tourFound')}</TourTip>
       <Card>
         <Label variant="label">{t('resultMessage')}</Label>
         <HighlightedText text={text} highlights={highlights} />

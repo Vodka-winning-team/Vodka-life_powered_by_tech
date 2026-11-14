@@ -37,6 +37,10 @@ type Store = {
   /** Address of our server for the online checks. */
   serverUrl: string;
   setServerUrl: (url: string) => void;
+  /** First-time tour: the step being shown (0, 1, 2...), or null when the tour is not running. */
+  tourStep: number | null;
+  /** Move the tour to a step; null ends it (and remembers that it was seen). */
+  setTourStep: (step: number | null) => void;
 };
 
 const HISTORY_KEY = 'history-v1';
@@ -44,6 +48,7 @@ const LANGUAGE_KEY = 'language-v1';
 const SHIELD_KEY = 'shield-v1';
 const GRANNY_KEY = 'granny-v1';
 const SERVER_KEY = 'server-v1';
+const TOUR_KEY = 'tour-v1';
 const StoreContext = createContext<Store | null>(null);
 
 export function StoreProvider({ children }: { children: ReactNode }) {
@@ -53,6 +58,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   const [shieldOn, setShieldOnState] = useState(false);
   const [granny, setGrannyState] = useState(false);
   const [serverUrl, setServerUrlState] = useState(DEFAULT_SERVER);
+  const [tourStep, setTourStepState] = useState<number | null>(null);
 
   // Load saved history once, when the app starts.
   useEffect(() => {
@@ -72,10 +78,19 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     AsyncStorage.getItem(GRANNY_KEY)
       .then((saved) => setGrannyState(saved === 'on'))
       .catch(() => {});
+    // A phone that has never finished or skipped the tour starts it.
+    AsyncStorage.getItem(TOUR_KEY)
+      .then((saved) => { if (saved !== 'done') setTourStepState(0); })
+      .catch(() => {});
     AsyncStorage.getItem(SERVER_KEY)
       .then((saved) => { if (saved) setServerUrlState(saved); })
       .catch(() => {});
   }, []);
+
+  function setTourStep(step: number | null) {
+    setTourStepState(step);
+    if (step === null) AsyncStorage.setItem(TOUR_KEY, 'done').catch(() => {});
+  }
 
   function setServerUrl(url: string) {
     const clean = url.trim() || DEFAULT_SERVER;
@@ -159,6 +174,8 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     setGranny,
     serverUrl,
     setServerUrl,
+    tourStep,
+    setTourStep,
   };
 
   return <StoreContext.Provider value={store}>{children}</StoreContext.Provider>;
