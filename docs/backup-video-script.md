@@ -1,7 +1,7 @@
 # Backup video script (2 minutes)
 
 Owner: D (Paveesh). The organisers ask for a **backup demo video, about 2 minutes, with the core feature working**. It is what we play if the phone or the server fails on stage.
-**Record it on the final build** (release `verifye-2026-11-14-1056` or newer), between 11:30 and 12:00.
+**Record it on the final build** (release `verifye-final-2026-11-14-1145`), between 11:30 and 12:00.
 
 ## Before recording (5 minutes)
 

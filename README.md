@@ -118,7 +118,7 @@ To try the engine on one message without the app:
 ```
 TRY_MSG="MCB: verify your account at mcb-login-secure.net" npx jest try-it
 ```
-APK: https://github.com/Vodka-winning-team/Vodka-life_powered_by_tech/releases/tag/verifye-2026-11-14-1056 (build from the merged final look, Sat 14 Nov 10:56). If a later build is released before 12:30, it is the newest one on the Releases page.
+APK: https://github.com/Vodka-winning-team/Vodka-life_powered_by_tech/releases/tag/verifye-final-2026-11-14-1145 (final build, Sat 14 Nov 11:45).
 
 Optional server, on the demo laptop: double-click `run_server.bat`, or follow [`server/README.md`](server/README.md). In the app: Settings → server address. Phone and laptop must be on the same network (a phone hotspot works).
 
