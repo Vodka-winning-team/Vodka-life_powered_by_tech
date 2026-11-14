@@ -76,10 +76,11 @@ AI tools were allowed by the organisers. We list them all here. Every AI-assiste
 | Tool | Who | What we used it for |
 |---|---|---|
 | **Claude Code (Anthropic)** | Adiyen (A, data) | Python scripts that turn the official PDFs into JSON; `validate.py`; test cases; French and Kreol strings; fact-checking the numbers on our slides |
-| **Claude Code** | Pushkar (B, engine) | The rules engine (first in Kotlin, then ported to TypeScript), its tests, a try-it tool, the README draft, the slide draft and the team board (`automation.md`) |
-| **Claude Code** | Jayesh (C, app) | The Expo app and its 6 screens, the phone-number format, the language switch |
-| **Claude Code** | Paveesh (D, pitch) | README, pitch documents and user-test write-ups |
-| **OpenAI Codex CLI** | Team | Critical review of our ideas before the build, and a read-only review of the app screens (4 fixes, 13 Nov 18:45) |
+| **Claude Code** | Pushkar (B, engine) | The rules engine (first in Kotlin, then ported to TypeScript), its tests, the new server written on Sat 14 Nov (`server/`) and its tests, the README and slide drafts, and the team board (`automation.md`) |
+| **Claude Code** | Jayesh (C, app) | The Expo app and its screens, tabs, widget, tour, Granny mode, automatic checking, the animations, the QR scanner, speech input and the final look |
+| **Claude Code** | Paveesh (D, pitch) | README, decision log, pitch documents, test checklists, the slide deck, the poster and leaflet |
+| **OpenAI Codex CLI** | Team | Critical review of our ideas before the build, and read-only reviews of the app during the build |
+| **myt AI Cloud text-to-speech** (Mauritius Telecom) | In the app, optional | The Kreol read-aloud voice, through our server. It reads our result text aloud; it decides nothing. |
 
 **What we added ourselves, and checked:**
 - **Choices:** the user (Kevin), the job-fee check as our lead story, no AI model deciding a result, checks that work offline, a server written from scratch when we went online, and every cut. See [`docs/decisions.md`](docs/decisions.md).
@@ -118,7 +119,7 @@ To try the engine on one message without the app:
 ```
 TRY_MSG="MCB: verify your account at mcb-login-secure.net" npx jest try-it
 ```
-APK: https://github.com/Vodka-winning-team/Vodka-life_powered_by_tech/releases/tag/verifye-2026-11-14-0656 (demo build, Sat 14 Nov 06:56). The final build is linked here before 12:00.
+APK: https://github.com/Vodka-winning-team/Vodka-life_powered_by_tech/releases/tag/verifye-2026-11-14-1056 (build from the merged final look, Sat 14 Nov 10:56). If a later build is released before 12:30, it is the newest one on the Releases page.
 
 Optional server, on the demo laptop: double-click `run_server.bat`, or follow [`server/README.md`](server/README.md). In the app: Settings → server address. Phone and laptop must be on the same network (a phone hotspot works).
 

@@ -8,11 +8,11 @@ The organisers' list ("What to submit"): Git repo link · the app · backup demo
 | # | What they ask for | Ours | Status |
 |---|---|---|---|
 | 1 | **Git repo link:** public, commits from kick-off, sent through their Google Form | https://github.com/Vodka-winning-team/Vodka-life_powered_by_tech | ✅ public; first commit Fri 12:32 |
-| 2 | **The app:** Android APK or Expo/test link | Newest release on https://github.com/Vodka-winning-team/Vodka-life_powered_by_tech/releases (today: `verifye-2026-11-14-0656`) | ⏳ replace with the final build after the 11:00 freeze |
+| 2 | **The app:** Android APK or Expo/test link | Newest release on https://github.com/Vodka-winning-team/Vodka-life_powered_by_tech/releases (newest: `verifye-2026-11-14-1056`, the merged final look) | ✅ released 10:56; ⏳ quick test on 2–3 phones still to do |
 | 3 | **Backup demo video:** about 2 minutes, core feature working | *(link: add it here)* | ❌ to record 11:30–12:00 |
 | 4 | **Pitch slides:** maximum 6 | 6 slides; export as PDF or PowerPoint from the deck's menu. Text version: [`slides.md`](slides.md) | ⏳ export after the final numbers |
 | 5 | **README:** problem, user, data sources, stack, AI tools, surprise card, how to run | [`README.md`](../README.md): all seven sections are there | ⏳ final pass at the freeze (APK link, features, test counts) |
-| 6 | **Decision log:** 5–10 key decisions, with times | [`decisions.md`](decisions.md): 24 decisions with times and records | ✅ add any new ones before submitting |
+| 6 | **Decision log:** 5–10 key decisions, with times | [`decisions.md`](decisions.md): 25 decisions with times and records | ✅ add any new ones before submitting |
 
 ## 2. Before pressing Submit
 

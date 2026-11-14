@@ -5,7 +5,7 @@ Owner: D (Paveesh). Run this on **every new APK or Expo Go build**, on 2 phones 
 **Result labels:** this page uses the wording of the final look (`c/notice-style`): "Be careful – check first" and "No warning signs found – still check". Builds up to release 06:56 still say "verify" in those two labels; the levels are the same.
 All messages are fictional; they come from [`demo-messages.md`](demo-messages.md) and [`test-cases.md`](test-cases.md).
 
-**Get the APK:** open the [newest release](https://github.com/Vodka-winning-team/Vodka-life_powered_by_tech/releases/tag/verifye-2026-11-14-0656) on the phone (demo build, Sat 14 Nov 06:56; check the Releases page for a newer one) → download the `.apk` file → open it → allow "Install unknown apps" if asked → **Install** (if Play Protect warns: More details → Install anyway). Install it over the old build and write the build's name (for example `verifye-2026-11-14-0656`) in the results table. Remove the old September FraudLens app, and set Phone as the default dialler.
+**Get the APK:** open the [newest release](https://github.com/Vodka-winning-team/Vodka-life_powered_by_tech/releases/tag/verifye-2026-11-14-1056) on the phone (final look, Sat 14 Nov 10:56; check the Releases page for a newer one) → download the `.apk` file → open it → allow "Install unknown apps" if asked → **Install** (if Play Protect warns: More details → Install anyway). Install it over the old build and write the build's name (for example `verifye-2026-11-14-1056`) in the results table. Remove the old September FraudLens app, and set Phone as the default dialler.
 
 ---
 
