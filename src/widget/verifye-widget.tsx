@@ -24,29 +24,30 @@ export function latestAlert() {
 
 // Colours follow Android's own widgets: a soft tonal surface, a slightly lighter inner card,
 // and one filled pill for the main action.
+// Colours follow the app's notice style: white (or black at night), black text and one yellow.
 const PALETTE: Record<
   'light' | 'dark',
   Record<'surface' | 'inner' | 'text' | 'muted' | 'primary' | 'onPrimary' | 'alert' | 'on' | 'off', HexColor>
 > = {
   light: {
-    surface: '#EEF2FB',
-    inner: '#FFFFFF',
-    text: '#14171F',
-    muted: '#5B6170',
-    primary: '#1F4FD8',
-    onPrimary: '#FFFFFF',
-    alert: '#9A5B00',
+    surface: '#FFFFFF',
+    inner: '#D7B982',
+    text: '#111111',
+    muted: '#5C5C5C',
+    primary: '#111111',
+    onPrimary: '#D7B982',
+    alert: '#111111',
     on: '#1A7F4B',
     off: '#8A8D93',
   },
   dark: {
-    surface: '#1C2029',
-    inner: '#272C37',
-    text: '#F2F4F8',
-    muted: '#A7AEBB',
-    primary: '#7EA2FF',
-    onPrimary: '#0E1116',
-    alert: '#F2B84B',
+    surface: '#111111',
+    inner: '#D7B982',
+    text: '#FFFFFF',
+    muted: '#B9B9B2',
+    primary: '#D7B982',
+    onPrimary: '#111111',
+    alert: '#111111',
     on: '#5FD39A',
     off: '#7C8494',
   },
@@ -75,7 +76,7 @@ export function VerifyeWidget({
         flexDirection: 'column',
         justifyContent: 'space-between',
         backgroundColor: c.surface,
-        borderRadius: 28,
+        borderRadius: 3,
         padding: 16,
       }}>
       {/* Top row, like Android's own widgets: a small app badge and name, and the status on the right. */}
@@ -85,7 +86,7 @@ export function VerifyeWidget({
             style={{
               width: 24,
               height: 24,
-              borderRadius: 12,
+              borderRadius: 3,
               backgroundColor: c.primary,
               alignItems: 'center',
               justifyContent: 'center',
@@ -116,7 +117,7 @@ export function VerifyeWidget({
           width: 'match_parent',
           height: 52,
           backgroundColor: c.primary,
-          borderRadius: 26,
+          borderRadius: 3,
           paddingHorizontal: 20,
           alignItems: 'center',
           justifyContent: 'center',
@@ -133,7 +134,7 @@ export function VerifyeWidget({
             flexDirection: 'column',
             width: 'match_parent',
             backgroundColor: c.inner,
-            borderRadius: 18,
+            borderRadius: 3,
             paddingVertical: 10,
             paddingHorizontal: 14,
           }}>
@@ -143,7 +144,7 @@ export function VerifyeWidget({
             maxLines={1}
             truncate="END"
           />
-          <TextWidget text={alert.campaign} style={{ fontSize: 13, color: c.text }} maxLines={2} truncate="END" />
+          <TextWidget text={alert.campaign} style={{ fontSize: 13, color: c.alert }} maxLines={2} truncate="END" />
         </FlexWidget>
       )}
     </FlexWidget>

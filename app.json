@@ -13,7 +13,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "backgroundColor": "#1F4FD8",
+        "backgroundColor": "#D7B982",
         "foregroundImage": "./assets/images/android-icon-foreground.png",
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
       },
@@ -29,7 +29,7 @@
       [
         "expo-splash-screen",
         {
-          "backgroundColor": "#1F4FD8",
+          "backgroundColor": "#D7B982",
           "image": "./assets/images/splash-icon.png",
           "imageWidth": 160
         }
@@ -43,7 +43,13 @@
           "disableIOS": true
         }
       ],
-      ["expo-audio", { "microphonePermission": false, "recordAudioAndroid": false }],
+      [
+        "expo-audio",
+        {
+          "microphonePermission": false,
+          "recordAudioAndroid": false
+        }
+      ],
       [
         "react-native-android-widget",
         {
@@ -59,6 +65,23 @@
               "resizeMode": "horizontal|vertical",
               "updatePeriodMillis": 1800000
             }
+          ]
+        }
+      ],
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Verifye uses the camera to read a QR code and check its link before it opens.",
+          "recordAudioAndroid": false
+        }
+      ],
+      [
+        "expo-speech-recognition",
+        {
+          "microphonePermission": "Verifye uses the microphone so you can say a message instead of typing it.",
+          "speechRecognitionPermission": "Verifye turns what you say into text so it can be checked.",
+          "androidSpeechServicePackages": [
+            "com.google.android.googlequicksearchbox"
           ]
         }
       ]

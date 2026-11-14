@@ -79,6 +79,15 @@ def test_harmful_link_is_high_and_names_the_source(tmp_path):
     assert r["category_label"] == "Known harmful link"
 
 
+def test_shared_platform_is_not_harmful_because_of_other_pages(tmp_path):
+    # A real Linktree QR code was flagged "Stop": URLhaus lists a few pages on linktr.ee, and .ee has no RDAP.
+    client, _ = make_client(tmp_path, FakeProviders(urlhaus_hosts={"linktr.ee"}, unregistered={"linktr.ee"}))
+    data = client.post("/api/v1/analyze", json={"text": "https://linktr.ee/qr/9077510d?utm_source=qr_code"}).json()
+    assert data["risk_level"] == "low"
+    assert data["intel"]["blocklisted"] is False
+    assert data["intel"]["findings"] == []
+
+
 def test_urlhaus_listing_is_high(tmp_path):
     client, _ = make_client(tmp_path, FakeProviders(urlhaus_hosts={"mcb-login-secure.net"}))
     assert client.post("/api/v1/analyze", json={"text": FAKE_MCB}).json()["risk_level"] == "high"

@@ -76,7 +76,7 @@ export function allMatches(re: RegExp, text: string): RegExpExecArray[] {
 export type Link = { range: Highlight; host: string };
 
 const TLDS =
-  'com|net|org|mu|info|xyz|top|cam|click|co|uk|io|app|link|site|online|live|me|biz|cc|ly|gl|in|fr|us|tk|ml|ga|cf|gq|shop|store|vip|win|bid|loan|work';
+  'com|net|org|mu|info|xyz|top|cam|click|co|uk|io|app|link|site|online|live|me|biz|cc|ly|gl|in|fr|us|tk|ml|ga|cf|gq|shop|store|vip|win|bid|loan|work|sbs|bond|cfd|icu|buzz|lat|today|rest|support|help|services|digital|pro|cloud';
 const LINK = new RegExp(
   `\\b(?:https?://)?(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+(?:${TLDS})\\b(?:[/?#][^\\s]*)?`,
   'gi',

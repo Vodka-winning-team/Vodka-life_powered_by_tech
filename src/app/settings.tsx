@@ -11,11 +11,13 @@ import { Button, Card, Label, Screen, Status } from '@/components/ui';
 import { t } from '@/constants/strings';
 import { FontSize, Radius, Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
+import { setNight, useNight } from '@/lib/night';
 import { useStore } from '@/lib/store';
 
 export default function SettingsScreen() {
   const theme = useTheme();
-  const { shieldOn, setShieldOn, granny, setGranny, serverUrl, setServerUrl, setTourStep } = useStore();
+  const { shieldOn, setShieldOn, granny, setGranny, serverUrl, setServerUrl, setTourStep, online, setOnline } = useStore();
+  const night = useNight();
 
   return (
     <Screen>
@@ -26,6 +28,27 @@ export default function SettingsScreen() {
           </View>
           <Switch value={granny} accessibilityLabel={t('grannyMode')} onValueChange={setGranny} />
         </View>
+      </Card>
+
+      {/* Night mode: black page, white text, yellow buttons. */}
+      <Card>
+        <View style={styles.switchRow}>
+          <View style={styles.grow}>
+            <Label>{t('nightMode')}</Label>
+          </View>
+          <Switch value={night} accessibilityLabel={t('nightMode')} onValueChange={setNight} />
+        </View>
+      </Card>
+
+      {/* Online checks on or off. Off = fully offline: nothing is sent anywhere. */}
+      <Card>
+        <View style={styles.switchRow}>
+          <View style={styles.grow}>
+            <Label>{t('onlineMode')}</Label>
+          </View>
+          <Switch value={online} accessibilityLabel={t('onlineMode')} onValueChange={setOnline} />
+        </View>
+        <Label variant="small">{online ? t('onlineModeOnHint') : t('onlineModeOffHint')}</Label>
       </Card>
 
       {/* Shield: Android APK only (no native part in Expo Go or on the web). */}
@@ -72,6 +95,7 @@ export default function SettingsScreen() {
           accessibilityLabel={t('serverLabel')}
           style={[styles.server, { color: theme.text, backgroundColor: theme.background, borderColor: theme.border }]}
         />
+        <Label variant="small">{t('serverHint')}</Label>
       </Card>
     </Screen>
   );
@@ -80,5 +104,5 @@ export default function SettingsScreen() {
 const styles = StyleSheet.create({
   switchRow: { flexDirection: 'row', alignItems: 'center', gap: Spacing.two },
   grow: { flex: 1 },
-  server: { borderWidth: 1, borderRadius: Radius, padding: Spacing.two, fontSize: FontSize.small, minHeight: 48 },
+  server: { borderWidth: 2, borderRadius: Radius, padding: Spacing.two, fontSize: FontSize.small, minHeight: 48 },
 });

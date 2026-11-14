@@ -1,13 +1,15 @@
 // Small building blocks used by every screen. Colours and sizes come from constants/theme.ts.
 
-import { useRef, type ComponentRef, type ReactNode, type RefObject } from 'react';
-import { KeyboardAvoidingView, Pressable, ScrollView, StyleSheet, Text, View, type TextStyle } from 'react-native';
+import { useEffect, useRef, useState, type ComponentRef, type ReactNode, type RefObject } from 'react';
+import { Animated, Easing, KeyboardAvoidingView, Pressable, ScrollView, StyleSheet, Text, View, type TextStyle } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { t } from '@/constants/strings';
-import { CardShadow, FontSize, LevelColors, MaxContentWidth, RadiusCard, Spacing } from '@/constants/theme';
+import { CardShadow, FontSize, HeadingFont, LevelColors, MaxContentWidth, PageMargin, RadiusCard, Spacing } from '@/constants/theme';
 import type { Highlight, Level } from '@/engine';
 import { useLook } from '@/hooks/use-look';
+import { useReduceMotion } from '@/hooks/use-reduce-motion';
+import { onGoToTop } from '@/lib/tab-top';
 import { useTheme } from '@/hooks/use-theme';
 
 /** Text style at the current size (Granny mode makes text 1.4x bigger). */
@@ -22,11 +24,15 @@ function sized(style: TextStyle, scale: number): TextStyle {
 export function Screen({ children, scrollRef }: { children: ReactNode; scrollRef?: RefObject<ComponentRef<typeof ScrollView> | null> }) {
   const theme = useTheme();
   const { granny } = useLook();
+  const ownRef = useRef<ComponentRef<typeof ScrollView>>(null);
+  const pageRef = scrollRef ?? ownRef;
+  // Tapping the tab you are already on brings the page back to the top.
+  useEffect(() => onGoToTop(() => pageRef.current?.scrollTo({ y: 0, animated: true })), [pageRef]);
   return (
     <SafeAreaView edges={['bottom', 'left', 'right']} style={{ flex: 1, backgroundColor: theme.background }}>
       {/* While typing, the keyboard pushes the page up instead of covering the buttons. */}
       <KeyboardAvoidingView behavior="padding" style={{ flex: 1 }}>
-        <ScrollView ref={scrollRef} contentContainerStyle={styles.scroll} keyboardShouldPersistTaps="handled">
+        <ScrollView ref={pageRef} contentContainerStyle={styles.scroll} keyboardShouldPersistTaps="handled">
           <View style={[styles.column, granny && { gap: Spacing.four }]}>{children}</View>
         </ScrollView>
       </KeyboardAvoidingView>
@@ -50,7 +56,7 @@ export function Label({
   const theme = useTheme();
   const { granny, scale } = useLook();
   // Granny mode: strong contrast, so no grey text.
-  const color = (variant === 'small' || variant === 'overline') && !granny ? theme.textSecondary : theme.text;
+  const color = variant === 'small' && !granny ? theme.textSecondary : theme.text;
   return (
     <Text numberOfLines={numberOfLines} style={[textStyles[variant], sized(textStyles[variant], scale), { color }, style]}>
       {children}
@@ -62,13 +68,28 @@ export function Label({
  * A group of related items (a heading and its controls): tight spacing inside,
  * while the page puts more space between groups. Granny mode spreads it a little more.
  */
-export function Section({ title, children }: { title?: string; children: ReactNode }) {
+export function Section({ title, number, children }: { title?: string; number?: number; children: ReactNode }) {
+  const theme = useTheme();
   const { granny } = useLook();
-  return (
-    <View style={{ gap: granny ? Spacing.three : Spacing.two }}>
-      {/* Small uppercase heading above a group. */}
-      {title ? <Label variant="overline">{title.toUpperCase()}</Label> : null}
+  const body = (
+    <View style={{ flex: 1, gap: granny ? Spacing.three : Spacing.two }}>
+      {/* Uppercase heading with a strong rule under it. */}
+      {title ? (
+        <View style={{ borderBottomWidth: 2, borderBottomColor: theme.border, paddingBottom: 6 }}>
+          <Label variant="overline">{title.toUpperCase()}</Label>
+        </View>
+      ) : null}
       {children}
+    </View>
+  );
+  if (number === undefined) return body;
+  // A numbered step: a yellow square with the number, then the step.
+  return (
+    <View style={{ flexDirection: 'row', gap: 14 }}>
+      <View style={[styles.number, { backgroundColor: theme.accent }]}>
+        <Text style={[textStyles.number, { color: theme.onAccent }]}>{number}</Text>
+      </View>
+      {body}
     </View>
   );
 }
@@ -98,7 +119,7 @@ export function Warning({ title, children }: { title: string; children: ReactNod
 export function Card({ children }: { children: ReactNode }) {
   const theme = useTheme();
   return (
-    <View style={[styles.card, { backgroundColor: theme.backgroundElement, borderColor: theme.border }]}>
+    <View style={[styles.card, { borderBottomColor: theme.hairline }]}>
       {children}
     </View>
   );
@@ -122,46 +143,90 @@ export function Button({
   title,
   onPress,
   kind = 'primary',
+  guard = 1000,
 }: {
   title: string;
   onPress: () => void;
   kind?: 'primary' | 'secondary';
+  /** A second tap within this many milliseconds is ignored (panic-tapping). */
+  guard?: number;
 }) {
   const theme = useTheme();
   const { scale, buttonHeight } = useLook();
   const primary = kind === 'primary';
-  const press = useOneTap(onPress, 1000);
+  const press = useOneTap(onPress, guard);
+  const reduce = useReduceMotion();
+  // Pressed: the button eases to 97% of its size in 100 ms, and back on release, so every tap is felt.
+  const [size] = useState(() => new Animated.Value(1));
+  function ease(to: number) {
+    if (reduce) return; // "Remove animations" is on: the button only dims
+    // In: quick (90 ms). Out: a touch slower (180 ms), so the button settles instead of snapping back.
+    Animated.timing(size, { toValue: to, duration: to < 1 ? 90 : 180, easing: Easing.out(Easing.cubic), useNativeDriver: true }).start();
+  }
   return (
-    <Pressable
-      accessibilityRole="button"
-      onPress={press}
-      style={({ pressed }) => [
-        styles.button,
-        {
-          backgroundColor: primary ? theme.primary : theme.primarySoft,
-          borderColor: primary ? theme.primary : theme.primarySoft,
-          // Pressed: slightly smaller and dimmer, so every tap is felt.
-          opacity: pressed ? 0.85 : 1,
-          transform: [{ scale: pressed ? 0.97 : 1 }],
-          minHeight: buttonHeight,
-        },
-      ]}>
-      <Text style={[textStyles.label, sized(textStyles.label, scale), { color: primary ? theme.onPrimary : theme.primary, textAlign: 'center' }]}>
-        {title}
-      </Text>
+    <Pressable accessibilityRole="button" onPress={press} onPressIn={() => ease(0.96)} onPressOut={() => ease(1)}>
+      {({ pressed }) => (
+        <Animated.View
+          style={[
+            styles.button,
+            {
+              backgroundColor: primary ? theme.primary : theme.primarySoft,
+              borderColor: theme.primary,
+              opacity: pressed ? 0.85 : 1,
+              transform: [{ scale: size }],
+              minHeight: buttonHeight + 6,
+              justifyContent: primary ? 'space-between' : 'center',
+            },
+          ]}>
+          <Text
+            style={[
+              textStyles.label,
+              sized(textStyles.label, scale),
+              { color: primary ? theme.onPrimary : theme.primary, flexShrink: 1 },
+              primary ? { fontFamily: HeadingFont, fontWeight: 'normal', letterSpacing: 0.3 } : { textAlign: 'center' },
+            ]}>
+            {title}
+          </Text>
+          {/* The main button points forward. */}
+          {primary ? <Text style={[textStyles.label, sized(textStyles.label, scale), { color: theme.onPrimary }]}>→</Text> : null}
+        </Animated.View>
+      )}
     </Pressable>
   );
 }
 
 /** Big coloured banner with the result level, and (optionally) one plain sentence saying what to do. */
-export function LevelBanner({ level, detail }: { level: Level; detail?: string }) {
+export function LevelBanner({ level, detail, stamp = false }: { level: Level; detail?: string; stamp?: boolean }) {
   const colors = LevelColors[level];
-  const { scale } = useLook();
+  const { scale, granny } = useLook();
+  const reduce = useReduceMotion();
+  // "Stop – high risk" becomes the word "Stop." with "HIGH RISK" above it.
+  const [word, note] = t(`level${level}`).split(' – ');
+  // A short word is set poster-size; a longer phrase ("No warning signs found") is set smaller so it fits.
+  const big = word.length <= 6 ? FontSize.poster : word.length <= 12 ? 56 : 34;
+  // The "stamp" (new results only): the word lands from 135% to 100% in 400 ms, no bounce.
+  // Granny mode or "Remove animations": a 150 ms fade, nothing moves.
+  const still = granny || reduce;
+  const [landed] = useState(() => new Animated.Value(stamp ? 0 : 1));
+  useEffect(() => {
+    if (!stamp) return;
+    Animated.timing(landed, { toValue: 1, duration: still ? 150 : 400, easing: Easing.bezier(0.16, 1, 0.3, 1), useNativeDriver: true }).start();
+    // Runs once, when the banner first appears.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  const stampSize = still ? 1 : landed.interpolate({ inputRange: [0, 1], outputRange: [1.35, 1] });
   return (
-    <View accessibilityRole="header" style={[styles.banner, { backgroundColor: colors.background }]}>
-      <Text style={[textStyles.banner, sized(textStyles.banner, scale), { color: colors.text }]}>{t(`level${level}`)}</Text>
+    <View accessibilityRole="header" accessibilityLabel={t(`level${level}`)} style={[styles.banner, { backgroundColor: colors.background }]}>
+      {note ? <Text style={[textStyles.overline, { color: colors.text }]}>{note.toUpperCase()}</Text> : null}
+      <Animated.Text
+        style={[
+          textStyles.poster,
+          { color: colors.text, fontSize: big, lineHeight: big * 1.2, opacity: landed, transform: [{ scale: stampSize }], transformOrigin: 'left center' },
+        ]}>
+        {word}.
+      </Animated.Text>
       {detail ? (
-        <Text style={[textStyles.body, sized(textStyles.body, scale), { color: colors.text, textAlign: 'center', marginTop: Spacing.two }]}>
+        <Text style={[textStyles.body, sized(textStyles.body, scale), { color: colors.text, fontWeight: '600', marginTop: Spacing.one }]}>
           {detail}
         </Text>
       ) : null}
@@ -175,7 +240,7 @@ export function LevelTag({ level, label }: { level: Level; label?: string }) {
   const { scale } = useLook();
   return (
     <View style={[styles.tag, { backgroundColor: colors.background }]}>
-      <Text numberOfLines={1} style={[textStyles.tag, sized(textStyles.tag, scale), { color: colors.text }]}>
+      <Text numberOfLines={2} style={[textStyles.tag, sized(textStyles.tag, scale), { color: colors.text }]}>
         {label ?? t(`level${level}`)}
       </Text>
     </View>
@@ -204,7 +269,7 @@ export function HighlightedText({ text, highlights }: { text: string; highlights
       {parts.map((p, i) => (
         <Text
           key={i}
-          style={p.marked ? { backgroundColor: theme.highlight, fontWeight: '700' } : undefined}>
+          style={p.marked ? { backgroundColor: theme.highlight, color: theme.onAccent, fontWeight: '700' } : undefined}>
           {p.text}
         </Text>
       ))}
@@ -226,7 +291,7 @@ export function Chip({ title, selected, onPress }: { title: string; selected: bo
         styles.chip,
         {
           backgroundColor: selected ? theme.primary : theme.backgroundElement,
-          borderColor: selected ? theme.primary : theme.border,
+          borderColor: theme.border,
           minHeight: chipHeight,
         },
       ]}>
@@ -238,8 +303,10 @@ export function Chip({ title, selected, onPress }: { title: string; selected: bo
 }
 
 const textStyles = StyleSheet.create({
-  title: { fontSize: FontSize.title, fontWeight: '800', lineHeight: FontSize.title * 1.2, letterSpacing: -0.5 },
-  overline: { fontSize: FontSize.overline, lineHeight: FontSize.overline * 1.4, fontWeight: '700', letterSpacing: 1 },
+  title: { fontSize: FontSize.title, fontWeight: 'normal', lineHeight: FontSize.title * 1.25, letterSpacing: -0.5, fontFamily: HeadingFont, textTransform: 'uppercase' },
+  overline: { fontSize: FontSize.overline, lineHeight: FontSize.overline * 1.4, fontWeight: 'normal', letterSpacing: 1.5, fontFamily: HeadingFont },
+  poster: { fontSize: FontSize.poster, fontWeight: 'normal', letterSpacing: -1, fontFamily: HeadingFont },
+  number: { fontSize: 30, lineHeight: 34, fontWeight: 'normal', fontFamily: HeadingFont },
   body: { fontSize: FontSize.body, lineHeight: FontSize.body * 1.45 },
   small: { fontSize: FontSize.small, lineHeight: FontSize.small * 1.4 },
   tag: { fontSize: FontSize.small, lineHeight: FontSize.small * 1.4, fontWeight: '700' },
@@ -248,12 +315,14 @@ const textStyles = StyleSheet.create({
 });
 
 const styles = StyleSheet.create({
-  scroll: { padding: 20, alignItems: 'center' },
+  scroll: { padding: PageMargin, alignItems: 'center' },
   column: { width: '100%', maxWidth: MaxContentWidth, gap: Spacing.three },
-  card: { borderWidth: 1, borderRadius: RadiusCard, padding: 20, gap: Spacing.two, ...CardShadow },
-  button: { borderWidth: 1, borderRadius: 999, paddingVertical: 15, paddingHorizontal: Spacing.three, minHeight: 52, justifyContent: 'center' },
-  banner: { borderRadius: RadiusCard, paddingVertical: Spacing.five, paddingHorizontal: Spacing.three, ...CardShadow },
+  card: { borderBottomWidth: 1, paddingBottom: 14, gap: Spacing.one + 2, ...CardShadow },
+  number: { width: 48, height: 48, alignItems: 'center', justifyContent: 'center', borderRadius: RadiusCard },
+  button: { borderWidth: 2, borderRadius: RadiusCard, paddingVertical: 14, paddingHorizontal: 18, minHeight: 58, flexDirection: 'row', alignItems: 'center', gap: Spacing.two },
+  // The band reaches the screen edges and the top of the page.
+  banner: { marginHorizontal: -PageMargin, marginTop: -PageMargin, paddingHorizontal: PageMargin, paddingTop: Spacing.three, paddingBottom: 22, gap: 4 },
   warning: { borderRadius: RadiusCard, padding: Spacing.three, gap: Spacing.one },
-  tag: { alignSelf: 'flex-start', borderRadius: 8, paddingHorizontal: Spacing.two, paddingVertical: 2 },
-  chip: { borderWidth: 1, borderRadius: 999, paddingHorizontal: Spacing.three, paddingVertical: Spacing.two, minHeight: 48, minWidth: 48, justifyContent: 'center' },
+  tag: { alignSelf: 'flex-start', borderRadius: RadiusCard, paddingHorizontal: 9, paddingVertical: 4 },
+  chip: { borderWidth: 2, borderRadius: RadiusCard, paddingHorizontal: Spacing.three, paddingVertical: Spacing.two, minHeight: 48, minWidth: 48, justifyContent: 'center' },
 });

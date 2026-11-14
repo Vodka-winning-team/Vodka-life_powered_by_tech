@@ -5,7 +5,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 /** Default server address. It can be changed in Settings on the Scan screen. */
-export const DEFAULT_SERVER = process.env.EXPO_PUBLIC_API_URL ?? 'http://10.231.16.165:8000';
+export const DEFAULT_SERVER = process.env.EXPO_PUBLIC_API_URL ?? 'http://127.0.0.1:8000';
 
 const TIMEOUT_MS = 10000;
 const DEVICE_KEY = 'device-v1';
@@ -20,7 +20,9 @@ export type OnlineResult = {
   summary: string;
   category_label: string;
   tactics: OnlineTactic[];
-  intel: { findings: OnlineIntelFinding[]; blocklisted: boolean };
+  /** `checked`: the live services that answered (safe_browsing, urlhaus, rdap, short_links, ipqs). */
+  /** `skipped`: the live services that did not answer in time (so the check is not complete). */
+  intel: { findings: OnlineIntelFinding[]; blocklisted: boolean; checked?: string[]; skipped?: string[] };
   verification: { community_reports: number };
 };
 

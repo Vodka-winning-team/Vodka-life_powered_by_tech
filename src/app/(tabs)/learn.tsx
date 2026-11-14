@@ -13,7 +13,7 @@ type LearnContent = { lessons: Lesson[]; quiz: QuizQuestion[] };
 const bundled: Record<string, LearnContent> = require('@/constants/learn-content.json');
 
 export default function LearnScreen() {
-  const { serverUrl, language } = useStore();
+  const { serverUrl, language, online } = useStore();
   const [lessons, setLessons] = useState<Lesson[] | null>(null);
   const [quiz, setQuiz] = useState<QuizQuestion[] | null>(null);
   // Quiz progress: which question, the option picked for it (null = not answered yet), and the score.
@@ -23,7 +23,9 @@ export default function LearnScreen() {
 
   useEffect(() => {
     let cancelled = false;
-    Promise.all([getOnline<Lesson[]>(serverUrl, `/learn/tactics?lang=${language}`), getOnline<QuizQuestion[]>(serverUrl, `/learn/quiz?lang=${language}`)]).then(
+    // Offline mode: never ask the server, use the lessons bundled in the app.
+    const ask = <T,>(path: string) => (online ? getOnline<T>(serverUrl, path) : Promise.resolve(null));
+    Promise.all([ask<Lesson[]>(`/learn/tactics?lang=${language}`), ask<QuizQuestion[]>(`/learn/quiz?lang=${language}`)]).then(
       ([newLessons, newQuiz]) => {
         if (cancelled) return;
         // Offline (or server down): use the lessons bundled in the app, so this tab always works.
@@ -36,12 +38,12 @@ export default function LearnScreen() {
     return () => {
       cancelled = true;
     };
-  }, [serverUrl, language]);
+  }, [serverUrl, language, online]);
 
   if (lessons === null || quiz === null) {
     return (
       <Screen>
-        <Label>{t('onlineLoading')}</Label>
+        <Label>{t('onlineLoading', language)}</Label>
       </Screen>
     );
   }
@@ -68,13 +70,13 @@ export default function LearnScreen() {
 
   return (
     <Screen>
-      <Section title={t('quizTitle')}>
+      <Section title={t('quizTitle', language)}>
         {finished ? (
           <Card>
             <Status>
-              {t('quizScore')}: {score}/{quiz.length}
+              {t('quizScore', language)}: {score}/{quiz.length}
             </Status>
-            <Button kind="secondary" title={t('quizAgain')} onPress={restart} />
+            <Button kind="secondary" title={t('quizAgain', language)} onPress={restart} />
           </Card>
         ) : (
           <Card>
@@ -93,16 +95,16 @@ export default function LearnScreen() {
             ))}
             {picked !== null && (
               <>
-                <Status>{picked === question.answer ? t('quizRight') : t('quizWrong')}</Status>
+                <Status>{picked === question.answer ? t('quizRight', language) : t('quizWrong', language)}</Status>
                 <Label>{question.explanation}</Label>
-                <Button title={t('quizNext')} onPress={next} />
+                <Button title={t('quizNext', language)} onPress={next} />
               </>
             )}
           </Card>
         )}
       </Section>
 
-      <Section title={t('learnTricksTitle')}>
+      <Section title={t('learnTricksTitle', language)}>
         {lessons.map((lesson) => (
           <Card key={lesson.id}>
             <Label variant="label">{lesson.label}</Label>

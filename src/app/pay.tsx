@@ -16,7 +16,7 @@ import { useStore } from '@/lib/store';
 export default function PayScreen() {
   const theme = useTheme();
   const { scale } = useLook();
-  const { serverUrl } = useStore();
+  const { serverUrl, online } = useStore();
   const [name, setName] = useState('');
   const [account, setAccount] = useState('');
   const [amount, setAmount] = useState('');
@@ -37,6 +37,11 @@ export default function PayScreen() {
     const value = Number(amount.replace(/[^\d.]/g, ''));
     if (account.trim().length < 4 || !(value > 0)) {
       setError(t('payMissing'));
+      return;
+    }
+    // This check asks our server, so it needs Online checks to be on.
+    if (!online) {
+      setError(t('needsOnline'));
       return;
     }
     setError('');
