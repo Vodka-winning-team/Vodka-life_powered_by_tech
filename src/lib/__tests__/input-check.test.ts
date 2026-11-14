@@ -9,6 +9,16 @@ test('random typing is not a message', () => {
   expect(looksLikeMessage('')).toBe(false);
 });
 
+test('test typing is not a message either (found by Pushkar)', () => {
+  for (const text of ['asdf asdf', 'qwerty qwerty', 'blah blah', 'xyz xyz', 'AAAAA BBBBB', 'test.test', 'asdkjh.qwkjzx', 'foo.bar', '1111111', '0000 0000']) {
+    expect(looksLikeMessage(text)).toBe(false);
+  }
+});
+
+test('a Chinese message (no spaces) is accepted', () => {
+  expect(looksLikeMessage('您的包裹无法派送，请点击链接更新地址')).toBe(true);
+});
+
 test('real messages are accepted, in English, French and Kreol', () => {
   expect(looksLikeMessage('MCB: Your OTP is 553201')).toBe(true);
   expect(looksLikeMessage('Pay the processing fee of Rs 50,000 today by Juice.')).toBe(true);

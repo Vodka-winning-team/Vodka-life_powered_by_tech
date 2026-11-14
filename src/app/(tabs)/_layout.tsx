@@ -6,6 +6,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import { router, Tabs } from 'expo-router';
 import type { ComponentProps } from 'react';
 import { Pressable, type ColorValue } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { t } from '@/constants/strings';
 import { FontSize, Spacing } from '@/constants/theme';
@@ -26,6 +27,8 @@ export default function TabsLayout() {
   const theme = useTheme();
   const { language } = useStore(); // titles are re-read when the language changes
   const { granny, scale } = useLook();
+  // Space taken by Android's navigation buttons at the bottom of the screen (0 on phones without them).
+  const insets = useSafeAreaInsets();
 
   return (
     <Tabs
@@ -40,8 +43,9 @@ export default function TabsLayout() {
         tabBarStyle: {
           backgroundColor: theme.backgroundElement,
           borderTopColor: theme.border,
-          height: granny ? 84 : 68,
+          height: (granny ? 84 : 68) + insets.bottom,
           paddingTop: Spacing.one,
+          paddingBottom: insets.bottom,
         },
         tabBarLabelStyle: { fontSize: (granny ? 13 : 11) * Math.min(scale, 1.2), fontWeight: '600' },
         tabBarIconStyle: { marginBottom: 0 },

@@ -9,7 +9,8 @@ import { t } from '@/constants/strings';
 import { getOnline, type Lesson, type QuizQuestion } from '@/lib/online';
 import { useStore } from '@/lib/store';
 
-const bundled: { lessons: Lesson[]; quiz: QuizQuestion[] } = require('@/constants/learn-content.json');
+type LearnContent = { lessons: Lesson[]; quiz: QuizQuestion[] };
+const bundled: Record<string, LearnContent> = require('@/constants/learn-content.json');
 
 export default function LearnScreen() {
   const { serverUrl, language } = useStore();
@@ -27,8 +28,9 @@ export default function LearnScreen() {
         if (cancelled) return;
         // Offline (or server down): use the lessons bundled in the app, so this tab always works.
         const offline = newLessons === null || newQuiz === null;
-        setLessons(offline ? bundled.lessons : newLessons);
-        setQuiz(offline ? bundled.quiz : newQuiz);
+        const local = bundled[language] ?? bundled.en;
+        setLessons(offline ? local.lessons : newLessons);
+        setQuiz(offline ? local.quiz : newQuiz);
       },
     );
     return () => {
