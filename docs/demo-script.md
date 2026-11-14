@@ -63,8 +63,8 @@ The messages are in [`demo-messages.md`](demo-messages.md) and the slides in [`s
 > "Not only jobs. This says MCB, but the link is mcb-login-secure.net. MCB's official website on the Bank of Mauritius list is mcb.mu. Stop. And here is MCB's official number, from mcb.mu."
 
 **Step 5: no false alarm (about 20 s)**
-- Paste demo message 5 (the real-style MCB code SMS) → **Check message** → **No warning signs found – still verify**.
-> "A real bank code SMS. It says *never share this code*, so the app doesn't cry wolf. And it never says 'safe'. It says: still verify."
+- Paste demo message 5 (the real-style MCB code SMS) → **Check message** → **No warning signs found – still check**.
+> "A real bank code SMS. It says *never share this code*, so the app doesn't cry wolf. And it never says 'safe'. It says: still check."
 
 **Step 6: surprise card, "try to break it" (about 60 s)**
 > "Our surprise card: the app must survive a user doing the wrong thing. Kevin is stressed and in a hurry. Let's try to break it."
@@ -129,7 +129,7 @@ Answer in **two sentences**, then stop. The person in brackets answers first; an
 7. **"What about false alarms?"** (Pushkar)
    The real bank code SMS in the demo gives no warning. Our tests also caught one false alarm early: "fresh orange juice" was counted as MCB Juice. We fixed it so "juice" counts only next to banking words (decision 9).
 8. **"And what if it misses something?"** (Pushkar)
-   It can, which is why it never says "safe". The lowest level is "No warning signs found – still verify", always with the official number.
+   It can, which is why it never says "safe". The lowest level is "No warning signs found – still check", always with the official number.
 9. **"How do you test it?"** (Pushkar)
    Automated tests run the exact demo messages, A's 15 test cases in English, French and Kreol, and checks on the real data files (`npm test`). *(Give the number from the latest `npm test` run on the day.)*
 10. **"Why did you switch from Kotlin to Expo?"** (Jayesh)

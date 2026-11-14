@@ -48,7 +48,7 @@ Owner: D (Paveesh). Pitches start at **13:00**: 10 minutes for the pitch and dem
 5. **"How do you make money?"**
    "Free for users: no ads, no data sold. Fraud costs banks and the state money, so they'd fund it: a sponsored pilot, then our checks licensed into banking apps. Nobody has signed."
 6. **"What if it's wrong?"**
-   "It never says 'safe'. The lowest result is 'No warning signs found – still verify', always with the official number. And wrong input never gets a result at all: that's our surprise card."
+   "It never says 'safe'. The lowest result is 'No warning signs found – still check', always with the official number. And wrong input never gets a result at all: that's our surprise card."
 
 ## If something breaks
 

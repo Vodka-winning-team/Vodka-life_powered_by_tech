@@ -77,7 +77,7 @@ The app can't charge users, show ads or sell data: Kevin is being asked for Rs 5
 - *"We already warn our customers."* Inside your app and by SMS, yes. The fake message arrives in WhatsApp, where you aren't.
 - **Neutrality:** a sponsor's bank is checked exactly like every other bank.
 - **Trust:** banks are cautious with a student project; a public body's backing makes it easier.
-- **Liability:** the app never says "safe", only "no warning signs found – still verify".
+- **Liability:** the app never says "safe", only "no warning signs found – still check".
 - **Slow decisions:** banks take months, which is why year 1 is grants and a pilot.
 
 ## 7. What we must never do

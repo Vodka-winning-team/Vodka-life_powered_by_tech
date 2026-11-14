@@ -30,7 +30,7 @@ Airplane mode **on** for steps 1–6: every check works offline. Then network on
 2. Job check: the agency is **listed** for jobs abroad, but *"this does not prove the message is from them"*. The processing fee is the **employer's** (reg 7(2)(e)) → **Stop – high risk**.
 3. What to do now: call the agency on the **register's** number, never the one in the message; share a summary with Mum.
 4. Fake MCB message with `mcb-login-secure.net` → **not MCB's official website** (mcb.mu, Bank of Mauritius list) → MCB's official number.
-5. A real MCB code SMS → **No warning signs found – still verify**. No false alarm.
+5. A real MCB code SMS → **No warning signs found – still check**. No false alarm.
 6. **Try to break it** (surprise card): empty paste, random typing, panic taps → never a false result.
 7. **Network on → Online check:** the same message now shows live link checks ("Website address isn't registered"), and **"Reported by other phones"** once 2 phones report it. Kreol read-aloud.
 8. *(Optional, 20 s)* **Automatic checking:** a WhatsApp arrives → *"Stop – warning signs found"* without touching the phone. Opt-in, nothing saved.

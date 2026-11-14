@@ -26,7 +26,7 @@ The law is clear: no agency or employer may charge a worker a recruitment fee (P
    - **Bank link:** is the link the bank's official website, per the Bank of Mauritius list? (`mcb-login-secure.net` is not `mcb.mu`.)
    - **Investment offer:** has the FSC warned about this firm or website?
    - **Known campaigns:** does it match a CERT-MU alert (e.g. the Divali WhatsApp cash gift)?
-4. **Result:** *Stop – high risk*, *Be careful – verify*, or *No warning signs found – still verify*. The app never says "safe" or "scam".
+4. **Result:** *Stop – high risk*, *Be careful – check first*, or *No warning signs found – still check*. The app never says "safe" or "scam".
 5. **What to do now:** call the **official** number (from the register or the bank list, never from the message), share a summary with someone you trust, report (MAUCORS, the bank, the Ministry's Recruitment Licence Unit).
 6. **History** (saved only when you tap Save) and **Our sources** (every dataset with its date).
 7. **Automatic checking (opt-in, Android only):** if you switch it on, new WhatsApp and SMS notifications are checked on the phone with the same rules, and a warning appears: *"Stop – warning signs found. Tap to see why."* Off by default, nothing saved or sent, no other apps read. It can't read photos, voice notes or muted chats, so sharing or pasting stays the main way in.

@@ -35,10 +35,10 @@ Expected: **STOP**, with MCB's official number +230 202 6060.
 Then: *"And this one?"* (fictional):
 > MCB: Your OTP for the online payment of Rs 1,250.00 at DARTY is 482913. Never share this code with anyone, including MCB staff.
 
-Expected: **No warning signs found – still verify**. Watch for:
+Expected: **No warning signs found – still check**. Watch for:
 - [ ] Do they see *why* the link is a problem (the highlight in the message)?
 - [ ] Do they know which number to call: the app's, not the message's?
-- [ ] On the second message, do they still understand "still verify", or do they read it as "it's fine"?
+- [ ] On the second message, do they still understand "still check", or do they read it as "it's fine"?
 
 ### Kreol reader (language check, about 10 minutes)
 - Switch the app to **Kreol** on the Scan screen and read every screen aloud: Scan, Result, Job check, What to do now, History, Our sources.

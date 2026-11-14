@@ -2,6 +2,7 @@
 
 Owner: D (Paveesh). Run this on **every new APK or Expo Go build**, on 2 phones if possible, and on the web version (`npx expo start`, then press `w`).
 **Fast way to copy:** open this page on the phone in GitHub. Each message is in a grey box with a **copy button**. Tap it, then paste in the app.
+**Result labels:** this page uses the wording of the final look (`c/notice-style`): "Be careful – check first" and "No warning signs found – still check". Builds up to release 06:56 still say "verify" in those two labels; the levels are the same.
 All messages are fictional; they come from [`demo-messages.md`](demo-messages.md) and [`test-cases.md`](test-cases.md).
 
 **Get the APK:** open the [newest release](https://github.com/Vodka-winning-team/Vodka-life_powered_by_tech/releases/tag/verifye-2026-11-14-0656) on the phone (demo build, Sat 14 Nov 06:56; check the Releases page for a newer one) → download the `.apk` file → open it → allow "Install unknown apps" if asked → **Install** (if Play Protect warns: More details → Install anyway). Install it over the old build and write the build's name (for example `verifye-2026-11-14-0656`) in the results table. Remove the old September FraudLens app, and set Phone as the default dialler.
@@ -25,7 +26,7 @@ They now want Rs 15,000 for the air ticket.
 MCB: Unusual activity on your account. Verify your account at mcb-login-secure.net or it will be blocked.
 ```
 
-**4. Real-style MCB code SMS → No warning signs found – still verify.**
+**4. Real-style MCB code SMS → No warning signs found – still check.**
 ```
 MCB: Your OTP for the online payment of Rs 1,250.00 at DARTY is 482913. Never share this code with anyone, including MCB staff.
 ```
@@ -50,7 +51,7 @@ Weekend promo: fresh orange juice 1L at Rs 75. See all offers at freshmarket.mu
 Trade with KRAKEIF Global, a licensed investment dealer. 10% per week guaranteed.
 ```
 
-**9. CERT-MU campaign → Be careful – verify**, citing the CERT-MU alert of 17 Apr 2026.
+**9. CERT-MU campaign → Be careful – check first**, citing the CERT-MU alert of 17 Apr 2026.
 ```
 Mauritius Telecom Lucky Draw: you have won a prize! Send your details to mauritiustelecomeluckydraw@gmail.com
 ```
