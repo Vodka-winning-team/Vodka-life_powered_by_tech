@@ -51,3 +51,17 @@ export function onlineCategory(category: string, summary: string, language: Lang
   if (language === 'en' || !known) return { label: category, summary };
   return { label: known.label[language], summary: known.summary[language] };
 }
+
+/** The live services our server asks, by the id it reports. Product names stay as they are. */
+const SERVICES: Record<string, Record<Language, string>> = {
+  safe_browsing: { en: 'Google Safe Browsing', fr: 'Google Safe Browsing', mfe: 'Google Safe Browsing' },
+  urlhaus: { en: 'URLhaus (abuse.ch)', fr: 'URLhaus (abuse.ch)', mfe: 'URLhaus (abuse.ch)' },
+  rdap: { en: 'website registry', fr: 'registre des sites web', mfe: 'rezis sit web' },
+  short_links: { en: 'short-link check', fr: 'vérification des liens courts', mfe: 'verifikasion lien kourt' },
+  ipqs: { en: 'phone number reputation', fr: 'réputation du numéro', mfe: 'repitasion nimero' },
+};
+
+/** "Google Safe Browsing · URLhaus (abuse.ch) · website registry" for the services that answered. */
+export function liveServices(checked: string[] | undefined, language: Language): string {
+  return (checked ?? []).map((id) => SERVICES[id]?.[language] ?? id).join(' · ');
+}

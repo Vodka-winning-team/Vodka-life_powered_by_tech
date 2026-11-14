@@ -93,13 +93,35 @@ class Intel:
             return current if current != url else None
         return await self._cached("unshorten:" + url, go)
 
+    # Web endings whose registry answers RDAP lookups through rdap.org. For other endings (.mu, .ee, .de...)
+    # "no answer" tells us nothing, so we must not say "not registered".
+    RDAP_ENDINGS = frozenset({
+        "com", "net", "org", "info", "biz", "xyz", "top", "site", "online", "shop", "store", "sbs", "bond", "cfd",
+        "icu", "club", "app", "dev", "live", "click", "link", "vip", "work", "buzz", "cam", "lat", "today", "rest",
+        "support", "help", "services", "digital", "pro", "cloud", "win", "bid", "loan",
+    })
+
+    # Big shared platforms: millions of unrelated pages live on one host. A few harmful pages there
+    # say nothing about another page, so the host alone never makes a link "harmful".
+    SHARED_HOSTS = frozenset({
+        "linktr.ee", "docs.google.com", "drive.google.com", "sites.google.com", "forms.gle", "youtube.com",
+        "www.youtube.com", "youtu.be", "facebook.com", "www.facebook.com", "m.facebook.com", "instagram.com",
+        "www.instagram.com", "tiktok.com", "www.tiktok.com", "x.com", "twitter.com", "t.me", "wa.me",
+        "github.com", "raw.githubusercontent.com", "dropbox.com", "www.dropbox.com", "onedrive.live.com", "1drv.ms",
+        "mega.nz", "mediafire.com", "www.mediafire.com", "pastebin.com", "canva.com", "www.canva.com",
+        "linkedin.com", "www.linkedin.com", "reddit.com", "www.reddit.com", "discord.com", "discord.gg",
+        "medium.com", "notion.site", "wordpress.com", "blogspot.com", "weebly.com", "wixsite.com",
+    })
+
     async def domain_age_days(self, domain: str) -> int | None:
         """Days since the domain was registered, from public RDAP records (no key needed)."""
         async def go() -> int | None:
             async with self._client(2.5) as client:
                 resp = await client.get(f"https://rdap.org/domain/{domain}", follow_redirects=True)
             if resp.status_code == 404:
-                return -1  # no registration record: the address isn't registered (or was taken down)
+                # No record. That means "not registered" only when this ending's registry can be asked.
+                ending = domain.rsplit(".", 1)[-1].lower()
+                return -1 if ending in self.RDAP_ENDINGS else None
             if resp.status_code != 200:
                 return None
             for event in resp.json().get("events", []):
@@ -169,6 +191,8 @@ class Intel:
             jobs["safe_browsing"] = asyncio.ensure_future(self.safe_browsing(urls))
         if urls and self.settings.urlhaus_auth_key:
             for h in sorted({extract.host_of(u) for u in urls}):
+                if h in self.SHARED_HOSTS:
+                    continue  # a shared platform: its host listing proves nothing about this page
                 jobs["urlhaus:" + h] = asyncio.ensure_future(self.urlhaus_host(h))
         if numbers and self.settings.ipqs_key:
             for n in numbers[:2]:

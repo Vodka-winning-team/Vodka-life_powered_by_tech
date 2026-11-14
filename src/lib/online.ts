@@ -20,7 +20,8 @@ export type OnlineResult = {
   summary: string;
   category_label: string;
   tactics: OnlineTactic[];
-  intel: { findings: OnlineIntelFinding[]; blocklisted: boolean };
+  /** `checked`: the live services that answered (safe_browsing, urlhaus, rdap, short_links, ipqs). */
+  intel: { findings: OnlineIntelFinding[]; blocklisted: boolean; checked?: string[] };
   verification: { community_reports: number };
 };
 

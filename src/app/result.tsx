@@ -2,14 +2,15 @@
 
 import { router } from 'expo-router';
 import { useEffect, useState } from 'react';
-import { Linking, Pressable, StyleSheet, TextInput } from 'react-native';
+import { Linking, Pressable, StyleSheet, TextInput, View } from 'react-native';
 
 import { Appear } from '@/components/motion';
 import { OnlineCheck } from '@/components/online-check';
 import { TourTip } from '@/components/tour';
 import { Button, Card, HighlightedText, Label, LevelBanner, LevelTag, Screen, Warning } from '@/components/ui';
+import { liveServices } from '@/constants/online-texts';
 import { findingDetail, findingTitle, t } from '@/constants/strings';
-import { FontSize, Radius, Spacing } from '@/constants/theme';
+import { FontSize, PageMargin, Radius, Spacing } from '@/constants/theme';
 import { useLook } from '@/hooks/use-look';
 import { useOnlineCheck } from '@/hooks/use-online-check';
 import { useTheme } from '@/hooks/use-theme';
@@ -22,7 +23,7 @@ import { prettyDay } from '@/lib/time';
 
 export default function ResultScreen() {
   const theme = useTheme();
-  const { current, saveCurrent, addToCase, serverUrl, online: onlineMode } = useStore();
+  const { current, saveCurrent, addToCase, serverUrl, online: onlineMode, language } = useStore();
   const { granny, scale } = useLook();
   const [newText, setNewText] = useState('');
   const [reading, setReading] = useState(false);
@@ -65,12 +66,27 @@ export default function ResultScreen() {
   // is not good news. The result is at least "Be careful".
   const qrCaution = isFromQr(current.id) && found === 'NONE';
   const level = qrCaution ? 'CAREFUL' : found;
+  // Wait for the live answer before showing a level for a link (it can turn a quiet result into Stop).
+  const hasLink = /(https?:\/\/|www\.)\S+/i.test(text);
+  const checking = hasLink && online === 'loading';
+  // The live services that answered for this message (shown under "Checked against").
+  const live = typeof online === 'object' ? liveServices(online.intel?.checked, language) : '';
 
   return (
     // A new case, follow-up or Job check answer starts a fresh page at the top, so the level banner is always seen.
     <Screen key={`${current.id}-${text}-${current.job?.agencyId ?? ''}-${current.job?.costId ?? ''}`}>
       {/* The banner says the level and what to do. (Granny mode shows that sentence in big text just below.) */}
-      <LevelBanner level={level} detail={granny ? undefined : t(`granny${level}`)} stamp={play} />
+      {checking ? (
+        // A message with a link: no level until the online check has answered.
+        <View accessibilityRole="header" accessibilityLiveRegion="polite" style={[styles.checking, { backgroundColor: theme.text }]}>
+          <Label variant="title" style={{ color: theme.background }}>
+            {t('checkingLink')}
+          </Label>
+          <Label style={{ color: theme.background }}>{t('checkingLinkHint')}</Label>
+        </View>
+      ) : (
+        <LevelBanner level={level} detail={granny ? undefined : t(`granny${level}`)} stamp={play} />
+      )}
       <TourTip step={3}>{t('tourLevel')}</TourTip>
 
       {/* The next step comes first. (Granny mode shows the Call buttons themselves, just below.) */}
@@ -166,6 +182,12 @@ export default function ResultScreen() {
               {t(s.title)}: {prettyDay(s.snapshot)}
             </Label>
           ))}
+          {/* The live services our server asked for this message, just now. */}
+          {live !== '' && (
+            <Label variant="small">
+              {t('liveChecks')}: {live}
+            </Label>
+          )}
         </Card>
       </Pressable>
 
@@ -202,5 +224,7 @@ export default function ResultScreen() {
 }
 
 const styles = StyleSheet.create({
+  // The same full-width band as the level banner.
+  checking: { marginHorizontal: -PageMargin, marginTop: -PageMargin, paddingHorizontal: PageMargin, paddingTop: Spacing.three, paddingBottom: 22, gap: 4 },
   input: { minHeight: 80, borderWidth: 1, borderRadius: Radius, padding: Spacing.two + 4, fontSize: FontSize.body, textAlignVertical: 'top' },
 });
