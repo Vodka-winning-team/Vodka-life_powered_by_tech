@@ -167,7 +167,7 @@ Answer in **two sentences**, then stop. The person in brackets answers first; an
 26. **"How do you make money?"** (Paveesh)
     Verifye stays free for users: no ads, no data sold. Fraud costs banks and the state real money, so they would fund it: first a sponsored pilot, then licensing our checks into banking apps. We haven't signed anyone.
 27. **"Why would a bank pay?"** (Paveesh)
-    Fake messages use banks' names, and the payment often goes out by Juice or my.t money; banks pay for that in refunds and complaints. We'd put our checks inside their own apps, right before the payment. One bank as a pilot, then a yearly licence.
+    Fake messages use banks' names, and the payment often goes out by Juice or my.t money; banks pay for that in refunds and complaints. We'd put our checks inside their own apps, right before the payment. One bank as a pilot, then a yearly licence. It's realistic: our engine is plain TypeScript with no phone code, so a bank's app can use it as it is.
 28. **"What does it cost, and what's the price?"** (Paveesh)
     The checks cost nothing to run; the optional server is one small machine plus a few usage-priced services. We haven't set a price: we'd set it in the pilot, against what one prevented fraud case saves a bank.
 
