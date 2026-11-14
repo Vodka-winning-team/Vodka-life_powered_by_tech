@@ -141,13 +141,18 @@ export function Button({
   );
 }
 
-/** Big coloured banner with the result level. */
-export function LevelBanner({ level }: { level: Level }) {
+/** Big coloured banner with the result level, and (optionally) one plain sentence saying what to do. */
+export function LevelBanner({ level, detail }: { level: Level; detail?: string }) {
   const colors = LevelColors[level];
   const { scale } = useLook();
   return (
     <View accessibilityRole="header" style={[styles.banner, { backgroundColor: colors.background }]}>
       <Text style={[textStyles.banner, sized(textStyles.banner, scale), { color: colors.text }]}>{t(`level${level}`)}</Text>
+      {detail ? (
+        <Text style={[textStyles.body, sized(textStyles.body, scale), { color: colors.text, textAlign: 'center', marginTop: Spacing.two }]}>
+          {detail}
+        </Text>
+      ) : null}
     </View>
   );
 }

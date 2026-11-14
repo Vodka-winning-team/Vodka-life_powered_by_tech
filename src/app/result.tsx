@@ -47,7 +47,8 @@ export default function ResultScreen() {
   return (
     // A new case, follow-up or Job check answer starts a fresh page at the top, so the level banner is always seen.
     <Screen key={`${current.id}-${text}-${current.job?.agencyId ?? ''}-${current.job?.costId ?? ''}`}>
-      <LevelBanner level={level} />
+      {/* The banner says the level and what to do. (Granny mode shows that sentence in big text just below.) */}
+      <LevelBanner level={level} detail={granny ? undefined : t(`granny${level}`)} />
       <TourTip step={3}>{t('tourLevel')}</TourTip>
 
       {/* The next step comes first. (Granny mode shows the Call buttons themselves, just below.) */}
@@ -74,7 +75,7 @@ export default function ResultScreen() {
       {/* Granny mode: one plain sentence, then the official number to call, first. Details stay below. */}
       {granny && (
         <>
-          <Label variant="label">{t(`granny${result.level}`)}</Label>
+          <Label variant="label">{t(`granny${level}`)}</Label>
           {result.contacts.map((c) => (
             <Button
               key={c.name + c.phone}
