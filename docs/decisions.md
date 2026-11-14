@@ -5,7 +5,7 @@ Started by A (Adiyen) at 20:15 because D was missing (Jayesh's request on `autom
 
 ## Decisions
 
-1. **14:00 · Theme 1 and inspiration take from FraudLens.** The organisers approved it, and the team already knew the idea. *Record: PROJECT.md §10.*
+1. **14:00 · Theme 1 and a FraudLens rebuild.** The organisers approved it, and the team already knew the idea. *Record: PROJECT.md §10.*
 2. **15:00 · No AI model: rules plus official registers.** The rules ask for real data, and the app must work offline. Every warning points to a rule or an official record. *Record: PROJECT.md §10, CLAUDE.md "No AI/ML models".*
 3. **15:00 · No server: all data is bundled on the phone.** It works with no signal and sends nothing anywhere. *Record: PROJECT.md §10.*
 4. **15:00 · The overseas-job check is the lead story.** There is documented local harm and a clear legal rule: Private Recruitment Agencies Act 2023 s.5 and Regulations 2025 reg 7(2). *Record: PROJECT.md §10.*
@@ -39,7 +39,17 @@ Started by A (Adiyen) at 20:15 because D was missing (Jayesh's request on `autom
 20. **Sat 14 Nov, 00:56 · Final APK released** (`verifye-final-2026-11-14-0055`), with Official numbers, Granny mode, Read aloud (phone voices, English and French), the "Checked against these official records" card, the new icon and the UI polish. *Record: board 00:56 (Jayesh); logged by D at 01:01.*
 21. **Sat 14 Nov, 02:03 · Organisers' answer on the old FraudLens look: don't reuse it.** Paveesh asked an organiser: the app must not look like our old projects (old code, old FraudLens); use fresh code and a fresh look. This matches what we did: the app was rebuilt from scratch this weekend (decision 1), renamed Verifye (decision 17) with a new icon and new screens, and the old FraudLens app is removed from the demo phones. Jayesh confirms on the board that no old design files or fonts are in the app. *Record: organiser's answer reported by Paveesh at 02:03; board line 02:03.*
 
+*Note, Sat 14 Nov 04:26: decision 1 was reworded at 04:15 (commit 08d75a4) to "inspiration take from FraudLens". D restored the original wording, which matches its record (PROJECT.md §10, pushed Fri 15:42). Past entries are not edited; changes of plan get a new entry with the time.*
+
 ## Open (not decided yet)
+
+- **⚠️ The old FraudLens backend in `backend/` (NOT agreed; needs the team and an organiser).** The facts, with times, Sat 14 Nov:
+  - 02:03 · An organiser told Paveesh: fresh code and a fresh look, nothing from our old projects (decision 21).
+  - 02:55 · Jayesh added `backend/` (commit 5601249): the server of our earlier FraudLens project. Pushkar's check at 03:14: all 67 Python files are identical to the September 2026 repo, and it holds ML models trained on 23 Sep 2026 and a synthetic-data script. **This code was not written during the hackathon.**
+  - 03:04–04:22 · Jayesh built online features on it (commits 22ab77e, 0e6f30d, 310ce41, 1bfccf5, 978f4ac): Online check card, Report this message, Read aloud with the myt AI voice, Learn, Before you pay. Tested on his phone at 04:15 and 04:22. **Not released.**
+  - 03:14 · Pushkar: it breaks Rule 1 (start from empty) and decision 21; proposes a normal `git revert` (no history rewrite) and demoing the 02:34 offline build. 03:25 · Jayesh: the backend stays. 04:25 · Adiyen supports the revert. Adiyen also voted no to any online voice at 01:06.
+  - It would reverse decisions 2 (no AI model), 3 (no server) and 21 (no old code), and the "works offline" and "nothing leaves the phone" claims.
+  - **Status at 04:26:** 2 for the revert (Pushkar, Adiyen), 1 against (Jayesh), Paveesh not yet on record. No organiser has been asked about reusing the old backend. The released APK (`verifye-final-2026-11-14-0055`, 00:55) and the 02:34 build do not use it. D's README and slides describe only the offline app until this is settled.
 
 - **Kreol voice with an optional online switch** (D's proposal, `docs/proposal-kreol-voice.md`): a sound test of myt AI text-to-speech comes first; recorded Kreol clips are plan B. Not decided.
 - **Surprise card meeting:** Pushkar's plan (decision 14) was posted at 20:46 and the engine part is done. All 4 still confirm it in a 10-minute meeting; D adds the time here.

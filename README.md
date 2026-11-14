@@ -6,6 +6,8 @@ Hackathon: **Life Powered by Tech**, Theme 1 *Powered to Protect*.
 
 *Verifye* is Kreol for “check”. Until Fri 13 Nov, 22:46, the app’s working name was FraudLens Moris (decision 17); some internal code names still use it.
 
+> **About the `backend/` folder (added Sat 14 Nov, 02:55):** it is the server of our earlier FraudLens project, from September 2026, added unchanged. **It was not written during this hackathon**, and the team has not agreed to use it (see "Open" in [`docs/decisions.md`](docs/decisions.md)). The released app described below does not use it: it works offline, with no server.
+
 **Team documents:** plan in [`PROJECT.md`](PROJECT.md) and [`docs/TASKS.md`](docs/TASKS.md) · decision log in [`docs/decisions.md`](docs/decisions.md) · AI log in [`docs/ai-log.md`](docs/ai-log.md) · user-test script in [`docs/user-tests.md`](docs/user-tests.md) (not run yet) · phone tests in [`docs/quick-test.md`](docs/quick-test.md) · live team board in [`automation.md`](automation.md).
 
 ## Problem
@@ -28,7 +30,7 @@ The law is clear: no agency or employer may charge a worker a recruitment fee (P
 5. **What to do now:** call the **official** number (from the register or the bank list, never from the message), share a summary with someone you trust, report (MAUCORS, the bank, the Ministry's Recruitment Licence Unit).
 6. **History** (saved only when you tap Save) and **Our sources** (every dataset with its date).
 7. **Automatic checking (opt-in, Android only):** if you switch it on, new WhatsApp and SMS notifications are checked on the phone with the same rules, and a warning appears: *"Stop – warning signs found. Tap to see why."* Off by default, nothing saved or sent, no other apps read. It can't read photos, voice notes or muted chats, so sharing or pasting stays the main way in.
-8. **Official numbers ("Search an agency or bank"):** look up any of the 79 agencies or 21 banks and payment apps without a message, and see every official number with its source. The Call button only opens the dialler.
+8. **Official numbers ("Search an agency or bank"):** look up any of the 79 agencies or 21 banks and payment apps without a message, and see every official number with its source. The Call button only opens the dialler. **"Is this number official?"**: type a phone number to see whether it is in the Ministry register or the bank list, and whose it is (in the 02:34 build, not released yet).
 9. **Granny mode:** one switch for bigger text and buttons, strong contrast, and a simpler result: one plain sentence, then the Call button.
 10. **Read aloud:** the result is read out with the phone's own voices, offline (English and French; Kreol is read with the French voice for now).
 11. **"Checked against these official records":** every result shows the date of each official list it used.
