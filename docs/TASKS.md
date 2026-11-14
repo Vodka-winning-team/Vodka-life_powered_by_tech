@@ -16,7 +16,7 @@ Changes since PROJECT.md (team review, 16:05): **Shield is cut**, the Arnak? Liv
 > 2. Replace the stub in `src/engine/index.ts` with a port of `DataSet.kt`, `Engine.kt`, `Rules.kt`, `Text.kt`. Same class and method names: `DataSet.fromJson(agencies, feeRules, banks, fscAlerts, certAlerts)` (5 JSON strings), `new Engine(data)`, `engine.check(text, job?)`, `engine.suggestAgencies(text)`. The app already calls these, so screens work the moment you push.
 > 3. **Highlights:** Kotlin `IntRange` (end included) becomes `{ start, end }` with **end NOT included** (`end = last + 1`, like `text.slice(start, end)`). Keep `Text.kt`'s trick that keeps character positions after removing accents.
 > 4. Port `EngineTest.kt` + `DataSetTest.kt` to Jest in `src/engine/__tests__/` (read the data files with `fs.readFileSync` from `app/src/main/assets/data/`). Run with `npm test`. All 21 must pass.
-> 5. `TryIt.kt` becomes `src/engine/try-it.ts` if you still want it (optional).
+> 5. `TryIt.kt` becomes `src/engine/__tests__/try-it.test.ts` if you still want it (optional).
 > 6. **Pure TypeScript only:** no `react-native` or `expo` imports in `src/engine/`.
 > 7. When all tests pass: delete the Kotlin `engine/` folder in the same commit (`B: engine ported to TypeScript, 21 tests`).
 >
