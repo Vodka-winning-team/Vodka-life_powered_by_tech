@@ -173,6 +173,8 @@ export default function ScanScreen() {
 
       {/* Before paying: the other lookups are in the tabs below. */}
       <Section>
+        {/* A QR code hides its link: scan it here and it is checked before anything opens. */}
+        <Button kind="secondary" title={t('qrTitle')} onPress={() => router.push('/qr')} />
         <Button kind="secondary" title={t('payTitle')} onPress={() => router.push('/pay')} />
         <Pressable accessibilityRole="link" onPress={() => router.push('/sources')} style={styles.sourcesLink}>
           <Ionicons name="document-text-outline" size={16 * scale} color={theme.textSecondary} />

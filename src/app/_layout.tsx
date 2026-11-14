@@ -60,6 +60,7 @@ function AppStack({ colors }: { colors: ThemeColors }) {
       <Stack.Screen name="sources" options={{ title: t('sourcesTitle', language) }} />
       <Stack.Screen name="shield" options={{ title: t('shieldSetupTitle', language) }} />
       <Stack.Screen name="pay" options={{ title: t('payTitle', language) }} />
+      <Stack.Screen name="qr" options={{ title: t('qrTitle', language) }} />
       <Stack.Screen name="settings" options={{ title: t('settingsTitle', language) }} />
       {/* Opened by the home screen widget: checks the copied message, then shows the Result. */}
       <Stack.Screen name="check" options={{ headerShown: false, animation: 'fade' }} />

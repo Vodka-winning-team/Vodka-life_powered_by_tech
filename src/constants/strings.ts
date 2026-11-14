@@ -10,6 +10,11 @@ const en = {
 
   languageLabel: 'Language',
   settingsTitle: 'Settings',
+  qrTitle: 'Scan a QR code',
+  qrHint: 'Point the camera at the QR code.',
+  qrSafe: 'Verifye checks what the code holds before anything opens. It never opens the link itself.',
+  qrNeedsCamera: 'To read a QR code, Verifye needs the camera. Nothing is recorded or saved.',
+  qrAllow: 'Allow the camera',
   nightMode: 'Night mode',
   onlineMode: 'Online checks',
   onlineModeOnHint: 'On: links and numbers are also checked online, through our server.',
@@ -176,6 +181,11 @@ export type Language = 'en' | 'fr' | 'mfe';
 
 const fr: Partial<Record<StringKey, string>> = {
   settingsTitle: "Réglages",
+  qrTitle: "Scanner un code QR",
+  qrHint: "Pointez la caméra vers le code QR.",
+  qrSafe: "Verifye vérifie ce que contient le code avant que quoi que ce soit ne s'ouvre. Il n'ouvre jamais le lien lui-même.",
+  qrNeedsCamera: "Pour lire un code QR, Verifye a besoin de la caméra. Rien n'est enregistré ni sauvegardé.",
+  qrAllow: "Autoriser la caméra",
   nightMode: "Mode nuit",
   onlineMode: "Vérifications en ligne",
   onlineModeOnHint: "Activé : les liens et numéros sont aussi vérifiés en ligne, par notre serveur.",
@@ -317,6 +327,12 @@ const fr: Partial<Record<StringKey, string>> = {
   widgetShieldOff: "Vérification automatique : désactivée",
 };
 const mfe: Partial<Record<StringKey, string>> = {
+  // QR scanner (draft Kreol, needs Paveesh's check)
+  qrTitle: "Skann enn kod QR",
+  qrHint: "Vir kamera la lor kod QR la.",
+  qrSafe: "Verifye gete ki ena dan kod la avan nanye ouver. Li zame ouver lien la li mem.",
+  qrNeedsCamera: "Pou lir enn kod QR, Verifye bizin kamera la. Nanye pa anrezistre ni sove.",
+  qrAllow: "Les kamera la",
   // Settings switches (draft Kreol, needs Paveesh's check)
   nightMode: "Mod lanwit",
   onlineMode: "Verifikasion anlinn",
